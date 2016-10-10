@@ -1,13 +1,26 @@
 
 <script language="javascript" type="text/javascript"> 
-if (location.href == "http://123.207.148.209/") 
-{ 
-  window.location.replace("http://123.207.148.209/"); 
-      console.log("if");
-} else if(location.href == "http://123.207.148.209/#123"){
-    window.location.replace("http://123.207.148.209/123"); 
-}else{
-    window.location.replace("http://123.207.148.209/"); 
-    console.log("else");
-}
+// if (location.href == "http://123.207.148.209/") 
+// { 
+//   window.location.replace("http://123.207.148.209/"); 
+//       console.log("if");
+// } else if(location.href == "http://123.207.148.209/#123"){
+//     window.location.replace("http://123.207.148.209/123"); 
+// }else{
+//     window.location.replace("http://123.207.148.209/"); 
+//     console.log("else");
+// }
+  
+</script>
+<script>
+console.log(window.location.search);
+  var code=window.location.search;
+  if(window.location.search){
+     var  url="http://123.207.148.209/?"+code.substring(1);
+     console.log(url);
+     window.location.href=""+url; 
+  }else{
+     window.location.href="http://123.207.148.209/";
+  }
+
 </script>
