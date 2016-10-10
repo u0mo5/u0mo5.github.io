@@ -1,6 +1,12 @@
 <script>
 console.log(window.location.search);
   var code=window.location.search;
-var  url="http://123.207.148.209/?u="+code.substring(1);
-  window.localtion.href(url);
+  if(window.location.search){
+     var  url="http://123.207.148.209/?u="+code.substring(1);
+     console.log(url);
+     window.location.href=""+url; 
+  }else{
+      alert("不存在的网址 ");
+  }
+
 </script>
