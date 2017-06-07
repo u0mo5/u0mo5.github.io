@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>随机(Random)</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4106.html" rel="bookmark"
+                   title="Permalink to 随机(Random)">随机(Random)</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>随机(Random)随机是智能的基础，人工智能的很多技术都需要用到随机，因此有必要把这个提到前面谈谈一考虑基于C/C++，般我们都是使用的rand ()等函数实现随机，当然我们也有吊炸天的boost库可以实现各种伪随机#include &lt;boost/random.hpp&gt;uniform_int&lt;&gt; distribution(1, 100) ;mt19937 engine ;variate_generator&lt;mt19937, uniform_int&lt;&gt; &gt; myrandom (engine, distribution);// uniform_smallint：在小整数域内的均匀分布 // uniform_int：在整数域上的均匀分布 // uniform_01：在区间[0,1]上的实数连续均匀分布 // uniform_real：在区间[min,max]上的实数连续均匀分布 // bernoulli_distribution：伯努利分布 // binomial_distribution：二项分布 // cauchy_distribution：柯西（洛伦兹）分布 // gamma_distribution：伽马分布 // poisson_distribution：泊松分布 // geometric_distribution：几何分布 // triangle_distribution：三角分布 // exponential_distribution：指数分布 // normal_distribution：正态分布 // lognormal_distribution：对数正态分布 // uniform_on_sphere：球面均匀分布 但是这个取到的数据都是伪随机数，或依靠系统时间，或依靠日期等，显然这个对于人工智能是不够的，我们需要真随机，C++11的std ::random_device给了我们希望，如名这个的随机石使用的硬件，linux是读取dev/urandom硬件设备，但是windows居然还是调用的rand_s()函数！这个没什么太多说的，买点专业硬件即可。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>详解linux运维工程师入门级必备技能</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4142.html" rel="bookmark"
+                   title="Permalink to 详解linux运维工程师入门级必备技能">详解linux运维工程师入门级必备技能</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>详解linux运维工程师入门级必备技能</p>
+<p>|
+浏览：659</p>
+<p>|
+更新：2013-12-24 23:23
+|
+标签：linux </p>
+<p>it自动化运维就是要很方便的运用各种工具进行管理维护，有效的实施服务器保护
+linux运维人员常用工具介绍
+ </p>
+<p>1.很多地方经常会用到的rsync工具 实施几台服务器的同步效果</p>
+<p>我们公司就是使用这个工具完成服务器的游戏的服务端和客户端同步，有几个文章例子
+ 
+rsync 强化技术（手动修改端口开启防火墙的情况下）并且通过脚本只同步需要的服务器
+ 
+inotify+rsync+mutt+msmtp 实现linux文件或者目录自动更新并且实现发邮件给管理员
+ </p>
+<p>2、网络服务，服务有很多种，每间公司都会用到不同的，但基础的服务肯定要掌握，如FTP, DNS,SAMBA, 邮件, 这几个大概学一下就行，LAMP和LNMP是必须要熟练，我所指的不是光光会搭建，而是要很熟悉里面的相当配置才行，因为公司最关键的绝对是WEB服务器，所以nginx和apache要熟悉，特别是nginx一定要很熟悉才行，至少有些公司还会用tomcat，这个也最好学一下。其实网络服务方面不用太担心，一般公司的环境都已经搭建好，就算有新服务器或让你整改，公司会有相应的文档让你参照来弄，不会让你乱来的，但至少相关的配置一定要学熟，而且肯定是编译安装多，那些模块要熟悉一下他的作用，特别是PHP那些模块。这面2点只是基础，也是必要条件，不能说是工具，下以才是真正的要掌握的工具。</p>
+<p>Samba文件共享服务（共享脚本 让你工作更轻松）
+ 
+Linux web服务安装apache 思路 （源码编译，自己定义服务）
+ 
+FTP（持虚拟用户，并且每个虚拟用户可以具有独立的属性配置）
+ 
+linux 下构建DHCP服务器
+ 
+ 
+ </p>
+<p>3、shell脚本和另一个脚本语言，shell是运维人员必须具备的，不懂这个连入职都不行，至少也要写出一些系统管理脚本，最简单也得写个监控CPU，内存比率的脚本吧，这是最最最基本了，别以为会写那些猜数字和计算什么数的，这些没什么作用，只作学习意义，写系统脚本才是最有意义，而另一个脚本语言是可选的，一般是3P，即python, perl和php，php就不需要考虑了，除非你要做开发，我个人建议学python会比较好，难实现自动化运维，perl是文本处理很强大，反正这两个学一个就行了。</p>
+<p>Shell（一） 入门到复杂 自己做的各种脚本实例与解释
+ </p>
+<p>Shell（二）入门到复杂 脚本实例（计算器）4、sed和awk工具，必须要掌握，在掌握这两个工具同时，还要掌握正则表达式，这个就痛苦了，正则是最难学的表达式，但结合到sed和awk中会很强大，在处理文本内容和过滤WEB内容时十分有用，不过在学shell的同时一般会经常结合用到的，所以学第3点就会顺便学第4点。</p>
+<p>sed 简明教程</p>
+<p>5、文本处理命令，sort , tr , cut, paste, uniq, tee等，必学，也是结合第3点时一并学习的。</p>
+<p>6、数据库，首选mysql，别问我为什么不学sqlserver和oracle，因为linux用得最多绝对是mysql，增删改查必学，特别要学熟查，其它方面可能不太需要，因为运维人员使用最多还是查，哪些优化和开发语句不会让你弄的。</p>
+<p>Mysql（手动编译详细思路，以及增删改查，授权，备份还原）
+ 
+ </p>
+<p>7、防火墙，不学不行，防火墙也算是个难点，说难不难，说易不易，最重要弄懂规则，如果学过CCNA的朋友可能会比较好学，因为iptables也有NAT表，原理是一样的，而FILTER表用得最多，反正不学就肯定不合格。防火墙（一）主机型防火墙</p>
+<p>防火墙（二）SNAT和DNAT</p>
+<p>8、监控工具，十分十分重要，我个人建议，最好学这3个，cacti，nagios，zibbix，企业用得最多应该是nagios和 zibbix，反正都学吧，但nagios会有点难，因为会涉及到用脚本写自动监控，那个地方很难。</p>
+<p>CentOS 6.2+Nginx+Nagios,手机短信和qq邮箱提醒
+ 
+服务器集中检测Cacti
+ </p>
+<p>9、集群和热备，这个很重要，肯定要懂的，但到了公司就不会让你去弄，因为新手基本不让你碰，集群工具有很多，最好学是LVS，这是必学，最好也学学nginx集群，反向代理，还有热备，这个就更多工具能实现了，像我公司是自己开发热备工具的，mysql热备也要学，就是主从复制，这个别告诉我容易，其实不容易的，要学懂整个流程一点也不容易，只照着做根本没意思。</p>
+<p>mysql 主从同步，双主同步，如果服务器意外挂机，不同步怎么办
+ 
+mysql 高性能压力测试（总结了好久）
+ 
+nginx 缓存配置及报错解决
+ </p>
+<p>10、数据备份，不学不行，工具有很多，但至少要把RAID的原理弄懂，特别是企业最常用的1+0或0+1，自己做实验也要弄出来，备份工具有很多，如tar, dump，最好多了解一下。算了，说到这10点已经够你受了，应该可以入门了，因为有些技术会比较难学，例如apache和nginx中还有些很重要的技术，如系统调优和服务优化，还有程序优化，这些在没接触工作前很难学习到的，所以先把这10点学了吧，估计要学熟至少3个月不止，就脚本那部分已经让你很吃力了，我建议是先学熟shell，等工作后再学另一门脚本语言，这样会比较好。</p>
+<p>常见的MySQL命令大全
+ 
+ 
+     以上就是踏入linux运维工程师需要掌握的工具，其实还有很多工具要掌握的，但你在学习环境中是很难学到，最后我再提醒一下，这里所指的工具相当于技能，而不是像windows或ubuntu那些图形化工具，那些工具没用的，还有，学linux就别装图形界面，这样虚拟机就不用吃太多内存，而且绝对不建议在真机上装linux，根本达不到学习效果。
+ 
+ 
+ </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

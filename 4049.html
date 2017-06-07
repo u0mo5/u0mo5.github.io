@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>微信红包系统设计 & 优化</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4049.html" rel="bookmark"
+                   title="Permalink to 微信红包系统设计 & 优化">微信红包系统设计 &amp; 优化</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>微信红包系统设计 &amp; 优化
+浏览次数：151次 腾讯大讲堂 2015年04月02日 字号: 大 中 小</p>
+<p>分享到：QQ空间新浪微博腾讯微博人人网豆瓣网开心网更多0
+ </p>
+<p>编者按：经过2014年一年的酝酿，2015微信红包总量创下历史新高，峰值1400万次/秒，8.1亿次每分钟，微信红包收发达10.1亿次，系统整体运行平稳, 在这里我分享下微信红包背后的技术。
+讲师：jeri
+核心功能&amp;目标
+首先，了解下微信红包的4个逻辑：摇/发/抢/拆。看似简单，实现可不简单再review下微信红包要实现目标：
+摇：摇的流畅
+快：抢的要快
+爽：拆的爽
+稳：能分享出去
+系统难点：
+1.中国运营商网络环境复杂，覆盖面广，春节期间网络吃紧，容易出现网络故障
+2.在尖峰摇时如何避免服务雪崩
+3.在服务资源有限时，如何提供柔性服务
+4.如何构造有损服务
+5.如何构造set模型
+6.如何解决并发抢
+7.如何实现实现数据一致性
+系统整体架构图</p>
+<p>跨区域网络解决方案
+微信客户端分布全球，接入点较多，用户资料靠近接入点，可以加速用户资料访问，但是红包的业务逻辑层并不全网分布，业务逻辑层访问数据层比较多，数据层有状态强一致性问题，只能同用一个数据副本，比如上海用户与深圳用户在同个群里，抢同一个红包，如果订单数据在上海与深圳都有，在抢的时候，无法保证数据同步，可用性低，所以，设计系统时，一定要梳理清楚系统间的调用关系，优化接入层的业务逻辑，把网络耗时降到最小，系统吞吐量才能提升。
+跨区域网络问题，在物理实施上，也需要有备份绕行的能力，这个可以在系统的底层框架中实现，当指定专线出现故障时，快速切换网络，恢复服务
+如何构建有损服务
+什么是有损服务？选择性牺牲一部分数据一致性和完整性从而保证核心功能绝大多数运行，经过一段时间窗口，数据一致性与完整性能得以恢复，这也是腾讯的一直运营策略，在有限资源前提下，量力而为，满足用户的核心需求
+比如，春晚摇一摇，我们的核心点是摇/拆/分享，那系统的资源优先需要保证这些服务的响应，任何关联系统出现异常的时候马上进行系统降级，防止引起系统雪崩。
+系统降级可以分为两个方面，一是把核心功能调用链路简化，减少依赖，通过辅助轻量化的服务实现，确保最短关键路径的可行，比方说在接入层置入摇红包逻辑，将每秒千万级请求转化为每秒万级的红包请求，再传到红包服务的后端逻辑，降低雪崩的可能性。
+柔性服务.打造好的产品体验
+柔性可用是在有损服务价值观支持下的方法，重点在于实际上会结合用户使用场景，根据资源消耗，调整产品策略，设计几个级别不同的用户体验场景，保证尽可能成功返回关键数据，并正常接受请求，绝不轻易倒下。
+比如，红包的核心功能拆，拆完需要记录用户头像昵称，转帐资金划转，同时输出同个订单下其它拆记录，拆过程这些操作都可能失败，但是核心操作获取红包是成功的，此时，我们至少可以告诉用户抢到金额，不至于让用户焦急等待，不断重试，未完成的操作(头像补全与资金转帐)，可以通异步补尝方式重试。这样解决了用户的问题，也缓解了系统压力。
+如果构造set模型
+Set模块就像一个集装箱，把各模块标准化，模块化，规模化，它为海量服务运营，特别是设备管理、网络架构，提供了宏观运营支撑框架，从而极大提高了海量服务运营效率。
+微信红包的set模块，以拆服务为例，从接入层开始，数据开始sticky，按订单号路由，即按单号分set，同一个set尽可能在一个IDC 里，减少模块间调用的耗时，在同一个set内，逻辑层任何一台机器，调用方可实时摘除，如果是数据层发生故障，先在接入层，把新产生的红包订单号屏蔽有故障对应的set编号，比如，set1 数据库出现故障，为了避免在故障的set1 上继续产生新的支付请求，在订单生成器直接跳过set1的单号规则，把新请求导致其它set, 只有未抢完的部分红包，会提示故障，稍后恢复，阻止了故障引发的进一步恶化，在故障db上的数据，通过备机与业务逻辑层的数据核对，完成数据一致性的修复。
+如何解决并发抢
+群里红包的规则是金额随机抢，在一个大群发一个红包出去，抢并发请求量高，在同一个资源上操作，需要增加锁操作，避免一个抢总数超过发送红包总数，众所周所，mysql的加锁操作，很多抢在一个锁上等，性能损耗大，吞吐量下降，对于海量服务的操作，是不能满足要求。
+在set模块的基础上，我们把发/抢的资源请求都会落到同一个资源set，在最外层，cache红包的状态，如果红包已经被抢完了，即刻返回，如果红包未接完，对于一个红包进去抢环节还有限流，这是第一级保护，通过一致性hash算法，一一个单到dao层都会路由到同一个机器的同一个进程，dao到mysql在现一个连接上完成抢操作，把并发抢修改成串行化，mysql可以无锁等待，性能明显提升。
+如何实现数据一致性
+谈到分布式系统，先回顾CAP理论
+​
+C：Consistency数据一致更新，所有变动都是同步的
+A：高可用，好的响应性能
+P: 分区容忍，可靠性
+在我们的系统设计中，同样碰到这个问题，无法同时满足三个因子，移动互联网系统，高可用性是必要要求，数据分区也是分布式系统的条件，所以，我们设计系统时，只能尽量保证数据一致性，只要一定时间窗口内，完成数据一致，让用户满意。</p>
+<p>微信红包的数据有几份，订单数据，用户数据，还有对应的cache数据，
+N：数据副本份数红包有三份
+R: 一次需读取的副本红包一次从一个副本可以全部读取需要数据
+W: 一次写入数据2份实时写，一分异步化
+R(1) + W(2) &lt;=N从公式算出，我们的数据模型也是弱一致性
+用户数据是异步更新，更新失败，通过消息中心，异步重试，根据DB资源负载设置调用方的调用阀值，除了实时重试，我们还有准实时数据核对，保证数据最终一致性。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

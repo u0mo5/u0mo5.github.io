@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>rundll32 常用命令</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3565.html" rel="bookmark"
+                   title="Permalink to rundll32 常用命令">rundll32 常用命令</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>Rundll32 常用命令列表（1）
+ 
+下面是具体的Rundll32 的命令行列表：
+添加删除程序
+RunDll32.exe shell32.dll,Control_RunDLL appwiz.cpl,,0
+内容审查程序
+RunDll32.exe msrating.dll,RatingSetupUI
+控制面板
+RunDll32.exe shell32.dll,Control_RunDLL
+删除IE浏览器等上网产生的Internet 临时文件
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 8
+删除IE浏览器等上网产生的Cookies
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 2
+删除IE浏览器等上网浏览历史
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 1
+删除IE浏览器等的填表记录
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 16
+删除IE浏览器等上网时保存的用户密码
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 32
+删除上面所有的上网产生的垃圾、记录、临时文件
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 255
+删除IE浏览器插件所产生的垃圾记录
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 4351
+调整日期和时间
+RunDll32.exe shell32.dll,Control_RunDLL timedate.cpl
+显示设置
+RunDll32.exe shell32.dll,Control_RunDLL access.cpl,,3
+设备管理器
+RunDll32.exe devmgr.dll DeviceManager_Execute
+文件夹选项 - 常规
+RunDll32.exe shell32.dll,Options_RunDLL 0
+文件夹选项 - 文件类型设置
+RunDll32.exe shell32.dll,Control_Options 2
+文件夹选项 - 搜索设置
+RunDll32.exe shell32.dll,Options_RunDLL 2
+文件夹选项 - 查看
+RunDll32.exe shell32.dll,Options_RunDLL 7
+忘记密码向导
+RunDll32.exe keymgr.dll,PRShowSaveWizardExW
+立即进入休眠状态
+RunDll32.exe powrprof.dll,SetSuspendState
+Internet Explorer 的 Internet 选项
+Rundll32 Shell32.dll,ConBring up trol_RunDLL Inetcpl.cpl,,6
+ 
+3Rundll32 常用命令列表（2）
+ 
+键盘设置
+RunDll32.exe shell32.dll,Control_RunDLL main.cpl @1
+锁屏
+RunDll32.exe user32.dll,LockWorkStation
+鼠标切换左右键
+Rundll32 User32.dll,SwapMouseButton
+鼠标设置
+Rundll32 Shell32.dll,Control_RunDLL main.cpl @0,0
+映射网络驱动器
+Rundll32 Shell32.dll,SHHelpShortcuts_RunDLL Connect
+网络连接
+RunDll32.exe shell32.dll,Control_RunDLL ncpa.cpl
+管理IE收藏夹
+Rundll32.exe shdocvw.dll,DoOrganizeFavDlg
+直接打开某文件的对话框
+Rundll32 Shell32.dll,OpenAs_RunDLL 任意文件名
+打印机用户界面
+Rundll32 Printui.dll,PrintUIEntry /？
+打印机管理
+Rundll32 Shell32.dll,SHHelpShortcuts_RunDLL PrintersFolder
+电源设置
+RunDll32.exe Shell32.dll,Control_RunDLL powercfg.cpl
+Process Idle Tasks
+rundll32.exe advapi32.dll,ProcessIdleTasks
+地区和语言设置
+Rundll32 Shell32.dll,Control_RunDLL Intl.cpl,,0
+系统保存的密码管理
+RunDll32.exe keymgr.dll,KRShowKeyMgr
+安全移除硬件对话框
+Rundll32 Shell32.dll,Control_RunDLL HotPlug.dll
+ 
+4Rundll32 常用命令列表（3）
+ 
+系统声音设置
+Rundll32 Shell32.dll,Control_RunDLL Mmsys.cpl,,0
+系统属性对话框
+Rundll32 Shell32.dll,Control_RunDLL Sysdm.cpl,,3
+系统属性 - 高级
+RunDll32.exe shell32.dll,Control_RunDLL sysdm.cpl,,4
+系统属性：自动更新
+RunDll32.exe shell32.dll,Control_RunDLL sysdm.cpl,,5
+任务栏属性
+RunDll32.exe shell32.dll,Options_RunDLL 1
+用户帐户管理
+RunDll32.exe shell32.dll,Control_RunDLL nusrmgr.cpl
+插入/弹出硬件
+RunDll32.exe shell32.dll,Control_RunDLL hotplug.dll
+Windows 安全中心
+RunDll32.exe shell32.dll,Control_RunDLL wscui.cpl
+Windows - 关于
+RunDll32.exe SHELL32.DLL,ShellAboutW
+Windows 字体安装文件夹
+Rundll32 Shell32.dll,SHHelpShortcuts_RunDLL FontsFolder
+Windows防火墙
+RunDll32.exe shell32.dll,Control_RunDLL firewall.cpl
+无线网络设置
+RunDll32.exe shell32.dll,Control_RunDLL NetSetup.cpl,@0,WNSW</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

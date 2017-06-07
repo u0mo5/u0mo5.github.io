@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>一键GHOST使用图文教程</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3530.html" rel="bookmark"
+                   title="Permalink to 一键GHOST使用图文教程">一键GHOST使用图文教程</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>一、准备工作
+系统安装好以后，对系统进行及时备份，以防不测，以后恢复时三五分钟即可完成，还你一个全新的完整系统。</p>
+<p>一键GHOST V8.3 Build 060903 硬盘版免费下载</p>
+<p>从以上地址下载软件并安装，或者下载矮人DOS工具箱也可以，里边也带有GHOST。然后启动系统，选择</p>
+<p>如图中的第二项，在接下来的界面中选择第六项，应该为：启动GHOST 8.3进行手动操作。</p>
+<p>接着会出现以下界面</p>
+<p>依次选择“Local(本地)→Partition(分区)→To Image(生成映像文件)”项(见图1)，这一步不能搞错，记准从上往下数的选择顺序是1－2－2           。</p>
+<p>2、屏幕显示出硬盘选择画面，选择分区所在的硬盘“1”，如果您只有一块硬盘，可以直接按回车。</p>
+<p>3、选择要制作镜像文件的分区（即源分区），这里用上下键选择分区“1”（即C分区），再按Tab键切换到“OK“按钮，再按回车。</p>
+<p>4、选择镜像文件保存的位置，此时按下“Shift+Tab”键可以切回到选择分区的下拉菜单，按上下键选择分区，例如“1:2”的意思就是第一块硬盘的第二个分区，也就是“D”盘，选好分区后，再按Tab键切到文件选择区域，用上下键选择文件夹，可以再按Tab键，切到“Filename”文本框键入镜像文件名称，如“xp”或“C_BAK.GHO”，然后按回车键即可。
+支招：建议大家在进行备份前就在分区里建好Ghost的文件夹，把GHOST程序和备份文件放在一起，从GHOST目录启动GHOST程序，这样就直接回到镜像备份GHOST目录，直接填上备份文件名然后按回车就可以了。</p>
+<p>5、接下来Norton Ghost会询问你是否需要压缩镜像文件，这里只能用左右键选择，“No”表示不做任何压缩；“Fast”的意思是进行小比例压缩但是备份工作的执行速度较快；“High”是采用较高的压缩比但是备份速度相对较慢。一般都是选择“High”，虽然速度稍慢，但镜像文件所占用的硬盘空间会大大降低（实际也不会慢多少），恢复时速度很快。</p>
+<p>6、这一切准备工作做完后，Ghost就会问你是否进行操作，当然选“yes”了，按回车后，开始为你制作镜像文件了。备份速度与CPU主频和内容容量有很大的关系，一般来说10分钟以内都可以完成。
+等进度条走到100%，就表示备份制做完毕了，可以真接按机箱的重启按钮或ctrl+alt+del，而不用退出ghost或dos系统。</p>
+<p>通过上面的工作，我们已经制做了一个C盘的备份，在系统出现不能解决的问题时，我们就可以轻轻松松的来恢复系统了。</p>
+<p>三、系统备份还原
+1、重启选择进入DOS系统，转到备份盘，进入备份目录，运行GHOST程序，选择Local→Partition→From Image （注意这次是“From Image”项），恢复到系统盘。记准从上往下数的选择顺序是1－2－3           ，完成后RESET           重启。</p>
+<p>2、选择镜像文件保存的位置，此时按下“Shift+Tab”键可以切回到选择分区的下拉菜单，按上下键选择分区，例如“1:2”的意思就是第一块硬盘的第二个分区，也就是“D”盘，选好分区后，再按Tab键切到文件选择区域，用上下键选择文件夹，用回车进入相应文件夹并选好源文件，也就是*.gho的文件，并按回车。
+如果是从GHOST目录启动GHOST程序，可以直接看到目录下的GHOST备份文件。移动光标选择即可。</p>
+<p>3、此时的图例表达的意思是，你所选的源文件是一个主分区的镜像文件，不用理会，直接按回车。</p>
+<p>4、此时的图例表达的意思是，让您选择硬盘，如果您只有一块硬盘，也可以不用理会，直接按回画。</p>
+<p>5、此时的图例表达的意思是，要把镜像文件恢复到哪个分区，我们一盘只对C盘操作，所以选择Primary，也就是主分区C盘的意思。</p>
+<p>6、所有选择完毕后，ghost仍会叫你确认是否进行操作，当然，我们要选择“yes”了，回车。
+再次等到进度条走完100%，镜像就算恢复成功了，此时直按选择ghost给出的选项“restart compter”即可重启了。</p>
+<p>四、编写批处理文件，打造自动系统备份与还原</p>
+<p>比如在E盘下BAK文件夹下面建立GHOST文件夹，存放有GHOST.EXE程序，
+e:bakghostghost.exe -clone,mode=pdump,src=1:1,dst=e:ghostbac.gho -fx -sure -rb
+打开记事本，复制上面一行保存退出，改名为BF.BAT。</p>
+<p>e:bakghostghost -clone,mode=load,src=e:ghostbac.gho:1,dst=1:1 -sure -rb
+打开记事本，复制上面一行保存退出，改名为HF.BAT 。
+把这两个文件放在GHOST目录下面。这样进入DOS以后，打BF 回车即开始进行GHOST备份，打HF即可进行恢复系统操作，算是自己定制的二键GHOST吧。</p>
+<p>说明：pdump 意思为备份，src为源盘，1:1第一块硬盘第一个分区即C盘，dst为目标盘，e:ghostbac.gho           为存放路径E盘GHOST目录下文件名为BAC.GHO，自己可以根据自己的需要在这里做修改更改盘符存放路径和文件名，-fx 为完成后直接回到DOS下，pload意思是恢复，-sure 为如果有同名文件直接覆盖，-rb 在还原或复制完成以后，让系统重新启动。这样DOS下在GHOST目录下输入批处理文件名即可自动进行备份和恢复。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

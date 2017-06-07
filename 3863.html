@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>使用 XMLBeans 进行编程</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3863.html" rel="bookmark"
+                   title="Permalink to 使用 XMLBeans 进行编程">使用 XMLBeans 进行编程</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>深入考察 XMLBeans 的特性和功能。本文通过一个简单的例子介绍 XMLBeans 技术，然后一步一步地介绍编译和绑定的过程，讨论 XML 游标、标记和 XQuery 表达式等高级特性。本文还将讨论 XMLBeans 与其他 XML-Java 数据绑定技术相比所具有的优点。
+ 
+    随着企业应用程序的复杂性不断加剧，XML 文档的约束和规则变得越来越严格。此外，随着业界越来越迅速地采用 Web 服务，XML 开始成为跨越多种平台的不可忽视的重要角色。所有这一切意味着，应用程序迫切需要一种简单而强大的机制来处理 XML。
+    XMLBeans 提供了这样一种机制，可以将 XMLBeans 用于 XML 数据绑定。与其他只支持 W3C XML Schema 规范的某个子集的数据绑定技术不同，XMLBeans 支持完整的规范，从这方面来说，它非常强大。对于习惯于面向对象操作的开发人员来说，它还惊人地易用。
+    通过 XMLBeans，您可以使用 Java 类访问和操纵 XML 文档中包含的数据。
+    它是如何做到这些的呢？实际上，它包括两个步骤：
+    XMLBeans 编译器生成XML 模式的对象表示。这种对象表示是一组普通的 Java 类和接口，用于表示模式的结构和约束。
+    符合上述模式的实际 XML 实例文档被绑定到 第 1 步生成的 Java 类和接口的实例。绑定过程需要使用 XMLBeans API，以面向对象的方式访问真正的 XML 实例文档中的数据。
+    一旦 XMLBeans 编译器生成了和模式对应的一般 Java 类和接口，任何符合该模式的 XML 实例文档都可以使用这些类和接口绑定。XMLBeans 比传统的解析更进了一步，因为用户不再需要进行以下操作：
+    导航内存中的数据树中的每个节点。
+    编写回调方法，从 XML 文档中提取信息。（关于 XMLBeans 和解析的比较，请参阅本文后面的 XMLBeans 的优点。）
+    一个简单的例子
+    这是一个简单的例子：输入一个模式，XMLBeans 编译器会将其编译成通用的接口。然后我会向您展示如何将符合该模式的具体 XML 文档实例绑定到这些接口。
+    清单 1. 输入模式（automobile-policy.xsd）
+   </p>
+<p>Xml代码  </p>
+<p>&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;  
+　 &lt;xs:element name="automobile-policy"&gt;  </p>
+<p>&lt;xs:complexType&gt;  </p>
+<p>&lt;xs:sequence&gt;  </p>
+<p>&lt;xs:element name="insurance-date" type="xs:dateTime"/&gt;  </p>
+<p>&lt;xs:element name="policyholder-information"  </p>
+<p>type="policyholder-information" minOccurs="1"/&gt;  </p>
+<p>&lt;xs:element name="insured-vehicle"  </p>
+<p>type="insured-vehicle" minOccurs="1"/&gt;  </p>
+<p>&lt;xs:element name="liability-coverage"  </p>
+<p>type="liability-coverage" minOccurs="1"/&gt;  </p>
+<p>&lt;xs:element name="third-party-coverage"  </p>
+<p>type="third-party-coverage"/&gt;  </p>
+<p>&lt;/xs:sequence&gt;  </p>
+<p>&lt;/xs:complexType&gt;  </p>
+<p>&lt;/xs:element&gt;  </p>
+<p>&lt;xs:complexType name="policyholder-information"&gt;  </p>
+<p>&lt;xs:sequence&gt;  </p>
+<p>&lt;xs:element name="name" type="xs:string"/&gt;  </p>
+<p>&lt;xs:element name="social-security-number" type="xs:string"/&gt;  </p>
+<p>&lt;xs:element name="address" type="xs:string"/&gt;  </p>
+<p>&lt;/xs:sequence&gt;  </p>
+<p>&lt;/xs:complexType&gt;  </p>
+<p>&lt;xs:complexType name="insured-vehicle"&gt;  </p>
+<p>&lt;xs:sequence&gt;  </p>
+<p>&lt;xs:element name="year-of-manufacture" type="xs:string"/&gt;  </p>
+<p>&lt;xs:element name="make" type="xs:string"/&gt;  </p>
+<p>&lt;xs:element name="model" type="xs:string"/&gt;  </p>
+<p>&lt;xs:element name="price" type="xs:double"/&gt;  </p>
+<p>&lt;/xs:sequence&gt;  </p>
+<p>&lt;/xs:complexType&gt;  </p>
+<p>&lt;xs:complexType name="liability-coverage"&gt;  </p>
+<p>&lt;xs:sequence&gt;  </p>
+<p>&lt;xs:element name="coverage-limit" type="xs:double"/&gt;  </p>
+<p>&lt;xs:element name="coverage-premium" type="xs:double"/&gt;  </p>
+<p>&lt;/xs:sequence&gt;  </p>
+<p>&lt;/xs:complexType&gt;  </p>
+<p>&lt;xs:complexType name="third-party-coverage"&gt;  </p>
+<p>&lt;xs:sequence&gt;  </p>
+<p>&lt;xs:element name="coverage-limit" type="xs:double"/&gt;  </p>
+<p>&lt;xs:element name="coverage-premium" type="xs:double"/&gt;  </p>
+<p>&lt;/xs:sequence&gt;  </p>
+<p>&lt;/xs:complexType&gt;  </p>
+<p>&lt;/xs:schema&gt;   </p>
+<p>清单 1中的模式描述的是一种汽车保险单，其中包括：
+    名为 automobile-policy 的全局根元素。
+    4 种复杂类型： policyholder-information 、 insured-vehicle 、 liability-coverage 和 third-party-coverage 。
+    一种简单类型 insurance-date 。
+   
+    编译过程
+    在进入 清单 1所示模式的编译过程之前，请下载并安装 Apache XMLBeans version 1.03（请参阅 Resources）。释放压缩包中的文件，将 bin 目录放到 path 下，并将 lib/xbean.jar 放到 classpath 中。
+    bin 目录中包含执行一些有用动作的脚本，比如（在 Windows 平台上）：
+    scomp.cmd 是将模式编译成 XMLBeans 类和接口的模式编译器。
+    validate.cmd 对模式验证 XML 实例文档。
+    对于 UNIX 和 Linux 平台，XMLBeans 提供了 scomp.sh 和 validate.sh 来执行上述操作。
+    xbean.jar 包含真正的 XMLBeans API 类。
+    将模式放在适当的文件夹中并设置好 path 与 classpath ，使用 下面的命令编译模式：
+   </p>
+<p>Xml代码  </p>
+<p>scomp　-out　automobile-policy.jar automobile-policy.xsd  </p>
+<p>在上述命令中， scomp 是模式编译器， -out 选项用于命名输出的 jar 文件，这里使用的 automobile-policy.jar ； automobile-policy.xsd 是编译的模式。 
+    上述命令将 automobile-policy.xsd 编译成 XMLBeans 接口和类，并将它们打包到 automobile-policy.jar 。编译后将生成以下接口： 
+    AutomobilePolicyDocument ，表示文档元素，该元素是由全局根元素生成的，在该例中是 automobile-policy 。       
+    AutomobilePolicyDocument$AutomobilePolicy ，表示全局根元素 automobile-policy 。
+    PolicyholderInformation ，表示复杂类型 policyholder-information 。
+    InsuredVehicle ，表示复杂类型 insured-vehicle 。
+    LiabilityCoverage ，表示复杂类型 liability-coverage 。
+    ThirdPartyCoverage ，表示复杂类型 third-party-coverage 。
+    生成的接口包名是从模式中使用名称空间衍生出来的。因为该模式没有包含名称空间，所以这些接口将被放在包 noNamespace 中。
+    让我们看一看这些接口。 AutomobilePolicyDocument 接口包含以下方法：
+    getAutomobilePolicy() ，访问 automobile-policy 元素。
+    setAutomobilePolicy(AutomobilePolicy automobilePolicy) ，设置 automobile-policy 元素。
+    addNewAutomobilePolicy() ，添加 automobile-policy 并返回新的空元素。
+    与此类似， AutomobilePolicyDocument$AutomobilePolicy 接口也包含以下方法：
+    getPolicyholderInformation() ，访问 policyholder-information 元素。
+    getInsuredVehicle() ，访问 insured-vehicle 元素。
+    其中的关键是将 XML Schema 结构作为 Java 接口复制，所有的基本操作，即添加新元素以及访问、设置已有的元素，都是作为这些接口的方法来实现的。
+    此外，所有生成的接口都有一个包含静态方法的工厂类，比如：
+    newInstance() 创建了这种类型的新实例。
+    parse() 用于解析真正的 XML 实例文档。
+    绑定过程
+    将模式编译成 XMLBeans 接口和类之后，需要将 XML 实例绑定到这些类。下面的代码取自 AutomobilePolicyHandler.java ，它使用生成的接口，根据编译后的模式处理真正的 XML 实例。
+    清单 2. AutomobilePolicyHandler.java
+   </p>
+<p>Java代码  </p>
+<p>import noNamespace.*;  
+import java.io.File;  
+import java.util.Calendar;  
+public class AutomobilePolicyHandler{  
+　public static void main(String args[]) {  </p>
+<p>try {  </p>
+<p>String filePath = "automobile-policy.xml";  </p>
+<p>java.io.File inputXMLFile = new java.io.File(filePath);  </p>
+<p>AutomobilePolicyDocument autoPolicyDoc =  
+　　 AutomobilePolicyDocument.Factory.parse(inputXMLFile);  
+　 AutomobilePolicyDocument.AutomobilePolicy autoPolicyElement =  
+　　 autoPolicyDoc.getAutomobilePolicy();  
+　 System.out.println("date is " + autoPolicyElement.getInsuranceDate());  </p>
+<p>} catch (Exception e) {  </p>
+<p>e.printStackTrace();  
+　}  
+　}  
+}  </p>
+<p>清单 2 的代码接受输入的 XML 实例，并使用 AutomobilePolicyDocument Factory 类的 parse() 方法获得 AutomobilePolicyDocument 实例。  
+    上述 AutomobilePolicyDocument 实例的 getAutomobilePolicy() 方法可以提供根元素 automobile-policy 的句柄。您可以使用简单的 getter 和 setter 检索 XML 中子元素的值。
+    下面的 XML 文件 automobile-policy.xml 符合模式 automobile-policy.xsd ，可以将它用于 清单 2中的方法。
+    清单 3. automobile-policy.xml</p>
+<p>Xml代码  </p>
+<p>&lt;automobile-policy&gt;  
+　　　&lt;insurance-date&gt;2004-09-05T14:12:22-05:00&lt;/insurance-date&gt;  </p>
+<p>&lt;policyholder-information&gt;  </p>
+<p>&lt;name&gt;Alan&lt;/name&gt;  </p>
+<p>&lt;social-security-number&gt;1GBL7D1G3GV100770  </p>
+<p>&lt;/social-security-number&gt;  </p>
+<p>&lt;address&gt;171 Dormonth Street, Fairfield, OH&lt;/address&gt;  </p>
+<p>&lt;/policyholder-information&gt;  </p>
+<p>&lt;insured-vehicle&gt;  </p>
+<p>&lt;year-of-manufacture&gt;1999&lt;/year-of-manufacture&gt;  </p>
+<p>&lt;make&gt;Chevy&lt;/make&gt;  </p>
+<p>&lt;model&gt;Optra&lt;/model&gt;  </p>
+<p>&lt;price&gt;1234&lt;/price&gt;  </p>
+<p>&lt;/insured-vehicle&gt;  </p>
+<p>&lt;liability-coverage&gt;  </p>
+<p>&lt;coverage-limit&gt;1222&lt;/coverage-limit&gt;  </p>
+<p>&lt;coverage-premium&gt;12&lt;/coverage-premium&gt;  </p>
+<p>&lt;/liability-coverage&gt;  </p>
+<p>&lt;third-party-coverage&gt;  </p>
+<p>&lt;coverage-limit&gt;2343&lt;/coverage-limit&gt;  </p>
+<p>&lt;coverage-premium&gt;14&lt;/coverage-premium&gt;  </p>
+<p>&lt;/third-party-coverage&gt;  </p>
+<p>&lt;/automobile-policy&gt;  </p>
+<p>XMLBeans 的层次结构
+ 
+    编译生成的所有 XMLBeans 类都是从 org.apache.xmlbeans.XmlObject 派生的。这是所有 XMLBeans 类型的基本接口，包含一些所有 XMLBeans 类都提供的通用设施：
+    有一个从标准 DOM 树或者 SAX 流复制 XMLObject 实例的方法。
+    有一个 validate() 方法，可以用它验证该 XMLObject 下的 XML 子树。
+    有一个 selectPath(java.lang.String) 方法，该方法使用相对 XPath 查找 XmlObject 子树下的其他 XmlObject 。
+    在 XMLObject 层内，有用户驱动的模式类型和内置模式类型。我已经说明了用户驱动类型（如 automobile-policy 和 policyholder-information ）的语义。如前所述，每个用户驱动的模式类型都被表示成一个接口。
+    另一方面，对于 xs:int 和 xs:string 这类内置模式类型，XMLBeans 提供了 46 种 Java 类型，对应于 W3C XML Schema 规范定义的 46 种内置类型。比如，为了对应 XML Schema 中的 xs:string ，XMLBeans 提供了 XmlString 。
+    让我们再回到模式，为了提取 policyholder-information 复杂类型中的 xs:string 类型的社会安全号，XMLBeans 提供了以下方法：</p>
+<p>Java代码  </p>
+<p>org.apache.xmlbeans.XmlString xgetSocialSecurityNumber();  </p>
+<p>该方法返回 XmlString 。 
+    当然，XMLBeans 也提供了返回纯 Java 类型的方法：</p>
+<p>Java代码  </p>
+<p>java.lang.String getSocialSecurityNumber();  </p>
+<p>注意，在返回 XMLBeans 类型的情况下，方法名是以 xget 开头的。 xget 版本的方法在性能上要好于 get 版本，因为 get 需要将数据转化成最适当的 Java 类型。  
+ 
+    高级特性
+   
+    通过这个简单的例子，您已经发现使用 XMLBeans 是多么容易，而且也熟悉了 XMLBeans 的层次结构，现在来看一看 XMLBeans 的一些高级特性。这些特性才真正代表了 XMLBeans 的强大功能。
+    XML 游标
+    XML 游标定义了 XML 文档中的一个位置。它最适合没有可用模式的 XML 文档。游标允许用户通过改变自身的位置来遍历整个文档，还允许用户删除和插入 XML 片段，访问和设置 XML 值等。
+    清单 4 是一个简单的例子，说明了 XML 游标的用法。 CursorHandler.java 中的代码将检索 automobile-policy.xml 中已保险汽车的型号。
+    清单 4. CursorHandler.java</p>
+<p>Java代码  </p>
+<p>import noNamespace.*;  
+import java.io.File;  
+import java.util.Calendar;  
+import org.apache.xmlbeans.XmlCursor;  
+public class CursorHandler {  
+　public static void main(String args[]) {  </p>
+<p>try {  </p>
+<p>String filePath = "automobile-policy.xml";  </p>
+<p>java.io.File inputXMLFile = new java.io.File(filePath);  </p>
+<p>AutomobilePolicyDocument autoPolicyDoc =  
+　　　 AutomobilePolicyDocument.Factory.parse(inputXMLFile);  
+　　XmlCursor cursor = autoPolicyDoc.newCursor();  
+　　cursor.toFirstContentToken();  
+　　cursor.toChild(2);  </p>
+<p>cursor.toChild(2);  </p>
+<p>System.out.println(cursor.getTextValue());  
+　　System.out.println("Type of Token is: " +  </p>
+<p>cursor.currentTokenType() +  
+　　"nText of Token is" + cursor.xmlText());  </p>
+<p>cursor.dispose();  
+　} catch (Exception e) {  </p>
+<p>e.printStackTrace();  
+　}  
+　}  
+}  </p>
+<p>该例中的游标被定义在 XML 实例的开头。方法 toFirstContentToken() 将游标移动到当前 START 或 STARTDOC 内容中的第一个标志上。从本质上说，这意味着将游标移到了根元素 automobile-policy 的起始位置上。  
+    因此， cursor.getTextValue() 将打印 XML 文档的全部内容。
+    因为我们的目的是查找已保险汽车的型号， cursor.toChild(2) 方法将游标移动到 automobile-policy 的第三个子元素，即 &lt;insured-vehicle&gt; 。现在游标移到了 &lt;insured-vehicle&gt; 元素上，再次调用 cursor.toChild(2) 方法可以将游标移动到相对于当前位置的第三个子元素上，即 &lt;model&gt; 元素。
+    然后用方法 cursor.getTextValue() 检索型号值。
+    在完成游标的使用之后，不要忘记调用其 dispose() 方法。
+   
+    XML 标志
+ 
+    XML 标志代表一类 XML 标记。实际上，XML 标志代表了 XML 文档能够包含的不同类型的部分。其中包括 XML 文档的开始和结束、属性和属性值等。
+    在代码中移动 XML 游标时，可以将它从一个标志移动到另一个标志。当您移动游标时，是将它移动到符合要求的标志。如果游标没有发现可以移动到的适当标志，那么它将保留在原位，并返回“false”表示游标没有移动。
+    每种标志类型都用 TokenType 类中的一个常数表示，其中包括：
+    INT_STARTDOC ，表示 XML 文档的开始（不含 XML 声明）。
+    INT_ENDDOC ，表示 XML 文档的结束。
+    INT_TEXT ，表示元素的内容。
+    标志本身不作为对象公开，但其类型和属性可以通过游标方法来访问。比如， CursorHandler.java 中的下列代码片段将打印标志类型和标志值。
+    清单 5. 打印标志类型和标志文本的代码</p>
+<p>Java代码  </p>
+<p>System.out.println("Type of Token is: " + cursor.currentTokenType()  </p>
+<p>+ "nText of Token is" + cursor.xmlText());  </p>
+<p>XQuery 表达式
+ 
+    XMLBeans 支持 XQuery 表达式。这种类 SQL 语法能够遍历 XML 文档来访问元素和属性。XQuery 表达式和 XML 游标的结合大大增强了 XQuery 的能力。我们仍然使用上述从 automobile-policy.xml 中检索已保险车辆型号的例子，清单 6 中的代码片段就能够完成这项工作。
+    清单 6. 使用 XQuery 表达式 检索 XML 元素值的代码</p>
+<p>Java代码  </p>
+<p>XmlCursor cursor = autoPolicyDoc.newCursor();  
+String modelQuery = $this/automobile-policy/insured-vehicle/model;  </p>
+<p>//Note that execQuery creates a new cursor  
+XMLCursor resultCursor = cursor.execQuery(modelQuery);  
+System.out.println(resultCursor.getTextValue());  </p>
+<p>清单 6 中的代码创建了一个到达所需元素的 XQuery 表达式。 execQuery() 方法运行该查询表达式，并返回新的 resultCursor 。然后使用该 resultCursor 打印 model 元素的值。变量 $this 表示 XML 游标的当前位置。
+ 
+    XMLBeans 的优点
+ 
+    XMLBeans 面临着传统解析和绑定技术的竞争，如 DOM、SAX、JAXB 和 Castor，但 XMLBeans 有一些独到之处。它们的比较如下：
+    DOM 在内容中生成整个文档的树。如果文档非常大，DOM 就会变得对内存非常敏感，并会显著降低性能。通过增量解组（incremental unmarshalling）并提供 xget 方法来访问内置的模式数据类型，XMLBeans 取得了较好的性能。
+    与 DOM 相比，SAX 对内存要求不高，但是 SAX 要求开发人员为事件处理程序编写回调方法，而 XMLBeans 则不需要。
+    与 XMLBeans 类似，JAXB 和 Castor 也都是 XML/Java 绑定技术，但它们都没有提供百分之百的模式支持。XMLBeans 最大的优势之一是几乎百分之百的支持 XML Schema。此外，XMLBeans 还能够访问完整的 XML Infoset，对于强调元素顺序或者注释的应用程序，这一点特别有用。
+ 
+    XMLBeans 还提供了解析 XML 实例的即时验证。
+　　XMLBeans 包括一些创新的特性，如 XML 游标和对 XQuery 的支持。
+　　结束语
+　　在 XML 和 Java 技术的发展前沿地带，各种各样的技术互相拥挤碰撞着，XMLBeans 在非常短的时间内站稳了脚跟。如果开发人员需要处理复杂的 XML 模式和需要更多的本机支持（比如访问完整的 XML Infoset），那么 XMLBeans 是无可替代的。
+　　性能的优势和即时验证支持，使 XMLBeans 成为用于各种 XML 和 Java 数据绑定场景的一种非常强大的工具。易于理解的 API 降低了开发人员的学习难度，也使其成为非常诱人的选择。这是一项强大而激动人心的技术。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

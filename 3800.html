@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>JSP页面中使用JSTL标签出现无法解析问题解决办法</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3800.html" rel="bookmark"
+                   title="Permalink to JSP页面中使用JSTL标签出现无法解析问题解决办法">JSP页面中使用JSTL标签出现无法解析问题解决办法</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>今天建立一个JavaWeb工程测试JNDI数据源连接，在jsp页面中引入了JSLT标签库，代码如下：
+1&lt;%@ page language="java"import="java.util.*"pageEncoding="UTF-8"%&gt;
+2&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/core"prefix="c"%&gt;
+3&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/sql"prefix="sql"%&gt;
+4
+5&lt;!DOCTYPE HTML&gt;
+6&lt;html&gt;
+7&lt;head&gt;</p>
+<p>8&lt;title&gt;JNDI数据源连接测试&lt;/title&gt;</p>
+<p>9&lt;/head&gt;</p>
+<p>10
+11&lt;body&gt;</p>
+<p>12&lt;sql:query var="rs"dataSource="jdbc/oracle"&gt;
+13SELECT * FROM LEAD_OAMS_DBSOURCES
+14&lt;/sql:query&gt;
+15
+16&lt;c:forEach var="row"items="${rs.rows}"&gt;
+17${row.RESOURCEID}---${row.DBSOURCE_NAME}---${row.DBSOURCE_TYPE}&lt;br/&gt;
+18&lt;/c:forEach&gt;
+19&lt;/body&gt;</p>
+<p>20&lt;/html&gt;
+如上，在Jsp中使用了foreach等jstl/core中的语法，结果一运行就报错，报错为：
+1org.apache.jasper.JasperException: The absolute uri: http://java.sun.com/jsp/jstl/core cannot be resolved in either web.xml or the jar files
+如下图所示：
+ 
+　　从错误信息来看是说jsp页面的引入的jstl标签库无法解析，上网找了一下这个错误的原因，原来是我的web项目中没有jstl标签库的相关jar包造成的，也就是缺少jstl.jar和 standard.jar这两个jar包才造成这个问题的(这个问题比较郁闷，我以为MyEclipse会自动导入jstl.jar和 standard.jar这两个jar包)如下图所示：
+ 
+　　既然是缺少了jstl.jar和 standard.jar，那么解决的办法就是手动将jstl.jar和 standard.jar这两个jar包加入到web项目的WEB-INF/lib目录中或者是把jstl.jar、standard.jar复制到tomcat的lib中就可以了，JSTL API 和实现包，在Tomcat下面都有，位于 %TOMCAT_HOME%/webapps/examples/WEB-INF/lib 目录中，如下图所示：
+ 
+　　这个目录下只有jstl.jar和standard.jar这两个文件，前者是JSTL规范 API，后者是 JSTL的标准实现。把这两个jar包放到Web工程的WEB-INF/lib目录，如下所示：
+ 
+重新启动tomcat服务器，再次访问使用了JSTL标签库的jsp页面，这次就可以正常使用JSTL标签库中的标签库了，如下图所示：</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

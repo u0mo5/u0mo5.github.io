@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>centos7安装python-pip</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4550.html" rel="bookmark"
+                   title="Permalink to centos7安装python-pip">centos7安装python-pip</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2017-05-25T13:52:37+08:00">
+                Thu 25 May 2017
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>在使用centos7的软件包管理程序yum安装python-pip的时候会报一下错误：&nbsp;No&nbsp;package&nbsp;python-pip&nbsp;available.
+Error:&nbsp;Nothing&nbsp;to&nbsp;do</pre><p><span style="padding: 0px; margin: 0px; font-size: 14px; background-color: #FFFFFF; color: #362E2B; font-family: Arial; line-height: 26px;">说没有python-pip软件包可以安装。</span><span style="color: #333333; font-family: Verdana, Arial, Tahoma; font-size: 14px; background-color: #FFFFFF;"></span>&nbsp;这是因为像centos这类衍生出来的发行版，他们的源有时候内容更新的比较滞后，或者说有时候一些扩展的源根本就没有。所以在使用yum来search &nbsp;python-pip的时候，会说没有找到该软件包。因此为了能够安装这些包，需要先安装扩展源EPEL。EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。首先安装epel扩展源：&nbsp;sudo&nbsp;yum&nbsp;-y&nbsp;install&nbsp;epel-release</pre><p><span style="padding: 0px; margin: 0px; font-size: 14px; background-color: #FFFFFF; color: #362E2B; font-family: Arial; line-height: 26px;">然后安装python-pip</span><span style="color: #333333; font-family: Verdana, Arial, Tahoma; font-size: 14px; background-color: #FFFFFF;"></span>&nbsp;&nbsp;sudo&nbsp;yum&nbsp;-y&nbsp;install&nbsp;python-pip</pre><p><span style="padding: 0px; margin: 0px; font-size: 14px; background-color: #FFFFFF; color: #362E2B; font-family: Arial; line-height: 26px;">安装完之后别忘了清除一下cache</span><span style="color: #333333; font-family: Verdana, Arial, Tahoma; font-size: 14px; background-color: #FFFFFF;"></span>&nbsp;ps：升级pippip install --upgrade pip&nbsp;sudo&nbsp;yum&nbsp;clean&nbsp;all</pre><p><span style="padding: 0px; margin: 0px; font-size: 14px; background-color: #FFFFFF; color: #362E2B; font-family: Arial; line-height: 26px;">搞定，收工！</span>    </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

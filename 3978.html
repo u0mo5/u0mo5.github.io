@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>单元测试框架TestNg使用总结</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3978.html" rel="bookmark"
+                   title="Permalink to 单元测试框架TestNg使用总结">单元测试框架TestNg使用总结</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>工欲善其事，必先利其器
+单元测试的重要性是不言而喻的。但如果没有好的单元测试工具，是无法激起开发人员的欲望。
+Testng便是利器之一。TestNG是基于Annotation的测试框架的先驱，他拥有通过添加诸如灵活的装置、测试分类、参数测试和依赖方法等特性来克服JUnit3的一些不足之处。下面我将总结一些TestNg的重要特性。
+关于testng.xml
+Testng.xml是以xml记录所有测试的文件。它描述了测试套件的运行时定义，也是testng中运行测试的最大工作单元。虽然没有testng.xml文件，测试也很容易被执行。但是随着测试代码的增长，testng.xml提供了方便用来存放所有运行时的配置，如设置有关类，测试，方法，参数，分组的包含与排除等。在测试类越来越多时，它就显得非常重要。
+Testing.xml的主要结构
+根标签是&lt;suite&gt;
+&lt;suite&gt;标签包含一个或多个&lt;test&gt;标签
+&lt;test&gt;标签包含一个或多个&lt;classes&gt;标签
+&lt;classes&gt;标签包含一个或多个&lt;method&gt;标签
+一般来说，大多数文件详细到&lt;classes&gt;标签即可。
+Testing.xml的额外标签
+&lt;packages&gt;和&lt;package&gt;：顾名思义，它们可以指定一组java包，在这个标签中还可以用包含&lt;include&gt;或者排除&lt;exclude&gt;属性。
+&lt;parameter&gt;定义了参数名称和值，它的使用是与测试类当中@Parameters的注释结合使用的，作用和@Dataprovider类似，提供外部参数，功能不如@Dataprovider强大，有局限性。
+&lt;suite-files&gt;和&lt;suite-file&gt;：它是用来引入其他testng.xml文件的，这些文件将于当前文件一起执行。
+&lt;groups&gt;，&lt;define&gt;和&lt;run&gt;：这三个标签结合使用，在执行时用来指定或者排除一部分的分组，以一个例子见分晓：
+ 
+ </p>
+<p>Xml代码  </p>
+<p>&lt;groups&gt;  
+  &lt;define name=”all”&gt;  
+     &lt;include name=”test1”/&gt;  
+     &lt;exclude name=”test2”/&gt;  
+  &lt;/define&gt;  
+  &lt;run&gt;  
+    &lt;include name=”all”/&gt;  
+  &lt;/run&gt;  
+&lt;groups&gt;  </p>
+<p>注意执行测试的默认顺序是按照testng.xml里给定的顺序执行的。如果你不希望按此顺序执行，请使用preserve-order属性指定为false。如&lt;test name="Regression1" preserve-order="false"&gt;。关于testng.xml的标签详细说明，可参见testng.xml的官方文档。
+ 
+在实际开发时，我建议testng.xml以功能点为粒度进行划分。然后以总的testng.xml将各个功能点的配置汇总起来。
+参数传递
+Testng改进了传统测试框架无法传递参数的缺点，它能够提供了想测试方法传递参数的最简单两种的方法：
+1，在测试方法上加@Parameters标签，然后在testng.xml给出参数。
+2，指定@Dataproviders。
+第一种方式的缺点很明显，它只支持java基本类型，并且在构造值时，无法包含计算逻辑得到需要的参数。
+第二种方式可以想测试方法传递任何有效的java类型。我们倾向于第二种方法来构造参数。
+ 
+在此，我们再介绍一种传递参数的方式：工厂注释@Factory，它不同于前面两种参数传递。
+让我们回顾一下普通的testng测试，这些测试类是无参数构造方法(默认构造方法，无法接受参数)的。@Factory的出现，正是弥补这一缺陷而产生的。@Factory的方法在执行时会被首先检查并执行，且只执行一次。执行完以后返回一个Object数组。这个数组里对象的内容便是当前测试方法带了构造函数的实例。在使用@Factory的同时，该测试类还有一个对应带参数的构造函数，@Factory就是为以构造函数提供参数的形式提供了帮助。
+ 
+测试的依赖与分组
+我们在将依赖与分组放在一起描述，是因为他们之间有着紧密的联系。
+测试依赖
+测试方法之间的依赖是一种很常见的需求，您也许认为，测试之间的依赖不是破坏了测试方法之间的隔离性吗？确实是这样的，但是有时为了这种隔离性，在彼此隔离的测试方法当中要付出很大的代价去相互模拟，所以为了方便起见，testng提供了这种依赖的方式。
+Testng当中通过@Test的属性dependsOnMethods，dependsOnGroups来实现针对方法和分组的依赖。
+依赖还包括软依赖和硬依赖。硬依赖是很强的关联，如果被依赖的测试失败，那么依赖它的测试会跳过。而软依赖则不会跳过。通过给@Test设定alwaysRun=true来实现软依赖。使用依赖时需要注意的是要避免循环依赖
+测试分组
+Testing当中提供的组名，与java当中包的概念有些类似，都是将包含相似点的类归为一组。
+分组的最重要的目标就是：使固定的测试代码和执行哪些测试实现清晰的分离。当你需要指定执行哪些组的测试时，在动态执行时指定组即可。
+关于分组的语法是非常简单的，@Test,@BeforeClass,@AfterClass,@BeforeMethod等都可以属于分组。相关的语法是@Test(groups=”group1”)，一个@Test的groups还可以指定多个组名，如@Test(groups=”group1,groups2”)。
+定义好的组名，其实是给运行时使用的，也就是在testng.xml文件当中可以配置。前面的testng.xml说明当中就提到了&lt;groups&gt;的用法。
+Group的组织可以根据各种维度来进行划分，如单元测试，集成测试，性能测试。或者是框架分层来划分如action,service,dao等。在配置文件当中还可以定义组中组，通过define标签来实现，前面也有所说明。
+在一般项目中，我建议组分类可按照架构分层来定义，分为基础功能，service业务以及dao层。
+expectedExceptions
+用expectedExceptions来测试异常有两个好处：其一，它消除了try/catch语句给代码带来的干扰。其二，使得测试代码表达的意图更加清楚。只要看到@Test注释当中定义的expectedExceptions属性，就知道该测试方法的意图，把Exception的用例和预期业务功能的用例分到不同测试方法中。
+语法很简单，@Test(expectedExceptions=”XXXException.class”) ，异常类可以有多个，用逗号隔开。
+异步与并发测试
+异步与并发在单元测试当中通常都比较困难。
+关于异步测试，如JMS，发送和接收是解耦的，如果是测试发送消息的方法，当收到响应时，会有返回值。根据这个场景，测试代码通常是这样：
+ 
+ </p>
+<p>Java代码  </p>
+<p>Private volatile Boolean success=”false”;  
+@Test(groups=”send”)  
+Public void sendMessage(){  
+   //send message code  
+}  
+  
+@Test(timeOut=10000,invocationCount=1000,successPercentage=98,dependsOnGroups={“send”})  
+Public void waitForAnser(){  
+   While(!success){  
+     Thread.sleep(1000);  
+   }  
+}  </p>
+<p>@Test(timeOut = 10000, invocationCount = 1000,successPercentage = 98)，是用于测试系统的可用性和响应速度所设的值。这里告诉testng调用该方法1000次，如果98%的调用是成功的，就认为是通过测试。当然，前面也要调用sendMessage方法1000次。timeOut是防止死锁而产生的。
+Testing内建了对并发的支持，可以分为两种
+1，并发测试
+Testng在做并发测试时提供了threadPoolSize,invocationCount和timeOut三个属性来完成。threadPoolSize可以指定多个线程池来执行测试方法。
+2，并发执行测试
+Testing还可以通过testng.xml来设置并发执行。testng.xml默认是单线程执行的。
+&lt;suite&gt;标签可以设置parallel属性。Thread-count指定线程数
+parallel=”methods”：每个测试方法都在它自己的线程中执行(以方法为粒度)。
+parallel=”tests”：在某个&lt;test&gt;标签内的所有测试方法都在它自己的线程中执行（以&lt;test&gt;为粒度）。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

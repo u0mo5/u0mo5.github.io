@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>【Objective-C】Windows下Objective-C开发环境配置</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4197.html" rel="bookmark"
+                   title="Permalink to 【Objective-C】Windows下Objective-C开发环境配置">【Objective-C】Windows下Objective-C开发环境配置</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>【Objective-C】Windows下Objective-C开发环境配置
+ftp://ftpmain.gnustep.org/pub/gnustep/binaries/windows/
+ </p>
+<p>最近打算针对iPhone、iPod touch和iPad开发一些应用，所以，需要开始学习Objective C（苹果推出的类似C语言的开发语言）。由于苹果的自我封闭的产业链发展模式（从芯片、机器、开发语言、终端产品、服务）的限制，要想开发针对苹果 iPhone等产品的应用程序，就需要用Mac机器，在Xcode的IDE上使用Objective C语言开发。Mac机器就不用说了，那比PC机器要贵不少（当然性价比还是很高的），所以，要想廉价方式学习Objective C就必须要在Windows上能搭建一个Objective C开发环境。好了，不说废话了。      在Windows下搭建Objective C开发环境，需要到GNUstep官方网站上下载，四个软件包：GNUstep MSYS System、GNUstep Core、GNUstep Devel、Cairo Backend。其中，前两个软件包是必须要安装的，第三个软件包是安装一些开发工具，比如：gcc、g++等，所以如果是学习Objective C的话，这个包也是必须要安装，第四个软件包是安装glib等库，这个包安装不安装根据具体情况而定。     至于GNUstep是什么东西，有什么用处，这里做个简单的介绍：GNUstep就是提供类似Cocoa（苹果OS的开发框架）的API和工具，目前支持GNU/Linux and GNU/HURD, Solaris, NetBSD, OpenBSD, FreeBSD, Darwin和Windows，免费使用的。这个项目使Objective C能在多数流行平台上开发和运行。有关详细的介绍开始参考GNUstep的官方网站。    言归正传，下载上述软件包后，点击安装就可以了。然后，需要确认是否安装成功，并且是否能成功编译Objective C代码。    在“开始”菜单中“所有程序”下可以找到“GNUstep” -&gt; “shell”，就会出console窗口，可以试试一些Linux命令（ls,cd,mkdir等）。编写一个Objective C代码进行编译运行测试。在这里就用经典的“hello world”来说明：#import &lt;Foundation/Foundation.h&gt;int main (int argc, const char <em>argv[]) {    NSAutoreleasePool </em>pool=[[NSAutoreleasePool alloc] init];    NSLog(@"Hello World!");    [pool drain];    return 0;}    在Windows环境下用文本编辑器（Editplus，UE等），编写上述代码，并且保存到GNUstep安装目录下的/home下，取名为helloworld.m。在GNUstep的console窗口命令行下，    1、cd /home    2、gcc -o helloworld helloworld.m -I/GNUstep/System/Library/Headers -fconstant-string-class=NSConstantString -L/GNUstep/System/Library/Libraries -lobjc -lgnustep-base    3、输入./helloworld.exe运行helloworld.exe说明：第二步中的一些参 数明说，如果熟悉Linux/Unix下C/C++编译的话，上述参数应该很熟悉，-I表示头文件查找的路径，-L表示库文件查找路径，-l表示需要链接 的库文件。但是，-fconstant-string-class=NSConstantString  对于这个参数可能比较陌生，这个参数主要是指定常量字符串所使用的class。  改进：由于在GNUstep的窗口下不能复制，粘贴，手动打字容易出错，所以，可以写个shell脚本，取名为test.sh,内容如下：gcc -o "$1" "$2" -I/GNUstep/System/Library/Headers -fconstant-string-class=NSConstantString -L/GNUstep/System/Library/Libraries -lobjc -lgnustep-base然后和上面的一样，在GNUstep的console窗口命令行下      1、cd /home    2、sh test.sh  helloworld  helloworld.m    3、运行helloworld.exe说明：test.sh中的$1 和 $2分别表示获取执行test.sh时传进来的第1个和第2个参数，然后通过sh test.sh  helloworld helloworld.m就是执行test.sh脚本并传入两个参数，采用传参数的目的是让这个test.sh成为一个编译的模板，这样每次只要传不同的参数就可以编译运行。    helloworld.exe编译并运行成功的话，说明windows下Objective C开发环境就搭建好了，这样就可以开始以廉价方式的学习Objective C</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

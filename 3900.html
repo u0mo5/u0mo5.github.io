@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>freemarker技术入门例子（结合struts2）</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3900.html" rel="bookmark"
+                   title="Permalink to freemarker技术入门例子（结合struts2）">freemarker技术入门例子（结合struts2）</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>由于最近项目里面要求要使用freemarker技术来做展现层，所以在网上搜索了好多资料，基础知识是看了李刚原来写的那本《struts2权威指南》。一直想在网上找一个很基础的例子来入门，但是不知道是我的原因还是怎么的，找到的都不是很理想，而且网上基本上是一篇文章到处贴。所以郁闷之下，就自己慢慢摸索写出了一个入门的例子，可以作为自己的总结，也可以让更多的初学者快速入门。
+闲话少述，看例子。
+<strong>*</strong>例子的整个目录结构如下图：</p>
+<p>说明：1、struts-tags.tld文件是由struts2的jar中拷贝出来的。
+         2、工程全部使用utf-8编码。
+ 
+关键的几个文件：
+1、index.ftl:</p>
+<p>Java代码  </p>
+<p>&lt;#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]/&gt;  </p>
+<p>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;  </p>
+<p>&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;  </p>
+<p>&lt;head&gt;  
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;  </p>
+<p>&lt;title&gt;freemarkerDemo&lt;/title&gt;  
+&lt;/head&gt;  
+&lt;body&gt;  
+&lt;@s.form action="users/users_login.action"&gt;  </p>
+<p>${"用户名"}:&lt;@s.textfield name="username"/&gt;&lt;br/&gt;  </p>
+<p>${"密码"}:&lt;@s.password name="password"/&gt;&lt;br/&gt;  </p>
+<p>&lt;@s.submit value="sign on"/&gt;  </p>
+<p>&lt;/@s.form&gt;  </p>
+<p>&lt;/body&gt;  
+&lt;/html&gt;  </p>
+<p>2、profile.ftl:</p>
+<p>Java代码  </p>
+<p>&lt;#assign s=JspTaglibs["/WEB-INF/struts-tags.tld"]/&gt;  </p>
+<p>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;  </p>
+<p>&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;  </p>
+<p>&lt;head&gt;  
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;  </p>
+<p>&lt;title&gt;freemarkerDemo&lt;/title&gt;  
+&lt;/head&gt;  
+&lt;body&gt;  
+姓名：${username}  
+&lt;br/&gt;  
+密码：${password}  
+&lt;br/&gt;  
+年龄：${userInfo.age}  
+&lt;br/&gt;  
+登录时间：${userInfo.signinTime?string("yyyy-MM-dd HH:mm:ss")}  </p>
+<p>&lt;br/&gt;  
+QQ：${userInfo.qq}  
+&lt;br/&gt;  
+地址：${userInfo.addr}  
+&lt;hr/&gt;  
+我的书籍：  
+&lt;#list userInfo.books as book&gt;  
+ ${book}&amp;nbsp;  
+&lt;/#list&gt;  
+&lt;/body&gt;  
+&lt;/html&gt;  </p>
+<p>3、web.xml:</p>
+<p>Xml代码  </p>
+<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;  
+&lt;web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  </p>
+<p>xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   </p>
+<p>http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"&gt;  </p>
+<p>&lt;filter&gt;  </p>
+<p>&lt;filter-name&gt;struts2&lt;/filter-name&gt;  </p>
+<p>&lt;filter-class&gt;org.apache.struts2.dispatcher.FilterDispatcher&lt;/filter-class&gt;  </p>
+<p>&lt;/filter&gt;  </p>
+<p>&lt;filter-mapping&gt;  </p>
+<p>&lt;filter-name&gt;struts2&lt;/filter-name&gt;  </p>
+<p>&lt;url-pattern&gt;/*&lt;/url-pattern&gt;  </p>
+<p>&lt;/filter-mapping&gt;  </p>
+<p>&lt;servlet&gt;  </p>
+<p>&lt;servlet-name&gt;JspSupportServlet&lt;/servlet-name&gt;  </p>
+<p>&lt;servlet-class&gt;org.apache.struts2.views.JspSupportServlet&lt;/servlet-class&gt;  </p>
+<p>&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;  </p>
+<p>&lt;/servlet&gt;  </p>
+<p>&lt;welcome-file-list&gt;  </p>
+<p>&lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;  </p>
+<p>&lt;/welcome-file-list&gt;  </p>
+<p>&lt;/web-app&gt;  </p>
+<p>4、sturts.xml:</p>
+<p>Xml代码  </p>
+<p>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;  
+&lt;!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"  
+    "http://struts.apache.org/dtds/struts-2.1.dtd"&gt;  </p>
+<p>&lt;struts&gt;  
+    &lt;constant name="struts.ui.theme" value="simple" /&gt;  </p>
+<p>&lt;package name="users" extends="struts-default" namespace="/users"&gt;  </p>
+<p>&lt;action name="users_*" class="com.pop.project.myftl.test.action.UserAction" method="{1}"&gt;  </p>
+<p>&lt;result name="index" type="freemarker"&gt;/WEB-INF/ftl/index.ftl&lt;/result&gt;  </p>
+<p>&lt;result name="profile" type="freemarker"&gt;/WEB-INF/ftl/profile.ftl&lt;/result&gt;  </p>
+<p>&lt;/action&gt;  </p>
+<p>&lt;/package&gt;  </p>
+<p>&lt;/struts&gt;  </p>
+<p>5、UserAction:</p>
+<p>Java代码  </p>
+<p>package com.pop.project.myftl.test.action;  
+  
+import java.util.ArrayList;  
+import java.util.Date;  
+import java.util.List;  
+  
+import com.opensymphony.xwork2.ActionSupport;  
+import com.pop.project.myftl.test.bean.UserInfo;  
+  
+public class UserAction extends ActionSupport {  
+  
+    private static final long serialVersionUID = 1L;  </p>
+<p>private String username;  </p>
+<p>private String password;  </p>
+<p>private UserInfo userInfo;  </p>
+<p>/** </p>
+<p><em> 首页 
+     </em> @return 
+     */  
+    public String index() {  </p>
+<p>return "index";  </p>
+<p>}  
+    /** </p>
+<p><em> 登录 
+     </em> @return 
+     */  
+    public String login()  </p>
+<p>{  
+        userInfo = new UserInfo() ;  </p>
+<p>userInfo.setAddr("shaanxi baoji") ;  </p>
+<p>userInfo.setAge(25) ;  </p>
+<p>userInfo.setSigninTime(new Date()) ;  </p>
+<p>userInfo.setQq("77276575") ;  </p>
+<p>List&lt;String&gt; books = new ArrayList&lt;String&gt;() ;  </p>
+<p>books.add("Thinking in Java") ;  </p>
+<p>books.add("禅意花园") ;  </p>
+<p>books.add("敏捷编程") ;  </p>
+<p>books.add("代码大全") ;  </p>
+<p>userInfo.setBooks(books) ;  
+        return "profile" ;  </p>
+<p>}  
+    // setters and getters  </p>
+<p>public String getUsername() {  </p>
+<p>return username;  </p>
+<p>}  
+    public void setUsername(String username) {  </p>
+<p>this.username = username;  </p>
+<p>}  
+    public String getPassword() {  </p>
+<p>return password;  </p>
+<p>}  
+    public void setPassword(String password) {  </p>
+<p>this.password = password;  </p>
+<p>}  
+    public UserInfo getUserInfo() {  </p>
+<p>return userInfo;  </p>
+<p>}  
+    public void setUserInfo(UserInfo userInfo) {  </p>
+<p>this.userInfo = userInfo;  </p>
+<p>}  
+}  </p>
+<p>UserInfo类是一个有几个属性的javabean，这里就不用列了。
+自己跑一下例子慢慢来吧。
+运行结果：</p>
+<p>myfreemarker.zip (3.6 MB)
+下载次数: 221</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

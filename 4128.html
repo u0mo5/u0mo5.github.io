@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>给Android程序员的六个建议</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4128.html" rel="bookmark"
+                   title="Permalink to 给Android程序员的六个建议">给Android程序员的六个建议</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>给Android程序员的六个建议</p>
+<p>分类： 安卓相关2015-07-14 23:58 177人阅读 评论(0) 收藏 举报</p>
+<p>android程序员</p>
+<p>如果你一年前写的代码 , 在现在看来你还感觉写的很不错 , 那么说明你学习的不够多.</p>
+<p>不要在Context中持有静态引用</p>
+<p>public class MainActivity extends LocationManagingActivity implements ActionBar.OnNavigationListener,
+        GooglePlayServicesClient.ConnectionCallbacks,
+        GooglePlayServicesClient.OnConnectionFailedListener {
+    //...
+    private static MeTrackerStore mMeTrackerStore; 
+    //...
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        //...
+        mMeTrackerStore = new MeTrackerStore(this);
+    }
+}</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</p>
+<p>这个毛病可能很多人都会犯过 , 如果MeTrackerStore通过构造持有activity的引用 , 那这个activity就永远不会被垃圾回收.(除非静态变量被重新分配至不同的activity)
+这是因为MeTrackerStore 是静态的 , 而对于静态变量的存储, 当应用程序启动 , 不收集 , 知道退出该应用程序正在运行的进程 .
+注: 从技术层面来说 , 你可以持有一个静态应用的 application context , 这样不会造成内存泄露 , 但不建议这么做</p>
+<p>注意控制”隐性引用”对象的生命周期</p>
+<p>public class DefineGeofenceFragment extends Fragment {
+    public class GetLatAndLongAndUpdateMapCameraAsyncTask extends AsyncTask&lt;String, Void, LatLng&gt; {</p>
+<div class="highlight"><pre><span></span>    @Override
+    protected LatLng doInBackground(String... params) {
+        //...
+        try {
+            //Here we make the http request for the place search suggestions
+            httpResponse = httpClient.execute(httpPost);
+            HttpEntity entity = httpResponse.getEntity();
+            inputStream = entity.getContent();
+            //..
+        }
+    }
+}
+</pre></div>
+
+
+<p>}</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</p>
+<p>这段代码有很多问题 , 我们把终点放在隐式引用 . 在Java中 , 对于包含静态内部类的类 , 非静态内部类具有隐式引用.
+本段代码中 , 对与外部类DefineGeofenceFragment 将持有一个 GetLatAndLongAndUpdateMapCameraAsyncTask 引用
+对与包含内部类的外部类来说 , 他们有一个隐含的引用包含匿名类的类的实例 , 该GetLatAndLongAndUpdateMapCameraAsyncTask 有一个隐含的引用片段</p>
+<p>Android Studio 让你更快捷, 更舒服 AS提供的快捷键和live templates，会让你写起代码飞快，目前Android Studio已经可以支持NDK开发，日后会有越来越多的人喜欢Andriod Studio并使用它来开发。</p>
+<p>一个方法只做一件事 有一个在我写这超过100行的类之一的方法。这样的方法难以阅读，修改和重新使用。试着写的方法只能做一件事。通常情况下，这意味着你应该怀疑的是超过20行代码的方法。在这里，你可以招募的Android Studio来帮助你发现问题的方法。</p>
+<p>向比你有经验的人学习 这可能听起来微不足道，但它是一个错误，我做的时候，我写我的第一个应用程序。 当你写一个应用程序，你会犯错误。其他人已经取得了这些错误。从这些人的了解。你是在浪费你的时间，如果你重复别人的可以避免的错误。我浪费了大量的时间在我的第一个应用程序使得我本来可以避免，如果我只是花了一点时间，从经验丰富的软件开发人员学习错误。 阅读程序员修炼。然后阅读有效的Java。这两本书将帮助你避免我们作出开发新手常犯的错误。当你与那些书做，不停地寻找聪明的人学习的榜样。</p>
+<p>多使用第三方库 当你写一个应用时 , 你可能会遇到更聪明 , 更有经验的人已经解决了你的需求或问题. Android 有很多开源库 , 我们可以多利用他们。 在我的应用中 , 我经常使用第三方库提供的功能 , 比如 Retrofit 和 Picasso . 如果你不确定你需要哪种类型或功能的库 , 下面介绍一下比较流行的几款库:
+1.  Google 广播 (http://fragmentedpodcast.com/episodes/9/) , 告诉你什么情况 使用什么库 , 例如 Dagger Retrofit Picasso 和 Mockito
+2. 订阅Android周刊 . 他们会给你推送最新的第三方库或比较最新 , 最近比较流行的设计模式及功能.
+3. 寻找开源代码的应用 去解决类似你需要的功能或模块. 这个应用可能会用到你不知道的第三方库.</p>
+<p>版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

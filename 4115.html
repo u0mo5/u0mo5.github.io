@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>Magento架构分析,Magento MVC 设计分析</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4115.html" rel="bookmark"
+                   title="Permalink to Magento架构分析,Magento MVC 设计分析">Magento架构分析,Magento MVC 设计分析</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>Magento架构分析,Magento MVC 设计分析</p>
+<p>分类：Magento　标签：Magento MVC、Magento架构　669人浏览</p>
+<p>Magento 采用类似 JAVA的架构，其扩展与稳定性非常突出，也是在开源电商平台最优秀的，下面我大概分析一下其内部架构
+Magento系统请求响应流程图</p>
+<p>下面是具体请求步骤分析</p>
+<p>用户向浏览器发出请求(高级话题:What really happens when you navigate to a URL )
+浏览器向magento所在的服务器发出请求，magento的Controllers捕捉该请求并分发(实例:Magento Controller Dispatch and Hello World )
+Controller使用Oject Models,此时Magento的Model开始config(加载config.xml,system.xml,layout下的<em>.xml 等所有配置文件)(高级话题：config.xml 配置参数说明http://www.magentocommerce.com/wiki/development/reference/module_config.xml  和 system.xml 实例 http://alanstorm.com/custom_magento_system_configuration )
+Object Model 返回相应的数据(大部分是系统配置信息请研究Class Mage_Core_Model_Config和相关的类)
+Controller 根据layout下的</em>.xml的配置信息使用相应的Layouts
+Layout 使用Blocks(Blocks是Layout的骨架)
+Blocks使用Object Model(哈哈，这步是天经地义的，不通过Model使用数据库等相关的资源，Blocks就是巧妇难为无米之炊)
+Object Model 使用数据库资源（就是使用具体tables的数据,高级话题：http://www.magentocommerce.com/wiki/development/magento_database_diagram )
+使用DB
+返回DB资源
+返回Datas给Object(主意Magento的Datas被加工成Object了)
+返回datas对应的Object给Block
+Block使用Helpers(哈哈，Helpers其实就是打杂的，正如其名，作用完成一些特定的功能:更多Helpers参看：Mage_Core_Helper_Abstract 这是个高级话题，在system.xml配置的时候必须指定Helper)
+Helpers使用Object Models资源(Helpers打杂的最终目的-搞点东西回来)
+Object返回Helpers请求的资源
+Helpers return HTML(哈哈，Helpers打杂主要就是处理一些HTML相关的东西)给Blocks
+Blocks使用Templates(不适用Template怎么把内容显示出来,这步也天经地义,没必要解释)
+Templates使用Helpers(Helpers有时需要配合一下Templates，如Helpers用于控制图像的显示等功能)
+Helpers 返回HTML或者data给Template
+Template返回HTML给Blocks(block其实就是页面的一部分自定义的区域)</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>酷友观点/经验：支付接口返回数据接收地址，session数据丢失（或者说失效）的问题浅析(原创文章)</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4210.html" rel="bookmark"
+                   title="Permalink to 酷友观点/经验：支付接口返回数据接收地址，session数据丢失（或者说失效）的问题浅析(原创文章)">酷友观点/经验：支付接口返回数据接收地址，session数据丢失（或者说失效）的问题浅析(原创文章)</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>酷友观点/经验：支付接口返回数据接收地址，session数据丢失（或者说失效）的问题浅析(原创文章)
+ </p>
+<p>最近手头在开发一个游戏官网，在支付模块采用神州付技术支持，神州付数据表单中要求提供服务器返回地址和页面返回地址，相信做过这类接口的朋友应该猜到</p>
+<p>最近手头在开发一个游戏官网，在支付模块采用神州付技术支持，神州付数据表单中要求提供服务器返回地址和页面返回地址，相信做过这类接口的朋友应该猜到这两个地址的作用。小编解释下，我们在购买物品或者服务完成，通过支付工具（支付宝、财付通、神州付等等）付款成功之后，支付工具会将订单数据返回给服务器返回地址，同时将页面跳转到页面返回地址....
+       在服务器返回地址接受返回过来的订单数据时，会对支付过程进行判断，如果支付成功，则在网站数据库中添加订单信息。我们添加订单信息的时候往往会有个字段，用于存储用户姓名，而用户姓名则会存储在session("user_name")中。
+       好了，说到这里，问题出来了。session("user_name")中的数据只能在同一个网站下的网址中自动保存和传递，而服务器返回地址是由支付工具跳转过来，在支付页面是不存在session("user_name"),跳转到服务器返回地址后，自然也就接收不到session("user_name")的值，在做订单数据添加时，用户姓名字段就成了空字段。这就是session丢失或者说是失效。
+      最近在网上收罗了很多解决方案，整理之后，感觉有这么两种方法还不错...
+      第一：建立专门数据库，在支付之前，根据订单号对应存储session("user_name")值，在跳转回服务器返回地址时，再根据订单号，从数据库提取出session值来添加订单信息。
+      第二：有些支付工具可以使用，以神州付为例，在提交的订单信息栏目中，有特别一项可以用于存储用户的私有信息(privatefield)，那就可以利用这一项来代替session("user_name") ，接受session("user_name")值并返回给服务器返回地址，弥补了session不能跨网站传值的缺陷。
+      可能也还有跟好的方法，欢迎大家一起分享交流...</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

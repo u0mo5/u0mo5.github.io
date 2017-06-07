@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>MySQL查询重复出现次数最多的记录</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4094.html" rel="bookmark"
+                   title="Permalink to MySQL查询重复出现次数最多的记录">MySQL查询重复出现次数最多的记录</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>MySQL查询重复出现次数最多的记录    http://database.51cto.com/art/201011/235139.htm2010-11-25 14:40 佚名 互联网&nbsp;字号：T&nbsp;|&nbsp;T对于MySQL数据库来说，查询永远是最重要的功能，下文就教您查询重复出现次数最多的记录的方法，供您借鉴参考。    AD：51CTO移动APP安全沙龙！马上要爆满，手慢没座位！&nbsp;    MySQL查询的方法很多，下面为您介绍的MySQL查询语句用于实现查询重复出现次数最多的记录，对于学习MySQL查询有很好的帮助作用。    在有些应用里面，我们需要查询重复次数最多的一些记录，虽然这是一个很简单的查询语句，但是对许多初学者来说，仍然有些难度，特发此文章备查。SELECT&nbsp;keyword,&nbsp;count(&nbsp;<em>&nbsp;)&nbsp;AS&nbsp;count &nbsp;    FROM&nbsp;article_keyword &nbsp;    GROUP&nbsp;BY&nbsp;keyword &nbsp;    ORDER&nbsp;BY&nbsp;count&nbsp;DESC &nbsp;    LIMIT&nbsp;20 &nbsp;    &nbsp;此段查询语句返回 article_keyword 表中 keyword 重复次数（count）最多的20条记录。SELECT&nbsp;DISTINCT&nbsp;count(&nbsp;</em>&nbsp;)&nbsp;AS&nbsp;count &nbsp;    FROM&nbsp;article_keyword &nbsp;    GROUP&nbsp;BY&nbsp;keyword &nbsp;    ORDER&nbsp;BY&nbsp;count&nbsp;DESC &nbsp;    LIMIT&nbsp;6 &nbsp;    &nbsp;此段查询语句返回 article_keyword 表中 keyword 的重复次数（count）排名前 6 的数值。通过添加 DISTINCT 返回唯一记录。    ps:    select cid,count(*) as count from typecho_relationships group by cid having count&gt;1;</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

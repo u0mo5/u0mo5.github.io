@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>（转）spring mvc 中文乱码问题解决</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3782.html" rel="bookmark"
+                   title="Permalink to （转）spring mvc 中文乱码问题解决">（转）spring mvc 中文乱码问题解决</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>在eclipse环境里，页面传输数据的时候通常用ISO-8859-1这个字符集可以用 str = new String(str.getBytes("ISO-8859-1"), "GBK"); 转码str是你页面得到的字符串，后面的表示从"ISO-8859-1"转到"GBK"，或者你转成别的也可以16:35 浏览 (1550) 评论 (2) 分类: 技术 收藏 相关推荐 评论chenlb 2007-09-09 回复 不好意思多写了 Java代码 &lt;filter&gt;    &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;    &lt;filter-class&gt;filters.SetCharacterEncodingFilter&lt;/filter-class&gt;    &lt;init-param&gt;    &lt;param-name&gt;encoding&lt;/param-name&gt;    &lt;param-value&gt;utf8&lt;/param-value&gt;    &lt;/init-param&gt;  &lt;/filter&gt;   &lt;filter-mapping&gt;    &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;    &lt;url-pattern&gt;/<em>&lt;/url-pattern&gt;   &lt;/filter-mapping&gt;  &lt;filter&gt;    &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;    &lt;filter-class&gt;filters.SetCharacterEncodingFilter&lt;/filter-class&gt;    &lt;init-param&gt;    &lt;param-name&gt;encoding&lt;/param-name&gt;    &lt;param-value&gt;utf8&lt;/param-value&gt;    &lt;/init-param&gt;  &lt;/filter&gt;   &lt;filter-mapping&gt;    &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;    &lt;url-pattern&gt;/</em>&lt;/url-pattern&gt;   &lt;/filter-mapping&gt;  chenlb 2007-09-09 回复 如果你这样str = new String(str.getBytes("ISO-8859-1"), "GBK"); 转码。 写出来程序通用性不好，而且每次有中文都要这样，用过虑器好。但只对post方式有效。get方式看， http://www.blogjava.net/chenlb/archive/2007/07/17/130922.html 如果是spring 用spring提供的过虑器,在web.xml里加 Java代码 &lt;filter&gt;    &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;    &lt;init-param&gt;    &lt;param-name&gt;encoding&lt;/param-name&gt;    &lt;param-value&gt;utf8&lt;/param-value&gt;    &lt;/init-param&gt;  &lt;/filter&gt;   &lt;filter-mapping&gt;    &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;    &lt;url-pattern&gt;/<em>&lt;/url-pattern&gt;   &lt;/filter-mapping&gt;   &lt;filter&gt;  &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;  &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;  &lt;init-param&gt;  &lt;param-name&gt;encoding&lt;/param-name&gt;  &lt;param-value&gt;utf8&lt;/param-value&gt;  &lt;/init-param&gt; &lt;/filter&gt;  &lt;filter-mapping&gt;  &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;  &lt;url-pattern&gt;/</em>&lt;/url-pattern&gt;  &lt;/filter-mapping&gt;如没用spring,用tomcat里面的例子(在webappsservlets-examplesWEB-INFclasses里把filters目录放到你的classer下,其实只要SetCharacterEncodingFilter就可以了,同样在web.xml里加 Java代码 &lt;filter&gt;    &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;    &lt;filter-class&gt;filters.SetCharacterEncodingFilter&lt;/filter-class&gt;    &lt;init-param&gt;    &lt;param-name&gt;encoding&lt;/param-name&gt;    &lt;param-value&gt;utf8&lt;/param-value&gt;    &lt;/init-param&gt;  &lt;/filter&gt;   &lt;filter-mapping&gt;    &lt;filter-name&gt;Set Character Encoding&lt;/filter-name&gt;    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;   &lt;/filter-mapping&gt;  http://xhy0422.javaeye.com/blog/51084</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>Rolling cURL: PHP并发最佳实践</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3952.html" rel="bookmark"
+                   title="Permalink to Rolling cURL: PHP并发最佳实践">Rolling cURL: PHP并发最佳实践</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>&nbsp;</p>
+<p>小桑、&nbsp;发布于 2周前 (12-08)
+分类：技术文章&nbsp;/&nbsp;网络分享</p>
+<p>阅读(65)
+评论(0)</p>
+<p>在实际项目或者自己编写小工具(比如新闻聚合,商品价格监控,比价)的过程中, 通常需要从第3方网站或者API接口获取数据, 在需要处理1个URL队列时, 为了提高性能, 可以采用cURL提供的curl_multi_*族函数实现简单的并发.
+&nbsp;
+本文将探讨两种具体的实现方法, 并对不同的方法做简单的性能对比.
+&nbsp;
+1. 经典cURL并发机制及其存在的问题
+经典的cURL实现机制在网上很容易找到, 比如参考PHP在线手册的如下实现方式:
+function classic_curl($urls, $delay) {
+$queue = curl_multi_init();
+$map = array();
+&nbsp;
+foreach ($urls as $url) {
+// create cURL resources
+$ch = curl_init();
+&nbsp;
+// set URL and other appropriate options
+curl_setopt($ch, CURLOPT_URL, $url);
+&nbsp;
+curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_NOSIGNAL, true);
+&nbsp;
+// add handle
+curl_multi_add_handle($queue, $ch);
+$map[$url] = $ch;
+}
+&nbsp;
+$active = null;
+&nbsp;
+// execute the handles
+do {
+$mrc = curl_multi_exec($queue, $active);
+} while ($mrc == CURLM_CALL_MULTI_PERFORM);
+&nbsp;
+while ($active &gt; 0 &amp;&amp; $mrc == CURLM_OK) {
+if (curl_multi_select($queue, 0.5) != -1) {
+do {
+$mrc = curl_multi_exec($queue, $active);
+} while ($mrc == CURLM_CALL_MULTI_PERFORM);
+}
+}
+&nbsp;
+$responses = array();
+foreach ($map as $url=&gt;$ch) {
+$responses[$url] = callback(curl_multi_getcontent($ch), $delay);
+curl_multi_remove_handle($queue, $ch);
+curl_close($ch);
+}
+&nbsp;
+curl_multi_close($queue);
+return $responses;
+}
+首先将所有的URL压入并发队列, 然后执行并发过程, 等待所有请求接收完之后进行数据的解析等后续处理. 在实际的处理过程中, 受网络传输的影响, 部分URL的内容会优先于其他URL返回, 但是经典cURL并发必须等待最慢的那个URL返回之后才开始处理, 等待也就意味着CPU的空闲和浪费. 如果URL队列很短, 这种空闲和浪费还处在可接受的范围, 但如果队列很长, 这种等待和浪费将变得不可接受.
+&nbsp;
+2. 改进的Rolling cURL并发方式
+仔细分析不难发现经典cURL并发还存在优化的空间, 优化的方式时当某个URL请求完毕之后尽可能快的去处理它, 边处理边等待其他的URL返回, 而不是等待那个最慢的接口返回之后才开始处理等工作, 从而避免CPU的空闲和浪费. 闲话不多说, 下面贴上具体的实现:
+function rolling_curl($urls, $delay) {
+$queue = curl_multi_init();
+$map = array();
+&nbsp;
+foreach ($urls as $url) {
+$ch = curl_init();
+&nbsp;
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_NOSIGNAL, true);
+&nbsp;
+curl_multi_add_handle($queue, $ch);
+$map[(string) $ch] = $url;
+}
+&nbsp;
+$responses = array();
+do {
+while (($code = curl_multi_exec($queue, $active)) == CURLM_CALL_MULTI_PERFORM) ;
+&nbsp;
+if ($code != CURLM_OK) { break; }
+&nbsp;
+// a request was just completed — find out which one
+while ($done = curl_multi_info_read($queue)) {
+&nbsp;
+// get the info and content returned on the request
+$info = curl_getinfo($done[‘handle’]);
+$error = curl_error($done[‘handle’]);
+$results = callback(curl_multi_getcontent($done[‘handle’]), $delay);
+$responses[$map[(string) $done[‘handle’]]] = compact(‘info’, ‘error’, ‘results’);
+&nbsp;
+// remove the curl handle that just completed
+curl_multi_remove_handle($queue, $done[‘handle’]);
+curl_close($done[‘handle’]);
+}
+&nbsp;
+// Block for data in / output; error handling is done by curl_multi_exec
+if ($active &gt; 0) {
+curl_multi_select($queue, 0.5);
+}
+&nbsp;
+} while ($active);
+&nbsp;
+curl_multi_close($queue);
+return $responses;
+}
+3. 两种并发实现的性能对比
+改进前后的性能对比试验在LINUX主机上进行, 测试时使用的并发队列如下:
+&nbsp;
+http://item.taobao.com/item.htm?id=14392877692
+http://item.taobao.com/item.htm?id=16231676302
+http://item.taobao.com/item.htm?id=17037160462
+http://item.taobao.com/item.htm?id=5522416710
+http://item.taobao.com/item.htm?id=16551116403
+http://item.taobao.com/item.htm?id=14088310973
+简要说明下实验设计的原则和性能测试结果的格式: 为保证结果的可靠, 每组实验重复20次, 在单次实验中, 给定相同的接口URL集合, 分别测量Classic(指经典的并发机制)和Rolling(指改进后的并发机制)两种并发机制的耗时(秒为单位), 耗时短者胜出(Winner), 并计算节省的时间(Excellence, 秒为单位)以及性能提升比例(Excel. %). 为了尽量贴近真实的请求而又保持实验的简单, 在对返回结果的处理上只是做了简单的正则表达式匹配, 而没有进行其他复杂的操作. 另外, 为了确定结果处理回调对性能对比测试结果的影响, 可以使用usleep模拟现实中比较负责的数据处理逻辑(如提取, 分词, 写入文件或数据库等).
+&nbsp;
+性能测试中用到的回调函数为:
+function callback($data, $delay) {
+preg_match_all(‘/&lt;h3&gt;(.+)&lt;/h3&gt;/iU’, $data, $matches);
+usleep($delay);
+return compact(‘data’, ‘matches’);
+}
+数据处理回调无延迟时: Rolling Curl略优, 但性能提升效果不明显.
+&nbsp;
+————————————————————————————————
+Delay: 0 micro seconds, equals to 0 milli seconds
+————————————————————————————————
+Counter &nbsp; &nbsp; &nbsp; &nbsp; Classic &nbsp; &nbsp; &nbsp; &nbsp; Rolling &nbsp; &nbsp; &nbsp; &nbsp; Winner &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Excellence &nbsp; &nbsp; &nbsp;Excel. %
+————————————————————————————————
+1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.1193 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0390 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0803 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;67.31%
+2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0556 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0477 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0079 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;14.21%
+3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0461 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0588 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0127 &nbsp; &nbsp; &nbsp; &nbsp; -21.6%
+4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0464 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0385 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0079 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;17.03%
+5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0534 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0448 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0086 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;16.1%
+6 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0540 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0714 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0174 &nbsp; &nbsp; &nbsp; &nbsp; -24.37%
+7 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0386 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0416 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0030 &nbsp; &nbsp; &nbsp; &nbsp; -7.21%
+8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0357 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0398 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0041 &nbsp; &nbsp; &nbsp; &nbsp; -10.3%
+9 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0437 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0442 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0005 &nbsp; &nbsp; &nbsp; &nbsp; -1.13%
+10 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0319 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0348 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0029 &nbsp; &nbsp; &nbsp; &nbsp; -8.33%
+11 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0529 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0430 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0099 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;18.71%
+12 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0503 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0581 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0078 &nbsp; &nbsp; &nbsp; &nbsp; -13.43%
+13 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0344 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0225 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0119 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;34.59%
+14 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0397 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0643 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0246 &nbsp; &nbsp; &nbsp; &nbsp; -38.26%
+15 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0368 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0489 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0121 &nbsp; &nbsp; &nbsp; &nbsp; -24.74%
+16 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0502 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0394 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0108 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;21.51%
+17 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0592 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0383 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0209 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;35.3%
+18 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0302 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0285 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0017 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5.63%
+19 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0248 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0553 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Classic &nbsp; &nbsp; &nbsp; &nbsp; -0.0305 &nbsp; &nbsp; &nbsp; &nbsp; -55.15%
+20 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0137 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0131 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0006 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.38%
+————————————————————————————————
+Average &nbsp; &nbsp; &nbsp; &nbsp; 0.0458 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0436 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0022 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.8%
+————————————————————————————————
+Summary: Classic wins 10 times, while Rolling wins 10 times
+数据处理回调延迟5毫秒: Rolling Curl完胜, 性能提升40%左右.
+&nbsp;
+————————————————————————————————
+Delay: 5000 micro seconds, equals to 5 milli seconds
+————————————————————————————————
+Counter &nbsp; &nbsp; &nbsp; &nbsp; Classic &nbsp; &nbsp; &nbsp; &nbsp; Rolling &nbsp; &nbsp; &nbsp; &nbsp; Winner &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Excellence &nbsp; &nbsp; &nbsp;Excel. %
+————————————————————————————————
+1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0658 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0352 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0306 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;46.5%
+2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0728 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0367 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0361 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;49.59%
+3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0732 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0387 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0345 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;47.13%
+4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0783 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0347 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0436 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;55.68%
+5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0658 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0286 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0372 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;56.53%
+6 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0687 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0362 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0325 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;47.31%
+7 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0787 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0337 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0450 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;57.18%
+8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0676 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0391 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0285 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;42.16%
+9 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0668 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0351 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0317 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;47.46%
+10 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0603 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0317 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0286 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;47.43%
+11 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0714 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0350 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0364 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;50.98%
+12 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0627 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0215 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0412 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;65.71%
+13 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0617 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0401 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0216 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;35.01%
+14 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0721 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0226 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0495 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;68.65%
+15 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0701 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0428 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0273 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;38.94%
+16 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0674 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0352 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0322 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;47.77%
+17 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0452 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0425 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0027 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5.97%
+18 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0596 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0366 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0230 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;38.59%
+19 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0679 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0480 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0199 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;29.31%
+20 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0657 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0338 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0319 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;48.55%
+————————————————————————————————
+Average &nbsp; &nbsp; &nbsp; &nbsp; 0.0671 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0354 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rolling &nbsp; &nbsp; &nbsp; &nbsp; 0.0317 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;47.24%
+————————————————————————————————
+Summary: Classic wins 0 times, while Rolling wins 20 times
+通过上面的性能对比, 在处理URL队列并发的应用场景中Rolling cURL应该是更加的选择, 并发量非常大(1000+)时, 可以控制并发队列的最大长度, 比如20, 每当1个URL返回并处理完毕之后立即加入1个尚未请求的URL到队列中, 这样写出来的代码会更加健壮, 不至于并发数太大而卡死或崩溃. 详细的实现请参考: http://code.google.com/p/rolling-curl/
+&nbsp;
+5. 参考资料和延伸阅读
+Client URL Library http://www.php.net/manual/en/book.curl.php
+Parallel CURL Requests with PHP http://blog.rob.cx/multi-curl
+A more efficient multi-curl library for PHP (non-blocking) http://code.google.com/p/rolling-curl/
+PHP: Parallel cURL Performance http://stackoverflow.com/questions/10485199/php-parallel-curl-performance-rollingcurl-vs-parallelcur
+未经允许不得转载：乌云博客&nbsp;»&nbsp;Rolling cURL: PHP并发最佳实践</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

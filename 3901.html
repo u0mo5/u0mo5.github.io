@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>eclipse中从数据库生成hibernate实体类</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3901.html" rel="bookmark"
+                   title="Permalink to eclipse中从数据库生成hibernate实体类">eclipse中从数据库生成hibernate实体类</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>为什么写这篇BLOG，是因为经常有同事或网友问起我hiberante实体类的生成问题。所以下次再有人问我可以省一堆的话了，其实这个真的是很简单。        现在hibernate在项目中的应用是越来过广泛了。我是从hibernate开始支持注释语法后才开始研究它的。说实在的，原来的hibernate生成的一堆堆的XML文件看着就头晕，还不如自己写的SQL语句来的舒服，所以一直听朋友和同事介绍，可自己一直不屑用之。        可是现在有福了hibernate是JPA最常用的实现之一，而且hiberante自身也对注释语法进行了支持。现在再不用去看那一堆堆的XML映射了。而且eclipse还提供了从数据库直接生成Entity Class的工具。既然可以少写或不写SQL语句那合乐而为为呢。废话少说，开始做起来。</p>
+<p>还是从我们开始项目的第一步说起，新建项目。一般我们用java做web项目都是File-&gt;New-&gt;Dynamic Web Project，如下图：然后会出现新建项目的对话框如图所示然后点击Modify按钮后如图将java persistence选中，这样就为项目增加了JPA的特性，其它特性根据项目需要自行修改。点击OK后。点击几次NEXT（忽略的几步根据自身情况而定）到JPA FACET窗口，如下图：因为咱们用的是hibernate列表中没有所以platform选择Generic,Type选择disable library configuration,因为咱们把需要的jar文件直接放到WEB-INF下的lib目录中就可以了。所以不用配置。再下面的connection这个是必须要配置的要不我们怎么从数据库中生成啊。对不。如果以前配置过连接直接选择就可以了，如果没有配置过点击 add connection.如下图：选择要使用的数据库类型，然后下一步，如下图。其实这个类型也没啥作用只是个生成连接字符串的模版而以。选择已有的驱动，如果没有怎么办，废话，当然是继续新增了。这块不详述了，点击driver后面第一个按钮，根据提示选择对应的jar文件即可。做完上述操作点击Finish.回到JPA Facet窗口。选中Discover annotated classes automatically,把Create orm.xml钓掉。然后点Finish项目就建完了。然后在项目文件夹上右键选择JPA tools-&gt;Generate Entities from Tables.后如下图：选择建好的connection如果没有connect 就connect一下。就会如上图所示了（有时eclipse会有些小问题看不见表，可以重启一下试试，实在不行就直接建个JPA project ，生成实体后再拷到自己的项目中就可以了。）选中要生成实体的表，Next如下图：上面是表之间的关系，如果可以做相应的修改（用的是ecipse 3.5貌似eclipse3.4还没这个功能，eclipse越来越强了），再Next后如下图：（这个好像也是eclipse 3.5才加的）都能看明白吧。按照需要改改就可以了，这里不多啰嗦。再Next后，如下图：这是一些表的每个属性的调整，一般也不用调了。Finish就好了。嘿嘿终于完成了。贴了这么多图，累死我了。不过为了大家能弄明白，还是图比文字更能说明情况，我辛苦点就辛苦点吧。。看看源码中生成的java文件是不是你想要的，具体这些类怎么用。就不是这篇文章要说的问题了。如果大家有需要，我下回接着写。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

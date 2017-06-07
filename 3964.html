@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>SSH框架总结（框架分析+环境搭建+实例源码下载）</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3964.html" rel="bookmark"
+                   title="Permalink to SSH框架总结（框架分析+环境搭建+实例源码下载）">SSH框架总结（框架分析+环境搭建+实例源码下载）</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>分类： Spring Hibernate Struts Web开发2013-04-25 10:00 103610人阅读 评论(206) 收藏 举报</p>
+<p>首先，SSH不是一个框架，而是多个框架（struts+spring+hibernate）的集成，是目前较流行的一种Web应用程序开源集成框架，用于构建灵活、易于扩展的多层Web应用程序。
+ 
+集成SSH框架的系统从职责上分为四层：表示层、业务逻辑层、数据持久层和域模块层（实体层）。
+ 
+Struts作为系统的整体基础架构，负责MVC的分离，在Struts框架的模型部分，控制业务跳转，利用Hibernate框架对持久层提供支持。Spring一方面作为一个轻量级的IoC容器，负责查找、定位、创建和管理对象及对象之间的依赖关系，另一方面能使Struts和Hibernate更好地工作。
+ </p>
+<p>由SSH构建系统的基本业务流程是：
+ 
+1、在表示层中，首先通过JSP页面实现交互界面，负责传送请求(Request)和接收响应(Response)，然后Struts根据配置文件(struts-config.xml)将ActionServlet接收到的Request委派给相应的Action处理。
+2、在业务层中，管理服务组件的Spring IoC容器负责向Action提供业务模型(Model)组件和该组件的协作对象数据处理(DAO)组件完成业务逻辑，并提供事务处理、缓冲池等容器组件以提升系统性能和保证数据的完整性。
+3、在持久层中，则依赖于Hibernate的对象化映射和数据库交互，处理DAO组件请求的数据，并返回处理结果。
+ 
+采用上述开发模型，不仅实现了视图、控制器与模型的彻底分离，而且还实现了业务逻辑层与持久层的分离。这样无论前端如何变化，模型层只需很少的改动，并且数据库的变化也不会对前端有所影响，大大提高了系统的可复用性。而且由于不同层之间耦合度小，有利于团队成员并行工作，大大提高了开发效率。
+ 
+ 
+下面我们再详细看一下组成SSH的这三个框架
+一、Spring
+1、什么是Spring？
+简单来说，Spring是一个轻量级的控制反转（IoC）和面向切面（AOP）的容器框架。
+ 
+2、Spring的特性</p>
+<p>具体自己百度吧
+所有Spring的这些特征使你能够编写更干净、更可管理、并且更易于测试的代码
+ 
+3、为什么使用Spring？
+Spring的以上特性使得开发人员使用基本的JavaBean来完成以前只可能由EJB完成的事情。然而，Spring的用途不仅限于服务器端的开发。从简单性、可测试性和松耦合的角度而言，任何Java应用都可以从Spring中受益。
+ 
+二、Struts
+1、什么是Struts？
+它通过采用 Java Servlet/JSP 技术，实现了基于Java EEWeb应用的MVC设计模式的应用框架，是MVC经典设计模式中的一个经典产品。
+ 
+2、Struts1的核心构成</p>
+<p>在 Struts1 中，由一个名为 ActionServlet 的 Servlet 充当 控制器(Controller)的角色，根据描述模型、视图、控制器对应关系的 struts-config.xml 的配置文件，转发视图(View)的请求，组装响应数据模型（Model）。
+ 
+在 MVC 的模型（Model）部分，经常划分为两个主要子系统（系统的内部数据状态与改变数据状态的逻辑动作），这两个概念子系统分别具体对应 Struts 1里的 ActionForm 与 Action 两个需要继承实现超类。在这里，Struts 1可以与各种标准的数据访问技术结合在一起，包括Enterprise Java Beans（EJB）, JDBC 与 JNDI。
+ 
+在 Struts 1的视图（View） 端，除了使用标准的JavaServer Pages（JSP）以外，还提供了大量的标签库使用，同时也可以与其他表现层组件技术（产品）进行整合，比如 Velocity Templates，XSLT 等。
+ 
+通过应用 Struts 的框架，最终用户可以把大部分的关注点放在自己的业务逻辑（Action）与 映射关系的配置文件（struts-config.xml）中。
+ 
+3、Struts1的基本执行流程
+详见《STRUTS基本工作流程》
+ 
+4、什么是struts2
+Struts 2是Struts的下一代产品，是在 struts 1和WebWork的技术基础上进行了合并的全新的Struts 2框架。其全新的Struts 2的体系结构与Struts 1的体系结构差别巨大。Struts 2以WebWork为核心，采用拦截器的机制来处理用户的请求，这样的设计也使得业务逻辑控制器能够与ServletAPI完全脱离开，所以Struts 2可以理解为WebWork的更新产品
+ 
+5、strut2的体系结构
+ 
+ 
+解析：
+当Web容器收到请求（HttpServletRequest）它将请求传递给一个标准的的过滤链包括  流程（ActionContextCleanUp）过滤器，然后经过Other filters(SiteMesh ,etc),
+接下来需要调用FilterDispatcher核心控制器，然后它调用ActionMapper确定请求那个Action，ActionMapper返回一个收集Action详细信息的ActionMaping对象。
+接下来FilterDispatcher将控制权委派给ActionProxy,ActionProxy调用配置管理器(ConfigurationManager) 从配置文件中读取配置信息(struts.xml)，然后创建ActionInvocation对象，ActionInvocation在调用Action之前会依次的调用所用配置拦截器（Interceptor N） 一旦执行结果返回结果字符串ActionInvocation负责查找结果字符串对应的(Result）然后执行这个Result Result会调用一些模版（JSP）
+来呈现页面，之后拦截器(Interceptor N)会在被执行(顺序和Action执行之前相反)最后响应(HttpServletResponse)被返回在web.xml中配置的那些过滤器和（核心控制器）（FilterDispatcher）。
+ 
+6、为什么使用Struts？
+首先，Struts 是MVC的一种实现，它将 Servlet和 JSP 标记（属于 J2EE 规范）用作实现的一部分。Struts继承了MVC的各项特性，并根据J2EE的特点，做了相应的变化与扩展，减弱了业务逻辑接口和数据接口之间的耦合，以及让视图层更富于变化
+ 
+另外， struts具有页面导航功能，使系统的脉络更加清晰。通过一个配置文件，即可把握整个系统各部分之间的联系，这对于后期的维护有着莫大的好处。尤其是当另一批开发者接手这个项目时，这种优势体现得更加明显。
+ 
+7、 Struts1和Struts2的区别
+详见《Struts1 和 Struts2》
+ 
+三、Hibernate
+1、什么是Hibernate？
+Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。 Hibernate可以应用在任何使用JDBC的场合，既可以在Java的客户端程序使用，也可以在Servlet/JSP的Web应用中使用，最具革命意义的是，Hibernate可以在应用EJB的J2EE架构中取代CMP，完成数据持久化的重任
+ 
+2、Hibernate核心构成
+ 
+具体就不展开了
+ 
+3、Hibernate基本执行流程</p>
+<p>为什么使用Hibernate？
+1. 对JDBC访问数据库的代码做了封装，大大简化了数据访问层繁琐的重复性代码。
+2、Hibernate是一个优秀的ORM实现。他很大程度的简化DAO层的编码工作，将软件开发人员从大量相同的数据持久层相关编程工作中解放出来，使开发更对象化了。
+3、移植性好，支持各种数据库，如果换个数据库只要在配置文件中变换配置就可以了，不用改变hibernate代码。
+4、支持透明持久化，因为hibernate操作的是纯粹的（pojo）java类，没有实现任何接口，没有侵入性。所以说它是一个轻量级框架。
+ 
+ 
+最后附上SSH1和SSH2框架搭建的实例，点击即可下载
+SSH1框架搭建实例（spring2+struts1+hibernate3）采用旧版本，详见代码中注释
+SSH2框架搭建实例（spring3.2+strust2.3.4+hibernate4.2）全部采用最新版本，详见代码中注释
+ 
+开发环境搭建，参照我的另一篇博客
+《Win7(64) + eclipse（64）+ tomcat7（64）+ jdk7（64）开发环境配置》
+ 
+ 
+ </p>
+<p>[html] view plaincopyprint?
+ </p>
+<p>一些说明：  
+  
+索要代码的邮箱，我基本上都发过了，如果有漏发，请联系我。  
+  
+  
+还是希望大家去csdn下载页去下载。如果速度慢，可以去这里http://pan.baidu.com/s/1eQh7FXo  
+  
+  
+开发环境配置。http://blog.csdn.net/shan9liang/article/details/8807784  
+    
+在war中，找到application-common.xml。修改数据源，指定自己的数据库即可。项目部署后，会自动映射表。  
+    
+    
+&lt;!--配数据源 --&gt;  
+&lt;bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  
+destroy-method="close"&gt;  
+&lt;property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" /&gt;  
+&lt;property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" /&gt;  
+&lt;property name="username" value="ssh" /&gt;  
+&lt;property name="password" value="ssh" /&gt;  
+&lt;/bean&gt;  
+    
+以上是oracle的配置。  
+  
+如果使用其他数据库，请在lib目录下，加入驱动包。并修改数据源。  
+  
+强烈建议：  
+  
+  
+https://code.csdn.net/shan9liang/tgb  
+这是在CSDN CODE托管的，采用ssh搭建的一个考勤管理系统，maven项目，比原来那个更规范了，建议用这个，而且我会持续更新，逐渐加入各种主流框架，相信我。  
+。不过不是eclipse项目，需要手工导入eclipse，最近特喜欢用intellij。建议直接用git clone。  </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

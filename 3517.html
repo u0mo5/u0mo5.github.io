@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>删除Autorun.inf的方法</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3517.html" rel="bookmark"
+                   title="Permalink to 删除Autorun.inf的方法">删除Autorun.inf的方法</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>你的电脑的每个分区根目录都有一个autorun.inf的文件夹，查看属性是只读+隐藏，且无法删除、无法取得权限!点进去，却显示的是控制面板的内容?
+ </p>
+<p>其实这个不是病毒，而是用来防病毒，一些系统封装工具本身就自带。下面教你删除的方法：
+建立一个批处理文件，代码如下：
+cacls?%1/g everyone:f
+Rd /S/Q?%1
+文件名：删除免疫.bat，放到桌面，备用。
+拖动autorun.inf到桌面上的bat图标上就行了，怎么样，没有了这个文件夹了吧!
+上面的批处理代码转换成dos命令就是(删除G盘上的autorun.inf文件，红色的路径随着盘符的不同需要改变，其它的不要改动)：
+cacls G:autorun.inf /g everyone:f
+Rd /S/Q G:autorun.inf
+auturun.inf无法删除的原因
+当网民并没有在电脑上安装U盘免疫程序时，auturun.inf无法删除通常是病毒造成的，删除失败可能是病毒正在运行，或者病毒感染时创建的auturun.inf文件访问权限被修改。
+当电脑被U盘病毒入侵时，除了在磁盘生成的auturun.inf不可删除，还可能发现大量文件夹变成了.exe图标，这是病毒将原来正常的文件夹隐藏，然后在同一目录下创建很多病毒副本，文件名和正常文件名一样，不同之处是加上了exe扩展名。windows默认情况下不会显示隐藏文件和文件扩展名。
+需要修改文件夹选项之后才可以看到真相。
+些目录在Windows里删不掉，是因为在Windows里看上去它的文件名是XXX，实际它的文件名是“xxx..”之类的。要想删除这些目录，可以单击“开始→运行”，输入“CMD”启动“命令提示符”，使用rd命令删除。比如删除D盘的autorun.inf文件夹，先输入“D：”并回车切换到D盘，然后输入“DIR”并回车列出当前的目录，查看你无法删除的目录全名是什么，最后输入“rd /s autorun. inf”并回车，当出现提示时，按“Y”键并回车即删除。</p>
+<p>方法如下：
+1、打开“开始”，选择“运行”，输入“CMD”，打开命令行窗口
+2、输入X: 然后回车
+3、输入rmdir /s autorun.inf 然后回车
+4、当出现提示时，按“Y”，并回车
+X:代表autorun.inf 文件夹出现在哪个盘目录下，如C盘、D盘、e盘、f盘、H盘等。。
+比如说E盘里面有autorun.inf文件夹无法删除，那么就在dos命令框下输入：
+1、输入E: 然后回车(注意有冒号的哦)
+2、输入rmdir /s autorun.inf 然后回车
+3、当出现提示时：autorun.inf, 是否确认(Y/N)?按 “Y”，并回车
+去看看E盘下面的文件夹是否已经删除?恩，确实已经删除了。 这个方法是最简便的。
+在doc下删除
+运行 cmd
+d:
+attrib -s -h autorun.inf
+del autorun.inf
+attrib -s -h auto.exe
+del auto.exe
+其它的盘一样!
+肯定删除得了
+桌面上新建一个文本文档，然后输入：
+attrib C:autorun.inf -a -s -r -h
+attrib D:autorun.inf -a -s -r -h
+attrib E:autorun.inf -a -s -r -h
+attrib F:autorun.inf -a -s -r -h
+attrib I:autorun.inf -a -s -r -h
+ren C:autorun.inf autorun.inf
+ren D:autorun.inf autorun.inf
+ren E:autorun.inf autorun.inf
+ren F:autorun.inf autorun.inf
+ren I:autorun.inf autorun.inf
+del C:autorun.inf
+del D:autorun.inf
+del E:autorun.inf
+del F:autorun.inf
+del I:autorun.inf
+保存为后缀是bat的文件，双击此文件，确定删除autorun.inf，然后立即重启电脑就行了，若不行，重启点脑进入安全模式删除，或者用WindowsPE系统删除，在删除不了除非是WIN7的加密文件。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

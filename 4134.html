@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>php 修改上传文件大小 （max_execution_time post_max_size）</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4134.html" rel="bookmark"
+                   title="Permalink to php 修改上传文件大小 （max_execution_time post_max_size）">php 修改上传文件大小 （max_execution_time post_max_size）</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>php 修改上传文件大小 （max_execution_time post_max_size）</p>
+<p>有些朋友要通过自己的网站后台，包括论坛，来上传一些文件，php一般为2m，或8m（以下我们按默认为2m），接下来就是来讲怎么修改上传文件大小的。
+1.首先修改执行上传文件限制
+一般的文件上传,除非文件很小.就像一个5M的文件,很可能要超过一分钟才能上传完.但在php中,默认的该页最久执行时间为 30 秒.就是说超过30秒,该脚本就停止执行.这就导致出现 无法打开网页的情况.这时我们可以修改 max_execution_time
+在php.ini里查找max_execution_time默认是30秒.改为max_execution_time = 00表示没有限制
+另一种方法是可以在php程序中加入set_time_limit();来设定页面最久执行时间.set_time_limit(0);//0表示没有限制
+2.其次修改数据包的最大限制
+修改 post_max_size 设定 POST 数据所允许的最大大小。此设定也影响到文件上传。php默认的post_max_size 为2M.如果 POST 数据尺寸大于 post_max_size $_POST 和 $_FILES superglobals 便会为空.查找 post_max_size .改为post_max_size = 150M
+3. 最好修改上传文件的最大限制
+很多人都会改了第二步.但上传文件时最大仍然为 2M.为什么呢.我们还要改一个参数upload_max_filesize 表示所上传的文件的最大大小。查找upload_max_filesize,默认为8M改为upload_max_filesize = 100M
+另外要说明的是,post_max_size 大于 upload_max_filesize 为佳</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

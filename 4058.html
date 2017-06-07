@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>PHP常用的一些优化技巧</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4058.html" rel="bookmark"
+                   title="Permalink to PHP常用的一些优化技巧">PHP常用的一些优化技巧</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>PHP常用的一些优化技巧</p>
+<p>点击联系老杨</p>
+<p>ecshop模板 php 优化技巧 老杨ecshop ecshop二次开发 2013-03-29</p>
+<p>0</p>
+<p>做为最流行的WEB语言， PHP他的突出优势就是其速度与效率。如果遇到维护原有效率不高的脚本，或者服务器负载较大，以及网络带宽不高等多种影响系统性能的瓶颈时，就需要我们对系统的内部环境经行调优。老杨ecshop二次开发一：PHP脚本优化      我下面说的几条PHP脚本级优化，你可以在优化时用到它们，这些技巧并不能让PHP运行速度变的更快，而只能使代码稍稍优化一点儿。最重要的是让你了解PHP内在的运行原理。     例子一：      在程序中使用count($array)作为条件循环时的耗时操作。       $birds = array("鹦鹉","麻雀","孔雀","天鹅");        for($i = 0;$i&lt;=count($birds);i++){         ............         }        上面的代码每次处理都要执行一遍count()函数，计算数组的长度。        下面我们重写代码        $count = count($birds);         for($i = 0;$i&lt;=$count;i++){         ............         }       例子二：        对字符操作时，检查某个字符串是否超出长度。我们很容易的想到的是strlen()函数，但是strlen()函数在使用的时候需要经行几步的操作，如全部小写化、函数查找。        在这样的场合，我们可以使用isset()来代替，以提高代码速度。        if(strlen($var) &lt; 5)  { echo "this is test";}        重写后的代码        if(!isset($var{5}))    { echo "this is test";}        调用isset()比strlen()函数要快，因为isset()是一种语法结果，而不是函数。在执行的时候不需要PHP引擎对strlen()函数进行小写换换和内部进行函数查找。       例子三：        使用递增或递减时，$i++比++$i稍慢。这点和其他的语言相比，在php中是个特例，不要在C++和java中也使用这个技巧。在php中，$i++比++$i慢的原因是$i++进行了4次计算，而++$i        进行了3次计算。$i++是先申请一个临时变量，然后增加。++$i直接使用原来变量。        例子四         字符串的输出              echo 与 print              print要比echo稍慢一些。理由很简单，不管是否需要，print都会返回一个状态标识，而echo只是简单的输出，不做任何其他的事情。              printf() 这个函数会很慢，建议万不得已的时候不要使用。printf()是在需要进行参数格式化的情况下使用的。        例子五           require 比 require_once 快           从PHP 5.2开始 require 将会比 require_once 快，因为require不会检查所包含的函数或文件是否存在。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

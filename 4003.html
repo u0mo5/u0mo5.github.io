@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>1433抓鸡的原理详解以及防范</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4003.html" rel="bookmark"
+                   title="Permalink to 1433抓鸡的原理详解以及防范">1433抓鸡的原理详解以及防范</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>作者: 暗影 分类: 原创文章 发布时间: 2014-5-12 ė455 次浏览 60 条评论</p>
+<p>目前网络上主流的抓鸡技术层出不穷比如 3389,1433,3306,8080,4899,135 等等运用比较广泛的抓鸡端口
+那么真正知道极其原理的又有的多少,我们只有知道了相应的原理才会懂得如何防范,如何优化我们的工具代码
+成为将效益达到最大化
+如果我们一味的依葫芦画瓢的那样不但不会提高自己的技术，
+还会花费大把的时间,与精力在上面,抓到的肉鸡也只会微乎其微、
+我们抓到肉鸡的多少往往取决于一下几点：
+1.服务器配置过低：
+ 
+带宽太低相对的扫描速度就会下降,服务器CPU核心太低,经常导致服务器卡死
+ 
+2.IP段不活跃：
+ 
+我们试想一下我们在扫描IP段的时候 整理了很多IP段在里面进行扫描 可是扫出来的端口很少
+这样就会大大的减少密码猜解的效率。
+ 
+3.抓鸡工具的密码字典太差
+也就是弱口令字典,字典是在精不在多,如果我们弄几M的大字典进行猜解,
+当然我们成功猜测出来的弱口令肯定会更多,可是需要花费的时间可能是原先速度的N倍
+如果有一篇高效率的字典,那么我们扫描起来将会得心应手
+ 
+4.木马的体积以及免杀的效果：
+木马体积越大,在传输的过程越容易造成漏洞传,断传，也就是还没有传输完成就已经中断了这样就根本不能上线
+那么肯定有朋友会问我多大的体积才算合适呢？ 这个没有确定的值 常理来讲当然越小越好,我个人推荐在20K-300K合适
+还有就是免杀效果,如果木马没有做任何反杀毒软件措施的话,我想的话这会是致命的,在不懂电脑安全的人也会知道下载个杀毒软件
+目前国内主流的杀毒软件就比如 360 金山毒霸 QQ管家 卡巴斯基等 如果将这几款杀毒软件进行免杀的话 效率会提升很多。
+ 
+现在就取其中一种1433抓鸡方法来讲解一下其原理,我们只有知道了入侵者是通过什么样的方法来入侵我们的电脑才会懂的如何的防御。
+ </p>
+<p>1433用一种溢出方式抓鸡，基本是用其自身端口对应的sql server数据库的弱口令来进行入侵的。</p>
+<p>就是当你用s扫描器扫描了许多开放1433端口的ip时，用X Scan或者流光还是hscan等等都随便你去扫描他</p>
+<p>sql server服务的弱口令，当扫描完成时，看下扫描报告，他会列出许多ip，以及他的数据库帐号密码，</p>
+<p>这里的帐号密码指的是sql server数据库的帐号密码，而不是系统自身的登录密码，</p>
+<p>然后用sqltools这个工具来连接，填上ip 以及账户，密码，然后直接去运行DOS命令，提权，并且开启终端端口</p>
+<p>如果出现什么存储过程，126   127的错误等等，利用百度google搜索一下都会有解决办法的。</p>
+<p>抓鸡工具就是利用批处理的方法将以上步骤用”自动化”
+ 
+如果大家还有什么不明白的地方直接留言,告诉我 或者通过邮箱联系我！</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

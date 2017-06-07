@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>有关WordPress的Rss导入指南</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3786.html" rel="bookmark"
+                   title="Permalink to 有关WordPress的Rss导入指南">有关WordPress的Rss导入指南</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>我是用cublog转过来.有一个软件博客备份软件(blog_backup)可以备份那个的blog.我用他备份后导出成rss2的文件.但我导入了很多次不成功.后来发现,原来blog_backup导出的格式和wordpress的不一样.
+下面我们来对比分析一下.
+内容标签
+&lt;description&gt;&lt;![CDATA[ 正文 ]]&gt;&lt;/description&gt;
+&lt;content:encoded&gt;&lt;![CDATA[ 正文]]&gt;&lt;/content:encoded&gt;
+分类标签&lt;category&gt;&lt;![CDATA[未分类]]&gt;&lt;/category&gt;
+时间&lt;pubDate&gt;Sat, 08 Dec 2007 10:37:20 +0000&lt;/pubDate&gt;&lt;pubDate&gt;Tue, 16 Oct 2007 19:28:00 GMT+8&lt;/pubDate&gt;主题
+&lt;title&gt;测试&lt;/title&gt;&lt;title&gt;&lt;![CDATA[LDAP 的地址簿(1)]]&gt;&lt;/title&gt;
+作者&lt;dc:creator&gt;admin&lt;/dc:creator&gt;
+对比后我们发现,主要是正文部分不一样,所以我们打开rss.xml的文件.然后替换 &lt;description&gt;&lt;![CDATA[为&lt;content:encoded&gt;&lt;![CDATA[.和]]&gt;&lt;/description&gt;替换为]]&gt;&lt;/content:encoded&gt;.
+然后重新导入就好了.
+别外我们可以看看wordpress导入的标准xml格式
+1. &lt;item&gt;2. &lt;title&gt;标题&lt;/title&gt;3. &lt;pubdate&gt;日期&lt;/pubdate&gt;&lt;!– post的日期,可选 –&gt;4. &lt;dc :date&gt;备选日期&lt;/dc&gt;&lt;!– pubdate的备选项.如果两个都没有,将使用导入时日期时间 –&gt;5. &lt;category&gt;目录&lt;/category&gt;&lt;!– post的目录,可选. –&gt;6. &lt;dc :subject&gt;备选目录&lt;/dc&gt;&lt;!– category的备选项.如都无,使用options中的Default post category –&gt;7. &lt;guid .+?&gt;post的permalink&lt;/guid&gt;&lt;!– 可选 –&gt;8. &lt;content :encoded&gt;内容&lt;/content&gt;9. &lt;description&gt;备选内容&lt;/description&gt;10. &lt;/item&gt;
+当然可以更加简单.
+1. &lt;item&gt;2. &lt;title&gt;标题&lt;/title&gt;3. &lt;pubdate&gt;日期&lt;/pubdate&gt;&lt;!– 谁会将所以post都设定到同一个时间上呢？还是带上吧 –&gt;4. &lt;content :encoded&gt;内容&lt;/content&gt;5. &lt;/item&gt;
+好了,以后导入有问题,我们只要给导入的格式改成标准导入格式就一定能正常导入了.</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

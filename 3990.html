@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>java字符集编码乱码问题</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3990.html" rel="bookmark"
+                   title="Permalink to java字符集编码乱码问题">java字符集编码乱码问题</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>博客分类：
+ 
+web</p>
+<p>javajspservlet </p>
+<p>最近做网页这块时碰到了正文字符乱码问题、别看这小小的一个问题，对我来说却花费了好长一段时间。现在让我慢慢分析它吧（说实话、这些有部分是从网上找的，但都是自己亲自打出来的、这样对自己来说不仅理解了而且还加深了印象）。 　　     在java内部运算中、涉及到所有字符串都会被转化UTF-8编码来运算，然而、在被java转化之前，字符串是怎么样的字符集呢？其实java总是根据操作系统的默认编码字符集来决定字符串的初始编码的；而且java系统的输入输出都是采取操作系统的默认编码。所以、我们如果能统一java系统的输入输出以及操作系统三者的编码字符集合，那么就能够正确处理和显示汉字。这也是处理java系统汉字的一个原则。 　　     然而在实际项目中、能够正确抓住和控制住java系统的输入输出部分是比较难的。在J2EE中、由于涉及到外部浏览器和数据库等，中文乱码问题很明显。J2EE应用程序是运行在J2EE容器中的、在这个系统中，输入途径有多种：一种是通过页面表单打包成请求（request）发往服务器的；第二种是通过数据库读入；而第三种输入比较复杂，jsp在第一次运行时总是被编译成Servlet，jsp中常常包含中文字符、那么编译使用javac时，java将根据默认的操作系统编码作为初始编码；除非自己特别指定了编码。 　　J2EE中的输出途径也有几种：第一种是jsp页面输出、由于jsp页面已经被编译成Servlet，那么在输出时、也将根据操作系统的默认编码来选择输出编码，除非指定输出编码方式；第二种输出途径便是将字符串输出到数据库。所以一个J2EE系统的输入输出是非常复杂、而且还是动态变化的。而java是跨平台运行的、在实际编译和运行中，都可能涉及到不同的操作系统；如果任由java自由地根据操作系统来决定输入输出的编码字符集、那将不可控制的出现乱码了。 　　要处理此种情况、根本办法就是明确指定整个应用系统的统一字符集，指定统一字符集到底是ISO8859_1、GBK、还是UTF—8呢？下面我们来分析下： 　　1、如果统一指定为ISO8859_1，因为目前大多数软件都是西方人编制的、他们默认的字符集就是ISO8859_1，包括Linux和数据库MySQL等。所以我们一般只需要注意在jsp头部声明、运行操作系统默认编码以及开发和编译代码时指定字符集是否为默认为ISO8859_1。 　　2、统一指定为GBK中文字符集、上面提到的三个地方需要同样做到，不同的是只能运行在编码默认为GBK的操作系统上、比如Windows；统一编码为ISO8859_1和GBK虽然能带来编制代码的方便、但是各自只能在相应的操作系统上运行；所以破坏了java跨平台运行的优越性、在一定范围内行得通；比如：为了使得GBK编码在linux上运行，设置Linux编码为GBK。 　　3、将java/j2EE系统的统一 编码定义为UTF-8，那么除应用系统以外就不需要任何附加设置的中文编码了。UTF-8是一种兼容所有语言的编码方式，唯一比较麻烦的就是要找到应用系统的所有出入口；然后用UTF-8来更改它。 　　一个J2EE应用系统需要做下面几项工作： 　　1、开发和编译代码时指定字符集为UTF-8，JBuild（一种可视化java开发工具）和Ecplise都可以在项目属性中设置。 　　2、使用过滤器、如果所有请求都经过一个Servlet控制分配器，那么我们使用Servlet时用filter执行语句，将所有来自浏览器的请求（request）转换为UTF-8；这是因为浏览器发过来的请求包括浏览器所在的操作系统编码可能是各种形式的编码、我们在他们数据流通的必经之地设置过滤：request.setCharacterEncoding(“UTF-8”);在使用filter时我们需要配置web.xml里文件来激活Filter。同时在jsp代码中声明UTF-8、设定数据库连接方式也是UTF-8，比如连接mysql时的配置URL :jdbc:mysql://localhost:3306/test?useUnicode=true&amp;charcaterEncoding=UTF-8; 　　下面看看java中文乱码问题的由来吧： 　　    Java的内核和class文件是基于unicode的，这使得java程序具有很好的跨平台性；由此也带来了一些中文乱码问题。原因主要有两方面：java和jsp文件本身编译时产生的乱码问题和java程序于其他媒介交互时产生的乱码问题。 　　首先java（包括jsp）源文件中很可能包含有中文，而java和jsp源文件的保存方式是基于字节流的；如果java和jsp编译成class文件过程中、使用的编码方式与源文件的编码不一致，就会出现乱码。对于处理这种乱码、建议在java文件中尽量不要写中文，如果必须写的话、尽量手动带参数-ecoding GBK 或者-ecoding gb2312编译；对于jsp、在文件头加上&lt;%@ page contentType =”text/html;charset=GBK”%&gt;或者是&lt;%@ page contentType="text/html;charset=gb2312"%&gt; 就能基本解决这类乱码问题。 　　下面就来重点讨论第二类乱码问题吧、即java程序与其他存储媒介交互时产生的乱码；很多存储媒介如数据库、文件、流等等的存储方式都是基于字节流的；java程序与这类媒介交互时就会发生字符（char）与字节（byte）之间的转换；具体情况如下： 　　页面form提交数据----&gt;java程序（byte--&gt;char） 　　java程序----&gt;页面数据显示（char---&gt;byte） 　　 　　数据库----&gt;java程序（char-----&gt;byte） 　　Java程序----&gt;数据库（byte---&gt;char）  　　 　　文件---&gt;java程序（byte--&gt;char） 　　Java程序----&gt;文件（char----&gt;byte） 　　 　　流---&gt;java程序（byte----&gt;char） 　　Java程序---&gt;流（char---&gt;byte） 　　 如果以上转换过程中使用编码方式与字节原有编码不一致，很可能会出现乱码。 解决方法：关键在于确保转换时使用的编码方式与字节原有的编码方式保持一致。 1、jsp与页面参数之间的乱码 　　Jsp获取页面参数时一般采用系统默认的方式，如果页面参数的编码类型与系统默认的 编码类型不一致、很可能就会出现乱码。所以解决它的办法是在页面获取参数之前，强制指定request获取参数的编码方式：request.setCharacterEncoding(“GBK”);如果在jsp将变量输出到页面时出现了乱码、可以通过设置request.setContentType(“text/html;charset=GBK”).如果不想在每个文件里都写这样两句话，更简洁的办法是使用Servlet规范中的过虑器指定编码，过滤器的在web.xml中的典型配置和主要代码如下： </p>
+<p>Java代码  </p>
+<p>//web.xml:  
+&lt;filter&gt;  
+&lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;  
+&lt;filter-class&gt;travel.web.CharacterEncodingFilter&lt;/filter-class&gt;  </p>
+<p>&lt;init-param&gt;  
+&lt;param-name&gt;encoding&lt;/param-name&gt;  
+&lt;param-value&gt;GBK&lt;/param-value&gt;  
+&lt;/init-param&gt;  
+&lt;/filter&gt;  
+&lt;filter-mapping&gt;  
+&lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;  
+&lt;url-pattern&gt;/*&lt;/url-pattern&gt;  
+&lt;/filter-mapping&gt;  
+　　过滤器中的代码：  
+//CharacterEncodingFilter.java:  
+public class CharacterEncodingFilter implements Filter {  
+  
+      protected String encoding = null;  </p>
+<p>public void init(FilterConfig filterConfig) throws ServletException {  
+     
+     this.encoding = filterConfig.getInitParameter("encoding");  </p>
+<p>}  
+  
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {  
+  
+request.setCharacterEncoding(encoding);response.setContentType("text/html;charset="+encoding);chain.doFilter(request, response);  </p>
+<p>}  
+}  </p>
+<p>2、java与数据库之间的乱码 　　大部分数据库都支持以unicode编码方式，所以解决Java与数据库之间的乱码问题比较明智的方式是直接使用unicode编码与数据库交互。很多数据库驱动自动支持unicode，如Microsoft的SQLServer驱动。其他大部分数据库驱动，可以在驱动的url参数中指定，如mysql驱动：jdbc:mysql://localhost/WEBCLDB?useUnicode=true&amp;characterEncoding=GBK。 　　 3、java与文件/流之间的乱码 　　Java读写文件最常用的类是FileInputStream/FileOutputStream和FileReader/FileWriter。其中FileInputStream和FileOutputStream是基于字节流的，常用于读写二进制文件。读写字符文件建议使用基于字符的FileReader和FileWriter，省去了字节与字符之间的转换。但这两个类的构造函数默认使用系统的编码方式，如果文件内容与系统编码方式不一致，可能会出现乱码。 在这种情况下，建议使用FileReader和FileWriter的父类：InputStreamReader/OutputStreamWriter，它们也是基于字符的，但在构造函数中可以指定编码类型： InputStreamReader(InputStream in, Charset cs) 和OutputStreamWriter(OutputStream out, Charset cs)。 4、其他 上面提到的方法应该能解决大部分乱码问题，如果在其他地方还出现乱码，可能需要手动修改代码。解决Java乱码问题的关键在于在字节与字符的转换过程中，你必须知道原来字节或转换后的字节的编码方式，转换时采用的编码必须与这个编码方式保持一致。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

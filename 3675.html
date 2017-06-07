@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>java 定时器</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3675.html" rel="bookmark"
+                   title="Permalink to java 定时器">java 定时器</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>import java.util.Calendar;import java.util.Date;import java.util.Timer;import java.util.TimerTask;
+ 
+public class TimeTest {    public static void main(String[] args) {        timer1();        //timer2();        //timer3();        //timer4();    }
+    // 第一种方法：设定指定任务task在指定时间time执行 schedule(TimerTask task, Date time)    public static void timer1() {        Timer timer = new Timer();        timer.schedule(new TimerTask() {            public void run() {                System.out.println("-------设定要指定任务--------");            }        }, 2000);// 设定指定的时间time,此处为2000毫秒    }
+    // 第二种方法：设定指定任务task在指定延迟delay后进行固定延迟peroid的执行    // schedule(TimerTask task, long delay, long period)    public static void timer2() {        Timer timer = new Timer();        timer.schedule(new TimerTask() {            public void run() {                System.out.println("-------设定要指定任务--------");            }        }, 1000, 5000);    }
+    // 第三种方法：设定指定任务task在指定延迟delay后进行固定频率peroid的执行。    // scheduleAtFixedRate(TimerTask task, long delay, long period)    public static void timer3() {        Timer timer = new Timer();        timer.scheduleAtFixedRate(new TimerTask() {            public void run() {                System.out.println("-------设定要指定任务--------");            }        }, 1000, 2000);    }    // 第四种方法：安排指定的任务task在指定的时间firstTime开始进行重复的固定速率period执行．    // Timer.scheduleAtFixedRate(TimerTask task,Date firstTime,long period)    public static void timer4() {        Calendar calendar = Calendar.getInstance();        calendar.set(Calendar.HOUR_OF_DAY, 12); // 控制时        calendar.set(Calendar.MINUTE, 0);       // 控制分        calendar.set(Calendar.SECOND, 0);       // 控制秒
+        Date time = calendar.getTime();         // 得出执行任务的时间,此处为今天的12：00：00
+        Timer timer = new Timer();        timer.scheduleAtFixedRate(new TimerTask() {            public void run() {                System.out.println("-------设定要指定任务--------");            }        }, time, 1000 * 60 * 60 * 24);// 这里设定将延时每天固定执行    }}</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

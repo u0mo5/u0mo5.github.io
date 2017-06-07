@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>Java注解浅谈</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3816.html" rel="bookmark"
+                   title="Permalink to Java注解浅谈">Java注解浅谈</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>注解定义（来自百度百科）：指示编译器如何对待您的自定义 Annotation，预设上编译器会将Annotation资讯留在class档案中，但不被虚拟机器读取，而仅用于编译器或工具程式运行时提供资讯。
+随着零配置的流行，注解的使用也越来越大众化，注解的学习也很有必要。最近学习了下Spring的几个注解，这里与大家分享下自己对注解的理解。首先我们来看下@Controller这个注解的源码：</p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10</p>
+<p>package org.springframework.stereotype;</p>
+<p>// 省略import以及一些注释
+ </p>
+<p>@Target({ElementType.TYPE})</p>
+<p>@Retention(RetentionPolicy.RUNTIME)</p>
+<p>@Documented</p>
+<p>@Component</p>
+<p>public @interface Controller {</p>
+<p>String value() default "";</p>
+<p>}</p>
+<p>不难看出，注解的关键字是@interface，很像一个接口，是不能够实例化的，然而我们在实际使用的时候，通常通过反射机制，得到注解接口的一个实例，进行逻辑处理，后面的样例会看到这种使用。（命名为value的注解方法有一个比较特别的用法，后面会提到。）它的主体部分，定义了一个value()方法，实际上，它不仅是一个方法定义，也是注解的一个属性定义。我们使用注解进行标注的时候，是这样的：@Controller(value="MyController")，而在解析判断时，会通过controller.value()方法，得到这个具体的value值"MyController"。再看看value()后面跟着的default，这个default表面上的意思是默认值为某个值，实际上还有一个功效，表示value属性可以不输入。因此我们使用Controller的时候，可以直接@Controller这样使用，不需要给定value，若去掉default，不指定value，会编译失败。再看看这个注解定义前面的注解。@Target，顾名思义，就是指定当前注解使用的作用目标。如果大家使用Eclipse等开发工具，将鼠标放到ElementType.TYPE处，会看到其注释内容，大致意思是说，这个注解要放到类、接口或者枚举类型声明的地方。也就是说，我们的@Controller注解只能放到类、接口、枚举定义前面，不能放到成员属性、方法、参数等地方。大家可以跟进ElementType，这里定义了“TYPE，FIELD，METHOD，PARAMETER，CONSTRUCTOR，LOCAL_VARIABLE，ANNOTATION_TYPE，PACKAGE”这么些枚举，根据注释（或者从枚举英文含义也不难猜测。这也从另一方面说明，合理的命名有助于提高代码可读性）很容易知道，注解可以实现注解到类文件的各个地方。@Retention(RetentionPolicy.RUNTIME)，Retention可能不好猜，但是看到后面的RUNTIME，精神一震，猜测应该是和“运行时”有关。再查看API帮助文档，Retention“指示注释类型的注释要保留多久”。这个保留多久，就要和RetentionPolicy(Retention的策略)配合使用了。Controller的Retention策略是运行时的，这样在代码运行时，可以通过反射获得这个注解。这中策略的好处，具体实现案例可以参考Spring的bean扫描以及AOP拦截的注解实现（Spring配置文件的component-scan base-package配置后，Spring bean工厂会逐个扫描包下所有类，根据其注解来生成相关bean。大家可以分析@Component、@Service、@Autowired等，其策略也是RUNTIME的）。@Documented，如果需要通过javadoc工具文档化时，会判断这个注解，从而保留注释（具体没有实践过，不瞎诌了）。@Component这个注解放在Controller上面，可以看做“Controller同样具有Component的作用”。实际上，目前的Spring扫描bean的时候，只认准了Component注解的。我们会看到，@Service、@Repository上面也有@Component注解。说道这里又不得不岔开下话题，来比照下@Service、@Controller、@Repository、@Component这几个注解的区别了。理论上讲，@Service是注解提供服务性质的bean上的，@Controller是注解MVC的C上的，@Repository是存储层bean使用的，而@Component是注解不区分服务还是控制的bean。实际上，这几类注解最终在Spring里都是以bean形式放到bean工厂里，没有什么区别对待。因此Spring扫描bean的时候，一律以@Component作为标记，@Service、@Controller、@Repository可以看做是一种功能预留：将来可能会对这三种注解的类做bean初始化时，做额外的增强型处理。拆分了注解后，我们会发现注解也没那么神秘。接下来可以设计个属于自己的注解了：自定义注解：</p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7</p>
+<p>@Target(ElementType.TYPE)</p>
+<p>@Retention(RetentionPolicy.RUNTIME)</p>
+<p>public @interface MyAnnotation {</p>
+<p>String name() default "";// 名字</p>
+<p>Class&lt;!--?--&gt; procClass() default Object.class;// 处理类的类型</p>
+<p>String value() default "";// 比较特别</p>
+<p>}</p>
+<p>注解使用类：</p>
+<p>?</p>
+<p>1
+2
+3</p>
+<p>// 标注时，name、procClass和value当做属性直接设值</p>
+<p>@MyAnnotation(name="Lily",procClass=TestAnnotation.class,value="abc")</p>
+<p>public class SomeClass{}</p>
+<p>测试：</p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9</p>
+<p>// 通过反射获得注解</p>
+<p>SomeClass some = new SomeClass();</p>
+<p>// 得到MyAnnotation的一个实例</p>
+<p>MyAnnotation annotationClass = some.getClass().getAnnotation(MyAnnotation.class);</p>
+<p>// 判断逻辑里，name和procClass当做方法用以调用
+String annotationName = annotationClass.name();
+System.out.println(annotationName);
+Class&lt;!--?--&gt; clazz = annotationClass.procClass();
+System.out.println(clazz);</p>
+<p>上面定义的value()在使用时，如果不设置其它属性，只设置value，可以这样简写：@MyAnnotation("abc")，此时，value的值为"abc"，其它取默认值。（不局限String类型。当然，MyAnnotation的其它方法需要提供default值。）以上是一个简单的样例，大家可以修改Target，增减方法，实现自己需要的注解。最后，欢迎大家拍砖。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

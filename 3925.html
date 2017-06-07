@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>SSH框架结构分析</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3925.html" rel="bookmark"
+                   title="Permalink to SSH框架结构分析">SSH框架结构分析</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>分类： 工作问题2012-03-29 18:10 1511人阅读 评论(0) 收藏 举报</p>
+<p>框架sshhibernatespringstrutsdao</p>
+<p>最近在弄j2ee,发现还是学到了很多东西，心情happy啊！昨天看到了一个文章是关于ssh的，就弄下来了，后面加点自己的东西，很感谢网上的各位前辈的总结。一个spring2.5+hibernate3.2+struts2.0组合框架，使用spring的IoC来管理应用的所有bean，包括struts2的action，充分发挥了spring轻量级框架的优势。
+摘 要:针对当前Web应用程序开发面临的问题，结合目前比较流行的开源框架Spring、Struts和Hibernate，提出了一种开发J2EE Web应用的轻量级解决方案，以帮助开发人员在短期内搭建结构清晰、可复用性好、维护方便的Web应用程序。并且，通过案例具体说明了如何将这一方案应用到实际项目中。关键词:J2EE  MVC  Struts  Spring  Hibernate
+    大型企业级Web应用系统的开发通常要求有一个良好的软件架构、便于协作开发和扩展升级，而传统的开发模式不能很好地满足这些要求。本文针对当前Web应用程序开发面临的问题，结合目前比较流行的开源框架SSH（Spring、Struts、Hibernate)，提出一种开发J2EE 企业级Web应用的轻量级解决方案，并通过案例具体说明如何将这一方案应用到实际项目中。1 框架技术    著名的软件大师Ralph Johnson对框架(Framework)进行了如下的定义： 框架是整个系统或系统的一部分的可重用设计，由一组抽象的类及其实例间的相互作用方式组成[1]。    框架一般具有即插即用的可重用性、成熟的稳定性以及良好的团队协作性。J2EE复杂的多层结构决定了大型的J2EE项目需要运用框架和设计模式来控制软件质量。目前，市场上出现了一些商业的、开源的基于J2EE的应用框架，其中主流的框架技术有：基于MVC模式的Struts框架和基于IoC模式的Spring框架以及对象/关系映射框架Hibernate等。1.1  表示层框架Struts     Struts是一个在JSP Model2基础上实现的MVC框架，主要分为模型(Model)、视图(Viewer)和控制器(Controller)三部分，其主要的设计理念是通过控制器将表现逻辑和业务逻辑解耦，以提高系统的可维护性、可扩展性和可重用性[2]。Struts框架的体系结构如图1所示。</p>
+<p>图一</p>
+<p>下面就图1所示的体系结构图分析Struts框架中的MVC组件。    （1）视图：视图部分主要由JSP页面组成，其中没有流程逻辑、业务逻辑和模型信息，只有标记。Struts自身包含了一组标记库(TagLib)，这也是Struts的精华之一，灵活运用它们可以简化JSP页面的代码，提高开发效率。    （2）控制器：Struts中的Controller主要是其自身提供的ActionServlet。ActionServlet接收所有来自客户端的请求并根据配置文件(struts-config.xml)中的定义将控制转移到适当的Action对象。    （3）模型：Struts没有定义具体Model层的实现，Model层通常是和业务逻辑紧密相关的，有持续化的要求。目前在商业领域和开源世界，都有一些优秀的工具可以为Model层的开发提供便利。1.2  业务逻辑层框架Spring    Spring是一个解决了许多J2EE开发中常见问题并能够替代EJB技术的强大的轻量级框架。这里所说的轻量级指的是Spring框架本身，而不是指Spring只能用于轻量级的应用开发。Spring的轻盈体现在其框架本身的基础结构以及对其他应用工具的支持和装配能力。与EJB这种庞然大物相比，Spring可使程序研发人员把各个技术层次之间的风险降低。    Spring框架的核心是控制翻转IoC(Inversion of Control)/依赖注入DI(Dependence Injection)机制。IoC是指由容器中控制组件之间的关系（这里，容器是指为组件提供特定服务和技术支持的一个标准化的运行时的环境）而非传统实现中由程序代码直接操控，这种将控制权由程序代码到外部容器的转移，称为“翻转”[3]。DI是对IoC更形象的解释，即由容器在运行期间动态地将依赖关系(如构造参数、构造对象或接口)注入到组件之中[3]。Spring采用设值注入(使用Setter方法实现依赖)和构造子注入(在构造方法中实现依赖)的机制，通过配置文件管理组建的协作对象，创建可以构造组件的IoC容器。这样，不需要编写工厂模式、单例模式或者其他构造的方法，就可以通过容器直接获取所需的业务组件。Spring框架的结构如图2所示。</p>
+<p>图2</p>
+<p>Spring框架由七个定义明确的模块组成，且每个模块或组件都可以单独存在，或者与其他一个或多个模块联合实现。Spring Core Container是一个用来管理业务组件的IoC容器，是Spring应用的核心；Spring DAO和Spring ORM不仅提供数据访问的抽象模块，还集成了对Hibernate、JDO和iBatis等流行的对象关系映射框架的支持模块，并且提供了缓冲连接池、事务处理等重要的服务功能，保证了系统的性能和数据的完整性；Sprnig Web模块提供了Web应用的一些抽象封装，可以将Struts、Webwork等Web框架与Spring整合成为适用于自己的解决方案。    Spring框架可以成为企业级应用程序一站式的解决方案，同时它也是模块化的框架，允许开发人员自由地挑选适合自己应用的模块进行开发。Spring框架式是一个松耦合的框架，框架的部分耦合度被设计为最小，在各个层次上具体选用哪个框架取决于开发者的需要。1.3 数据持久层框架Hibernate    O/R mapping技术是为了解决关系型数据库和面向对象的程序设计之间不匹配的矛盾而产生的。Hibernate是目前最为流行的O/R mapping框架，它在关系型数据库和Java对象之间做了一个自动映射，使得程序员可以以非常简单的方式实现对数据库的操作。Hibernate工作原理如图3所示。</p>
+<p>图3
+  Hibernate通过对JDBC的封装，向程序员屏蔽了底层的数据库操作，使程序员专注于OO程序的开发，有助于提高开发效率。程序员访问数据库所需要做的就是为持久化对象编制xml映射文件[4]。    底层数据库的改变只需要简单地更改初始化配置文件(hibernate.cfg.xml或者hibernate.properties)即可，不会对应用程序产生影响。     Hibernate有自己的面向对象的查询语言HQL，HQL功能强大，支持目前大部分主流的数据库，如Oracle、DB2、MySQL、Microsoft SQL Server等，是目前应用最广泛的O/R映射工具。Hibernate为快速开发应用程序提供了底层的支持。2 基于SSH组合框架的Web应用模型设计与实现2.1 集成SSH的新型J2EE框架　　前面分析了基于J2EE的三种框架技术，下面通过集成以上三种框架技术来对传统的J2EE Web开发模型加以改进，以形成一种新的、轻量型的J2EE架构。　　集成SSH框架的系统框架图如图4所示，系统从职责上分为四层：表示层、业务逻辑层、数据持久层和域模块层。其中使用Struts作为系统的整体基础架构，负责MVC的分离，在Struts框架的模型部分，利用Hibernate框架对持久层提供支持，业务层用Spring支持。具体做法是：用面向对象的分析方法根据需求提出一些模型，将这些模型实现为基本的Java对象，然后编写基本的DAO接口，并给出Hibernate的DAO实现，采用Hibernate架构实现的DAO类来实现Java类与数据库之间的转换和访问，最后由Spring完成业务逻辑。</p>
+<p>图四</p>
+<p>系统的基本业务流程是： 在表示层中，首先通过JSP页面实现交互界面，负责传送请求(Request)和接收响应(Response)，然后Struts根据配置文件(struts-config.xml)将ActionServlet接收到的Request委派给相应的Action处理。在业务层中，管理服务组件的Spring IoC容器负责向Action提供业务模型(Model)组件和该组件的协作对象数据处理(DAO)组件完成业务逻辑，并提供事务处理、缓冲池等容器组件以提升系统性能和保证数据的完整性。而在持久层中，则依赖于Hibernate的对象化映射和数据库交互，处理DAO组件请求的数据，并返回处理结果。　　采用上述开发模型，不仅实现了视图、控制器与模型的彻底分离，而且还实现了业务逻辑层与持久层的分离。这样无论前端如何变化，模型层只需很少的改动，并且数据库的变化也不会对前端有所影响，大大提高了系统的可复用性。而且由于不同层之间耦合度小，有利于团队成员并行工作，大大提高了开发效率。2.2 基于SSH框架的Web应用系统的实现　　下面将通过一个实际的系统来展示如何进行基于SSH框架的Web应用开发。该系统是为某通信公司运营部开发的一个问答式系统，功能类似于百度知道和新浪爱问。由于系统的模块较多，下面就以一个用户管理模块为例来说明系统的开发实现过程，并将按照数据持久层、业务逻辑层、表示层的顺序说明系统构建过程。　　（1）数据持久层　　数据持久层由Java对象持久化类和数据访问对象(DAO)组成。每个数据库表都对应着一个持久化对象，这样就给予了开发者使用OO思想设计和开发的便利，同时也屏蔽了具体的数据库和具体的数据表、字段，消除了对数据库操作的硬编码在重用性上的弊端。用户信息表的部分结构如表1所</p>
+<p>Hibernate通过映射(Mapping)文件将对象(Object)与关系型数据(Relational)相关联，因此需要编写和数据库表相对应的Java持久化类以及对应的映射文件。有了Java持久化类后就可以在此基础上实现数据访问类。在Spring框架中，数据访问类可以从辅助类HibernateDaoSupport继承，这极大地方便了Hibernate框架在Spring中的使用，相应的部分代码如下：      public class UserDao           extends HibernateDaoSupport {      public int add(User user) {        return Integer.ParseInt(this.getHibernateTemplate().save(user).toString());      }      public List findAll() {        return this.getHibernateTemplate().loadAll(User.class);      }      }  具体的Hibernate数据源、session工厂、事务管理、缓冲连接池等功能都由业务层的Spring容器提供。　　（2）业务逻辑层　　业务逻辑层由Spring框架支持，提供了处理业务逻辑的服务组件。开发者需要对业务对象建模，抽象出业务模型并封装在Model组件中。由于数据持久层实现了Java持久化类并且封装了数据访问对象(DAO)，因此可以在Model组件中方便地调用DAO组件来存取数据。Spring的IoC容器负责统一管理Model组件和DAO组件以及Spring所提供的事务处理、缓冲连接池等服务组件。　　在用户管理模块中，通过业务建模创建了用户模型UserService类，封装了对用户的权限管理以及积分管理等功能。UserService类通过调用数据访问类UserDao实现对用户数据的操作。这些组件的关系将通过配置Spring框架的applicationContext.xml联系起来，配置文件的主要内容如下：     （3）表示层     表示层结合JSP和Struts的TagLib库处理显示功能，利用ActionServlet将请求(*.do)映射到相应的Action，并由Action调用业务逻辑的服务组件，然后根据处理结果跳转到Forword对象指定的响应页面。     业务流程的部署由struts-config.xml完成。下面以一个显示所有用户信息的请求(ListUser.do)为例来说明配置文件的使用。    基于J2EE的Web应用以其层次性、平台无关性的优势已经逐渐成为了电子商务、电子政务主要的解决方案。本文针对传统的J2EE Web应用开发的弊端，提出了一种利用轻量级框架来快速搭建Web应用的解决方案，并且通过其在实际项目中的应用，证明了采用此方案可以帮助开发人员在短时间内建立结构清晰、可重用性好、维护扩展方便的Web应用程序。
+ 
+参考文献[1]  GAMMA E, HELM R, JOHNSON R, et al. Design patterns:Elements of reusable object-oriented software[M]. Addison  Wesley, 1994.[2]  孙卫琴.精通Struts:基于MVC的Java Web设计与开发[M]. 北京：电子工业出版社,2004.[3]  JOHNSON R, HOELLER J, ARENDSEN A, et al. Java/J2EE application framework reference document. V1.1.2004.[4]  徐长盛,戴超.一种快速开发Web应用程序方法的研究[J]. 计算机工程与设计,2004,(12):2237-2239.[5]  夏昕,曹晓钢,唐勇.深入浅出Hibernate[M]. 北京：电子工业出版社,2005.[6]  JOHNSON R.Expert one-on-one J2EE design and development[M]. 魏海萍译.北京：电子工业出版社,2003.
+在用ssh开发web应用时，需要对生成的各个类文件进行组织，下面就对一个可行的目录方案进行介绍：
+譬如应用中有一个用户管理模块，则在公共包下建立一个user包，如该公共包可以为com.simon.oa，
+在user包下包括如下子包
+1、controler包
+该包放置各种struts的action。
+2、dao包
+该包放置各类dao（data access object），也就是放置对数据库访问的实现类，在用myeclipse中的“Hibernate Reverse Engineering”进行反向操作时在某一个目录中就会生成对应某个表的DAO，生成后可将该DAO拖到dao包中。在某些应用中将DAO作为接口，在该接口中包括所有对数据库的操作方法，然后在dao包建立一个hibernate包，在hibernate包中放置对DAO接口的实现，譬如：UserDAO接口有一个实现类为UserDaoImpl，将该类放置到hibernate包中，实际的开发倾向于后一种方式，因为对这个DAO接口可以实现spring的IoC操作。(不知道myeclipse对此是怎么考虑的，这个问题让我纠缠了很久，误将DAO理解成一个能够进行实际操作的类，而不是一个接口，以后开发要注意)
+3、model包
+该包中放置hibernate反向工程生成的bean和该bean对应的.hbm.xml文件。
+4、service包
+该包放置业务操作类，譬如用户服务类，一般情况将该用户操作类提取一个接口，然后在service包下生成一个impl包，在impl包中才放置用户操作接口的实现类。该用户接口实现类中调用DAO接口对数据库进行操作，而调用该实现类的方法在struts的action中。
+5、vo包（value object）
+vo包中的中包括struts中使用的POJO及actionform等信息。
+VO:  Value ObjectDTO: Data Transfer Object个人理解VO和DTO是类似的东西，原则上VO和DTO只有Public Fields，主要用于进程之间数据传递的问题，VO和DTO不会传递到表示层，在业务层就会被吸收。但看到很多人在建立VO和DTO时，也含有Setter,Getter属性和一些其它的辅助方法，这也无可厚非，我自己也不能确定这对不对。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

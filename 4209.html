@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>第三方支付过程中session失效问题</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4209.html" rel="bookmark"
+                   title="Permalink to 第三方支付过程中session失效问题">第三方支付过程中session失效问题</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>第三方支付过程中session失效问题</p>
+<p>时间 2015-05-13 12:36:23  IT社区推荐资讯
+原文  http://itindex.net/detail/53436-session-问题</p>
+<p>主题 Java</p>
+<p>问题产行于公司p2c交易平台的一个用户充值模块。
+平台简介：该平台通过第三方支付(以下使用“支付宝”代替)完成与各大银行的交易(充值、投资、转帐、提现等操作)，并将数据保存在我司的服务器数据库中，服务器使用tomcat，数据库Mysql
+平台充值流程：用户登陆系统----点击充值-----跳转到支付宝----登陆支付宝------选择银行------充值完毕-----redrect到用户中心(平台中的action为"preurl:/user/center")，问题来了，
+当用户充值完成后转回用户中心时平台转回了登陆界面，需要用户重新输入一次用户名和密码才能到达用户中心。
+谈到此种现象，但凡搞过java开发的软件工程师应该都能想到是session问题，好吧，让我们来一起研究一下从点击充值到支付完成过程中session的变化。
+1、用户使用username 和 password登陆后会将用户信息保存在session中，并且在客户端浏览器的cookie中添加一个cookie(key:JSESSIONID,value:XXX)；
+2、用户点击充值按钮跳转到支付宝---XX银行进行充值，由于XX银行充值网站也是使用tomcat，那么cookie中默认的session key 也为 JSESSIONID，这样以来充值完毕便修改了cookie中session的值；
+3、平台使用spring security的用户登陆校验，拦截所有需要用户登陆的界面，这样以来，当充值完成返回preurl:/user/center的时候被spring拦截，并取出cookie中JSESSIONID所对应的值再去session里查找用户信息；
+4、由于XX银行修改过的session与原session并非同一session，于是spring将其拦截到用户登陆界面；
+以上便是一个很常见的跨域访问session失效问题，但是问题并非想象中那么简单，至少笔者在此问题上费了很大的力气，并寻问“众大神”以及几千人的技术群，无一人知晓(或许真正的大神不屑一顾吧)，现解决办法及说明总结如下：
+1、总体思路
+在用户点击充值时将sessionid保存下来，充值成功后再将sessionid取出来替换
+2、具体实现
+支付宝接口说明中有一个字段叫做merpri(私有域)，官方解释：“用户自定义字段，可以将自己需要
+的信息保存在里面，接口调用完成后原样返回”，那么正好是我们需要的，在向支付宝write数据时，我将sessionid取到并放入merpri中，然后在回调时将merpri中的值取出，通过遍历cookie数组将数组中名为JSESSIONID的cookie替换为之前的，关键代码如下：
+//说明：以下代码为直接在博客中手写如有错误请留言，以便及时更正
+//从jsf中获取
+HttpServletRequest request = FacesUtil.getHttpServletRequest ();
+HttpServletResponse response = FacesUtil.getHttpServletResponse();
+//从支付宝返回参数中获取之前保存的sessionid
+String finalSession = request.getParameter("merpri");
+Cookie[] cookies = request.getCookies();
+for(Cookie c : cookies){
+     if(c.getName.equals("JSESSIONID")){
+         //如果是带域名的网站需要配置，因为现在的问题是跨域session失效
+         c.setDomain(".alibaba.com");   <br>
+          //删除cookie
+         c.setMaxAge(0);
+         //设置路径（域名后面的主路径）
+         c.setPath("/alibaba");
+         response.addCookie(c);
+         c.setDomain(".alibaba.com");
+         Cookie cookie = new Cookie("JSESSIONID",finalSession);
+         //设置生命周期为20分
+         cookie .setMaxAge(20);
+         cookie .setPath("/");
+         response.addCookie(cookie);
+     }
+}
+3、容易出问题的地方总结：
+1)  不要将代码放在耦合性较强的代码逻辑中
+2) cookie中sessionid的操作一定要在返回/user/center 之前最近位置(否则将无法删除cookie)
+3) cookie生命周期和路径一定要注意匹配，应当使用调试工具查看cookie实时的一个值
+4) 设置domain时需要特别注意，经本人测试以下四种浏览器：ie 9, firefox, 360安全, 猎豹
+其中ie 9 和 firefox域为 .alibaba.com  而360安全,猎豹 的域为www.alibaba.com这样就会出现：使用不同的浏览器设置cookie的域不同而导致其中2个浏览器依然无法正常跳转到用户中心，解决办法：在代码中判断其内核，根据不同的内核设定不同的域。
+5) 若使用的第三方支付没有私有域的概念，那么请使用数据库代替吧，即：将sessionid放入数据库中，这样以来要保证事务的完整性了
+题外话：
+(谈到浏览器的兼容问题，IE浏览器不得不让人大跌眼镜，众所知周，所谓“浏览器兼容”无非就是IE这个“笨重的家伙”，解析js速度慢到极点，并且效果看上去极差，这一点应该向谷歌和火狐学习)，360有个新功能是这样描述的：
+我们新增加了一个控制手段：内核控制Meta标签。只要你在自己的网站里增加一个Meta标签，告诉360浏览器这个网址应该用哪个内核渲染，哪么360浏览器就会在读取到这个标签后，立即切换对应的内核。并将这个行为应用于这个二级域名下所有网址。
+目前该功能已经在所有的360安全浏览器实现。我们也建议其它浏览器厂商一起支持这个实现。让这个控制标签成为行业标准。
+在head标签中添加一行代码：
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta name="renderer" content="webkit|ie-comp|ie-stand"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+浏览器的兼容问题严重困扰了众多的软件工程师，不仅仅是前端开发，在此希望能够出台一个浏览器标准将所有的浏览器内核规范处理，开发工程师使用这个规范去开发，以减少这种“由于浏览器间客户流量竞争”而给开发者带来的工作量。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

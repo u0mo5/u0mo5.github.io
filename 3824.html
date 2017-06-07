@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>Java图形与文本（18）</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/3824.html" rel="bookmark"
+                   title="Permalink to Java图形与文本（18）">Java图形与文本（18）</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>实例018  旋转图形
+实例说明
+本实例演示在Java中绘制图形时，如何对图形进行旋转。运行程序，单击窗体上的“顺时针”按钮，可以将图形顺时针旋转，效果如图1.18所示，用户还可以通过单击“逆时针”和“还原”按钮，对窗体上的图形进行逆时针旋转和还原等操作。</p>
+<p>关键技术
+ 
+本实例主要是通过在JPanel类的子类中，重写JComponent类的paint()方法，并在该方法中使用Graphics2D类的rotate()方法来实现的。
+使用Graphics2D类的rotate()方法，可以实现图形的旋转，该方法的定义如下：
+public abstract void rotate(double theta, double x, double y)
+参数说明
+? theta：旋转的角度，以弧度为单位。
+? x：旋转原点的x坐标。
+w y：旋转原点的y坐标。
+设计过程
+（1）新建一个项目。
+（2）在项目中创建一个继承JFrame类的RotateShapeFrame窗体类。
+（3）在RotateShapeFrame窗体类中，创建内部面板类RotateShapePanel，并重写JComponent类的paint()方法，在该方法中使用Graphics2D类的rotate()方法旋转图形。
+（4）将内部面板类RotateShapePanel的实例，添加到窗体类RotateShapeFrame的内容面板上，用于在窗体上显示旋转后的图形，代码如下：
+class RotateShapePanel extends JPanel {  // 创建内部面板类
+    public void paint(Graphics g) {  // 重写paint()方法
+        Graphics2D g2 = (Graphics2D) g;  // 获得Graphics2D对象
+        Rectangle2D.Float rect = new Rectangle2D.Float(40, 40, 80, 50); // 创建矩形对象
+        BasicStroke stroke = new BasicStroke(10);  // 创建宽度是10的笔画对象
+        g2.setStroke(stroke); // 设置笔画对象
+        g2.clearRect(0, 0, 338, 220);   // 清除原有内容
+        if (flag == 0) {
+            g2.draw(rect); // 绘制原矩形
+        } else if (flag == 1) {
+            g2.rotate(rotateValue); // 顺时针旋转
+            g2.draw(rect); // 绘制矩形
+        } else if (flag == 2) {
+            g2.rotate(rotateValue); // 逆时针旋转
+            g2.draw(rect); // 绘制矩形
+        }
+    }
+}
+U 注意：上面代码中的flag是一个标记变量，当该变量的值为0时，图形还原到原来的位置；为1时，对图形进行顺时针旋转；为2时，对图形进行逆时针旋转。rotateValue是与需要旋转角度对应的弧度值。
+秘笈心法
+心法领悟018：角度转换为弧度。
+由于使用Graphics2D类的rotate()方法旋转图形时，是按弧度进行旋转的，因此，当给定的旋转值是角度时，需要将其转换为弧度。在Java中，可以使用Math类的toRadians(double angdeg)方法，将参数指定的角度angdeg转换为近似相等的弧度值。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

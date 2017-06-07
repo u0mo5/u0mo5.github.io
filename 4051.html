@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>centos磁盘满了，查找大文件并清理</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4051.html" rel="bookmark"
+                   title="Permalink to centos磁盘满了，查找大文件并清理">centos磁盘满了，查找大文件并清理</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>centos磁盘满了，查找大文件并清理
+2013年07月29日 ⁄ 综合 ⁄ 共 1172字 ⁄ 字号 小 中 大 ⁄ 评论关闭</p>
+<p>今天发现vps敲入crontab -e 居然提示 “Disk quota exceeded” 无法编辑。于是"df -h"查了查发现系统磁盘空间使用100%了。最后定位到是/var/spool/mail/root 这个文件有几个G。于是清理掉，问题解决。如果不知道是哪些文件占了磁盘空间，可以看下面查找大文件方法。
+ 
+以下内容转自 http://hi.baidu.com/11haiou/item/f3a4878b601e084e840fab17
+ 
+linux操作系统中，经常会遇到磁盘空间满的问题。遇到这样的问题，先查下是什么文件过大或过多引起的，至于引起这个更深一层的原因，先不探讨。怎么查看大文件所在的路径，linux中有一个命令，叫du，先贴命令：du -m --max-depth=1或du -h --max-depth=1du：用于统计linux中文件或目录所占磁盘空间的大小du参数######-m：以M为单位展示查询结果-h：以K、M、G为单位展示查询结果，提高信息可读性--max-depth=1：其中，数字“1”是指查询结果中最多显示的目录层数，这里指最多显示一层目录。示例如下： 
+然后，利用此命令，逐层（目录）深入，这样就一定会查询到大文件所在目录，但也有可能是目录中文件过多所致。当找到大文件后，若因某些原因，不想对文件进行删除，可以用echo或cat或clear命令清除文件内容：echo &gt; /var/log/big.log此命令会把/var/log目录中的big.log文件内容清除，而又不删除big.log文件cat &gt; /var/log/big.log此命令能与“echo &gt; /var/log/big.log”达到相同效果，不过，命令执行后，需要用“Ctrl + d”结束clear &gt; /var/log/big.log此命令会把big.log文件内容清空，而不删除文件</p>
+<h1></h1>
+<p>另一种情况： 也可能是inode用完了.
+ 用# df -i  可以查看。
+真的是inode用完了，磁盘没法再写入新的内容了，这个是某些临时的小文件太多了，把inode用完了，把它删掉就行了。</p>
+<h1>find /var/spool/clientmqueue -type f -print -exec rm -f {} ;这个命令中 /var/spool/clientmqueue 是要删除的文件所在的目录 -type f这个参数限定find只查找普通文件（即不是管道文件，不是块文件，不是链接文件，不是目录等），防止误删除系统文件。</h1>
+<p>原因分析：系统中有用户开启了cron，而cron中执行的程序有输出内容，输出内容会以邮件形式发给cron的用户，而sendmail没有启动所以就产生了这些文件；</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>

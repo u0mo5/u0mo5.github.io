@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="english">
+<head>
+
+        <title>centos启用ftp功能</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/4191.html" rel="bookmark"
+                   title="Permalink to centos启用ftp功能">centos启用ftp功能</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                Thu 01 January 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>centos启用ftp功能</p>
+<p>2014-08-19 11:53 Idiot_s_Sky Idiot_s_Sky的博客 字号：T | T</p>
+<p>安装vsftpd组件，安装完后，有/etc/vsftpd/vsftpd.conf 文件，用来配置，还有新建了一个ftp用户和ftp的组，指向home目录为/var/ftp,默认是nologin“？……
+AD：【线下活动】三大新锐HTML 5企业汇聚51CTO—大话移动前端技术</p>
+<p>1.安装vsftpd组件，安装完后，有/etc/vsftpd/vsftpd.conf 文件，用来配置，还有新建了一个ftp用户和ftp的组，指向home目录为/var/ftp,默认是nologin（不能登录系统）</p>
+<p>yum -y install vsftpd </p>
+<p>可以用下面命令查看用户</p>
+<p>cat /etc/passwd </p>
+<p>默认ftp服务是没有启动的，用下面命令启动</p>
+<p>service vsftpd start </p>
+<p>2.安装ftp客户端组件（用来验证是否vsftpd）</p>
+<p>yum -y install ftp </p>
+<p>执行命令尝试登录</p>
+<p>ftp localhost </p>
+<p>输入用户名ftp，密码随便（因为默认是允许匿名的）
+登录成功，就代表ftp服务可用了。
+但是，外网是访问不了的，所以还要继续配置。
+3.取消匿名登陆</p>
+<p>vi /etc/vsftpd/vsftpd.conf </p>
+<p>把第一行的 anonymous_enable=YES ，改为NO
+重启</p>
+<p>service vsftpd restart </p>
+<p>4.新建一个用户(ftpuser为用户名，随便就可以)</p>
+<p>useradd ftpuser </p>
+<p>修改密码（输入两次）</p>
+<p>passwd ftpuser </p>
+<p>这样一个用户建完，可以用这个登录，记得用普通登录不要用匿名了。登录后默认的路径为 /home/ftpuser.
+5.开放21端口
+因为ftp默认的端口为21，而centos默认是没有开启的，所以要修改iptables文件</p>
+<p>vi /etc/sysconfig/iptables </p>
+<p>在行上面有22 -j ACCEPT 下面另起一行输入跟那行差不多的，只是把22换成21，然后：wq保存。
+还要运行下,重启iptables</p>
+<p>service iptables restart </p>
+<p>外网是可以访问上去了，可是发现没法返回目录，也上传不了，因为selinux作怪了。
+6.修改selinux</p>
+<p>getsebool -a | grep ftp </p>
+<p>执行上面命令，再返回的结果看到两行都是off，代表，没有开启外网的访问</p>
+<p>....   </p>
+<p>allow_ftpd_full_access off   </p>
+<p>....  </p>
+<p>....  </p>
+<p>ftp_home_dir off </p>
+<p>只要把上面都变成on就行
+执行</p>
+<p>setsebool -P allow_ftpd_full_access 1   </p>
+<p>setsebool -P ftp_home_dir off 1 </p>
+<p>再重启一下vsftpd</p>
+<p>service vsftpd restart </p>
+<p>这样应该没问题了（如果，还是不行，看看是不是用了ftp客户端工具用了passive模式访问了，如提示Entering Passive mode，就代表是passive模式，默认是不行的，因为ftp passive模式被iptables挡住了，下面会讲怎么开启，如果懒得开的话，就看看你客户端ftp是否有port模式的选项，或者把passive模式的选项去掉。如果客户端还是不行，看看客户端上的主机的电脑是否开了防火墙，关吧）
+7.开启passive模式
+默认是开启的，但是要指定一个端口范围，打开vsftpd.conf文件，在后面加上</p>
+<p>pasv_min_port=30000   
+pasv_max_port=30999  </p>
+<p>表示端口范围为30000~30999，这个可以随意改。
+改完重启一下vsftpd
+由于指定这段端口范围，iptables也要相应的开启这个范围，所以像上面那样打开iptables文件
+也是在21上下面另起一行，更那行差不多，只是把21 改为30000:30999,然后:wq保存，重启下iptables。这样就搞定了。
+原文链接：http://my.oschina.net/idiotsky/blog/303545
+【编辑推荐】</p>
+<p>Centos 6.5 64位安装VPN
+专题：踏上社区企业操作系统—CentOS的系统配置之旅
+如何将Puppet服务器及客户端安装到CentOS和RHEL上？
+CentOS查看系统信息-CentOS查看命令
+教你如何在Fedora,CentOS,RHEL中检查RPM包的依赖性</p>
+<p>【责任编辑：牛小雨 TEL：（010）68476606】</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/default.html">default</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>
