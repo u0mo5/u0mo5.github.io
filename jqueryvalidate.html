@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>JQuery validate</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/jqueryvalidate.html" rel="bookmark"
+                   title="Permalink to JQuery validate">JQuery validate</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2017-06-29T08:30:00+08:00">
+                周四 29 六月 2017
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>1.JQuery validate 不默认提交sumbit方式</strong></p>
+<div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;btn&quot;</span> <span class="nx">onclick</span> <span class="o">=</span> <span class="s2">&quot;query_submit()&quot;</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;btn btn-success&quot;</span><span class="o">&gt;</span><span class="nx">确定</span><span class="o">&lt;</span><span class="err">/a&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="kd">function</span> <span class="nx">check</span><span class="p">(){</span>
+        <span class="cm">/*关键在这儿，返回的是一个validate对象，这个对象有一个form方法，返回的是是否通过验证*/</span>
+        <span class="k">return</span>    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#form_main&quot;</span><span class="p">).</span><span class="nx">validate</span><span class="p">({</span>
+            <span class="c1">//debug:true,</span>
+            <span class="nx">rules</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">stat_value</span><span class="o">:</span><span class="p">{</span>
+                    <span class="nx">nonnegativeinteger</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">number</span><span class="o">:</span><span class="kc">true</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nx">errorClass</span><span class="o">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+            <span class="nx">success</span><span class="o">:</span> <span class="s1">&#39;valid&#39;</span><span class="p">,</span>
+            <span class="nx">unhighlight</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">errorClass</span><span class="p">,</span> <span class="nx">validClass</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//验证通过</span>
+                <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="nx">errorClass</span><span class="p">);</span>
+            <span class="p">},</span>
+            <span class="nx">errorPlacement</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">label</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">);</span> <span class="cm">/*必需*/</span>
+                <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="nx">$</span><span class="p">(</span><span class="nx">label</span><span class="p">).</span><span class="nx">text</span><span class="p">()).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">clears</span><span class="p">(</span><span class="nx">element</span><span class="p">){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">reset</span><span class="p">();</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">);</span><span class="c1">//select2 清空</span>
+    <span class="p">};</span>
+
+
+    <span class="kd">function</span> <span class="nx">query_submit</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">check</span><span class="p">().</span><span class="nx">form</span><span class="p">())</span> <span class="k">return</span><span class="p">;</span>
+        <span class="nx">form_main</span><span class="p">.</span><span class="nx">action</span><span class="o">=</span><span class="s2">&quot;/Manage_adstat/Adposition&quot;</span><span class="p">;</span>
+        <span class="nx">form_main</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">function</span> <span class="nx">excel_submit</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">check</span><span class="p">().</span><span class="nx">form</span><span class="p">())</span> <span class="k">return</span><span class="p">;</span>
+        <span class="nx">form_main</span><span class="p">.</span><span class="nx">action</span><span class="o">=</span><span class="s2">&quot;/Manage_adstat/Adposition/?act=excel&quot;</span><span class="p">;</span>
+        <span class="nx">form_main</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</pre></div>
+
+
+<p><strong>2.jQuery validate验证隐藏表单(hidden)域</strong></p>
+<p>validate 插件默认不会校验隐藏的 input（包括 type="hidden" 的或 display:"none" 的 input），我猜想插件作者这么做的原因可能是为了提升性能。但是有时还是需要对一个隐藏的 input 进行操作。  </p>
+<p>方法一：(来源于网上，未进行测试)<br>
+    把这项限制去除：打开 jQuery.validate.min.js，把ignore:":hidden"改为ignore:""<br>
+方法二：<br>
+    将input的width设置为0，高度设置为0.5px（值不能太小，大于0小于0.3px时，validate 插件没有进行验证），这样input在页面上就看不见了，实现了隐藏的效果，而且validate 插件也会进行验证。  </p>
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nt">input</span> <span class="nt">style</span><span class="o">=</span><span class="s2">&quot;height:0.5px;width:0px;padding:0px;margin:0px;&quot;</span> <span class="nt">data-val</span><span class="o">=</span><span class="s2">&quot;true&quot;</span> <span class="nt">data-val-required</span><span class="o">=</span><span class="s2">&quot;请选择生日。&quot;</span> <span class="nt">id</span><span class="o">=</span><span class="s2">&quot;Dob&quot;</span> <span class="nt">name</span><span class="o">=</span><span class="s2">&quot;Dob&quot;</span> <span class="nt">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+
+
+<p>jquery validate很不错的一个jQuery表单验证插件。升级到了1.9版的后，发现隐藏表单域验证全部失效，特别是在jquery.ui.tabs.min.js构造的Tabs里的验证！网上一搜，也没查到是怎么回事。最后在1.9的changelog里发现了这么一句
+changelog里</p>
+<div class="highlight"><pre><span></span>* Fixed #189 - :hidden elements are now ignored by default
+ignore: &quot;:hidden&quot;,
+ignore: &quot;&quot;       
+</pre></div>
+
+
+<p>就又开始验证隐藏域了</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/category/android.html">android</a></li>
+		<li><a href="/category/api.html">api</a></li>
+		<li><a href="/category/git.html">git</a></li>
+		<li><a href="/category/go.html">go</a></li>
+		<li><a href="/category/hack.html">hack</a></li>
+		<li><a href="/category/ios.html">ios</a></li>
+		<li><a href="/category/java.html">java</a></li>
+		<li><a href="/category/javascript.html">javascript</a></li>
+		<li><a href="/category/linux.html">linux</a></li>
+		<li><a href="/category/mysql.html">mysql</a></li>
+		<li><a href="/category/operation.html">operation</a></li>
+		<li><a href="/category/others.html">others</a></li>
+		<li><a href="/category/php.html">php</a></li>
+		<li><a href="/category/program.html">program</a></li>
+		<li><a href="/category/python.html">python</a></li>
+		<li><a href="/category/read.html">read</a></li>
+		<li><a href="/category/soft.html">soft</a></li>
+		<li><a href="/category/success.html">success</a></li>
+		<li><a href="/category/test.html">test</a></li>
+		<li><a href="/category/vcs.html">vcs</a></li>
+		<li><a href="/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>
