@@ -1,0 +1,193 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>在线尺子</title>
+<meta name="keywords" content="尺子，在线尺子，网页尺子，精确">
+<meta name="description" content="使用最方便最简单的在线尺子">
+<link type="text/css" rel="stylesheet" href="css/css.css">
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script>
+	$(function(){
+	jQuery.focus = function(slid){
+		var width = $(slid).width();
+		var len = $(slid).find("ul li").length;
+		var index =0;
+		var picTimer;
+		var btn = "<div class='btn'>";
+		for(var i=0;i<len;i++){
+			btn +="<span></span>";
+			}
+		btn +="</div>"
+		$(slid).append(btn);
+		
+		$(slid+" .btn span").css("opacity",0.4).mouseenter(function(){
+			index = $(this).index();
+			showPics(index);
+			}).eq(0).trigger("mouseleave");
+		
+		$(slid+" ul").css("width",width*(len));
+		
+		$(slid).hover(function() {
+			clearInterval(picTimer);
+		},function() {
+			picTimer = setInterval(function() {
+				showPics(index);
+				index++;
+				if(index == len) {index = 0;}
+			},4000); 
+		}).trigger("mouseleave");
+		
+		
+		function showPics(index){
+			var nowLeft = -index*width;
+			$(slid+" ul").stop(true,true).animate({"left":nowLeft},300);
+			$(slid+" ul li").find("img").css("transform","scaleX(1.1) scaleY(1.1)").eq(index).css("transform","scaleX(1) scaleY(1)");
+			$(slid+" .btn span").removeClass("on").eq(index).addClass("on");
+			$(slid+" .btn span").stop(true,true).animate({"opacity":"0.4"},300).eq(index).stop(true,false).animate({"opacity":"1"},300);
+			}
+	};
+});
+</script>
+</head>
+<body>
+
+<div class="content">
+	<div class="banner"></div>
+    <div class="title"><h3>在线尺子测量工具</h3></div>
+    <div class="menu">
+		<div class="czw">参照物校准:</div>
+		<div class="unit">单位：
+			<input type="radio" name="unit" id="rCm" checked="checked">cm
+			<input type="radio" name="unit" id="rInch">inch
+		</div>
+        <ul class="menu-list">
+        	<li class="menu-s">
+				<img src="images/paper.png" /> 纸张
+				<ul class="submenu-list">
+					<li class="submenu" onclick="javascript:calibrate('zhi.png',210,'A4纸');$(this).parent().hide();"><img src="images/menu_spaper.png">A4</li>
+					<li class="submenu" onclick="javascript:calibrate('zhi.png',176,'B5纸');$(this).parent().hide();"><img src="images/menu_spaper.png">B5</li>
+					<li class="submenu" onclick="javascript:calibrate('zhi.png',216,'Letter');$(this).parent().hide();"><img src="images/menu_spaper.png">letter</li>
+				</ul>
+            </li>
+			<!--<li class="menu-s">
+				<img src="images/menu_banknote.png" /> 纸币
+				<ul class="submenu-list">
+					<li class="submenu"><img src="images/menu_rmb100.png">人民币
+						<ul>
+							<li class="subsubmenu" onclick="javascript:calibrate('rmb1.jpg',130,'一元纸币');$(this).parent().hide();"><img src="images/menu_rmb1.gif" />1元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('rmb5.jpg',135,'五元纸币');$(this).parent().hide();"><img src="images/menu_rmb5.gif" />5元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('rmb10.jpg',140,'十元纸币');$(this).parent().hide();"><img src="images/menu_rmb10.gif" />10元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('rmb20.jpg',145,'20元纸币');$(this).parent().hide();"><img src="images/menu_rmb20.png" />20元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('rmb50.jpg',150,'50元纸币');$(this).parent().hide();"><img src="images/menu_rmb50.png" />50元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('rmb100.jpg',155,'100元纸币');$(this).parent().hide();"><img src="images/menu_rmb100.png" />100元</li>
+						</ul>
+					</li>
+					<li class="submenu"><img src="images/menu_hkd100.gif">港幣
+						<ul>
+							<li class="subsubmenu" onclick="javascript:calibrate('gb10.jpg',134,'10元港币');$(this).parent().hide();"><img src="images/menu_hkd10.gif" />10元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('gb20.jpg',143,'20元港币');$(this).parent().hide();"><img src="images/menu_hkd20.gif" />20元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('gb50.jpg',148,'50元港币');$(this).parent().hide();"><img src="images/menu_hkd50.gif" />50元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('gb100.jpg',153,'100元港币');$(this).parent().hide();"><img src="images/menu_hkd100.gif" />100元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('gb500.jpg',158,'500元港币');$(this).parent().hide();"><img src="images/menu_hkd500.gif" />500元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('gb1000.jpg',165,'1000元港币');$(this).parent().hide();"><img src="images/menu_hkd1000.gif" />1000元</li>
+						</ul>
+					</li>
+					<li class="submenu"><img src="images/menu_ntd2000.gif" />新臺幣
+						<ul>
+							<li class="subsubmenu" onclick="javascript:calibrate('xtb100.jpg',145,'新台币100元');$(this).parent().hide();"><img src="images/menu_ntd100.gif" />100元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('xtb200.jpg',150,'新台币200元');$(this).parent().hide();"><img src="images/menu_ntd200.gif" />200元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('xtb500.jpg',155,'新台币500元');$(this).parent().hide();"><img src="images/menu_ntd500.gif" />500元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('xtb1000.jpg',160,'新台币1000元');$(this).parent().hide();"><img src="images/menu_ntd1000.gif" />1000元</li>
+							<li class="subsubmenu" onclick="javascript:calibrate('xtb2000.jpg',165,'新台币2000元');$(this).parent().hide();"><img src="images/menu_ntd2000.gif" />2000元</li>
+						</ul>
+					</li>
+					<li class="submenu" ><img src="images/menu_usd.png" />美元
+						<ul class="ssubmenu">
+							<li class="submenu" onclick="javascript:calibrate('my.jpg',156,'任意面值的美元纸币');$(this).parent().hide();"><img src="images/menu_usdall.gif" />任意面值</li>
+						</ul>
+					</li>
+					<li class="submenu"><img src="images/menu_euro500.png" />欧元
+						<ul class="ssubmenu">
+							<li class="submenu" onclick="javascript:calibrate('ou5.jpg',120,'5欧元');$(this).parent().hide();"><img src="images/menu_euro5.png" />5欧元</li>
+							<li class="submenu" onclick="javascript:calibrate('ou10.jpg',127,'10欧元');$(this).parent().hide();"><img src="images/menu_euro10.png" />10欧元</li>
+							<li class="submenu" onclick="javascript:calibrate('ou20.jpg',133,'20欧元');$(this).parent().hide();"><img src="images/menu_euro20.png" />20欧元</li>
+							<li class="submenu" onclick="javascript:calibrate('ou50.jpg',140,'50欧元');$(this).parent().hide();"><img src="images/menu_euro50.png" />50欧元</li>
+							<li class="submenu" onclick="javascript:calibrate('ou100.jpg',147,'100欧元');$(this).parent().hide();"><img src="images/menu_euro100.png" />100欧元</li>
+							<li class="submenu" onclick="javascript:calibrate('ou200.jpg',153,'200欧元');$(this).parent().hide();"><img src="images/menu_euro200.png" />200欧元</li>
+							<li class="submenu" onclick="javascript:calibrate('ou500.jpg',160,'500欧元');$(this).parent().hide();"><img src="images/menu_euro500.png" />500欧元</li>
+						</ul>
+					</li>
+					<li class="submenu"><img src="images/menu_yen10000.gif" />日元
+						<ul class="ssubmenu">
+							<li class="submenu" onclick="javascript:calibrate('ry1000.jpg',150,'1000日元');$(this).parent().hide();"><img src="images/menu_yen1000.gif" />1000円</li>
+							<li class="submenu" onclick="javascript:calibrate('ry2000.jpg',154,'2000日元');$(this).parent().hide();"><img src="images/menu_yen2000.gif" />2000円</li>
+							<li class="submenu" onclick="javascript:calibrate('ry5000.jpg',156,'5000日元');$(this).parent().hide();"><img src="images/menu_yen5000.gif" />5000円</li>
+							<li class="submenu" onclick="javascript:calibrate('ry10000.jpg',160,'10000日元');$(this).parent().hide();"><img src="images/menu_yen10000.gif" />10000円</li>
+						</ul>
+					</li>
+				</ul>
+            </li>-->
+			<li class="menu-s">
+				<img src="images/menu_card.png" /> 信用卡
+				<ul class="submenu-list">
+					<li class="subsubmenu" onclick="javascript:calibrate('card.png',85.6,'信用卡或同大小其他卡片');$(this).parent().hide();"><img src="images/s_card.png">标准信用卡</li>
+				</ul>
+            </li>
+			<li class="menu-s">
+				<img src="images/menu_disk.png" /> 光盘
+				<ul class="submenu-list">
+					<li class="subsubmenu" onclick="javascript:calibrate('disk.png',120,'标准尺寸的光盘');$(this).parent().hide();"><img src="images/menu_disk_s.png" />标准关盘</li>
+					<li class="subsubmenu" onclick="javascript:calibrate('disk.png',80,'迷你尺寸的光盘');$(this).parent().hide();"><img src="images/menu_disk_m.png" />迷你光盘</li>
+				</ul>
+            </li>
+        
+        </ul>
+       
+    </div>
+ 	<div class="desc">
+    	<div id="info1">
+    		想得到精确的在线尺子？<br/><br/><br/>
+        	<span class="em">>>先从上面的菜单中选一样你手边有的东西吧</span>
+        </div>
+        <div id="info2">
+        	<span class="em">将一张<span id="obj"></span>放在屏幕上的对应位置，使用两侧按钮调节大小，使得实物图与图片宽度相同。</span><br/><br/><br/>
+            <a href="javascript:caliFinish()" class="cneterbutton">完成</a>
+        </div>
+        <div id="info3">校准完成！请放心使用最精确的尺子</div>
+        <div id="info4">
+        	您当前已经校准了尺子，心在可以使用。<br/><br/>
+            当您<span class="em">更换显示器</span>/<span class="em">调整分辨率</span>/<span class="em">缩放页面</span>后，请重新校准尺子。
+        </div>
+    </div>
+    <div class="back_index">我要回到<a href="index.html">选择尺子</a>页面</div>
+    <div id="dCalibrate">
+    	<div id="dTop"><img src="images/blank.gif" width="1" height="1"/></div>
+        <div id="dLeft"></div>
+        <div id="dRight"></div>
+        <img id="iCalibrate" src="images/blank.gif"/>
+        <div id="dLAdjust">
+        	<a href="javascript:ladd(-10);" class="button" id="alsubsub">&lt;&lt;</a>
+            <a href="javascript:ladd(-1);" class="button" id="alSub">&lt;</a>
+            <a href="javascript:ladd(1);" class="button" id="alSAdd">&gt;</a>
+            <a href="javascript:ladd(10);" class="button" id="alAddAdd">&gt;&gt;</a>
+        </div>
+        <div id="dRAdjust">
+        	<a href="javascript:radd(-10);" class="button" id="aRSubSub">&lt;&lt;</a>
+            <a href="javascript:radd(-1);" class="button" id="aRsub">&lt;</a>
+            <a href="javascript:radd(1);" class="button" id="aRAdd">&gt;</a>
+            <a href="javascript:radd(10);" class="button" id="aRAddAdd">&gt;&gt;</a>
+        </div>
+    </div>
+    <div id="dRuler">
+    	<img id="iRuler" src="images/ruler.bmp" alt="尺子">
+    </div>
+    <div class="footer">
+    	
+    	<div class="flink">友情链接:<a href="http://bookfuns.com" target="_blank">读书圈</a></div>
+    </div>
+</div>
+</body>
+</html>

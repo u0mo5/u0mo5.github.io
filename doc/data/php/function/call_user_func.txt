@@ -1,0 +1,92 @@
+UCenter源代码里有一个函数call_user_func，开始以为是自己定义的函数，结果到处都找不到。后来才知道call_user_func是PHP的内置函数，该函数允许用户调用直接写的函数并传入一定的参数，下面总结下这个函数的使用方法。
+
+call_user_func函数类似于一种特别的调用函数的方法，使用方法如下：
+<code>
+<?php
+function nowamagic($a,$b)   
+{   
+	echo $a;   
+	echo $b;   
+}   
+call_user_func('nowamagic', "111","222");   
+call_user_func('nowamagic', "333","444");   
+//显示 111 222 333 444   
+?> 
+</code>
+调用类内部的方法比较奇怪，居然用的是array，不知道开发者是如何考虑的，当然省去了new，也挺有新意的：
+
+<code>
+<?php
+class a {   
+	function b($c)   
+	{   
+		echo $c;   
+	}   
+}   
+call_user_func(array("a", "b"),"111");   
+//显示 111   
+?>   
+</code>
+
+call_user_func_array函数和call_user_func很相似，只不过是换了一种方式传递了参数，让参数的结构更清晰：
+
+<code>
+<?php
+function a($b, $c)   
+{   
+	echo $b;   
+	echo $c;   
+}   
+call_user_func_array('a', array("111", "222"));   
+//显示 111 222   
+?>  
+</code>
+
+call_user_func_array函数也可以调用类内部的方法的：
+
+<code>
+<?php
+Class ClassA   
+{   
+  
+function bc($b, $c) {   
+     $bc = $b + $c;   
+echo $bc;   
+}   
+}   
+call_user_func_array(array('ClassA','bc'), array("111", "222"));   
+  
+//显示 333   
+?>   
+</code>
+
+call_user_func函数和call_user_func_array函数都支持引用，这让他们和普通的函数调用更趋于功能一致：
+
+<code>
+<?php
+function a($b)   
+{   
+	$b++;   
+}   
+$c = 0;   
+call_user_func('a', $c);   
+echo $c;//显示 1   
+call_user_func_array('a', array($c));   
+echo $c;//显示 2  
+?>
+</code>
+
+另外，call_user_func函数和call_user_func_array函数都支持引用。
+<code>
+<?php
+function increment(&$var)
+{
+    $var++;
+}
+$a = 0;
+call_user_func('increment', $a);
+echo $a; // 0
+call_user_func_array('increment', array(&$a)); // You can use this instead
+echo $a; // 1
+?>
+</code>
