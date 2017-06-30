@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>通用dao的demo</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3835.html" rel="bookmark"
+                   title="Permalink to 通用dao的demo">通用dao的demo</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>代码片段</p>
+<p>1. [代码]整型映射工具     </p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</p>
+<p>package org.dave.common.database.convert;</p>
+<p>import java.sql.ResultSet;</p>
+<p>import java.sql.SQLException;</p>
+<p>/**</p>
+<p>* 整型映射工具</p>
+<p>* @author David Day</p>
+<p>*/</p>
+<p>public class IntegerConverter implements ResultConverter&lt;Integer&gt; {</p>
+<p>@Override</p>
+<p>public Integer convert(ResultSet rs) throws SQLException {</p>
+<p>return rs.getInt(1);</p>
+<p>}</p>
+<p>}</p>
+<p>2. [代码]长整型映射工具     </p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</p>
+<p>package org.dave.common.database.convert;</p>
+<p>import java.sql.ResultSet;</p>
+<p>import java.sql.SQLException;</p>
+<p>/**</p>
+<p>* 长整型映射工具</p>
+<p>* @author 戴威</p>
+<p>*/</p>
+<p>public class LongConverter implements ResultConverter&lt;Long&gt; {</p>
+<p>@Override</p>
+<p>public Long convert(ResultSet rs) throws SQLException {</p>
+<p>return rs.getLong(1);</p>
+<p>}</p>
+<p>}</p>
+<p>3. [代码]数据模型的demo     </p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57</p>
+<p>package org.dave.demo.model;</p>
+<p>import org.dave.common.database.DataModel;</p>
+<p>@SuppressWarnings("serial")</p>
+<p>public class Demo extends DataModel {</p>
+<p>private Long id;</p>
+<p>private String name;</p>
+<p>private String pass;</p>
+<p>private String email;</p>
+<p>public Demo() {</p>
+<p>super();</p>
+<p>}</p>
+<p>public Demo(Long id) {</p>
+<p>super();</p>
+<p>this.id = id;</p>
+<p>}</p>
+<p>public Long getId() {</p>
+<p>return id;</p>
+<p>}</p>
+<p>public void setId(Long id) {</p>
+<p>this.id = id;</p>
+<p>}</p>
+<p>public String getName() {</p>
+<p>return name;</p>
+<p>}</p>
+<p>public void setName(String name) {</p>
+<p>this.name = name;</p>
+<p>}</p>
+<p>public String getPass() {</p>
+<p>return pass;</p>
+<p>}</p>
+<p>public void setPass(String pass) {</p>
+<p>this.pass = pass;</p>
+<p>}</p>
+<p>public String getEmail() {</p>
+<p>return email;</p>
+<p>}</p>
+<p>public void setEmail(String email) {</p>
+<p>this.email = email;</p>
+<p>}</p>
+<p>}</p>
+<p>4. [代码]demo数据模型转换     </p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</p>
+<p>package org.dave.demo.convert;</p>
+<p>import java.sql.ResultSet;</p>
+<p>import java.sql.SQLException;</p>
+<p>import org.dave.common.database.convert.ResultConverter;</p>
+<p>import org.dave.demo.model.Demo;</p>
+<p>public class DemoConverter implements ResultConverter&lt;Demo&gt; {</p>
+<p>@Override</p>
+<p>public Demo convert(ResultSet rs) throws SQLException {</p>
+<p>Demo demo = new Demo(rs.getLong(1));</p>
+<p>demo.setName(rs.getString(2));</p>
+<p>demo.setPass(rs.getString(3));</p>
+<p>demo.setEmail(rs.getString(4));</p>
+<p>return demo;</p>
+<p>}</p>
+<p>}</p>
+<p>5. [代码]dao的demo     </p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</p>
+<p>package org.dave.demo.dao;</p>
+<p>import java.sql.Connection;</p>
+<p>import java.util.List;</p>
+<p>import org.dave.common.database.access.DataAccess;</p>
+<p>import org.dave.common.database.convert.IntegerConverter;</p>
+<p>import org.dave.common.database.convert.LongConverter;</p>
+<p>import org.dave.demo.convert.DemoConverter;</p>
+<p>import org.dave.demo.model.Demo;</p>
+<p>public class DemoDao extends DataAccess {</p>
+<p>public DemoDao(Connection conn) {</p>
+<p>super(conn);</p>
+<p>}</p>
+<p>/**</p>
+<p>* 增加</p>
+<p>* @param name</p>
+<p>* @param pass</p>
+<p>* @param email</p>
+<p>* @return</p>
+<p>*/</p>
+<p>public Long add(String name, String pass, String email) {</p>
+<p>return super.insert("INSERT INTO demo(name,pass,email) values(?,?,?)", </p>
+<p>new LongConverter(), name, pass, email);</p>
+<p>}</p>
+<p>/**</p>
+<p>* 修改</p>
+<p>* @param id</p>
+<p>* @param name</p>
+<p>* @param pass</p>
+<p>* @param email</p>
+<p>*/</p>
+<p>public void update(Long id, String name, String pass, String email) {</p>
+<p>super.update("UPDATE demo SET name=?,pass=?,email=? WHERE id=?", </p>
+<p>name, pass, email, id);</p>
+<p>}</p>
+<p>/**</p>
+<p>* 删除</p>
+<p>* @param id</p>
+<p>*/</p>
+<p>public void delete(Long id) {</p>
+<p>super.update("DELETE FROM demo WHERE id=?", id);</p>
+<p>}</p>
+<p>/**</p>
+<p>* 根据ID查询</p>
+<p>* @param id</p>
+<p>* @return</p>
+<p>*/</p>
+<p>public Demo findById(Long id) {</p>
+<p>return super.queryForObject("SELECT id,name,pass,email FROM demo WHERE id=?", </p>
+<p>new DemoConverter(), id);</p>
+<p>}</p>
+<p>/**</p>
+<p>* 查询所有</p>
+<p>* @return</p>
+<p>*/</p>
+<p>public List&lt;Demo&gt; findAll() {</p>
+<p>return super.queryForList("SELECT id,name,pass,email FROM demo", new DemoConverter());</p>
+<p>}</p>
+<p>/**</p>
+<p>* 查询总记录数</p>
+<p>* @return</p>
+<p>*/</p>
+<p>public Integer getCount() {</p>
+<p>return super.queryForObject("SELECT COUNT(*) FROM demo", new IntegerConverter());</p>
+<p>}</p>
+<p>/**</p>
+<p>* 分页查询</p>
+<p>* @param start</p>
+<p>* @param size</p>
+<p>* @return</p>
+<p>*/</p>
+<p>public List&lt;Demo&gt; findByRange(int start, int size) {</p>
+<p>return super.queryForList("SELECT id,name,pass,email FROM demo limit ?,?", </p>
+<p>new DemoConverter(), start, size);</p>
+<p>}</p>
+<p>}</p>
+<p>6. [代码]基础service     </p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</p>
+<p>package org.dave.common;</p>
+<p>import java.sql.Connection;</p>
+<p>import org.dave.common.database.DatabaseTransaction;</p>
+<p>public abstract class BaseService {</p>
+<p>private DatabaseTransaction trans;</p>
+<p>protected BaseService(DatabaseTransaction trans) {</p>
+<p>this.trans = trans;</p>
+<p>}</p>
+<p>protected BaseService() { }</p>
+<p>protected DatabaseTransaction getTransaction() {</p>
+<p>return trans;</p>
+<p>}</p>
+<p>protected Connection getConnection() {</p>
+<p>return trans.getConnection();</p>
+<p>}</p>
+<p>}</p>
+<p>7. [代码]service的demo     </p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</p>
+<p>package org.dave.demo.service;</p>
+<p>import java.util.List;</p>
+<p>import org.dave.common.BaseService;</p>
+<p>import org.dave.common.data.Pager;</p>
+<p>import org.dave.common.database.DatabaseTransaction;</p>
+<p>import org.dave.demo.dao.DemoDao;</p>
+<p>import org.dave.demo.model.Demo;</p>
+<p>public class DemoService extends BaseService {</p>
+<p>public DemoService(DatabaseTransaction trans) {</p>
+<p>super(trans);</p>
+<p>}</p>
+<p>public DemoService() {</p>
+<p>super();</p>
+<p>}</p>
+<p>/**</p>
+<p>* 增加</p>
+<p>* @param demo</p>
+<p>* @return</p>
+<p>*/</p>
+<p>public Demo add(Demo demo) {</p>
+<p>DemoDao dao = new DemoDao(getConnection());</p>
+<p>Long id = dao.add(demo.getName(), demo.getPass(), demo.getEmail());</p>
+<p>return dao.findById(id);</p>
+<p>}</p>
+<p>/**</p>
+<p>* 更新</p>
+<p>* @param demo</p>
+<p>*/</p>
+<p>public void update(Demo demo) {</p>
+<p>new DemoDao(getConnection()).update(demo.getId(), demo.getName(), demo.getPass(), demo.getEmail());</p>
+<p>}</p>
+<p>/**</p>
+<p>* 删除</p>
+<p>* @param id</p>
+<p>*/</p>
+<p>public void delete(Long id) {</p>
+<p>new DemoDao(getConnection()).delete(id);</p>
+<p>}</p>
+<p>/**</p>
+<p>* 通过id查询</p>
+<p>* @param id</p>
+<p>* @return</p>
+<p>*/</p>
+<p>public Demo findById(Long id) {</p>
+<p>return new DemoDao(getConnection()).findById(id);</p>
+<p>}</p>
+<p>/**</p>
+<p>* 查询所有</p>
+<p>* @return</p>
+<p>*/</p>
+<p>public List&lt;Demo&gt; findAll() {</p>
+<p>return new DemoDao(getConnection()).findAll();</p>
+<p>}</p>
+<p>/**</p>
+<p>* 分页查询</p>
+<p>* @param page</p>
+<p>* @return</p>
+<p>*/</p>
+<p>public List&lt;Demo&gt; findByPage(Pager page) {</p>
+<p>DemoDao dao = new DemoDao(getConnection());</p>
+<p>page.setTotalResults(dao.getCount());</p>
+<p>return dao.findByRange(page.getStartResults(), page.getPageSize());</p>
+<p>}</p>
+<p>}</p>
+<p>8. [代码]action的demo     </p>
+<p>?</p>
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102</p>
+<p>package org.dave.demo.action;</p>
+<p>import java.util.List;</p>
+<p>import org.dave.common.data.Pager;</p>
+<p>import org.dave.common.database.DatabaseTransaction;</p>
+<p>import org.dave.demo.model.Demo;</p>
+<p>import org.dave.demo.service.DemoService;</p>
+<p>public class DemoAction {</p>
+<p>public String add() {</p>
+<p>DatabaseTransaction trans = new DatabaseTransaction(true);</p>
+<p>try {</p>
+<p>new DemoService(trans).add(demo);</p>
+<p>trans.commit();</p>
+<p>} catch (Exception e) {</p>
+<p>trans.rollback();</p>
+<p>return "error";</p>
+<p>} finally {</p>
+<p>trans.close();</p>
+<p>}</p>
+<p>return "toList";</p>
+<p>}</p>
+<p>public String update() {</p>
+<p>DatabaseTransaction trans = new DatabaseTransaction(true);</p>
+<p>try {</p>
+<p>new DemoService(trans).update(demo);</p>
+<p>trans.commit();</p>
+<p>} catch (Exception e) {</p>
+<p>trans.rollback();</p>
+<p>return "error";</p>
+<p>} finally {</p>
+<p>trans.close();</p>
+<p>}</p>
+<p>return "toList";</p>
+<p>}</p>
+<p>public String info() {</p>
+<p>DatabaseTransaction trans = new DatabaseTransaction(true);</p>
+<p>try {</p>
+<p>demo = new DemoService(trans).findById(demo.getId());</p>
+<p>} catch (Exception e) {</p>
+<p>return "error";</p>
+<p>} finally {</p>
+<p>trans.close();</p>
+<p>}</p>
+<p>return "info";</p>
+<p>}</p>
+<p>public String findByPage() {</p>
+<p>DatabaseTransaction trans = new DatabaseTransaction(true);</p>
+<p>try {</p>
+<p>demoList = new DemoService(trans).findByPage(page);</p>
+<p>} catch (Exception e) {</p>
+<p>return "error";</p>
+<p>} finally {</p>
+<p>trans.close();</p>
+<p>}</p>
+<p>return "page";</p>
+<p>}</p>
+<p>public String findAll() {</p>
+<p>DatabaseTransaction trans = new DatabaseTransaction(true);</p>
+<p>try {</p>
+<p>demoList = new DemoService(trans).findAll();</p>
+<p>} catch (Exception e) {</p>
+<p>return "error";</p>
+<p>} finally {</p>
+<p>trans.close();</p>
+<p>}</p>
+<p>return "list";</p>
+<p>}</p>
+<p>private Pager page;</p>
+<p>private Demo demo;</p>
+<p>private List&lt;Demo&gt; demoList;</p>
+<p>public Pager getPage() {</p>
+<p>return page;</p>
+<p>}</p>
+<p>public void setPage(Pager page) {</p>
+<p>this.page = page;</p>
+<p>}</p>
+<p>public Demo getDemo() {</p>
+<p>return demo;</p>
+<p>}</p>
+<p>public void setDemo(Demo demo) {</p>
+<p>this.demo = demo;</p>
+<p>}</p>
+<p>public List&lt;Demo&gt; getDemoList() {</p>
+<p>return demoList;</p>
+<p>}</p>
+<p>}</p>
+<p>9. [文件] 源码和试例包 ~ 13KB     下载(556)     
+http://www.oschina.net/code/snippet_86510_4466</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

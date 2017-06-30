@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>PHP调试工具Xdebug安装配置教程</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/4061.html" rel="bookmark"
+                   title="Permalink to PHP调试工具Xdebug安装配置教程">PHP调试工具Xdebug安装配置教程</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>PHP调试工具Xdebug安装配置教程</p>
+<p>说到PHP代码调试，对于有经验的PHPer，通过echo、print_r、var_dump函数，或PHP开发工具zend studio、editplus可解决大部分问题，但是对于PHP入门学习的童鞋来说有一定的难度，而且仅仅通过上述这些PHP调试手段，也很难准确发现PHP性能方面的问题，Xdebug是一个非常有用的PHP调试工具。
+　　Xdebug作为PHP调试工具，提供了丰富的调试函数，也可将Xdebug安装配置为zend studio、editplus调试PHP的第三方插件，通过开启自动跟踪(auto_trace)和分析器功能，可以直观的看到PHP源代码的性能数据，以便优化PHP代码。今天和大家分享PHP调试工具Xdebug安装以及配置方面的基础知识。
+　　Xdebug在PHP中的安装配置涉及php.ini配置文件的修改。
+　　Xdebug安装教程
+　　下载Xdebug
+　　首先我们需要下载Xdebug，务必根据安装的PHP版本，选择合适的Xdebug版本，由于我是在Windows环境下安装PHP的，所以选择下载Windows版本的Xdebug2.1.0(5.3 VC6 (32 bit))，下载下来的Xdebug文件为php_xdebug-2.1.0-5.3-vc6.dll，这是由于Xdebug是作为PHP模块的形式被安装配置与使用的。
+　　Xdebug安装提示：如果你不清楚安装的PHP版本，你可以通过phpinfo()函数参看，同时Xdebug也提供了phpinfo输出信息分析工具来帮助你分析如何安装Xdebug，只要将phpinfo输出信息复制提交即可，地址：Xdebug phpinfo信息分析地址
+　　安装Xdebug
+　　将下载的php_xdebug-2.1.0-5.3-vc6.dll复制到PHP安装目录下的ext目录，此处为C:phpext，ext目录专门用来存放PHP扩展库DLL文件。
+　　配置php.ini
+　　安装Xdebug的最后一步就是配置php.ini文件，打开C:php目录下的php.ini配置文件，在末尾添加</p>
+<p>[Xdebug]zend_extension="c:/php/ext/php_xdebug-2.1.0-5.3-vc6.dll"</p>
+<p>最后重启Apache服务器，通过phpinfo()函数，可以看到
+ </p>
+<p>Xdebug配置提示：PHP5.3之前版本配置Xdebug时使用zend_extension_ts，对于PHP5.3以上版本，使用zend_extension。
+　　XDEBUG NOT LOADED AS ZEND EXTENSION信息出现的原因
+　　出现XDEBUG NOT LOADED AS ZEND EXTENSION的原因是在安装Xdebug时由于我们将Xdebug的DLL文件复制到了phpext目录下，容易以PHP扩展库的形式加载Xdebug，在php.ini文件中添加了</p>
+<p>extension=php_xdebug-2.1.0-5.3-vc6.dll</p>
+<p>这是错误的Xdebug安装方式，必须以zend方式加载。
+　　至此PHP Xdebug的基础安装教程就结束了，下面我们需要对Xdebug作一些基础配置。
+Xdebug配置教程
+　　在安装完Xdebug后，我们还需要对Xdebug做基础配置，默认Xdebug的PHP函数自动跟踪(auto_trace)功能、分析器功能并没有开启，作为调试PHP代码的需要，有些Xdebug配置选项最好开启。
+　　在此之前我们需要创建Xdebug自动跟踪以及分析器输出文件的存放目录，务必确保目录是可读写的，此处我在D:PHPWeb下创建了xdebug race以及xdebugprofiler目录。
+　　最后在php.ini配置文件中完成Xdebug的配置工作，找到</p>
+<p>[Xdebug]zend_extension="c:/php/ext/php_xdebug-2.1.0-5.3-vc6.dll"</p>
+<p>在此之后添加Xdebug配置信息
+ </p>
+<p>代码</p>
+<p>xdebug.auto_trace=1xdebug.collect_params=1xdebug.collect_return=1xdebug.trace_output_dir="D:/PHPWeb/xdebug/trace"xdebug.profiler_enable=1xdebug.profiler_output_dir="D:/PHPWeb/xdebug/profiler" </p>
+<p>最后保存php.ini，并重启Aapche服务器即可。
+Xdebug部分配置选项说明
+　　xdebug.auto_trace = 1
+　　是否允许Xdebug跟踪函数调用，跟踪信息以文件形式存储，默认值为0
+　　collect_params = 1
+　　是否允许Xdebug跟踪函数参数，默认值为0
+　　xdebug.collect_return = 1
+　　是否允许Xdebug跟踪函数返回值，默认值为0
+　　xdebug.profiler_enable = 1
+　　打开xdebug的性能分析器，以文件形式存储，这项配置是不能以ini_set()函数配置的，默认值为0
+　　xdebug.profiler_output_dir
+　　性能分析文件的存放位置，默认值为/tmp
+　　xdebug.profiler_output_name
+　　性能分析文件的命名规则，默认值为cachegrind.out.%p
+　　xdebug.trace_output_dir
+　　函数调用跟踪信息输出文件目录，默认值为/tmp
+　　xdebug.trace_output_name
+　　函数调用跟踪信息输出文件命名规则，默认为trace.%c
+　　特别说明：Xdebug的trace和profiler的输出文件名规则是可以更改的，比如将文件名命名为具体跟踪的PHP执行文件名、进程ID、随机数等，非常方便，更多的Xdebug配置选项说明，请参考官网的Xdebug配置选项说明。
+　　至此PHP调试工具Xdebug教程之Xdebug的安装和配置就介绍完了，今后还将陆续介绍Xdebug如何在zend studio以及editplus中配置使用。
+ 
+ 
+ 
+摘自：http://www.leapsoul.cn/?p=935
+ 
+ 
+ 
+个人配置备份：
+ </p>
+<p>[XDebug]zend_extension="D:phpxamppphpextphp_xdebug.dll"xdebug.remote_enable=true     xdebug.remote_host=127.0.0.1  xdebug.remote_port=9000       xdebug.remote_handler=dbgp</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

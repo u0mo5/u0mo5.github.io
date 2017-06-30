@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>rapid-generator JAVA代码生成器</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3868.html" rel="bookmark"
+                   title="Permalink to rapid-generator JAVA代码生成器">rapid-generator JAVA代码生成器</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>有感于马上要做个比较大的业务系统，想到那无止境的增删改查、粘贴复制，顿时脑后升起一阵凉风。于是想到个找或者写一个Java代码的生成器，这样在正常开发进度下，也能余下更多的时间去做些别的事情。
+闲话少说，首先总结下需求：
+我需要的这个工具能够读取数据库表结构，通过对字段类型、名称等分析得到需要的各种变量，根据模板生成相应的pojo类、hibernate的xml配置文件、dao和service的接口和类。
+需求看起来很简单，但是一是没搞过这样的小工具，二是技术不过关，所以还是想到了找找有没有开源的代码拿过来根据自己的需求改。
+于是找到了rapid-generator这个开源工具，同学们可以下载rapid-generator直接使用，根据自己的需求写好模板就行了。
+由于自己项目中的特殊情况和公司规范等因素，另外也是想学习下别人的设计，所以我对源码进行了删减和功能的修改。
+来看下主要的类：</p>
+<p>Table：根据表结构建立的对象。
+Column：根据表中每列建立的对象。
+Generator：生成器核心类，主要负责根据表对象和读取FreeMarker模板生成最后的java代码文件。
+GeneratorControl：控制生成过程等的一些参数，例如文件是否覆盖、文件编码等。
+GeneratorProperties：读取配置文件的类，配置文件包括数据库连接信息和一些基本的参数配置。
+下面来看一下模板的编写：
+pojo模板：</p>
+<p>&lt;#include "/java_copyright.include"&gt;  </p>
+<p>&lt;#assign className = table.className&gt;     
+&lt;#assign classNameLower = className?uncap_first&gt;   
+package ${basepackage}.pojo.${mpackage}.${table.classNameFirstLower};  
+ 
+&lt;#include "/java_imports.include"&gt;  </p>
+<p>import com.linkage.agri.pojo.base.BaseEntity;  
+ 
+public class ${className} extends BaseEntity {  
+    private static final long serialVersionUID = 5454155825314635342L;  </p>
+<p>&lt;#list table.columns as column&gt;  
+    /**  </p>
+<p><em> ${column.remarks}  
+     </em>/ 
+    private ${column.simpleJavaType} ${column.columnNameLower};  </p>
+<p>&lt;/#list&gt;  
+ 
+&lt;@generateJavaColumns/&gt;  </p>
+<p>&lt;#macro generateJavaColumns&gt;  
+    &lt;#list table.columns as column&gt;  
+        &lt;#if column.isDateTimeColumn&gt;  </p>
+<p>public String get${column.columnName}String() {  </p>
+<p>return DateConvertUtils.format(get${column.columnName}(), FORMAT_${column.constantName});  </p>
+<p>}  
+    public void set${column.columnName}String(String ${column.columnNameLower}) {  </p>
+<p>set${column.columnName}(DateConvertUtils.parse(${column.columnNameLower}, FORMAT_${column.constantName},${column.simpleJavaType}.class));  </p>
+<p>}  
+        &lt;/#if&gt;      </p>
+<p>public void set${column.columnName}(${column.simpleJavaType} ${column.columnNameLower}) {  </p>
+<p>this.${column.columnNameLower} = ${column.columnNameLower};  </p>
+<p>}  
+      
+    public ${column.simpleJavaType} get${column.columnName}() {  </p>
+<p>return this.${column.columnNameLower};  </p>
+<p>}  
+    &lt;/#list&gt;  
+&lt;/#macro&gt; </p>
+<p>FreeMarker的基本语法可以看下FreeMarker中文手册。
+${}可以引用很多变量，这些变量包括：环境变量、table对象、配置变量等，这些变量都装在一个map里，如果自己有特殊需求，当然可以修改源码来装载更多的变量值。
+注意：当变量为对象时，访问对象的属性是通过get方法来访问的。例如${table.classNameFirstLower}，是引用 table对象的getNameFirstLower()方法，即使table对象中没有nameFirstLower这个属性也能够引用。
+再看下我写的dao的模板：</p>
+<p>&lt;#include "/java_copyright.include"&gt;  </p>
+<p>&lt;#assign className = table.className&gt;     
+&lt;#assign classNameLower = className?uncap_first&gt;     
+package ${basepackage}.dao.${mpackage}.${table.classNameFirstLower};  
+ 
+import java.math.BigDecimal;  
+import java.util.List;  
+import java.util.Map;  
+ 
+import com.linkage.agri.dao.base.AbstractHibernateDAO;  
+import com.linkage.agri.exception.DAOException;  
+import ${basepackage}.pojo.${mpackage}.${classNameLower}.${className};  
+ 
+&lt;#include "/java_imports.include"&gt;  </p>
+<p>public Class ${className}DAOImpl extends AbstractHibernateDAO implements ${className}DAO  
+{  
+    /**  </p>
+<p><em> &lt;query all&gt;  
+     </em> @param paramMap  
+     <em> @param orderMap  
+     </em> @param pageNum  
+     <em> @param pageSize  
+     </em> @return  
+     <em> @throws DAOException  
+     </em>/ 
+    @SuppressWarnings </p>
+<p>public List&lt;${className}&gt; queryList${className}ByAttr(Map&lt;String, Object&gt; paramMap, Map&lt;String, String&gt; orderMap, int pageNum,  </p>
+<p>int pageSize)  </p>
+<p>throws DAOException  </p>
+<p>{  
+        return super.listInstances(${className}.class, paramMap, orderMap, pageNum, pageSize);  </p>
+<p>}  
+      
+    /**  </p>
+<p><em>   
+     </em> &lt;find one by id&gt;  
+     <em> @param serial  
+     </em> @throws DAOException  
+     */ 
+    public ${className} find${className}By${table.pkColumn.columnName}(${table.pkColumn.simpleJavaType} ${table.pkColumn.columnNameFirstLower})  </p>
+<p>throws DAOException  </p>
+<p>{  
+        return (${className})super.findById(${className}.class, ${table.pkColumn.columnNameFirstLower});  </p>
+<p>}  
+      
+    /**  </p>
+<p><em>   
+     </em> &lt;save one&gt;  
+     <em> @param ${table.classNameFirstLower}  
+     </em> @throws DAOException  
+     */ 
+    public ${table.pkColumn.simpleJavaType} save${className}(${className} ${table.classNameFirstLower})  </p>
+<p>throws DAOException  </p>
+<p>{  
+        return (${table.pkColumn.simpleJavaType})super.saveInstance(${table.classNameFirstLower});  </p>
+<p>}  
+      
+    /**  </p>
+<p><em>   
+     </em> &lt;update one&gt;  
+     <em> @param ${table.classNameFirstLower}  
+     </em> @throws DAOException  
+     */ 
+    public void update${className}(${className} ${table.classNameFirstLower})  </p>
+<p>throws DAOException  </p>
+<p>{  
+        super.updateInstance(${className});  </p>
+<p>}  
+      
+    /**  </p>
+<p><em> &lt;check one is have?&gt;  
+     </em> @param paramMap  
+     <em> @return  
+     </em> @throws DAOException  
+     */ 
+    public boolean check${className}IsHaveByAttr(Map&lt;String, Object&gt; paramMap)  </p>
+<p>throws DAOException  </p>
+<p>{  
+        StringBuffer sqlBuffer = new StringBuffer();  </p>
+<p>sqlBuffer.append("SELECT COUNT(*) FROM ${table.sqlName} T ");  </p>
+<p>sqlBuffer.append("WHERE T.${table.pkColumn.sqlName} = ? ");  </p>
+<p>BigDecimal big = (BigDecimal)super.findUniqueResultBySQLWithParams(sqlBuffer.toString(), paramMap.get("${table.pkColumn.columnNameFirstLower}"));  </p>
+<p>return big.intValue() &gt; 0 ? false : true;  </p>
+<p>}  
+      
+    /**  </p>
+<p><em> &lt;update some&gt;  
+     </em> @param ${table.classNameFirstLower}List  
+     <em> @return  
+     </em> @throws DAOException  
+     */ 
+    public void update${className}Batch(List&lt;${className}&gt; ${table.classNameFirstLower}List)  </p>
+<p>throws DAOException  </p>
+<p>{  
+        super.updateBatchInstance(${table.classNameFirstLower}List);  </p>
+<p>}  
+      
+    /**  </p>
+<p><em>   
+     </em> &lt;delete one&gt;  
+     <em> @param ${table.classNameFirstLower}  
+     </em> @throws DAOException  
+     */ 
+    public void delete${className}(${className} ${table.classNameFirstLower})  </p>
+<p>throws DAOException  </p>
+<p>{  
+        super.deleteInstance(${table.classNameFirstLower});  </p>
+<p>}  
+ 
+} </p>
+<p>建立模板是能否解决自己问题的关键，在摸索出门道以后写模板变的十分简单。其实原理很简单，就是用一系列占位符来替换实际的变量值。
+模板路径可以按照实际项目中的路径来拜访，生成器可以读取某个路径下所有模板进行生成，结果如下图：</p>
+<p>接口和实现：</p>
+<p>就说这么多吧，感兴趣的可以研究下这个工具的源码，也DIY出一套自己代码生成工具。不感兴趣的直接写模板就能用。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

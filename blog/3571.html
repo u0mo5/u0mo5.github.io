@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>如何用AU3调用自己用VC++写的dll函数</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3571.html" rel="bookmark"
+                   title="Permalink to 如何用AU3调用自己用VC++写的dll函数">如何用AU3调用自己用VC++写的dll函数</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>这问题困扰我一个上午了，终于找到原因了，不敢藏私，和大家分享一下。 大家都知道，AU3下调用dll文件里的函数是很方便的，只要一个dllcall语句就可以了。 比如下面这个：</p>
+<p>$result = DllCall("user32.dll", "int", "MessageBox", "hwnd", 0, "str", "若干文字", "str", "若干标题", "int", 0)</p>
+<p>复制代码</p>
+<p>就是调用user32.dll文件之中的MessageBox函数，创建一个窗口。 但是如果要调用自己用vc++（我用的是vs2010）编写的dll文件之中的函数，似乎这样简单地使用就不会起作用，比如下面这个名叫dll.cpp的源码文件（用vs2010的dll模板建立，编译之后生成名为dll.dll的动态链接库），为了清晰起见，我将无关紧要的代码和注释去掉了，主要就一个很简单的求和函数：</p>
+<p>...</p>
+<p>int dlladd(int a, int b)
+{
+        return a+b;
+}</p>
+<p>复制代码</p>
+<p>对应的dll.h文件中该函数的声明为：</p>
+<p>_declspec(dllexport) int dlladd(int a, int b);</p>
+<p>复制代码</p>
+<p>这样生成的dll.dll在引用和链接之后可以被vc++程序以dlladd的函数名正常调用，但是在au3之中，这样调用（调用之前别忘记把dll.dll文件拷贝到au3程序所在的目录）：</p>
+<p>$result = DllCall("dll.dll", "int", "dlladd","int", 12, "int", 12)</p>
+<p>复制代码</p>
+<p>却无法正常使用。 原因有两个： 一是，c++支持重载，所以如果不做说明，编译生成的dll文件之中函数名字是会改变的，VC++程序会自动找到改名之后的函数，但是au3却无法找到，使用autoit3中文工具箱里自带的dll查看工具depends，查看dll.dll之中的导出函数，  可见dlladd被改名为类似“?dlladd@@YAHHHHH@z”这样的奇怪名字。  这时候可以用这样的方式在au3之中调用：</p>
+<p>$result = DllCall("dll.dll", "int", "?dlladd@@YAHHHHH@z","int", 12, "int", 12)</p>
+<p>复制代码</p>
+<p>但这样未免太傻了，所以更好的办法是在dll.h文件之中加上extern关键字，表示这个将会被外部程序调用，于是vc++就不会自动将函数改名了：</p>
+<p>extern "C" _declspec(dllexport) int dlladd(int a, int b);</p>
+<p>复制代码</p>
+<p>当然也可以改dll.def文件 但是这样改了之后，还会出现错误，这就是第二个原因了，因为vc++的函数默认的调用方式为_cdecl，而au3默认的函数调用方式为_stdcall，所以还要在dllcall语句的函数返回值后面标注一下调用方式：</p>
+<p>$result = DllCall("dll.dll", "int:cdecl", "dlladd","int", 12, "int", 12)</p>
+<p>复制代码</p>
+<p>这样就可以正常调用自己编写的dll文件之中的函数了。 此外还要注意一下，返回值的问题，返回的$result其实是个数组，$result[0]之中才是存储函数的返回值的。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>ios_常用关键字</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/4098.html" rel="bookmark"
+                   title="Permalink to ios_常用关键字">ios_常用关键字</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>一、关键字说明 1. @synthesize关键字:  根据@property设置，自动生成成员变量相应的存取方法，从而可以使用点操作符来方便的存取该成员变量 。 2. @implementation 关键字： 表明类的实现 @end 结束 3. self 关键字： 类似于java中的this，是隐藏参数，指向当前调用方法的类。 4. super 关键字： 调用父类的方法。self = [superinit]  这里不是判断self与[superinit]是否相等，而是判断是否可以成功初始化。[super init]：父类初始化成功的话，通过=给self，这样self成为一个非空对象，整个来说即非false(非NO)。 5. #import关键字： 告诉预处理器,将头文件的内容包含到本文件的. OC 中，import 能保证头文件只会被包含一次 。 6. @interface关键字： 声明一个xxx类。@end 结束声明.  7. 冒号： 表示继承 后面跟的是父类.   8. @property关键字： 设置成员变量的属性（有读／写，赋值assign,retain,copy ,以及对多线程的支持nonatomic）。  二、方法的申明 1. 声明一个方法，格式是 ： –(返回值) 方法关键字1 : (参数类型)参数名 方法关键字2 : (参数类型)参数名 …… （在读方法的时候就可以先找方法关键字来确定参数）。 2. 减号是实例方法， + 是类方法 3. 另一个初始化方法中调用已有的初始化方法  这种概念被称为Designated Initializer.  三、输出流 NSLog是OC中的标准输出, 附加输出当时日期, 时间, 应用程序名称 . 使用NSLog()输出任意对象的值时,都会使用%@格式说明。在使用这个说明符时,对象通过一个名为description的方法提供自己的NSLog()格式。   四、getter/setter方法 对象.属性：使用@property配合@synthesize可以让编译器自动实现getter/setter方法，使用的时候也很方便，可以直接使用“对象.属性”的方法调用; 对象.方法：如果我们想要”对象.方法“的方式来调用一个方法并获取到方法的返回值，那就需要使用@property配合@dynamic了。使用@dynamic关键字是告诉编译器由我们自己来实现访问方法。如果使用的是@synthesize，那么这个工作编译器就会帮你实现了。  
+ 
+ 
+ 
+ 
+ 
+五、属性的设置 1. readonly此标记说明属性是只读的，默认的标记是读写，如果你指定了只读，在@implementation中只需要一个读取器。或者如果你使用@synthesize关键字，也是有读取器方法被解析。而且如果你试图使用点操作符为属性赋值，你将得到一个编译错误。 2. readwrite此标记说明属性会被当成读写的，这也是默认属性。设置器和读取器都需要在@implementation中实现。如果使用@synthesize关键字，读取器和设置器都会被解析。 3. nonatomic：非原子性访问，对属性赋值的时候不加锁，多线程并发访问会提高性能。如果不加此属性，则默认是两个访问方法都为原子型事务访问。 4. atomic和nonatomic用来决定编译器生成的getter和setter是否为原子操作。atomic设置成员变量的@property属性时，默认为atomic，提供多线程安全。在多线程环境下，原子操作是必要的，否则有可能引起错误的结果。加了atomic，setter函数会变成下面这样：             {lock}             if (property != newValue) {                [property release];                property = [newValue retain];              }             {unlock} nonatomic禁止多线程，变量保护，提高性能。atomic是Objc使用的一种线程保护技术，基本上来讲，是防止在写未完成的时候被另外一个线程读取，造成数据错误。而这种机制是耗费系统资源的，所以在iPhone这种小型设备上，如果没有使用多线程间的通讯编程，那么nonatomic是一个非常好的选择。 指出访问器不是原子操作，而默认地，访问器是原子操作。这也就是说，在多线程环境下，解析的访问器提供一个对属性的安全访问，从获取器得到的返回值或者通过设置器设置的值可以一次完成，即便是别的线程也正在对其进行访问。如果你不指定 nonatomic ，在自己管理内存的环境中，解析的访问器保留并自动释放返回的值，如果指定了 nonatomic ，那么访问器只是简单地返回这个值。 5. assign: 简单赋值，不更改索引计数，适用于基础数据类型 （例如NSInteger，CGFloat）和C数据类型（int, float, double, char, 等）等简单数据类型 此标记说明设置器直接进行赋值，这也是默认值。在使用垃圾收集的应用程序中，如果你要一个属性使用assign，且这个类符合NSCopying协议，你就要明确指出这个标记，而不是简单地使用默认值，否则的话，你将得到一个编译警告。这再次向编译器说明你确实需要赋值，即使它是可拷贝的。 6. copy:建立一个索引计数为1的对象，然后释放旧对象，对NSString 它指出，在赋值时使用传入值的一份拷贝。拷贝工作由copy方法执行，此属性只对那些实行了NSCopying协议的对象类型有效。 7. retain:释放旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为1，对其他NSObject和其子类，对参数进行release旧值，再retain新值，指定retain会在赋值时唤醒传入值的retain消息。此属性只能用于Objective-C对象类型，而不能用于Core Foundation对象。(原因很明显，retain会增加对象的引用计数，而基本数据类型或者Core Foundation对象都没有引用计数——译者注)。         注意: 把对象添加到数组中时，引用计数将增加对象的引用次数+1。 
+ 
+ 
+ 
+ 
+              retain的实际语法为：               - (void)setName:(NSString <em>)newName {                      if (name != newName) {                         [name release];                         name = [newName retain];                         // name’s retain count has been bumped up by 1                     }                 } 8. copy与retain： 1) Copy其实是建立了一个相同的对象，而retain不是： 比如一个NSString对象，地址为0×1111，内容为@”STR”，Copy到另外一个NSString之后，地址为0×2222，内容相同，新的对象retain为1，旧有对象没有变化，retain到另外一个NSString之后，地址相同（建立一个指针，指针拷贝），内容当然相同，这个对象的retain值+1也就是说，retain是指针拷贝，copy是内容拷贝。 2) retain的set方法应该是浅复制，copy的set方法应该是深复制了 3) copy另一个用法： copy是内容的拷贝,对于像NSString,的确是这样.但是,如果是copy的是一个NSArray呢?比如： NSArray </em>array = [NSArray arrayWithObjects:@"hello",@"world",@"baby"]; NSArray <em>array2 = [array copy];  这个时候,,系统的确是为array2开辟了一块内存空间,但是我们要认识到的是,array2中的每个元素,只是copy了指向array中相对应元素的指针.这便是所谓的"浅复制". 9. assign与retain： 1) 接触过C，那么假设你用malloc分配了一块内存，并且把它的地址赋值给了指针a，后来你希望指针b也共享这块内存，于是你又把a赋值给（assign）了b。此时a和b指向同一块内存，请问当a不再需要这块内存，能否直接释放它？答案是否定的，因为a并不知道b是否还在使用这块内存，如果a释放了，那么b在使用这块内存的时候会引起程序crash掉。 2) 了解到1)中assign的问题，那么如何解决？最简单的一个方法就是使用引用计数（reference counting），还是上面的那个例子，我们给那块内存设一个引用计数，当内存被分配并且赋值给a时，引用计数是1。当把a赋值给b时引用计数增加到2。这时如果a不再使用这块内存，它只需要把引用计数减1，表明自己不再拥有这块内存。b不再使用这块内存时也把引用计数减1。当引用计数变为0的时候，代表该内存不再被任何指针所引用，系统可以把它直接释放掉。 总结：上面两点其实就是assign和retain的区别，assign就是直接赋值，从而可能引起1)中的问题，当数据为int, float等原生类型时，可以使用assign。retain就如2)中所述，使用了引用计数，retain引起引用计数加1, release引起引用计数减1，当引用计数为0时，dealloc函数被调用，内存被回收。  六、具体解析assign，retain，copy NSString </em>pt = [[NSString alloc] initWithString:@"abc"]; 
+ 
+ 
+ 
+ 
+上面一段代码会执行以下两个动作 a 在堆上分配一段内存用来存储@"abc"  比如：内存地址为：0X1111 内容为 "abc b 在栈上分配一段内存用来存储pt  比如：地址为：0Xaaaa 内容自然为0X1111   下面分别看下assign   retain   copy assign的情况： NSString <em>newPt = [pt assign]; 此时newPt和pt完全相同，地址都是0Xaaaa ，内容为0X1111 ，即newPt只是pt的别名，对任何一个操作就等于对另一个操作。 因此retainCount不需要增加。 retain的情况： NSString </em>newPt = [pt retain];  此时newPt的地址不再为0Xaaaa，可能为0Xaabb 但是内容依然为0X1111。 因此newPt 和 pt 都可以管理"abc"所在的内存。因此 retainCount需要增加1   copy的情况： NSString <em>newPt = [pt copy]; 此时会在堆上重新开辟一段内存存放@"abc" 比如0X1122 内容为@"abc 同时会在栈上为newPt分配空间 比如地址：0Xaacc 内容为0X1122 因此retainCount增加1供newPt来管理0X1122这段内存  //—————————————————————————— 看了这么多也许大家有点晕， 现在进行实际的代码演示： @property (nonatomic, assign) int number; 这里定义了一个int类型的属性， 那么这个int是简单数据类型，本身可以认为就是原子访问，所以用nonatomic,不需要进行引用计数，所以用assign。适用于所有简单数据类型。 @property (nonatomic, copy) NSString </em> myString; 这里定义了一个NSString类型的属性，不需要原子操作，所以用nonatomic。为什么需要copy，而不是retain呢！ 因为如果对myString赋值原字符串是一个可变的字符串(NSMutableString)对象的话，用retain的话，当原字符串改变的时候你的myString属性也会跟着变掉。我想你不希望看到这个现象。 实际上测试，如果原来的字符串是NSString的话，也只是retain一下，并不会copy副本 @property (nonatomic, retain) UIView <em> myView; 这里定义了一个UIView类型的属性，不需要原子操作，所以用nonatomic。当对myView 赋值的时候原来的UIView对象retainCount会加1  //接口文件 @interface MyClass : NSObject  @property (nonatomic, assign)   int  number;  @property (nonatomic, copy)    NSString  </em> myString;  @property (nonatomic, retain)   UIView  * myView;  @end  //实现文件 @implementation MyClass  @synthesize number = _number;  @synthesize myString = _myString; 
+ </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>IOS基础学习-2: UIButton</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/4236.html" rel="bookmark"
+                   title="Permalink to IOS基础学习-2: UIButton">IOS基础学习-2: UIButton</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>IOS基础学习-2: UIButton
+ </p>
+<p>UIButton是一个标准的UIControl控件，UIKit提供了一组控件：UISwitch开关、UIButton按钮、UISegmentedControl分段控件、UISlider滑块、UITextField文本字段控件、UIPageControl分页控件。这些控件的基类均是UIControl，而UIControl派生自UIView类，所以每个控件都有很多视图的特性，包括附着于其他视图的能力。所有控件都拥有一套共同的属性和方法。
+具体视图关系如下</p>
+<ol>
+<li>创建按钮
+1.1 initWithFrame</li>
+</ol>
+<p>UIButton *btn1 = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 80, 44)];</p>
+<p>1.2 类方法buttonWithType
+通常采用自定义方法，这样的方式比较灵活</p>
+<p>[UIButton buttonWithType:UIButtonTypeCustom];</p>
+<p>和UIButtonTypeCustom等同的还有以下方式：</p>
+<p>typedef enum {<br>
+    UIButtonTypeCustom = 0,               // 自定义，常用方式 
+    UIButtonTypeRoundedRect,              //白色圆角矩形，类似偏好设置表格单元或者地址簿卡片<br>
+    UIButtonTypeDetailDisclosure,    //蓝色的披露按钮，可放在任何文字旁<br>
+    UIButtonTypeInfoLight,        //小圆圈信息按钮，可以放在任何文字旁<br>
+    UIButtonTypeInfoDark,        //白色背景下使用的深色圆圈信息按钮<br>
+    UIButtonTypeContactAdd,        //蓝色加号(+)按钮，可以放在任何文字旁<br>
+} UIButtonType;</p>
+<ol>
+<li>设置按钮属性
+2.1 Frame属性</li>
+</ol>
+<p>btn.frame = CGRectMake(10.0, 10.0, 60.0, 44.0);  //x, y , weight, height;</p>
+<p>或者：</p>
+<p>[btn setFrame:CGRectMake(20,20,50,50)];</p>
+<p>2.2 设置标题</p>
+<p>[btn1 setTitle:@"点击" forState:UIControlStateNormal];  //设置标题
+[btn1 setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal]; //设置标题颜色[btn1 setTitleShadowColor:[UIColor grayColor] forState:UIControlStateNormal ];//标题阴影颜色</p>
+<p>2.3设置背景图片
+ </p>
+<p>[btn1 setImage:[UIImageimageNamed:@"btn1Img"] forState:UIControlStateNormal];   //按钮图片
+[btn1 setBackgroundImage:[UIImageimageNamed:@"btn1BgImg"] forState:UIControlStateNormal];  //背景图片</p>
+<p>2.4 设置按钮图片内部间距</p>
+<p>UIEdgeInsets insets;     // 设置按钮内部图片间距
+insets.top = insets.bottom = insets.right = insets.left = 10;
+btn.contentEdgeInsets = insets;    //内容间距  <br>
+bt.titleEdgeInsets = insets;         // 标题间距</p>
+<p>3. 按钮状态
+3.1 常用状态
+forState后，可以选择以下状态，常用的包括：常态，高亮，禁用，选中；</p>
+<p>enum {<br>
+    UIControlStateNormal       = 0,          //常态                     <br>
+    UIControlStateHighlighted  = 1 &lt;&lt; 0,                      // 高亮<br>
+    UIControlStateDisabled     = 1 &lt;&lt; 1,          //禁用<br>
+    UIControlStateSelected     = 1 &lt;&lt; 2,                      //选中<br>
+    UIControlStateApplication  = 0x00FF0000,          //当应用程序标志使用时<br>
+    UIControlStateReserved     = 0xFF000000          //为内部框架预留的<br>
+};<br>
+typedef NSUInteger UIControlState;</p>
+<p>3.2高亮或者禁用时，微调属性
+高亮时，图像颜色会加深，如果要关闭此属性，请设置adjustsImageWhenHighlighted 为NO</p>
+<p>btn1.adjustsImageWhenHighlighted = NO;</p>
+<p>禁用时，图像颜色会变浅，如果要关闭此属性，请设置adjustsImageWhenDisabled 为NO</p>
+<p>btn1.adjustsImageWhenDisabled = NO;</p>
+<p>选中时，可以设置按钮发光，请设置showsTouchWhenHighlighted 为YES</p>
+<p>btn1.showsTouchWhenHighlighted = YES;</p>
+<ol>
+<li>添加动作</li>
+</ol>
+<p>[btn1 addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];   //为按钮的行为添加属性</p>
+<p>-(void)btnPressed:(id)sender{              //处理按钮按下事件
+    UIButton<em> btn = (UIButton</em>)sender;<br>
+    if(btn ==  btn 1){
+    NSLog(@"btn1 pressed");
+    }
+}</p>
+<ol>
+<li>实例
+具体见下面的例子。</li>
+</ol>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

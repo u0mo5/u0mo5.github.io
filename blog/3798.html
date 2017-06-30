@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>Tomcat，JBoss与JBoss Web</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3798.html" rel="bookmark"
+                   title="Permalink to Tomcat，JBoss与JBoss Web">Tomcat，JBoss与JBoss Web</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>最近接触到应用服务器JBoss，此外JBoss Web与Tomcat也同为web服务器，便查阅资料对三者进行比较，供大家参考。</p>
+<p>一、Tomcat
+        Tomcat 服务器是免费开源的Web 应用服务器。支持最新的Servlet 和JSP 规范。因为Tomcat 技术先进、性能稳定，而且免费，因而深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。          Tomcat和IIS、Apache等Web服务器一样，具有处理HTML页面的功能，不过，Tomcat处理静态HTML的能力不如Apache服务器。另外它还是一个Servlet和JSP容器，独立的Servlet容器是Tomcat的默认模式，基于Tomcat的开发其实主要是Jsp和Servlet的开发。我们可以将Tomcat和Apache集成到一块，让Apache处理静态Html，而Tomcat处理Jsp和Servlet.这种集成只需要修改一下Apache和Tomcat的配置文件即可。           Tomcat也可以与其它一些软件集成起来实现更多的功能。如与上面提到的JBoss集成起来开发EJB，与Cocoon（Apache的另外一个项目）集成起来开发基于Xml的应用，与OpenJMS集成起来开发JMS应用，除了我们提到的这几种，可以与Tomcat集成的软件还有很多。</p>
+<p>二、Jboss </p>
+<p>JBoss是全世界开发者共同努力的成果，一个基于J2EE的开放源代码并且免费的应用服务器。 JBoss支持EJB 1.1，EJB 2.0和 EJB3.0的规范，它是一个管理EJB的容器和服务器。JBoss的目标是一个源代码开放的J2EE环境。但是JBoss核心服务仅是提供EJB服务器。JBoss4之前不包括Servlet/JSP的WEB容器，当然可以和Tomcat或Jetty绑定使用。JBoss4之后内嵌了web服务器。       JBoss具有如下六大优点：       1、JBoss免费，开源。        2、JBoss需要的内存和硬盘空间较小。        3、安装简单。先解压缩JBoss打包文件再配置环境变量就可以了。        4、JBoss能够"热部署"，部署BEAN只是简单拷贝BEAN的JAR文件到部署路径下就可以了。如果没有加载就加载它；如果已经  加载了就卸载掉，然后LOAD这个新的。        5、JBoss与Web服务器在同一个Java虚拟机中运行，Servlet调用EJB不经过网络，从而大大提高运行效率，提升安全性能。 
+       6、用户可以直接实施J2EE-EAR，而不是以前分别实施EJB-JAR和Web-WAR，非常方便。 
+ </p>
+<p>三、JBoss Web
+ </p>
+<p>JBoss Web即JBoss Web服务器,       JBossWeb服务器是一个新的开源项目，它将为JSP，Servlet技术，Microsoft ASP.net，PHP和CGI提供一个独立,高性能的部署平台。JBossWeb构建在Apache Tomcat，APR(Apache Portable Rumtime)和Tomcat native技术之上以达到稳定性和性能都能与Apache Http服务器相匹敌甚至是超越它。       JBoss Web服务器具有以下特性：        能够处理10,000多个并发连接数；       支持http,https和AJP(Apache Jserv Protocol)协议；       支持OpenSSL安全套接层；       提供一个灵活的URL rewriting操作引擎支持无限个规则数和规则条件；
+       支持CGI和PHP脚本，ASP.NET应用程序的in和out-of-process执行等。
+ </p>
+<p>四、三者关系：         
+ </p>
+<p>Tomcat是web服务器，因为能够处理HTTP请求和响应的可执行设备，所以称为web服务器，同时Tomcat可以管理小型服务程序（Servlet/jsp）生命周期(lifecycle),所以也成为Web/Servlet容器。         应用程序服务器是指能够管理Web应用程序的技术构架。从某种意义上web服务器属于应用服务器的子集。
+         一般来说，Web服务器专门处理HTTP请求(request)，而应用程序服务器是通过很多协议来为应用程序提供(serves)商业逻辑(business logic)。JBoss属于应用服务器，遵循J2EE规范，可以部署EJB应用，而Tomcat不能。JBoss4之前的版本不能处理Servlet和Jsp，需要与Tomcat（或其他web服务器）结合来使用，而JBoss4之后的版本已将Tomcat内嵌在其中，具备了web服务器的功能。
+        Tomcat也提供JNDI支持，这与那些J2EE应用服务器提供的是一致的。 应用服务器提供更多的J2EE特征，如EJB，JMS，JAAS等，同时有些应用服务器也支持Jsp和Servlet.而Tomcat则功能没有那么强大，它不提供EJB等支持。但如果与JBoss（一个开源的应用服务器）集成到一块，则可以实现J2EE的全部功能。既然应用服务器具有Tomcat的功能，那么Tomcat有没有存在的必要呢？事实上，我们的很多中小应用不需要采用EJB等技术，Jsp和Servlet已经足够，这时如果用应用服务器就有些浪费了。而Tomcat短小精悍，配置方便，能满足我们的需求，这种情况下我们自然会选择Tomcat.</p>
+<p>JBoss Web将Tomcat内核作为其Servlet容器引擎，并加以审核和调优。单纯的Tomcat性能有限，在很多地方表现有欠缺，如活动连接支持、静态内容、大文件和HTTPS等。         JBoss在Tomcat的基础上，对其进行本地化，将Tomcat 以内嵌的方式集成到 JBoss 中。        JBoss Web通过使用APR和Tomcat本地技术的混合模型来解决Tomcat的诸多不足。混合技术模型从最新的操作系统技术里提供了最好的线程和事件处理。结果，JBoss Web达到了可扩展性，性能参数匹配甚至超越了本地Apache HTTP服务器或者IIS。譬如JBoss Web能够提供数据库连接池服务，不仅支持 JSP 等 Java 技术，同时还支持其他 Web 技术的集成，譬如 PHP、.NET 两大阵营。        与Tomcat 相比，JBoss Web在静态资源访问方面性能优越。JBoss Web支持两种组件模式——纯Java和Native I/O。          OpenSSL是业界最为快速和安全的开源传输组件，可借助操作系统和硬件的特性实现高效的安全承载。JBoss Web集成了OpenSSL，可提供高效的安全传输服务，使得安全机制更上台阶。研究表明， JBoss Web中的SSL性能比单纯的Tomcat快四倍。        Tomcat 不具备URL重写功能，JBoss Web则可提供一个灵活的URL rewriting操作引擎，支持无限个规则数和规则条件。URL可被重写以支持遗留的URL错误处理，或应对服务器不时产生的其他问题。        JBoss Web既可单独运行，也可无缝嵌入JBoss应用服务器，成为JBoss中间件平台的一部分。不仅后台服务调用的性能将得以提升，也可利用以下JBoss平台的特性提升Web应用功能           所以JBossWeb可以说是一款超级改良版的Tomcat，两者都是web 服务器，并都可与应用服务器JBoss完美结合。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

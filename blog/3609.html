@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>窥探QQ基础数据库架构演变史</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3609.html" rel="bookmark"
+                   title="Permalink to 窥探QQ基础数据库架构演变史">窥探QQ基础数据库架构演变史</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>作为腾讯最核心最基础的后台服务之一，QQ基础数据库是存储QQ用户帐户信息和关系链信息的海量集群，它承载了百万级每秒的访问量、十亿级的账户数、百亿级关系链。如此大规模的集群，它是如何从300万的数量级一步一步演变而来？在它数据量不断增长的过程中，它经历了哪些困难，又是如何解决的？如今，它的架构是怎么样的？4月10日晚，腾讯大讲堂《QQ基础数据库架构演变之路》活动在武汉人文馆主厅举办。超过1000位学生和业内人士到场参加，整个会议厅人山人海。   廖念波先生从QQ Basic DB是什么讲起，开始了本次的讲座。  QQ Basic DB是什么？是QQ用户帐号（用户密码与资料）与关系链等基础数据的分布式海量存储集群。是QQ IM业务的后台DB；是腾讯几乎所有其他业务的基础，提供用户帐号和关系链服务。它与QQ IM 集群并列为腾讯最核心、历史最久的两大集群。 早期的难题 在2000年，QQ Basic DB将每300万连续QQ号码存储在一个机器上。我们碰到的最大问题是在登录比较频繁的情况下，磁盘非常忙，登录超时。找到了影响磁盘随机寻址能力的因素，我们提出了解决方案在进程空间内，动态分配一些内存，将用户热点数据cache到内存中。使得处理能力显著提升，单机能够处理1-2千次每秒的请求。 时间进入2002年，随着机器台数增多，死机是家常便饭。QQ Basic DB通过IDC级容灾、数据复制等方法将（500+）*2台机器；数百亿的关系链，数十亿的账户数；每秒上百万次读，数万次写的数据库的全年可用性做到了99.99%。 如何做到高可用？ 1、IDC级的容灾 2、灰度发布 3、强监控，及时处理  Bison提到，随着时代的变迁，需求不断增加，QQ Basic DB走入了V2.0。当前的需求与DB能力的脱节；一地的机房已饱和，异地部署逼在眉睫！新增一个帐号相关字段，需要2个月，把内存全部重新load一遍，风险极高。老的架构不能很好的支持异地部署，因此QQ Basic DB V2.0应运而生。 在演讲中Bison特别强调，要做到产品特性灵活扩展，最关键的是用户数据结构的灵活性！QQ Basic DB在V2.0版本中，对数据结构扩展性上进行了大量优化。现场Bison例举了一个很简单的例子：采用XML开式存储用户数据的优劣性。存储海量数据的QQ Basic DB，不适宜采用类似XML方式进行存储，原因是当存储量超过亿级时，冗余信息将极大占用通讯带宽！QQ团队通过tag整数化、必选的定长字段共用一个tag等手段，最终让DB有效载荷相对XML模式提升了 10倍，pack/unpack效率提升了100倍！ Bison列举的一个简单XML存储例子 在下一个部分，Bison主要提到了大家比较关心的QQ Basic DB安全性问题，其中一个非常重要的点就是异地部署。他特别强调，数据安全最关键的是有一套简单健壮、适应窄带化的数据复制机制。QQ Basic DBV2.0通过类似mysql复制机制做到了简单健壮，带宽占用窄带化，在专线故障情况下，流量可以在内外网灵活切换。目前在全国各地都有部署。  接下来，廖念波先生给大家介绍了优化了分片（sharding）方式、超长关系链解决方法、过载保护等方面的内容，给大家全面展示了腾讯的一些技术积累和总结。  文章来源：腾讯大讲堂</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

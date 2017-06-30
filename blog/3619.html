@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>其实Unix很简单</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3619.html" rel="bookmark"
+                   title="Permalink to 其实Unix很简单">其实Unix很简单</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>陈皓
+  很多编程的朋友都在网上问我这样的几个问题，Unix怎么学？Unix怎么这么难？如何才能学好？并且让我给他们一些学好Unix的经验。在绝大多数时候，我发现问这些问题的朋友都有两个特点： 1）对Unix有畏难心理，对其没有信心； 2）喜欢用拿Windows来和Unix做比较。   这两种特点就像两个“心理暗示”，暗示着自己Unix很不好学，暗示着Unix很糟糕，不如Windows好。于是，自己也就被自己的这种长期的“暗示”所催眠了。因为，从一开始就有畏难情绪，所以也就觉得Unix不好，觉得非常很吃力，最后还会导致对Unix的厌恶和反感的情绪。所以，为了纠正上述朋友们的“心理暗示”。我想写下这篇文章，想告诉大家，Unix真的很简单。   在正式叙述“简单的Unix”之前，我想做几点说明：（以免陷入无意义的争论）   1）  本文是站在开发者的角度来说明的，所以，如果有朋友不同意我的观点，请也以开发者的角度来向我提出质问和讨论，本人非常欢迎。   2）  本文难免要用Windows来和Unix做对比。这并不代表我不喜欢Windows，也不代表我要叫你放弃Windows。我们也知道这种对比已经没有什么意思了，但因为众多的朋友被Windows先入为主了，所以，我一定要拿Windows来开刀，才能扭转那个“心理暗示”。仅此而已。            OK，言归正传。先说Unix的一个最重要的特点——“高内聚，低藕合”！也就是说，Unix下的各种应用程序都和别人不相干。这就是贯穿整个Unix的思维——模块和程序的高度独立性。这样的设计和做法，会让你的系统比较的稳定，也会让你的系统特别地容易管理和维护。Unix下的应用程序们就像一支正规军一样排列地整整齐齐，只要司令（内核）还在，系统是不会因为某个军队的损失而无法自举的。而Windows的应用程序们就像一片树林一样，从地表上看过去，树木们排列地整整齐齐，但是他们的树根在地下却相互缠绕在一起，剪不断，理还乱，异常地复杂。          “高内聚，低藕合”的给Unix造成的结果是，其系统中基本上都是功能单一的小程序，这些小程序就像积木一样，当我们需要构造建一个自定义的建筑时，大多数情况下，我们只需要做的只是一个“搭积木”的简单游戏。Windows建设得富丽堂皇，可惜，别人的“积木”你几乎不可能拿到自己的建筑中来。总是要你模仿或重写。   （插一句：你是否注意到在网上下载Windows的软件时，会有一种所谓的“绿色软件”？这就是对Windows的最大讽刺，Windows下装一个软件，N个DLL放到Windows系统目录下，注册表里写入N个键值，还有很多你不知道的动作。而在Unix装软件，你不用担心你的系统目录下会莫明其妙地多出些乱七八糟的文件。就是copy那么简单，那怕是rpm自动安装，安装完后，你也能够查询到软件安装后对系统所做的改变。所以，你在Unix下分发你的软件时，你会觉得比Windows下要做得简单了许多许多。）          再说说Unix的另一个最重要的特点——“所有的设备都可以像文件一样地操作”。简单吧。所有的调备，文件、打印机、显示器、终端、网络、软盘、磁带、USB、CDROM、等等的I/O操作，都以文件描述符的方式进行操作。两个Unix下最重要的系统调用read/write就可以胜任所有设备的I/O了。Unix早就在/dev目录下为你建好了这些文件。使用起来很简单。          也许很多人都觉得Unix的命令行太过复杂。一个命令有着若干的参数，异常地复杂。但之所以今天Unix下的应用程序还在以字符界面为主，这恰好体现了Unix的简单的特征。这也是Unix的另一个特点——“命令的相互支持性”，命令们通过一个管道或是重定向，可以互相联系在一起，再加以Shell脚本的支持，哪怕要实现一些复杂的功能（比如一个小型的文本数据库），也是简单之极。          如果上面的论述依然不能让你信服Unix很简单，那么，让我们来用一些具体地实际的例子来看一下，Unix是如何简单的。让我们试着做下面的这样一个假设：“如果我们在学习编程的时候一开始是学Unix，然后转去做Windows”，那会是怎么样的一个情况？   1）  我们在Unix下创建进程，使用fork调用。到了Windows下，我们查了MSDN，发现了一个叫CreateProcess的系统调用可以创建进程，但我们却发现这个系统调用有10个参数。而Unix下的fork却一个参数都没有。这种情况下，你是否会有一种头大的感觉？因为，在Unix下，你根本看不到会有10参数这样复杂的系统调用API。   2）  我们在Unix下操作文件权限很简单，文件权限分三组（本人，同组，别人），每组都是可读，可写，可执行。两个简单的系统调用chmod/chown就搞定。到了Windows下，如果是NTFS，如果要以程序的方式设置文件权限，呵呵，你需要先了解什么是：SID，什么是DACL，什么是SACL，什么是ACE，还有十几相关的系统API函数等着你。（参看我的《以程序操作NTFS文件权限》）你也许会觉得这么复杂的安全策略是让系统更安全的基础，可以自从Windows出现的那一天以后，在安全方面的表现就没有胜过Unix。这无疑让人感到Windows做了一件吃力不讨好的事。   （插一句：Unix下的用户切换是相当简易方便的。而Windows下的用户切换会导致你需要退出当前用户的前台程序。这导致了Windows下的用户几乎无一例外地都会选择在超级用户的权限下工作/上网，这完全是让自己的机器在裸奔，所以，Windows下的病毒一旦在系统中运行就为所欲为了。而Unix下，很少用户会以root身份操作本机，因为切换用户非常方便。）   3）  在Unix下，用户有ID，用户组有ID，进程/线程都有ID。ID很简单易懂，就像我们的身份证一样。到了Windows下，用户标识叫Token，进程标识叫Handle（其实也就是一个DWORD的类型），我看到网上很多问题都在问Windows下的Handle的概念问题。我一直在想，为什么微软不取一个简单易懂的术语？要取得那么抽象，那么让人很迷惑。虽然这让Windows看起很NB，但也会因此加大了学习复杂度。（Windows的开发学习复杂度要比Unix复杂多了，而且有太多的看似很高深的术语让人一头雾水）   4）  让我们再来看一下用户管理和程序所有者方面的东西。在Unix下，需要你做的是配置NIS服务器和NFS服务器（以Autofs自动mount），简洁，清楚。到了Windows下，与其相似的是一个叫Domain的东西（主域控制器），首先，为了加入域，你需要重启电脑（Unix下只需要配置/etc/nsswitch.conf文件来告诉本机的用户登录源，无需重启），而对开发者来说，Unix的这个配置对程序是完全透明的。而Windows的域用户和本地用户需要一个域名来区分。在程序中切换用户时，Unix只需要setuid/seteuid就行了，Windows对此有三个比较复杂的API：CreateProcessAsUser, ImpersonateLoggedOnUser, LogonUser，其复杂度就不用比较了。另外，在Domain方式下，你的Document and Setting目录下的文件，会全部放到Domain服务器上去，你在别的机器上登录时，需要下载这些文件。最后，我倒不担心你和网友的MSN聊天记录会因为你的登录而到处都是，我担心的是，你在这么复杂的管理环境中写出来的代码是否能让别人放心？:-(   5）  在Unix下，要把自己的程序加入系统的启动服务只需要在/etc/init.d中配置就行了。写下一个有启动停止功能脚本，以特殊命名的方式链接到不同启动模式目录下就行了。Windows下加一个启动服务，如果你不编写程序，估计比较困难。   6）  在Unix下，如果要取得系统的信息。只需要到/proc目录下去cat那堆文件。所有进/线程的状态、命令行、内存/交换区使用情况、打开的文件描述符，等等，系统的CPU，内存，交换区，内存文件IO，分区，信息，网络，系统运行状态，系统设备，等等，要有多详细就有多详细，而且完全是纯文本的，直接就可以看了。到了Windows下，要穷举系统当前进程的信息，就不是一样很容易的事，更别说要取得别的信息了。     我很佩服微软把操作系统搞得那么复杂，又是注册表，又是安全策略，又是OLE，又是COM……。每次打开regedit.exe时，我根本不敢碰HKEY_CLASSES_ROOT，因为我看着里面那些成千上万个CLSID，我有点晕菜。   自1995年以来，10来年过去了。微软推出了多种各式各样的技术。我还记得Visual Studio 6.0中还有两个叫做FoxPro和J++的东西，FoxPro来自Foxbase，还有个几年，J++好像就没有几年。ActiveX Control完全是一个失败的技术，而那个叫做VB的编程语言，今天看来，它的确毁了很多很有潜力的程序员。在COM出现的时候，不知道今天还有多少人还记得一个叫MTS的玩意？今天，不知道还有多少人记得有一个叫ODBC的东西？在这种复杂混乱的Windows世界中，是否让你疲于追赶？今天的.NET不知道又有多少技术会随着时间所沉淀？在Windows上面，我们学习了许多的失败技术或是说是过渡技术。而我们的Unix自从上纪70年代以来，就没有多大的变化，而因为Unix应运而生的C语言直到今天依然光彩夺目。我相信这个30多年来久经考验还那么简单的Unix。   Unix就是这么简单，各位想在Unix下学开发的朋友，Windows那么复杂的操作系统都过来了，你还会怕这么简单的Unix么？  </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

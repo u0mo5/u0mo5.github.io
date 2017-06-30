@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>linux下FTP的工具和使用以及rpmReadSignature failed错误</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3945.html" rel="bookmark"
+                   title="Permalink to linux下FTP的工具和使用以及rpmReadSignature failed错误">linux下FTP的工具和使用以及rpmReadSignature failed错误</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>安装rpm文件时提示rpmReadSignature failed 错误
+2011-09-23 11:04</p>
+<p>现象：　　[root@localhost share]# rpm -ivh syslog-ng-3.1.0-1.rhel5.i386.rpm　　error: syslog-ng-3.1.0-1.rhel5.i386.rpm: rpmReadSignature failed: region trailer: BAD, tag 15872 type 2047 offset 28672 count 4096　　error: syslog-ng-3.1.0-1.rhel5.i386.rpm cannot be installed　　 　　【解决方法】　　1、检查下载使用的安装包、压缩包是否完整，否则从正规的镜像战点重新下载；　　 　　2、一般新手可能是由于用ftp上载到Linux上时没有用binary模式造成的。需要在ftp&gt;binary转变为二进制方式传输。</p>
+<p>源地址：  http://hi.baidu.com/somken/blog/item/069e62cbdfe19a21f8dc618e.html
+ 
+ 
+目前为止ftp是一个标准的文件网络传输协议，应用在osi模型的应用层，ftp支持两种传输模式，分别为ascii（文本传输模式，最大的缺点是会过滤掉不符合格式的数据）和binary（二进制传输模式，不会过滤数据而全部接受）模式，每次登录成功时，默认的是ascii模式，可以采用输入相关的命令来切换到，binary模式！
+ 首先linux下安装配置好vsftp的服务器端，并开启ftp的服务，可以用netstat -tulnp|grep vsftp查看启动成功与否
+[root@localhost ~]# ftp 192.168.1.192
+ftp&gt; help(查看可以使用的命令，其中较为常用的为当然是：上传、下载、新建、删除、模式切换....等等  下边演示介绍)1、get(下载)
+ftp&gt; dir（也可以使用ls来查看要目录下的文档）
+-rwxrwxrwx 1 ethnicity ethnicity 206666 Mar 15 22:00 222.184.88.146.txtftp&gt; binary（切换成binary模式）200 Switching to Binary mode.ftp&gt; hash（打开哈希，也就是显示过程）Hash mark printing on (1024 bytes/hash mark).
+ftp&gt; get 222.184.88.146.txt（下载到本地，并显示过程）200 PORT command successful. Consider using PASV.150 Opening BINARY mode data connection for 222.184.88.146.txt (206666 bytes).####################################################################################################226 File send OK.ftp: 收到 206666 字节，用时 0.02秒 10333.30千字节/秒。
+ftp&gt; bye221 Goodbye.
+C:&gt;dir（这个就是刚才下载的文件）
+2011/05/08  02:21           206,666 222.184.88.146.txt
+2、put(上传,这里有个技巧，上传哪里的文档，你可以在那个目录下ftp登录)
+ftp&gt; put install.log.syslog local: install.log.syslog remote: install.log.syslog227 Entering Passive Mode (192,168,1,192,43,203)150 Ok to send data.226 File receive OK.5341 bytes sent in 0.23 seconds (23 Kbytes/s)ftp&gt; dir（查看，上传成功）-rw-r--r--    1 500      500          5341 Mar 15 14:28 install.log.syslog
+3、mkdir、rmdir 、rename（目录的新建、删除、重命名）
+ftp&gt; mkdir laji（新建的命令）257 "/home/ethnicity/laji" createdftp&gt; dirdrwxr-xr-x    2 500      500          4096 Mar 15 14:32 laji
+ftp&gt; rmdir laji（删除的命令）250 Remove directory operation successful.
+ftp&gt; rename wanzi wanle（重命名的使用）350 Ready for RNTO.250 Rename successful.4、delete、rname（文档的删除、重命名）ftp&gt; delete web.crt（删除文档）250 Delete operation successful.
+ftp&gt; rename install.log.syslog  syslog.conf（档案的重命名）350 Ready for RNTO.250 Rename successful.
+5、status(查看当前的设置)
+ftp&gt; status连接到 192.168.1.192。类型: ascii；详细: 开 ；铃声: 关调试: 关 ；哈希标记打印: 关 。6、pwd（查看登入后的当前操作路径）
+ftp&gt; pwd257 "/home/ethnicity"
+7、bell（打开响铃模式）
+ftp&gt; bell铃声模式 开 。
+8、help（查看当前模式下可以使用的命令）
+ ftp&gt; help
+9、debug（显示操作的详尽信息）
+ftp&gt; debug调试 开 。
+9、ls、dir（查看当前目录下的文档和目录，dir显示信息较为详尽）
+比如在开启debug模式下的dir命令
+ftp&gt; dir---&gt; PORT 192,168,1,188,213,253（登录的主机的ip和端口）200 PORT command successful. Consider using PASV.---&gt; LIST150 Here comes the directory listing.-rwxrwxrwx    1 500      500        206666 Mar 15 14:00 222.184.88.146.txt-rw-r--r--    1 0        0              18 Mar 11 13:27 index.htmldrwxr-xr-x    2 500      500          4096 Dec 24 13:43 public_htmlftp: 收到 345 字节，用时 0.00秒 345.00千字节/秒。
+10、bye（退出）
+ftp&gt; bye---&gt; QUIT221 Goodbye.
+以上列出的命令在加上功能有类似的，批量操作命令，如下
+ mdelete、 mdir、mget、mkdir、mls、mput
+这些命令使用十分的频繁，当然如果想了解更多的话，可以结合help并查阅相关的资料，这里不再赘述！</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

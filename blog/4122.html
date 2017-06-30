@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>PHP笔记——java程序员看懂PHP程序</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/4122.html" rel="bookmark"
+                   title="Permalink to PHP笔记——java程序员看懂PHP程序">PHP笔记——java程序员看懂PHP程序</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>PHP笔记——java程序员看懂PHP程序
+ </p>
+<p>php是一种服务器端脚本语言，类型松散的语言。
+&lt;?php   ?&gt;       xml风格</p>
+<p>&lt;script language=”php”&gt;&lt;/script&gt;   脚本风格
+&lt;?       ?&gt;    简短风格
+&lt;%              %&gt;    ASP风格
+以;结尾；</p>
+<p>注释：</p>
+<p>a)         //
+b)         #
+c)         /<em>     </em>/</p>
+<p>变量是存储数据的容器，对大小写敏感。当变量非常长时，用定界符&lt;&lt;&lt;.</p>
+<p>$k=&lt;&lt;&lt;str
+…
+str;
+以为PHP为类型松散的语言，所以变量在声明的时候没有具体的类型关键词。
+统一用$开头 + 变量名
+1、  必须字母或者_开头
+2、  只能包含字母数字字符和下划线
+3、  对大小写敏感</p>
+<p>变量可以在PHP脚本任意位置声明。
+被引用/使用的脚本——作用域</p>
+<p>a)         local(局部)
+b)         global(全局)
+c)         static(静态)
+函数之外声明的变量拥有global作用域，只能在函数之外进行访问。
+函数内部声明的变量拥有local作用域，只能在函数之内进行访问。
+函数内部调用global变量需要①在内部用global关键词进行声明；②$GLOBAL[index]中存储了所有的全局变量，可以通过超全局变量$GLOBAL[index]中获取。</p>
+<p>$GLOBAL[index]这个数组在函数内可以访问，并能够用于直接更新全局变量。
+通常，当函数完成执行之后，会删除所有变量。假若不需要删除，即需要在首次声明的时候使用static
+常量无$,在脚本中无法改变其值。通过define(“常量的名称”,”常量的值”,”常量名是否对大小写敏感”);true(大小写相同)不敏感，false敏感。在类里定义常量用const关键字。</p>
+<p>根据使用位置而改变的常量，成为魔术常量。
+ 
+　　　　　　1)       <strong>FILE</strong>             当前文件夹
+ 
+　　　　　　2)       <strong>LINE</strong>             当前行数
+ 
+　　　　　　3)       <strong>FUNCTION</strong> 当前函数名
+ 
+　　　　　　4)       <strong>CLASS</strong>          当前类名
+ 
+　　　　　　5)       <strong>METHOD</strong>    当前对象的方法名
+ </p>
+<p>打印：echo      能够输出一个以上的字符串。</p>
+<p>print       只能够输出一个字符串，并始终返回1。</p>
+<p>字符串长度strlen();检索字符串内指定的字符或文本strpos();字符串连接用“.”,“.”后跟数字必须加空格。
+超全局变量：</p>
+<p>a)         $GLOBALS        引用全局作用域中的全部变量。
+b)         $_SERVER         保存关于报头、路径和脚本位置的信息。
+c)         $_REQUEST      用于收集HTML表单提交的数据。
+d)         $_POST              广泛用于收集提交method=”post”的HTML表单后的表单数据，也常用与传递变量。
+e)         $_GET                用于收集提交HTML表单（method=”get”）之后的表单数据，也可以收集URL中发送的数据。
+f)          $_FILES              从客户计算机向远程服务器上传文件。
+g)         $_ENV                         获取服务器端的环境参数。(variables_order=EPGCS)
+h)         $_COOKIE                  用于取回cookie的值。
+i)           $_SESSION                 用于存储有关用户会话的信息，或者更改用户会话的设置。</p>
+<p>include/require语句会获取指定文件中存在的所有文本/代码/标记，并复制到使用include/require语句的文件中。</p>
+<p>a)         require(静态加载)，当出现错误的时候，会生成致命错误，并停止脚本。
+b)         include(动态加载)，当出现错误的时候，只生成警告，脚本会继续执行。
+c)         require_once/include_once     同一个页面只包含一次。</p>
+<p>数组处理：$数组名[‘键名’]来初始化数组；也可以通过Array()函数来创建数组。</p>
+<p>count()返回数组的长度。
+数组遍历：foreach循环，用count()得到数组的长度然后用for;list()语言结构循环，仅仅用于默认数字索引;each()返回的是键值对。
+while(list($key,$value)=each($array)){
+ 
+}
+foreach($array as $key =&gt; $value){
+ 
+}</p>
+<p>PHP中类对象用class关键字来声明，类的属性也有作用域，不指定作用域可以用var进行修饰，成员方法与函数的区别在于可以用关键字进行修饰。构造函数__constract,析构函数__destruct
+“::”        作用域操作符，可以在不实例化的情况下调用类中的常量，变量和方法；</p>
+<p>“=&gt;”      数组成员访问符号；
+“-&gt;”       对象成员访问符号；
+“=&amp;”     引用（起别名）；
+“=”        赋值。</p>
+<p>$变量名 = new 类名([参数]);         //实例化；</p>
+<p>$变量名-&gt;成员属性 = 值;               //为属性赋值；
+$变量名-&gt;成员属性;                           //取得属性值；
+$变量名-&gt;成员方法;                           //使用方法；</p>
+<p>mysql：一般用conn.php封装，然后用require到需要的页面。</p>
+<p>1)       $conn = mysql_pconnect(“localhost”,”root”,””) or die(mysql_error());
+2)       mysql_select_db(“数据库名”,$conn);//连接到指定的数据库。
+3)       mysql_query(“set names utf8”);
+4)       $sql = “”;
+5)       $resultSet = mysql_query($sql) or die (“Invalid query : “.mysql_error);//返回sql语句结果集；
+6)       while($v = mysql_fetch_array($resultSet)){
+7)            echo “字段名：”.$v[‘title’];
+8)       }
+9)       mysql_free_result($resultSet);//关闭结果集；
+10)   mysql_close($conn);//关闭连接
+ 
+ </p>
+<p>我得不断学习，才会知道这个地方到底要写什么。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

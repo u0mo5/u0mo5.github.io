@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>数据库同步和使用JSONObject让Java Bean“原地满状态复活”</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3905.html" rel="bookmark"
+                   title="Permalink to 数据库同步和使用JSONObject让Java Bean“原地满状态复活”">数据库同步和使用JSONObject让Java Bean“原地满状态复活”</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>分类： 【java】2013-11-28 21:04 729人阅读 评论(0) 收藏 举报</p>
+<p>简介我为什么写这样一个简单的问题呢？首先介绍一下项目背景。最近需要做一个数据库同步的工作，也就是一个Web程序有两个数据库，一个是它自身的本地数据库，另外一个是远程的数据库。当我们对访问web项目，对其本地数据库进行增删改的时候，也要同时对远程数据库进行增删改。我们的思路是：我们首先在Spring的配置文件中，注入两个Dao对象，然后在service层进行增删改的时候，会在BaseDao中先调用本地数据库的dao，然后调用远程的dao。关键问题：
+当本地的数据库增删改成功，而远程数据库增删改失败的时候，我们就需要对其进行异常处理。我们需要将增删改的对象保存起来然后插入到本地的同步表当中，当远程数据库可访问的时候，然后再将本地同步表中的数据取出来，然后生成对应的Object对象，然后使用远程数据库的dao进行增删改,增删改之后再将本地数据库的同步表记录删除。</p>
+<p>前提：1.系统之前已经开发完毕，没有数据库同步功能2.系统使用ssh框架开发3.系统的所有增删改都是有service层调用Dao层的Hibernate方法实现的疑问：1.同步的时候为什么不在每个service层修改？对于一个相对庞大的系统，service层有很多类，如果一个service一个service修改，工作了太大，容易改错2.为什么不在数据库中添加一个字段，标记该条数据是否同步？系统有几十张数据库表，这样做的话，代码修改了过大3.如何设计同步表，如何根据同步表的内容对，进行同步？同步表的设计create table synctbl(  id varchar2(26) primary key,  type varchar2(10) not null,  classname varchar2(128) not null,  syncstring varchar2(3000) not null,  createtime date);id；主键，UUID即可type：操作类型(增、删、改，或者hql语句)classname:数据库表对于的Hibernate实体类的类名syncstring:进行增删改的对象的序列化字符串，或者hql语句createtime：该条记录的生成时间正文：以上逻辑有点复杂，很难用简短的文字描述清楚。我就把如何使用JSONObject让Hibernate的实体类生成字符串，然后在恢复的时候又是如何根据这些字符串和实体类的名称恢复出该实体类。使用JSONObject需要如下jar包。1.commons-beanutils-1.7.0.jar2.commons-collections-3.2.jar3.commons-lang-2.3.jar4.commons-logging-1.0.4.jar5.ezmorph-1.0.6.jar6.json-lib-2.1.jar然后我们创建一个Java Project来演示：
+项目源代码：https://github.com/nuptboyzhb/JavaJsonObjectBean
+ </p>
+<p>[java] view plaincopy
+ </p>
+<p>/<em> 
+ </em> $filename: TestMain.java,v $ 
+ <em> $Date: 2013-11-28  $ 
+ </em> Copyright (C) ZhengHaibo, Inc. All rights reserved. 
+ <em> This software is Made by Zhenghaibo. 
+ </em>/  
+package edu.njupt.zhb;  
+  
+import java.util.ArrayList;  
+import java.util.List;  
+  
+import net.sf.json.JSONObject;  
+  
+/<em> 
+ </em>@author: ZhengHaibo   
+ <em>web:     http://blog.csdn.net/nuptboyzhb 
+ </em>mail:    zhb931706659@126.com 
+ <em>2013-11-28  Nanjing,njupt,China 
+ </em>/  
+public class TestMain {  
+  
+    /** </p>
+<p><em> @param args 
+     </em>/  
+    public static void main(String[] args) {  </p>
+<p>// TODO Auto-generated method stub  </p>
+<p>BeanModel saveBeanModel = getInitBean();  
+        String clazzType = saveBeanModel.getClass().getName();  
+        String jsonString = JSONObject.fromObject(saveBeanModel).toString();  
+        printObject(saveBeanModel);//先打印一下看看  </p>
+<p>////////////////我们可以通过clazzType和jsonString，在程序中重新生成saveBeanModel对象  </p>
+<p>JSONObject jsonObject = JSONObject.fromObject(jsonString);  
+        try {  </p>
+<p>Object object = JSONObject.toBean(jsonObject, Class.forName(clazzType));  
+            /////////////////////此时的object就是我们由clazzType和jsonString两个属性恢复出的对象  </p>
+<p>printObject(object);  
+        } catch (ClassNotFoundException e) {  </p>
+<p>// TODO Auto-generated catch block  </p>
+<p>e.printStackTrace();  
+        }  
+    }  
+    public static BeanModel getInitBean(){  </p>
+<p>List&lt;BeanModel&gt; list = new ArrayList&lt;BeanModel&gt;();  </p>
+<p>for(int i = 0;i&lt;10;i++){  </p>
+<p>BeanModel beanModel = new BeanModel();  </p>
+<p>beanModel.setDate(new java.util.Date());  </p>
+<p>beanModel.setId(i);  
+            beanModel.setName("name"+i);  </p>
+<p>}  
+        BeanModel saveBeanModel = new BeanModel();  </p>
+<p>saveBeanModel.setId(11);  </p>
+<p>saveBeanModel.setDate(new java.util.Date());  </p>
+<p>saveBeanModel.setName("saveBean");  </p>
+<p>saveBeanModel.setList(list);  
+        return saveBeanModel;  </p>
+<p>}  
+    public static void printObject(Object object){  </p>
+<p>String result = JSONObject.fromObject(object).toString();  
+        System.out.println("结果："+result);  </p>
+<p>}  
+  
+}  </p>
+<p>BeanModel.java
+ 
+ </p>
+<p>[java] view plaincopy
+ </p>
+<p>/<em> 
+ </em> $filename: BeanModel.java,v $ 
+ <em> $Date: 2013-11-28  $ 
+ </em> Copyright (C) ZhengHaibo, Inc. All rights reserved. 
+ <em> This software is Made by Zhenghaibo. 
+ </em>/  
+package edu.njupt.zhb;  
+  
+import java.util.Date;  
+import java.util.List;  
+  
+/<em> 
+ </em>@author: ZhengHaibo   
+ <em>web:     http://blog.csdn.net/nuptboyzhb 
+ </em>mail:    zhb931706659@126.com 
+ <em>2013-11-28  Nanjing,njupt,China 
+ </em>/  
+public class BeanModel {  
+    private Integer id;  </p>
+<p>private Date date;  </p>
+<p>private String name;  </p>
+<p>private List&lt;BeanModel&gt; list;  </p>
+<p>public Integer getId() {  </p>
+<p>return id;  </p>
+<p>}  
+    public void setId(Integer id) {  </p>
+<p>this.id = id;  </p>
+<p>}  
+    public Date getDate() {  </p>
+<p>return date;  </p>
+<p>}  
+    public void setDate(Date date) {  </p>
+<p>this.date = date;  </p>
+<p>}  
+    public String getName() {  </p>
+<p>return name;  </p>
+<p>}  
+    public void setName(String name) {  </p>
+<p>this.name = name;  </p>
+<p>}  
+    public List&lt;BeanModel&gt; getList() {  </p>
+<p>return list;  </p>
+<p>}  
+    public void setList(List&lt;BeanModel&gt; list) {  </p>
+<p>this.list = list;  </p>
+<p>}  
+}  </p>
+<p>注意：对于我们“恢复”的对象，我们可以使用Hibernate的getCurrentSession进行保存操作。但是，如果使用getCurrentSession来更新或删除这个对象，那么Hibernate就会报错。此时，我们需要使用Hibernate的sessionFactory.openSession方法，获得Session，然后再执行更新或者删除操作。
+未经允许不得用于商业目的</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

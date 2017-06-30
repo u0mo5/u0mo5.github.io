@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>ubuntu 怎么更新?ubuntu更新命令及方法</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3967.html" rel="bookmark"
+                   title="Permalink to ubuntu 怎么更新?ubuntu更新命令及方法">ubuntu 怎么更新?ubuntu更新命令及方法</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>ubuntu 怎么更新?ubuntu更新命令及方法
+      安装Ubuntu系统后，第一件事就是更新系统源。由于系统安装的默认源地址在英国，作为Ubuntu的主源，国内连接速度非常慢，所以我们要将它换成就近的快速源。
+      网上有些人说CN99是国内最快的源，但不同的网络状况连接以下源的速度不同, 所以cn99并不一定是最快的源, 建议在添加前手动验证一下源的连接速度(ping下就行),比如说北京网通ADSL用户连接cn99就非常慢,而ftp.sjtu.edu.cn则相对较快，选择最快的源可以节省大批下载时间。
+      首先备份源列表，而后用gedit或其他编辑器打开源列表文件：
+      sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
+      sudo gedit /etc/apt/sources.list
+      从下面列表中选择合适的源，替换掉文件中所有的内容，保存编辑好的文件然后执行源的更新（注意：不同的Ubuntu版本对应的源是不同的，千万不要弄错了）：
+      sudo apt-get update
+      如果更新很慢，可以用上面的方法换一个源，然后再试，直到成功为止。然后，执行真正的系统更新：sudo apt-get upgrade；如下图所示：
+    
+常用的源列表如下：
+ubuntu 8.04的163源为：
+deb http://mirrors.163.com/ubuntu/ hardy main restricted universe multiversedeb http://mirrors.163.com/ubuntu/ hardy-security main restricted universe multiversedeb http://mirrors.163.com/ubuntu/ hardy-updates main restricted universe multiversedeb http://mirrors.163.com/ubuntu/ hardy-proposed main restricted universe multiversedeb http://mirrors.163.com/ubuntu/ hardy-backports main restricted universe multiversedeb-src http://mirrors.163.com/ubuntu/ hardy main restricted universe multiversedeb-src http://mirrors.163.com/ubuntu/ hardy-security main restricted universe multiversedeb-src http://mirrors.163.com/ubuntu/ hardy-updates main restricted universe multiversedeb-src http://mirrors.163.com/ubuntu/ hardy-proposed main restricted universe multiversedeb-src http://mirrors.163.com/ubuntu/ hardy-backports main restricted universe multiverse</p>
+<h1>Mirror.lupaworld.com 源更新服务器（浙江省杭州市双线服务器，网通同电信都可以用，亚洲地区官方更新服务器）：deb http://mirror.lupaworld.com/ubuntu gutsy main restricted universe multiversedeb http://mirror.lupaworld.com/ubuntu gutsy-security main restricted universe multiversedeb http://mirror.lupaworld.com/ubuntu gutsy-updates main restricted universe multiversedeb http://mirror.lupaworld.com/ubuntu gutsy-backports main restricted universe multiversedeb-src http://mirror.lupaworld.com/ubuntu gutsy main restricted universe multiversedeb-src http://mirror.lupaworld.com/ubuntu gutsy-security main restricted universe multiversedeb-src http://mirror.lupaworld.com/ubuntu gutsy-updates main restricted universe multiversedeb-src http://mirror.lupaworld.com/ubuntu gutsy-backports main restricted universe multiverse</h1>
+<p>Ubuntu 官方源 推荐北方网通用户添加deb http://archive.ubuntu.com/ubuntu/ gutsy main restricted universe multiversedeb http://archive.ubuntu.com/ubuntu/ gutsy-security main restricted universe multiversedeb http://archive.ubuntu.com/ubuntu/ gutsy-updates main restricted universe multiversedeb http://archive.ubuntu.com/ubuntu/ gutsy-proposed main restricted universe multiversedeb http://archive.ubuntu.com/ubuntu/ gutsy-backports main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ gutsy main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ gutsy-security main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ gutsy-updates main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ gutsy-proposed main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ gutsy-backports main restricted universe multiverse
+台湾的官方源速度也相当不错，有时甚至快于内地的：deb http://tw.archive.ubuntu.com/ubuntu gutsy main restricted universe multiversedeb http://tw.archive.ubuntu.com/ubuntu gutsy-security main restricted universe multiversedeb http://tw.archive.ubuntu.com/ubuntu gutsy-updates main restricted universe multiversedeb http://tw.archive.ubuntu.com/ubuntu gutsy-backports main restricted universe multiversedeb http://tw.archive.ubuntu.com/ubuntu gutsy-proposed main restricted universe multiversedeb-src http://tw.archive.ubuntu.com/ubuntu gutsy main restricted universe multiversedeb-src http://tw.archive.ubuntu.com/ubuntu gutsy-security main restricted universe multiversedeb-src http://tw.archive.ubuntu.com/ubuntu gutsy-updates main restricted universe multiversedeb-src http://tw.archive.ubuntu.com/ubuntu gutsy-backports main restricted universe multiversedeb-src http://tw.archive.ubuntu.com/ubuntu gutsy-proposed main restricted universe multiverse 
+再加个中国电信源科技大学的源（能用速度还不 错）
+deb http://ubuntu.uestc.edu.cn/ubuntu/ intrepid main restricted universe multiversedeb http://ubuntu.uestc.edu.cn/ubuntu/ intrepid-backports main restricted universe multiversedeb http://ubuntu.uestc.edu.cn/ubuntu/ intrepid-proposed main restricted universe multiversedeb http://ubuntu.uestc.edu.cn/ubuntu/ intrepid-security main restricted universe multiversedeb http://ubuntu.uestc.edu.cn/ubuntu/ hardy-updates main restricted universe multiversedeb-src http://ubuntu.uestc.edu.cn/ubuntu/ intrepid main restricted universe multiversedeb-src http://ubuntu.uestc.edu.cn/ubuntu/ intrepid-backports main restricted universe multiversedeb-src http://ubuntu.uestc.edu.cn/ubuntu/ intrepid-proposed main restricted universe multiversedeb-src http://ubuntu.uestc.edu.cn/ubuntu/ intrepid-security main restricted universe multiversedeb-src http://ubuntu.uestc.edu.cn/ubuntu/ intrepid-updates main restricted universe multiverse
+防止非官方源中软件包不全的问题，请在sources.list文件中尾部添加下面这个官方源。
+deb http://archive.ubuntu.org.cn/ubuntu-cn/ feisty main restricted universe multiverse
+如果没有这个源，下面安装某些软件的时候会提示找不到，比如w32codecs
+台湾源可能会慢一些，耐心等一下，换源后一般下载速度都有几十K，上百K也很正常。
+ubuntu更新命令
+       常用的APT命令参数：　　apt-cache search package 搜索包　　apt-cache show package 获取包的相关信息，如说明、大小、版本等　　sudo apt-get install package 安装包　　sudo apt-get install package - - reinstall 重新安装包　　sudo apt-get -f install 修复安装"-f = ——fix-missing"　　sudo apt-get remove package 删除包　　sudo apt-get remove package - - purge 删除包，包括删除配置文件等　　sudo apt-get update 更新源　　sudo apt-get upgrade 更新已安装的包　　sudo apt-get dist-upgrade 升级系统　　sudo apt-get dselect-upgrade 使用 dselect 升级　　apt-cache depends package 了解使用依赖　　apt-cache rdepends package 是查看该包被哪些包依赖　　sudo apt-get build-dep package 安装相关的编译环境　　apt-get source package 下载该包的源代码　　sudo apt-get clean &amp;&amp; sudo apt-get autoclean 清理无用的包　　sudo apt-get check 检查是否有损坏的依赖</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

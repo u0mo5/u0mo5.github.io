@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>Spring JMSTemplate 与 JMS 原生API比较</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3870.html" rel="bookmark"
+                   title="Permalink to Spring JMSTemplate 与 JMS 原生API比较">Spring JMSTemplate 与 JMS 原生API比较</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>博客分类：
+ 
+JMS
+Spring 2.x</p>
+<p>JMSUtil与Spring JmsTemplate的对比
+Author：信仰
+Date：2012-4-20
+未完待续，截止日期2012-4-20
+从以下几方面比较JMSUtil和Spring JmsTemplate
+l  对JNDI的支持
+l  对ConnectionFactory、Connection、Destination、Session、MessageProducer、MessageConsumer对象的处理
+l  对事务的处理
+l  不同类型的消息处理
+l  异常处理
+ </p>
+<p>Spring</p>
+<p>JMSUtil</p>
+<p>对JNDI的支持</p>
+<p>支持，可配置，可编码</p>
+<p>支持，只能编码</p>
+<p>对ConnectionFactory、
+Connection、
+Destination、
+Session、
+MessageProducer、
+MessageConsumer对象的处理</p>
+<p>配置</p>
+<p>编码</p>
+<p>对事务的处理</p>
+<p>配置</p>
+<p>编码</p>
+<p>对不同类型消息处理</p>
+<p>自动转换</p>
+<p>编码转换</p>
+<p>异常处理</p>
+<p>运行时异常，无需写try…catch</p>
+<p>检查异常，必须写try…catch</p>
+<p>1.   对JNDI的支持
+两者都支持JNDI和非JNDI方式。两者的JNDI名称都是在XML中配置完成的，这一点上两者不存在谁更有优势。
+1.1. Spring对JNDI的支持
+1.1.1.    Spring JMS 实现
+JNDI 查询的 JNDI 模板配置
+&lt;bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate"&gt;
+    &lt;property name="environment"&gt;
+      &lt;props&gt;
+        &lt;prop key="java.naming.factory.initial"&gt;
+            com.ibm.websphere.naming.WsnInitialContextFactory
+        &lt;/prop&gt;
+        &lt;prop key="java.naming.provider.url"&gt;
+            iiop://127.0.0.1:2813/
+        &lt;/prop&gt;
+      &lt;/props&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+通过 JNDI 配置 JMS 连接工厂
+&lt;bean id="internalJmsQueueConnectionFactory"
+class="org.springframework.jndi.JndiObjectFactoryBean"&gt;
+    &lt;property name="jndiTemplate"&gt;
+      &lt;ref bean="jndiTemplate"/&gt;
+    &lt;/property&gt;
+    &lt;property name="jndiName"&gt;
+      &lt;value&gt;MQ_JMS_MANAGER&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+JMS 模板配置
+&lt;bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate102"&gt;
+    &lt;property name="connectionFactory"&gt;
+      &lt;ref bean="internalJmsQueueConnectionFactory"/&gt;
+    &lt;/property&gt;
+    &lt;property name="destinationResolver"&gt;
+      &lt;ref bean="jmsDestinationResolver"/&gt;
+    &lt;/property&gt;
+    &lt;property name="pubSubDomain"&gt;
+      &lt;value&gt;false&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property name="receiveTimeout"&gt;
+      &lt;value&gt;20000&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+把 JmsTemplate 绑定到应用程序中
+&lt;bean id="jmsSender" class="springexample.client.JMSSender"&gt;
+           &lt;property name="jmsTemplate102"&gt;
+                 &lt;ref bean="jmsQueueTemplate"/&gt;
+           &lt;/property&gt;
+&lt;/bean&gt;
+    &lt;bean id="jmsReceiver" class="springexample.client.JMSReceiver"&gt;
+           &lt;property name="jmsTemplate102"&gt;
+               &lt;ref bean="jmsQueueTemplate"/&gt;
+           &lt;/property&gt;
+&lt;/bean&gt;
+用 JmsTemplate 发送 JMS 消息的 JMSSender
+public class JMSSender
+{
+   private JmsTemplate102 jmsTemplate102;
+ 
+   public JmsTemplate102 getJmsTemplate102()
+   {
+     return jmsTemplate102;
+   }
+ 
+   public void setJmsTemplate102(JmsTemplate102 jmsTemplate102)
+   {
+     this.jmsTemplate102 = jmsTemplate102;
+   }
+ 
+   public void sendMesage()
+   {
+     jmsTemplate102.send("JMS_RequestResponseQueue", new MessageCreator()
+     {
+          public Message createMessage(Session session) throws JMSException
+        {
+              return session.createTextMessage("This is a sample message");
+        }
+     });
+   }
+}
+用 JmsTemplate 检索 JMS 消息的 JMSReceiver（同步接收）
+public class JMSReceiver
+{
+    private JmsTemplate102 jmsTemplate102;
+ 
+public JmsTemplate102 getJmsTemplate102()
+{
+      return jmsTemplate102;
+    }
+ 
+    public void setJmsTemplate102(JmsTemplate102 jmsTemplate102)
+{
+     this.jmsTemplate102 = jmsTemplate102;
+    }
+    public void processMessage()
+{
+      Message msg = jmsTemplate102.receive("JMS_RequestResponseQueue");
+      try
+{
+        TextMessage textMessage = (TextMessage) msg;
+        if ( msg != null )
+{
+               System.out.println(" Message Received --&gt;" + textMessage.getText());
+        }
+      }
+catch ( Exception e )
+{
+            e.printStackTrace();
+      }
+    }
+}
+1.2. JMSUtil对JNDI的支持
+1.2.1.    JMSUtil的实现
+XML配置：
+&lt;bean id="MsgData_1.0_0001" class="com.cfcc.tips.common.data.MsgData"&gt;
+&lt;property name="qcfName"&gt;&lt;!— 连接工厂JNDI的名字 --&gt;
+&lt;value&gt;${jms.logQueueConFactory}&lt;/value&gt;
+&lt;/property&gt;
+&lt;property name="outputQ"&gt;&lt;!— 队列名 --&gt;
+&lt;value&gt;${jms.errLogQueueName}&lt;/value&gt;
+&lt;/property&gt;
+&lt;property name="expirationTime"&gt;&lt;!— 过期时间 --&gt;
+&lt;value&gt;0&lt;/value&gt;
+&lt;/property&gt;
+&lt;property name="confMode"&gt;&lt;!— 优先级 --&gt;
+&lt;value&gt;1&lt;/value&gt;
+&lt;/property&gt;
+&lt;/bean&gt;
+JMSUtil中发送消息报文和对象报文的方法：
+public static void putTextMessage(MsgData msgData, boolean transacted) throwsMessageException
+{
+    ……
+    ConnectionFactory connectionFactory = null;
+    Connection connection = null;
+    Session session = null;
+    Destination destination = null;
+    MessageProducer messageProducer = null;
+ 
+    try
+    {
+         connectionFactory = (ConnectionFactory)
+LocalContext.lookup(msgData.getQcfName(), true);
+        destination = (Destination) LocalContext.lookup(msgData.getOutputQ, false);
+        connection = connectionFactory.createConnection();
+        session = connection.createSession(transacted, Session.AUTO_ACKNOWLEDGE);
+        messageProducer = session.createProducer(destination);
+        // 修改为 二进制 ，字符集为可配置项，缺省为 GBK
+        BytesMessage message = session.createBytesMessage();
+ 
+        if (msgData.getExpirationTime() != null)
+         {
+             messageProducer
+.setTimeToLive(msgData.getExpirationTime().longValue());
+        }
+        ……           
+message
+.writeBytes(msgData.getMsg()
+.getBytes(MtoFactory.getInstance().getCharsetName()));
+ 
+}
+catch ( JMSException e1 )
+   {
+        String errorMsg = "发送消息失败:错误码" + e1.getErrorCode() + ",错误原因:" + e1.getMessage();
+         ……
+    }
+catch (NamingException e1)
+   {
+         String errorMsg = "发送消息失败，查找对应的资源未找到,错误原因:" + e1.getMessage();
+         ……
+}
+catch ( UnsupportedEncodingException ue )
+{
+String errorMsg = "发送消息失败，不支持的字符集: " + MtoFactory.getInstance().getCharsetName();
+            log.error(errorMsg, ue);
+            throw new MessageException(errorMsg, ue);
+}
+catch (RuntimeException e)
+{
+String errorMsg = "发送消息失败:" + e.getMessage();
+        ……
+}
+finally
+{
+if ( connection != null )
+{
+if( messageProducer != null )
+{
+                  try
+{
+                     messageProducer.close();
+                 }
+catch ( JMSException e2 )
+{
+                     log.error("关闭messageProducer异常", e2);
+                 }  
+              }
+             
+if( session != null )
+{
+try
+{
+                     session.close();
+                 }
+            catch ( JMSException e2 )
+{
+                     log.error("关闭session异常", e2);
+                 }  
+}
+try
+{
+connection.close();
+}
+catch ( JMSException e2 )
+{
+log.error("关闭connection异常", e2);
+}
+}
+}
+}
+ 
+/<em><em>
+</em> 发送一条对象报文，将一个对象放入队列中
+</em>
+<em> @param qcfName
+</em>            连接工厂名
+<em> @param outputQ
+</em>            队列名
+<em> @param obj
+</em>            要发送的对象
+<em> @param transacted 是否参与事务
+</em> @throws MessageException
+*/
+public static void putObjectMessage(String qcfName, String outputQ, Serializable obj,boolean transacted) throws MessageException
+{
+ConnectionFactory connectionFactory = null;
+    Connection connection = null;
+    Session session = null;
+    Destination destination = null;
+    MessageProducer messageProducer = null;
+ 
+try
+{
+        connectionFactory = (ConnectionFactory) LocalContext.lookup(qcfName, true);
+destination = (Destination) LocalContext.lookup(outputQ, false);
+        connection = connectionFactory.createConnection();
+        session = connection.createSession(transacted, Session.AUTO_ACKNOWLEDGE);
+        messageProducer = session.createProducer(destination);
+        ObjectMessage objmsg = session.createObjectMessage(obj);
+        objmsg.setJMSType("transfer");
+        messageProducer.send(objmsg);
+}
+catch ( JMSException e1 )
+   {
+        String errorMsg = "发送消息失败:错误码" + e1.getErrorCode() + ",错误原因:" + e1.getMessage();
+         ……
+    }
+catch (NamingException e1)
+   {
+         String errorMsg = "发送消息失败，查找对应的资源未找到,错误原因:" + e1.getMessage();
+         ……
+}
+catch ( UnsupportedEncodingException ue )
+{
+String errorMsg = "发送消息失败，不支持的字符集: " + MtoFactory.getInstance().getCharsetName();
+            log.error(errorMsg, ue);
+            throw new MessageException(errorMsg, ue);
+}
+catch (RuntimeException e)
+{
+String errorMsg = "发送消息失败:" + e.getMessage();
+        ……
+}
+finally
+{
+if ( connection != null )
+{
+if( messageProducer != null )
+{
+                  try
+{
+                     messageProducer.close();
+                 }
+catch ( JMSException e2 )
+{
+                     log.error("关闭messageProducer异常", e2);
+                 }  
+              }
+             
+if( session != null )
+{
+try
+{
+                     session.close();
+                 }
+            catch ( JMSException e2 )
+{
+                     log.error("关闭session异常", e2);
+                 }  
+}
+try
+{
+connection.close();
+}
+catch ( JMSException e2 )
+{
+log.error("关闭connection异常", e2);
+}
+}
+}
+}
+2.  对ConnectionFactory、Connection、Destination、Session、MessageProducer、MessageConsumer的处理
+Spring对打开和关闭连接的处理由容器控制，而JMS打开和关闭连接的处理由应用来控制。
+2.1. JMSUtil对上述对象的处理
+关闭上述对象：
+finally
+{
+if ( connection != null )
+{
+if( messageProducer != null )
+{
+                  try
+{
+                     messageProducer.close();
+                 }
+catch ( JMSException e2 )
+{
+                     log.error("关闭messageProducer异常", e2);
+                 }  
+              }
+             
+if( session != null )
+{
+try
+{
+                     session.close();
+                 }
+            catch ( JMSException e2 )
+{
+                     log.error("关闭session异常", e2);
+                 }  
+}
+try
+{
+connection.close();
+}
+catch ( JMSException e2 )
+{
+log.error("关闭connection异常", e2);
+}
+}
+}
+3.   对事务的处理
+3.1. Spring JMSTemplate对事物的处理方式
+3.1.1.    本地事务
+Spring为JMS提供了本地事务管理的能力，JMS事务管理器和数据库事务管理器都是PlatformTransactionManager接口的实现类，Spring的org.springframework.jms.connection包提供了用于管理JMS本地事务JmsTransactionManager事务管理器，JMS1.0.2则对应JmsTransactionManager102。
+&lt;bean id=”transactionManager”
+class=”org.springframework.jms.connection.JmsTransactionManager”&gt;
+       &lt;property name=”connectionFactory” ref=” internalJmsQueueConnectionFactory”/&gt;
+&lt;/bean&gt;
+       在进行标准的Spring事务配置后，就能够管理那些基于JmsTemplate编写的JMS处理类。对于那些未基于JmsTemplate编写的JMS处理类，可以让消息监听器容器对它们进行事务管理。DefaultMessageListenerContainer和ServerSessionMessageListenerContainer都支持通过消息监听器使用JMS事务，不过必须为他们提供一个事务管理器，如下配置：
+&lt;!— 事务管理器 --&gt;
+&lt;bean id=”transactionManager”
+class=”org.springframework.jms.connection.JmsTransactionManager”&gt;
+       &lt;property name=”connectionFactory” ref=” internalJmsQueueConnectionFactory”/&gt;
+&lt;/bean&gt;
+&lt;!—消息监听器容器 --&gt;
+&lt;bean id=”listenerContainer”
+class=”org.springframeword.jms.listener.DefaultMessageListenerContainer”&gt;
+&lt;property name=”transactionManager” ref=”transactionManager”/&gt;
+&lt;/bean&gt;
+3.1.2.    JTA事务
+启用JTA事务后，用户可以让数据库操作、JMS操作以及其它符合JTA标准的操作工作在同一个全局事务中。
+对于JMS来说，用户必须从Java EE的JNDI中获取XA支持的JMS ConnectionFactory。
+对于Spring配置来说，JTA全局事务和本地事务的差别并不大，用户只需要声明一个JtaTransactionManager事务管理器，将事务委托给Java EE应用服务器就可以了。当然，ConnectionFactory必须使用XA支持的JMSConnectionFactory。
+下面是让一个数据源和一个JMSConnectionFactory工作于同一个JTA事务的具体配置：
+&lt;jee:jndi-lookup id=”jdbcDataSource” jndi-name=”java:comp/env/jdbc/order”/&gt;
+&lt;jee:jndi-lookup id=”jmsConnFactory” jndi-name=”java:comp/env/jms/mail”/&gt;
+ 
+&lt;bean id=”transactionManageer”
+class=”org.springframework.transaction.jta.JtaTransactionManager”/&gt;
+3.2. JMSUtil对事物的处理方式
+3.2.1.    本地事务
+在Session可以控制交易，首选Session要定义成transacted，然后通过调用commit或rollback来提交或者回滚事务。
+QueueSession queueSession
+= connection.createQueueSession(boolean transacted, int acknowledgeMode);
+TopicSession topicSession
+       = connection.createTopicSession(Boolean transacted, int acknowledgeMode);
+ 
+Session.commit();
+Session.rollback()
+ 
+注意：如果transacted = true，则acknowledgeMode的值便无关紧要。
+3.2.2.    JTA事务
+还不太了解……
+4.   不同类型的消息的处理
+JMS有多钟类型的消息：
+l  javax.jms.TextMessage
+l  javax.jms.MapMessage
+l  javax.jms.ObjectMessage
+l  javax.jms.BytesMessage
+4.1. Spring使用消息转换器发送/接收消息
+Spring将POJO和JMS消息的双向转换工作抽象到MessageConverter中，在JmsTemplate中提供了几个convertAndSend()和receiveAndConvert()方法，这些方法自动使用MessageConverter完成消息的转换工作。
+4.1.1.    消息转换器
+在org.springframework.jms.support.converter包中，Spring提供了消息转换器的支持，首先看一下MessageConverter接口的两个方法：
+l  Object fromMessage(Message message)
+l  Message toMessage(Object object, Session session)
+MessageConverter接口的目的是为了向调用者屏蔽JMS细节,在JMS之上搭建的一个隔离层，这样调用者可以直接发送和接收POJO，而不是发送和接收JMS相关消息，调用者的程序将得到进一步简化。</p>
+<p>JMS消息类型</p>
+<p>POJO类型</p>
+<p>javax.jms.TextMessage</p>
+<p>String</p>
+<p>javax.jms.MapMessage</p>
+<p>java.util.Map</p>
+<p>javax.jms.ObjectMessage</p>
+<p>java.io.Serializable</p>
+<p>javax.jms.BytesMessage</p>
+<p>byte[] bytes</p>
+<p>当转换发生错误时，Spring将抛出MessageConversionException异常，该异常是org.springframework.jms.JmsException的子类。
+JmsTemplate和JmsTemplate102分别使用SimpleMessageConverter和SimpleMessageConverter102作为默认的消息转换器。用户也可以通过实现MessageConverter定义自己的消息转换器，并在配置JmsTemplate时通过messageConverter属性指定自己的消息转换器。
+4.1.2.    发送POJO消息
+4.1.2.1.       将POJO简单地映射为Message对象发送
+       假设User是一个POJO，其结构如下：
+       package com.baobaotao.domain;
+       ……
+public class User implement Serializable
+{
+       private String username;
+       private String userId;
+       private String email;
+       private int level;
+      
+       // 省略get/setter
+}
+这个POJO必须实现Serializable接口，以便可以将对象序列化后作为消息发送，除此以外没有任何其他的要求。
+将User作为JMS消息发送的操作仅需要一行简单的代码就可以完成：
+package com.baobaotao.jms;
+……
+import com.baobaotao.domain.User;
+public class MessageSender extends JmsGatewaySupport
+{
+       ……
+       public void sendUserMsg(User user)
+{
+       // 发送User对象
+       super.getJmsTemplate.convertAndSend(“userMsgQ”, user);
+}
+}
+ 
+JmsTemplate提供了几个重载版本的convertAndSend()方法：
+l  convertAndSend
+public void convertAndSend(Object message)
+throws JmsException
+Send the given object to the default destination, converting the object to a JMS message with a configured MessageConverter.
+This will only work with a default destination specified!
+Specified by:
+convertAndSend in interface JmsOperations
+Parameters:
+message - the object to convert to a message
+Throws:
+JmsException - converted checked JMSException to unchecked</p>
+<p>l  convertAndSend
+public void convertAndSend(Destination destination,
+                           Object message)
+                    throws JmsException
+Send the given object to the specified destination, converting the object to a JMS message with a configured MessageConverter.
+Specified by:
+convertAndSend in interface JmsOperations
+Parameters:
+destination - the destination to send this message to
+message - the object to convert to a message
+Throws:
+JmsException - converted checked JMSException to unchecked</p>
+<p>l  convertAndSend
+public void convertAndSend(String destinationName,
+                           Object message)
+                    throws JmsException
+Send the given object to the specified destination, converting the object to a JMS message with a configured MessageConverter.
+Specified by:
+convertAndSend in interface JmsOperations
+Parameters:
+destinationName - the name of the destination to send this message to (to be resolved to an actual destination by a DestinationResolver)
+message - the object to convert to a message
+Throws:
+JmsException - checked JMSException converted to unchecked</p>
+<p>l  convertAndSend
+public void convertAndSend(Object message,
+                           MessagePostProcessor postProcessor)
+                    throws JmsException
+Send the given object to the default destination, converting the object to a JMS message with a configured MessageConverter. The MessagePostProcessor callback allows for modification of the message after conversion.
+This will only work with a default destination specified!
+Specified by:
+convertAndSend in interface JmsOperations
+Parameters:
+message - the object to convert to a message
+postProcessor - the callback to modify the message
+Throws:
+JmsException - checked JMSException converted to unchecked</p>
+<p>l  convertAndSend
+public void convertAndSend(Destination destination,
+                           Object message,
+                           MessagePostProcessor postProcessor)
+                    throws JmsException
+Send the given object to the specified destination, converting the object to a JMS message with a configured MessageConverter. The MessagePostProcessor callback allows for modification of the message after conversion.
+Specified by:
+convertAndSend in interface JmsOperations
+Parameters:
+destination - the destination to send this message to
+message - the object to convert to a message
+postProcessor - the callback to modify the message
+Throws:
+JmsException - checked JMSException converted to unchecked</p>
+<p>l  convertAndSend
+public void convertAndSend(String destinationName,
+                           Object message,
+                           MessagePostProcessor postProcessor)
+                    throws JmsException
+Send the given object to the specified destination, converting the object to a JMS message with a configured MessageConverter. The MessagePostProcessor callback allows for modification of the message after conversion.
+Specified by:
+convertAndSend in interface JmsOperations
+Parameters:
+destinationName - the name of the destination to send this message to (to be resolved to an actual destination by a DestinationResolver)
+message - the object to convert to a message.
+postProcessor - the callback to modify the message
+Throws:
+JmsException - checked JMSException converted to unchecked
+4.1.2.2.       将POJO映射为Message后进行后置处理
+通过以上方法发送POJO，JmsTemplate仅会按照简单的映射方式发送JMS消息，如果我们需要在此基础上进一步设置Message的Header和Properties部分的值，一种方法是编写自己的消息转换器达到目的，还有一种更好的方法是使用Spring的org.springframework.jms.core.MessagePostProcessor回调接口。JmsTemplate在使用MessageConverter将POJO转换为JMS消息后以及发送消息前，将调用MessagePostProcessor对JMS消息进行后置加工处理。因此，我们有机会通过一个自定义的MessagePostProcessor回调接口对JMS消息对象进行“修正性”工作。
+下面，我们在User转换为ObjectMessage后，为消息对象指定过期时间并设置一个属性：
+package com.baobaotao.jms;
+……
+import org.springframework。jms.core.MessagePostProcessor;
+public class MessageSender extends JmsGatewaySupport
+{
+       public void sendUserMsg2(final User user)
+{
+       getJmsTemplate().convertAndSend(“userMsgQ”,
+user,
+new MessagePostProcessor()
+{
+       public Message postProcessMessage(Message message) throws JMSException
+       {
+              message.setJMSExpiration(System.currentTimeMillis() + 60 * 60 * 1000); //设置过期时间：一小时后过期
+              message.setIntProperty(“level”, user.getLevel()); // 设置一个属性
+}
+});
+}
+}
+4.1.3.    接收POJO消息
+4.2. JMSUtil必须直接实例化不同类型的消息对象
+4.2.1.    发送消息
+例如，如果要发送的消息是javax.jms.TextMessage类型，代码如下所示：
+TextMessage txtMsg = queueSession.createTextMessage(obj);
+messageProducer.send(txtMsg);
+4.2.2.    接收消息
+例如，如果要接收的消息是javax.jms.TextMessage类型，代码如下所示：
+Message m = messageConsumer.receive(1000 * 1);
+                    
+if ( m instanceof TextMessage )
+{
+TextMessage textMessage = (TextMessage) m;
+       System.out.println(textMessage.getText());
+}
+5.   异常处理
+5.1. Spring JmsTemplate 运行时异常
+JMS的异常都是检查型异常，使用原生JMS API，用户需要提供繁琐的异常捕获代码。而Spring将检查型异常转化为运行期异常。
+Spring在org.springframework.jms包为javax.jms包中所有的异常类提供了类型转换的镜像实现。如：org.springframework.jms.IllegalStateException对应javax.jms.IllegalStateExceptipn；org.springframework.jms.InvalidClientIDException对应javax.jms.InvalidClientIDException等。Spring中所有JMS相关的异常都继承于JmsException类。
+此外，Spring还提供了一些特定的JMS异常类：
+l  DestinationResolutionException：Spring允许通过简单的字符串指定消息地址，DestinationResolver在解析消息地址发生错误时抛出异常；
+l  SynchedLocalTransactionFailedException：如果在同步本地事务发生异常时抛出该异常，由于事务已经结束后，再次尝试同步事务时会发生这个异常；
+l  UncategorizedJmsException：任何未被归类的其他类型一场。
+5.2. JMSUtil检查异常</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

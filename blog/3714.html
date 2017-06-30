@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>Java 5 、6、 7中新特性</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3714.html" rel="bookmark"
+                   title="Permalink to Java 5 、6、 7中新特性">Java 5 、6、 7中新特性</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>JDK5新特性（与1.4相比）【转】
+1 循环
+for (type variable : array){ body}
+for (type variable : arrayList){body}
+而1.4必须是：
+for (int i = 0; i &lt; array.length; i++){ type variable = array[i];    body}
+for (int i = 0; i &lt; arrayList.size(); i++){type variable = (type) arrayList.get(i); body}
+2 泛型
+以ArrayList为例，包括创建一个容器对象和取得容器内对象操作：
+1.5 ArrayList&lt;Type&gt; arrayList =new ArrayList&lt;Type&gt;(); arrayList.get(i)
+1.4 ArrayList arrayList =new ArrayList();  (Type) arrayList.get(i)
+3 自动装箱拆箱
+在JDK5.0以前，在原始类型与相应的包装类之间的转化是不能自动完成的。要完成这种转化，需要手动调用包装类的构造函数，在JDK5.0环境中，可以自动转化：
+1.5 Integer wrapper = n;    int n = wrapper;
+1.4 Integer wrapper = new Integer(n);    int n = wrapper.intValue();
+4 可变的返回类型
+在JDK5.0以前，当覆盖父类方法时，返回类型是不能改变的。现在有新的规则用于覆盖方法。如下，一个典型的例子就是clone()方法：
+1.5 public Employee clone() { ... }
+    ...
+    Employee cloned = e.clone();
+1.4 public Object clone() { ... }
+    ...
+    Employee cloned = (Employee) e.clone();
+5 静态导入
+静态导入功能对于JDK 5.0以前的版本是不支持的。
+import static java.lang.Math;
+import static java.lang.System;
+...
+1.5 out.println(sqrt(PI));
+1.4 System.out.println(Math.sqrt(Math.PI));
+6 控制台输入
+JDK 5.0先前的版本没有Scanner类，只能使用JOptionPane.showInputDialog类代替。
+1.5 Scanner in = new Scanner(System.in);
+    System.out.print(prompt);
+    int n = in.nextInt();
+    double x = in.nextDouble();
+    String s = in.nextLine();
+1.4 String input = JOptionPane.showInputDialog(prompt);
+    int n = Integer.parseInt(input);
+    double x = Double.parseDouble(input);
+    s = input;
+7 格式化输出
+JDK5.0以前的版本没有printf方法，只能使用NumberFormat.getNumberInstance来代替。
+1.5 System.out.printf("%8.2f", x);
+1.4 NumberFormat formatter= NumberFormat.getNumberInstance();
+    String formatted = formatter.format(x);
+    for (int i = formatted.length(); i &lt; 8; i++)
+    System.out.print(" "); System.out.print(formatted);
+8 内容面板代理
+在JDK5.0先前的版本中，JFrame,JDialog,JApplet等类没有代理add和setLayout方法。
+1.5 add(component)；  setLayout(manager)；
+1.4 getContentPane().add(component)；getContentPane().setLayout(manager)；
+9 StringBuilder类
+jDK 5.0引入了StringBuilder类，这个类的方法不具有同步，这使得该类比StringBuffer类更高效。
+ 
+JDK6的新特性(转)
+1 SystemTray类
+在JDK6中 ,AWT新增加了两个类:Desktop和SystemTray,前者可以用来打开系统默认浏览器浏览指定的URL,打开系统默认邮件客户端给指定的邮箱发邮件,用默认应用程序打开或编辑文件(比如,用记事本打开以txt为后缀名的文件),用系统默认的打印机打印文档;后者可以用来在系统托盘区创建一个托盘程序.
+2 使用JAXB2来实现对象与XML之间的映射
+JAXB是Java Architecture for XML Binding的缩写，可以将一个Java对象转变成为XML格式，反之亦然。
+3 新增StAX
+StAX(The Streaming API for XML)是JDK6.0中除了DOM和SAX之外的又一种处理XML文档的API
+4 新增Compiler API
+可以用JDK6 的Compiler API去动态编译Java源文件。这个特性对于用到动态编译的应用程序相当有用， 比如JSP Web Server，当我们手动修改JSP后，是不希望需要重启Web Server才可以看到效果的，这时候我们就可以用Compiler API来实现动态编译JSP文件
+5 轻量级Http Server
+JDK6提供了一个简单的Http Server API,,程序员必须自己实现HttpHandler接口,HttpServer会调用HttpHandler实现类的回调方法来处理客户端请求。
+6 插入式注解处理API(Pluggable Annotation Processing API)
+插入式注解处理API提供一套标准API来处理Annotations,它把method, package, constructor, type, variable, enum, annotation等Java语言元素映射为Types和Elements, 从而将Java语言的语义映射成为对象。
+7 用Console开发控制台程序
+JDK6中提供了java.io.Console类专用来访问基于字符的控制台设备.
+8 Web服务元数据(Web Services metadata)
+9 更简单,更强大的JAX-WS
+Java Architecture for XML Web Services的缩写,是一种用Java和XML开发Web Services应用程序的框架。
+10 脚本语言支持(Scripting)
+JDK6增加了对脚本语言的支持，原理上是将脚本语言编译成bytecode，这样脚本语言也能享用Java平台的诸多优势，包括可移植性，安全等，另外，由于现在是编译成bytecode后再执行，所以比原来边解释边执行效率要高很多。
+11 JTable的排序和过滤
+原来的JTable基本上是只能显示数据，在JDK6新增了对JTable的排序和过滤功能
+========================================================
+7.0特性
+ 
+甲骨文有两个产品实现Java平台标准版（Java SE）7：Java SE的开发工具包（JDK），7和Java SE的运行环境（JRE）7。
+JDK 7中的JRE 7的一个超集，并包含在JRE 7的一切，再加上开发applets和应用程序所必需的编译器和调试器等工具。 JRE7提供了类库，Java虚拟机（JVM），和其他运行使用Java编程语言编写的applets和应用程序所需的组件。
+下面的概念图说明了Java组件技术：
+文档之“新”
+文档定期更新，以提供在Java平台上的新功能的深入了解信息的开发。一些最近的更新包括：
+1.Swing
+ 
+ 
+包括以下主题：
+JLayerClass Swing包中的新组件，可支持自定义绘制
+NimbusLook &amp; Feel Swing包中最新的U组件，可支持自定义皮肤
+Heavyweightand Lightweight Components Swing包中的最新属性，可实现透明和半透明窗体
+Shapedand Translucent Windows Swing包中的最新组件，可实现自定义形状窗体
+Hue-Saturation-Luminance(HSL) Color Selectionin JColorChooser Class 色彩选择器，可支持色彩饱和度和亮度</p>
+<p>Image 1NimbusLook &amp; Feel</p>
+<p>Image 2TranslucentWindow</p>
+<p>Image 3GradientWindow</p>
+<p>Image 4ShapedWindow</p>
+<p>Image 6 InternalFrameMixingFixed
+ 
+2. Java SE 7的网络增强
+ 
+ 
+URLClassLoader.close方法已被添加。这种方法有效地消除了如何支持从一个特定的代码库，特别是在JAR文件中加载的类和资源更新的实现的问题。有关更多信息，请参阅合为URLClassLoader。
+套接字直接协议（SDP）提供获得高性能的网络连接;在Java教程，请参阅了解套接字直接协议。
+3. JavaSE 7在Collections Framework的增强
+ 
+ 
+已加入TransferQueue接口，这是一个完善的BlockingQueue接口。类LinkedTransferQueue实现TransferQueue的接口。
+4. 客户端JRE 性能– 快速参考
+ 
+ 
+Java的丰富互联网应用程序（RIA）技术日趋成熟。在每一个Java运行时环境（JRE）软件版本的新功能被添加。此快速参考帮助您跟上充满活力的技术和实施工作在所有版本的客户端JRE软件优雅的RIA解决方案。快速参考提供有关在每个版本的JRE软件与Java SE 6 update 10的发布开始中添加了重要的功能的信息。
+窗口拖动的applet可以装饰一个默认或自定义的标题;看到请求和自定义可拖动的小程序Applet的装饰。以下增强功能已JNLP文件的语法; JNLP文件语法：(1)OS元素现在可以包含特定版本的Windows，如Windows Vista或Windows 7，在信息和资源的属性。 (2)的应用程序可以使用在快捷元素的安装属性，指定要安装他们的愿望。安装的应用程序的JavaWeb Start缓存被清除时删除，但可以明确地使用Java控制面板删除。(3)的Java Web Start应用程序可以部署不指定codebase属性;无代码库部署JNLP文件可以被嵌入到一个HTML页面; JNLP文件中嵌入applet标签。
+您可以检查applet的状态变量，而它加载，以确定是否该applet是准备从JavaScript代码来处理请求;处理与事件处理程序的初始化状态。
+您现在的控制窗口的装修风格，并从快捷方式启动一个applet的标题，或一拖再拖的浏览器;看到请求和定制开发可拖动的小程序Applet的装饰。
+5. Java XML 技术增强
+ 
+ 
+本版本中包含的JavaAPI，用于XML处理（JAXP）1.4.5支​​持Java用于XML绑定（JAXB）的2.2.3的架构，并支持Java API的XML Web服务（JAX - WS的）2.2.4。
+6. java.lang 包</p>
+<p>潜在的死锁多线程，非分层委托定制的类加载器被淘汰;见多线程在Java SE 7的自定义类加载器。
+7.Java 虚拟机</p>
+<p>非Java语言的Java虚拟机支持Java SE7中引入了一个新的JVM指令，它简化了在JVM上的动态类型编程语言的实施。
+垃圾收集器是一个服务器式的垃圾收集器，它取代并发标记 - 清除收集（CMS）的。
+Java HotSpot虚拟机性能增强
+8. Java I/O</p>
+<p>java.nio.file包和其相关的包，java.nio.file.attribute，提供访问文件系统的文件I / O和全面的支持;看到文件的I / O（特色NIO.2）。 NIO的代表为非阻塞I / O。 （1）目录&lt;Java home&gt; /样本/ NIO / chatserver /包含示例演示java.nio.file包中包含新的API。 （2）目录&lt;Java home&gt; /演示/ NIO / zipfs /包含NIO.2的NFS（网络文件系统）文件系统的示例演示。
+9. 安全</p>
+<p>9.1 一个已添加新的本地供应商提供了几种基于ECC算法（ECDSA / ECDH）;看到SUN的PKCS＃11提供的支持算法在Java中的PKCS＃11参考指南。
+9.2 弱加密算法现在可以被禁用的，见附录D：禁用加密算法的PKI的Java程序员指南和禁用加密算法（Disabled Cryptographic Algorithms）在Java安全套接字扩展（JSSE）的参考指南。 SSL /TLS的相关
+9.3 Various增强功能已被添加到Java安全套接字扩展。
+10. 并发</p>
+<p>fork/ join框架，这是基于对ForkJoinPool类，Executor接口的一个实现。它的设计，有效地运行一个大量使用的工作线程池的任务。一个“工作窃取技术”是用来保持忙碌的所有工作线程，充分利用多个处理器。查看的fork /join Java教程。 目录&lt;Java home&gt; /样本/ forkjoin /包含样品，演示的fork / join框架。
+ThreadLocalRandom类无需使用伪随机数的线程之间的争，见并发随机数。
+Phaser类是一个新的同步的障碍，类似的CyclicBarrier。
+11. Java 2D</p>
+<p>新的基于XRender -Java 2D渲染管线，支持现代的基于X11的桌面，提供图形性能，在系统属性中看到的Java 2D技术xrender标志。
+现在的JDK列举和显示通过的方法，如GraphicsEnvironment.getAvailableFontFamilyNames安装的OpenType /CFF字体，这些字体也能被Font.createFont方法识别。见选择字体索引。
+TextLayout的类支持藏文。
+libfontconfig，字体配置API，用于选择字体，使用Linux的一些实现的逻辑字体;见Fontconfig索引。
+12. 国际化</p>
+<p>Unicode 6.0.0被支持了，见Java教程的Unicode。目录&lt;Java home&gt; / demo/jfc/Font2DTest /包含了演示Java的Unicode 6.0的支持得例子。
+Java SE 7中可以容纳其ISO4217代码确定了新的货币，详见Currency类。
+13. Java 编程语言</p>
+<p>以下增强功能已被添加到Java语言：
+1. 二进制类型。
+2. 在数值类中使用下划线。
+3. 在switch语句中使用字符串。
+4. 泛型实例创建的类型推断。
+5. 实现了当使用可变方法做泛型的非具体化类型时编译器警告和报错。
+6. try-with-resources异常处理。
+6． 捕获多个异常类型和重新抛出改良型检测异常。
+14. JDBC 4.1</p>
+<p>JDBC4.1引入了以下特点：
+增添了使用一个try-with-resources语句自动关闭Connection,ResultSet,andStatement类型资源的功能。详见ProcessingSQL Statements.下的ClosingConnections 索引。
+RowSet的1.1：引进的RowSetFactory接口和RowSetProvider类，这使你通过JDBC驱动程序创建row sets的所有类型。详见UsingJdbcRowSet Objects中的Using theRowSetFactory Interface。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>
