@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>关于iPhone设备不同显示尺寸适配的一些方法</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/4235.html" rel="bookmark"
+                   title="Permalink to 关于iPhone设备不同显示尺寸适配的一些方法">关于iPhone设备不同显示尺寸适配的一些方法</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>关于iPhone设备不同显示尺寸适配的一些方法
+ </p>
+<p>------关于适配的理解------
+1、什么是适配？
+    适配是对不同硬件和系统软件的适应，硬件包括屏幕显示，处理器，内存等等（目前主要是屏幕适配，iPhone 6s新增了3D Touch功能，其他硬件功能并没有实质性的改变），软件主要是不同iOS系统（有些在最新系统（通常会尽量向下兼容）不再支持的方法都需要做一些判断）。
+2、为什么要适配？
+     适配是为了兼容不同的设备。
+3、屏幕适配主要有哪些方式？
+    （1）等比例适配（所有视图按屏幕大小缩放，相对位置不变）：a、纯代码；b、代码＋storyboard（不使用自动布局）；c、代码＋storyboard（使用自动布局）。
+    （2）自由适配（主要使用自动布局）：由于同一布局在不同大小的屏幕上显示效果不一样，如果仅仅是等比缩放，有时显示效果差强人意；在显示内容尺寸符合操作习惯（这个看自己咋想）的情况下，屏幕大小最大的区别是屏大显示内容多（如浏览新闻等，除了只有一些固定图片、控件等的简洁界面），a、约束内容的间距及相对大小；b、约束内容的宽高及相对位置；c、约束内容的间距、宽高。
+ 
+------适配的一些方法------
+情况一
+（等比适配，代码＋storyboard，不使用自动布局，建议用iPhone6的尺寸布局），通过获取屏幕尺寸，重定义CGRectMake，更新所有视图及其子视图的frame，完成等比适配。注意字体、图片，以及tableView、collectionView。
+1、——————AppDelegate.h添加：
++ (void)ergodicView:(UIView *)view;
+ 
+2、——————AppDelegate.m添加：</p>
+<h1>define ScreenHeight [UIScreen mainScreen].bounds.size.height</h1>
+<h1>define ScreenWidth [UIScreen mainScreen].bounds.size.width</h1>
+<h1>define ScreenScaleX (ScreenWidth/375)//相对于苹果6屏幕</h1>
+<h1>define ScreenScaleY (ScreenHeight/667)</h1>
+<p>//按屏幕自动适配storyBoard所有视图
++ (void)ergodicView:(UIView <em>)view{
+    
+    if (view.subviews.count != 0) {
+        for (UIView </em>temp in view.subviews) {
+            temp.frame = CGRectMake1(temp.frame.origin.x, temp.frame.origin.y, temp.frame.size.width, temp.frame.size.height);
+            [self ergodicView:temp];
+        }
+    }
+}
+ 
+//修改CGRectMake
+CG_INLINE CGRect
+CGRectMake1(CGFloat x, CGFloat y, CGFloat width, CGFloat height)
+{
+    CGRect rect;
+    rect.origin.x = x * ScreenScaleX;
+    rect.origin.y = y * ScreenScaleY;
+    rect.size.width = width * ScreenScaleX;
+    rect.size.height = height * ScreenScaleY;
+    return rect;
+}
+ </p>
+<hr>
+<p>情况二
+使用autolayout布局后，可重新设置视图的frame。等viewDidLoad加载完后，再延迟改变视图的frame，不延迟会被storyboard重新设置。也可以在viewDidLayoutSubviews或viewDidAppear重新设置frame</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

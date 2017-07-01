@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>7 款开源 Java 反编译工具</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3693.html" rel="bookmark"
+                   title="Permalink to 7 款开源 Java 反编译工具">7 款开源 Java 反编译工具</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>今天我们要来分享一些关于Java的反编译工具，反编译听起来是一个非常高上大的技术词汇，通俗的说，反编译是一个对目标可执行程序进行逆向分析，从而得到原始代码的过程。尤其是像.NET、Java这样的运行在虚拟机上的编程语言，更容易进行反编译得到源代码。当然，也有一些商业软件，对其程序进行了混淆加密，这样我们就很难用工具反编译了。
+1、Java反编译插件 —— Jadclipse
+JadClipse是Jad的Eclipse插件，是一款非常实用而且方便地Java反编译插件，我们只需将下载的插件包复制到eclipse的plugins目录下，然后修改window -&gt; Preferences -&gt; Java -&gt; JadClipse 下的Path to decompiler ，如：C:pinjadnt158jad.exe，最后在Windows -&gt; Perference -&gt; General -&gt; Editors -&gt; File Associations中修改“*.class”默认关联的编辑器为“JadClipse Class File Viewer” 即可。
+ 
+官方网站：http://sourceforge.net/projects/jadclipse/
+2、Java反编译工具 jad
+jad是一款使用非常广泛地Java反编译工具，上面这款Jadclipse就是基于jad的反编译插件，JAD 文件包含 MIDlet 套件的标题信息，例如开发应用程序的公司、应用程序名称和大小。
+官方网站：http://varaneckas.com/jad/
+3、Java 反编译器 JD-GUI
+JD-GUI 是一个用 C++ 开发的 Java 反编译工具，由 Pavel Kouznetsov开发，支持Windows、Linux和苹果Mac Os三个平台。而且提供了Eclipse平台下的插件JD-Eclipse。JD-GUI不需要安装，直接点击运行，可以反编译jar,class文件。
+官方网站：http://jd.benow.ca/
+4、Java反编译器 jdec
+jdec是一个Java反编译器。它能够把出现在一个.class文件中的字节码还原成Java源代码，反编译的结果几乎与原始Java文件相同。它还自带一个利用swing开发的用户操作界面。</p>
+<p>官方网站：http://jdec.sourceforge.net/
+5、uuDeJava
+uuDeJava是Java Class文件的反编译工具。反编译的Java源程序被输出到Class的相同目录。内部使用jad.exe。反编译Class文件时，可以直接点击Class文件(关联后)，或者选中文件或目录发送到uuDeJava的快捷方式。还可以拖动文件或目录到uuDeJava的主窗口。</p>
+<p>官方网站：http://www.uuware.com/uudejava_cn.htm
+6、Java 反向工程软件 Minjava
+Minjava 是一个 Java 反向工程软件，可帮助理解已存在一些 Java 软件的架构和行为。</p>
+<p>7、Java Decompiler
+这款反编译器叫 “Java Decompiler”, 由 Pavel Kouznetsov开发，目前最新版本为0.2.5. 它由 C++开发，并且官方可以下载 windows、linux和苹果Mac Os三个平台的可执行程序。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

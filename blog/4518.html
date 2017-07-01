@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>mysql给root开启远程访问权限，修改root密码</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/4518.html" rel="bookmark"
+                   title="Permalink to mysql给root开启远程访问权限，修改root密码">mysql给root开启远程访问权限，修改root密码</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2017-05-09T17:22:00+08:00">
+                周二 09 五月 2017
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h1>1.MySql-Server 出于安全方面考虑只允许本机(localhost, 127.0.0.1)来连接访问. 这对于 Web-Server 与 MySql-Server 都在同一台服务器上的网站架构来说是没有问题的. 但随着网站流量的增加, 后期服务器架构可能会将 Web-Server 与 MySql-Server 分别放在独立的服务器上, 以便得到更大性能的提升, 此时 MySql-Server 就要修改成允许 Web-Server 进行远程连接.2.不用每次都登到服务器去添加修改表，只要用图形化界面即可远程管理。&nbsp;我们可以按照下面的步骤修改:    1, 登录 Mysql-Server 连接本地 mysql (默认只允许本地连接)&nbsp;<img src="http://pic002.cnblogs.com/images/2012/282068/2012061702344092.jpg" alt=""/>&nbsp;2, 修改 Mysql-Server 用户配置<span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5; font-family: &quot;Courier New&quot; !important;"><a title="复制代码" style="color: rgb(7, 93, 179); text-decoration-line: underline; margin: 0px !important; padding: 0px !important; border-radius: 0px !important; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; border: none !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, Courier, monospace !important; min-height: auto !important;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span>mysql&gt;&nbsp;USE&nbsp;mysql;&nbsp;--&gt;&nbsp;SELECT&nbsp;User,&nbsp;Password,&nbsp;Host&nbsp;FROM&nbsp;user;&nbsp;--+------+----------+-----------+</h1>
+<p>|&nbsp;User&nbsp;|&nbsp;Password&nbsp;|&nbsp;Host&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
++------+----------+-----------+
+|&nbsp;root&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;localhost&nbsp;|
++------+----------+-----------+&nbsp;row&nbsp;&nbsp;&nbsp;(&gt;&nbsp;--&gt;&nbsp;--&nbsp;下面我们另外添加一个新的&nbsp;root&nbsp;用户,&nbsp;密码为空,&nbsp;只允许&nbsp;.&gt;&nbsp;GRANT&nbsp;ALL&nbsp;PRIVILEGES&nbsp;ON&nbsp;<em>.</em>&nbsp;TO&nbsp;@&nbsp;IDENTIFIED&nbsp;BY&nbsp;&gt;&nbsp;--&nbsp;@可以替换为@‘%&gt;&nbsp;--&nbsp;UPDATE&nbsp;user&nbsp;SET&nbsp;Host=&nbsp;WHERE&nbsp;User=&nbsp;AND&nbsp;Host=&nbsp;LIMIT&nbsp;;</pre><p><span class="cnblogs_code_copy" style="margin: 0px; padding: 0px 5px 0px 0px; line-height: 1.5; font-family: &quot;Courier New&quot; !important;"><a title="复制代码" style="color: rgb(7, 93, 179); text-decoration-line: underline; margin: 0px !important; padding: 0px !important; border-radius: 0px !important; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; border: none !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-family: Consolas, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, Courier, monospace !important; min-height: auto !important;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span>&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: medium;"><span style="margin: 0px; padding: 0px; line-height: normal;">修改root密码</span></span><table width="1451" style="width: 828px;"><tbody style="margin: 0px !important; padding: 0px !important; border-radius: 0px !important; background: none !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;"><tr style="margin: 0px !important; padding: 0px !important; border-radius: 0px !important; background: none !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;" class="firstRow"><td class="code" style="padding: 3px; border-color: silver; border-collapse: collapse; margin: 0px !important; border-radius: 0px !important; background: none !important; bottom: auto !important; float: none !important; left: auto !important; line-height: 1.1em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; box-sizing: content-box !important; min-height: auto !important;" width="NaN"><div class="line number1 index0 alt2" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background: none rgb(244, 244, 244) !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;"><code>mysql&amp;gt; use mysql</code></div><div class="line number2 index1 alt1" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;">&nbsp;</div><div class="line number3 index2 alt2" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background: none rgb(244, 244, 244) !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;"><code>Database changed</code></div><div class="line number4 index3 alt1" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;">&nbsp;</div><div class="line number5 index4 alt2" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background: none rgb(244, 244, 244) !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;"><code>mysql&amp;gt; update user ``set</code>&nbsp;<code>password=PASSWORD(``&amp;#39;123456&amp;#39;``) ``where</code>&nbsp;<code>user=``&amp;#39;root&amp;#39;``;</code></div><div class="line number6 index5 alt1" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;">&nbsp;</div><div class="line number7 index6 alt2" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background: none rgb(244, 244, 244) !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;"><code>Query OK, 0 rows affected (0.00 sec)</code></div><div class="line number8 index7 alt1" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;">&nbsp;</div><div class="line number9 index8 alt2" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background: none rgb(244, 244, 244) !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;"><code>Rows matched: 1&amp;nbsp; Changed: 0&amp;nbsp; Warnings: 0</code></div><div class="line number10 index9 alt1" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;">&nbsp;</div><div class="line number11 index10 alt2" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background: none rgb(244, 244, 244) !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;"><code>mysql&amp;gt; flush privileges;</code></div><div class="line number12 index11 alt1" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;">&nbsp;</div><div class="line number13 index12 alt2" style="margin: 0px !important; padding: 0px 1em 0px 0px !important; border-radius: 0px !important; background: none rgb(244, 244, 244) !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.8em !important; outline: 0px !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; min-height: auto !important;"><code>Query OK, 0 rows affected (0.00 sec)</code></div><code></code></td></tr></tbody></table>    </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

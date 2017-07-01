@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>SSH框架系列：Spring读取配置文件以及获取Spring注入的Bean</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3940.html" rel="bookmark"
+                   title="Permalink to SSH框架系列：Spring读取配置文件以及获取Spring注入的Bean">SSH框架系列：Spring读取配置文件以及获取Spring注入的Bean</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>分类： 【java】2013-12-09 16:29 1020人阅读 评论(0) 收藏 举报</p>
+<p>1.简介
+在SSH框架下，假设我们将配置文件放在项目的src/datasource.properties路径下，Spring的配置文件也是src/applicationContext.xml路径下，那么我们可以借助Spring的property-placeholder读取配置文件，然后注入Bean中。我们在程序中，可以根据Bean的Id，获取注入的值。这样我们就可以借助Spring来读取配置文件。
+2.Code
+2.1Student.java
+ </p>
+<p>[java] view plaincopy
+ </p>
+<p>package edu.njupt.zhb.model.mysql;  
+  
+  
+  
+/<em><em> 
+ </em> Student entity. @author MyEclipse Persistence Tools 
+ </em>/  
+  
+public class Student  implements java.io.Serializable {  
+  
+  
+    // Fields      </p>
+<p>private String id;  </p>
+<p>private String name;  </p>
+<p>private String course;  </p>
+<p>private Integer score;  </p>
+<p>private String remarks;  </p>
+<p>// Constructors  </p>
+<p>/*<em> default constructor </em>/  </p>
+<p>public Student() {  </p>
+<p>}  
+  
+    /*<em> minimal constructor </em>/  </p>
+<p>public Student(String name, String course, Integer score) {  </p>
+<p>this.name = name;  </p>
+<p>this.course = course;  </p>
+<p>this.score = score;  </p>
+<p>}  
+      
+    /*<em> full constructor </em>/  </p>
+<p>public Student(String name, String course, Integer score, String remarks) {  </p>
+<p>this.name = name;  </p>
+<p>this.course = course;  </p>
+<p>this.score = score;  </p>
+<p>this.remarks = remarks;  </p>
+<p>}  
+  
+     
+    // Property accessors  </p>
+<p>public String getId() {  </p>
+<p>return this.id;  </p>
+<p>}  
+      
+    public void setId(String id) {  </p>
+<p>this.id = id;  </p>
+<p>}  
+  
+    public String getName() {  </p>
+<p>return this.name;  </p>
+<p>}  
+      
+    public void setName(String name) {  </p>
+<p>this.name = name;  </p>
+<p>}  
+  
+    public String getCourse() {  </p>
+<p>return this.course;  </p>
+<p>}  
+      
+    public void setCourse(String course) {  </p>
+<p>this.course = course;  </p>
+<p>}  
+  
+    public Integer getScore() {  </p>
+<p>return this.score;  </p>
+<p>}  
+      
+    public void setScore(Integer score) {  </p>
+<p>this.score = score;  </p>
+<p>}  
+  
+    public String getRemarks() {  </p>
+<p>return this.remarks;  </p>
+<p>}  
+      
+    public void setRemarks(String remarks) {  </p>
+<p>this.remarks = remarks;  </p>
+<p>}  
+}  </p>
+<p>2.2datasource.properties中的配置
+ 
+ </p>
+<p>[plain] view plaincopy
+ </p>
+<h1>student config</h1>
+<p>student.name=Haibo  
+student.id=1012010638  
+student.course=Java  
+student.score=90  
+student.remarks=Come from Properties  </p>
+<p>2.3Spring配置文件applicationContext.xml部分配置
+ 
+ </p>
+<p>[html] view plaincopy
+ </p>
+<p>&lt;!-- 引入datasource配置文件 --&gt;  
+    &lt;context:property-placeholder location="classpath:datasource.properties" /&gt;  </p>
+<p>&lt;bean id="student" class="edu.njupt.zhb.model.mysql.Student"&gt;  </p>
+<p>&lt;property name="id" value="${student.id}" /&gt;  </p>
+<p>&lt;property name="name" value="${student.name}" /&gt;  </p>
+<p>&lt;property name="course" value="${student.course}" /&gt;  </p>
+<p>&lt;property name="score" value="${student.score}" /&gt;  </p>
+<p>&lt;property name="remarks" value="${student.remarks}" /&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>2.4读取Spring中的Bean函数
+ 
+ </p>
+<p>[java] view plaincopy
+ </p>
+<p>/<em> 
+ </em> $filename: BeanUtils.java,v $ 
+ <em> $Date: 2013-12-9  $ 
+ </em> Copyright (C) ZhengHaibo, Inc. All rights reserved. 
+ <em> This software is Made by Zhenghaibo. 
+ </em>/  
+package edu.njupt.zhb.tools;  
+  
+import org.apache.struts2.ServletActionContext;  
+import org.springframework.context.ApplicationContext;  
+import org.springframework.context.support.FileSystemXmlApplicationContext;  
+  
+/<em> 
+ </em>@author: ZhengHaibo   
+ <em>web:     http://blog.csdn.net/nuptboyzhb 
+ </em>mail:    zhb931706659@126.com 
+ <em>2013-12-9  Nanjing,njupt,China 
+ </em>/  
+public class BeanUtils {  
+    /** </p>
+<p><em> 获取Spring中注入的Bean 
+     </em> @param beanId：id 
+     <em> @return 
+     </em>/  
+    public static Object getSpringBean(String beanId){  </p>
+<p>//Spring配置文件的路径  </p>
+<p>String xmlRealPath = ServletActionContext.getServletContext().getRealPath("/WEB-INF/classes/applicationContext.xml");  </p>
+<p>ApplicationContext ac = new FileSystemXmlApplicationContext(xmlRealPath);  </p>
+<p>return ac.getBean(beanId);  </p>
+<p>}  
+}  </p>
+<p>2.5我们可以通过如下方式，获得Spring注入的值
+ 
+ </p>
+<p>[java] view plaincopy
+ </p>
+<p>Student stu = (Student)BeanUtils.getSpringBean("student");  </p>
+<p>2.6用JSONObject工具打印一下stu对象的值
+ 
+ </p>
+<p>[java] view plaincopy
+ </p>
+<p>System.out.println(JSONObject.fromObject(stu).toString());  </p>
+<p>2.7运行结果为：
+ 
+ </p>
+<p>[plain] view plaincopy
+ </p>
+<p>{"course":"Java","id":"1012010638","name":"Haibo","remarks":"Come from Properties","score":90}  </p>
+<p>未经允许不得用于商业目的</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

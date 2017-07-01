@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>同IP不同端口Session冲突问题</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/4068.html" rel="bookmark"
+                   title="Permalink to 同IP不同端口Session冲突问题">同IP不同端口Session冲突问题</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>同IP不同端口Session冲突问题</p>
+<p>分类： tomcat2013-09-24 11:19 1146人阅读 评论(0) 收藏 举报</p>
+<p>一个服务器上搭建了多个tomcat或者weblogic，端口不一样，同时启动访问时session丢失。如：A，B两个服务，在浏览器中登录访问A后，当前打开的浏览器上在开一个选项卡访问B服务后，回过来点击访问A时session丢失，需要重新登录A才可以访问。经过资料查找，发现问题是因为：IP相同认为是同一个域,接收了B的set-cookie指令,把对应的cookie内容覆盖了,其中包括jsessionid,造成A的session丢失。 如果IP不同,则不会发生这个问题。IP相同的两个session对应的cookie是一样的，而不幸的是sessionID就保存在cookie中，这样先访问A，再访问B的时候，B的sessionid会覆盖A的sessionid。这个事情没办法解决，所以你不要搞两个端口，最好是搞两个IP。原来都是cookie惹的祸，它不会区分端口，造成这多个站点不断的后来的覆盖前面的，从而造成session的丢失。
+        解决方法：
+方法1：将不同的多个应用服务在不同的虚拟主机中，或者映射不同的IP进行部署。
+方法2：对应tomcat服务处理方式：修改coocie的名称保证cookie不重复，即jsessionid的不重称，保证ip相同下sessioncookiename域名不同。
+           1、tomcat5修改方法
+在启动项中增加org.apache.catalina.SESSION_COOKIE_NAME参数</p>
+<p>linuxJAVA_OPTS=’-Dorg.apache.catalina.SESSION_COOKIE_NAME=yousessionname‘
+winset JAVA_OPTS=”-Dorg.apache.catalina.SESSION_COOKIE_NAME=yousessionname“</p>
+<p>2、tomcat6和tomcat7修改方法相同
+       tomcat增加参数对所有Context生效，影响甚大，所以到以后的版本可以就仅针对Context设置了
+        在Context容器标签上增加sessionCookieName参数</p>
+<p>&lt;Context path=”/” docBase=”webapp” reloadable=”false”sessionCookieName=”yoursessionname”&gt;&lt;/Context&gt;</p>
+<p>3、weblogic修改方法
+          设置各个应用使用不同的cookie-name。
+         weblogic的设置（设置不同的cookie-name）：         请在WEB-INFWeblogic.xml添加如下代码                  &lt;session-descriptor&gt;                                    &lt;cookie-name&gt;JSESSIONID1&lt;/cookie-name&gt;                     &lt;/session-descriptor&gt;  
+ 
+http://blog.csdn.net/isshquery/article/details/8493231
+http://blog.163.com/wendy_xiaoyue/blog/static/19040105120111114105829574/</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

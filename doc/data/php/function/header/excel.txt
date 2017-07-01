@@ -1,0 +1,65 @@
+====== 基于PHP导出Excel的小经验 完美解决乱码问题 ======
+
+
+
+
+本篇文章是对PHP导出Excel乱码问题的解决方法就行了详细的分析介绍，需要的朋友参考下\\
+我在PHP项目里要求把数据导出为Excel,并且数据中包含中文.\\
+网上大概了解一下可是使用PHPExcel,可是相对我的需求,这个框架太复杂了.于是还是想找找简单做法.\\
+网上发现其实最简单可以这样写,但问题是这种做法中文的编码不可靠..\\
+复制代码 代码如下:
+<code>
+<?php \\
+header("Content-type:application/vnd.ms-excel"); \\
+header("Content-Disposition:attachment;filename=export_data.xls"); \\
+echo   "姓名"."<nowiki>\</nowiki>t";  \\
+echo   "繁體"."<nowiki>\</nowiki>t";  \\
+echo   "博客"."<nowiki>\</nowiki>t";  \\
+echo   "<nowiki>\</nowiki>n";  \\
+echo   "jason"."<nowiki>\</nowiki>t";  \\
+echo   "@"."<nowiki>\</nowiki>t";  \\
+echo   "javaeye"."<nowiki>\</nowiki>t";  \\
+?>
+</code>
+有些同学会想到header加入字符集\\
+复制代码 代码如下:
+
+header("Content-type:application/vnd.ms-excel;charset=UTF-8");
+
+问题: 这里只是告诉浏览器要选什么字符集查看,最终我的需求还是要生成xls文件.\\
+当然.有些同学还会想到用iconv转码.\\
+复制代码 代码如下:
+
+echo iconv("当前编码","GB18030","此博客来源于javaeye,by jason");
+
+问题: 这样文件里的汉字编码就GB18030,可是Excel这么知道用什么编码打开呢?只能完全依赖OS默认.可是如果碰到繁体BIG5这么办,还是会乱码. 所以还是不靠谱.\\
+最后我采用phpMyAdmin的做法.用HTMLExcel, HTML我们比较熟悉,格式如下.\\
+复制代码 代码如下:
+<code>
+<html xmlns:o="urn:schemas-microsoft-com:office:office" \\
+xmlns:x="urn:schemas-microsoft-com:office:excel" \\
+xmlns="http://[[http://www.w3.org/TR/REC-html40|www.w3.org/TR/REC-html40"]]> \\
+<!DOCTYPE html PUBLIC "-// W3C//DTD XHTML 1.0 Transitional//EN" "http://[[http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd|www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"]]> \\
+<html> \\
+<head> \\
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" /> \\
+<style id="Classeur1_16681_Styles"></style> \\
+</head> \\
+<body> \\
+<div id="Classeur1_16681" align=center x:publishsource="Excel"> \\
+<table x:str border=0 cellpadding=0 cellspacing=0 width=100% style="border-collapse: collapse"> \\
+<tr><td class=xl2216681 nowrap>1234</td><td class=xl2216681 nowrap>Robbin会吐口水</td></tr> \\
+<tr><td class=xl2216681 nowrap>5678</td><td class=xl2216681 nowrap>javaeye网站</td></tr> \\
+</table> \\
+</div> \\
+</body> \\
+</html>  
+</code>
+这下可以直接echo了,又不需要iconv转码,只要设置好HTML里的Content-type(这里用的是UTF-8),是不是有舒服的感觉呢? 当然header还是要加上\\
+复制代码 代码如下:  header("Content-type:application/vnd.ms-excel"); \\
+header("Content-Disposition:attachment;filename=export_data.xls"); \\
+//////
+
+////
+
+////

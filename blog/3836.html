@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>使用Spring MVC统一异常处理实战</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3836.html" rel="bookmark"
+                   title="Permalink to 使用Spring MVC统一异常处理实战">使用Spring MVC统一异常处理实战</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>博客分类：
+ 
+J2EE
+Spring
+Spring MVC
+案例文档</p>
+<p>SpringMVC异常处理 </p>
+<p>1 描述 在J2EE项目的开发中，不管是对底层的数据库操作过程，还是业务层的处理过程，还是控制层的处理过程，都不可避免会遇到各种可预知的、不可预知的异常需要处理。每个过程都单独处理异常，系统的代码耦合度高，工作量大且不好统一，维护的工作量也很大。 那么，能不能将所有类型的异常处理从各处理过程解耦出来，这样既保证了相关处理过程的功能较单一，也实现了异常信息的统一处理和维护？答案是肯定的。下面将介绍使用Spring MVC统一处理异常的解决和实现过程。 2 分析 Spring MVC处理异常有3种方式： （1）使用Spring MVC提供的简单异常处理器SimpleMappingExceptionResolver； （2）实现Spring的异常处理接口HandlerExceptionResolver 自定义自己的异常处理器； （3）使用@ExceptionHandler注解实现异常处理； 3 实战 3.1 引言 为了验证Spring MVC的3种异常处理方式的实际效果，我们需要开发一个测试项目，从Dao层、Service层、Controller层分别抛出不同的异常，然后分别集成3种方式进行异常处理，从而比较3种方式的优缺点。 3.2 实战项目 3.2.1 项目结构  3.2.2 Dao层代码 </p>
+<p>Java代码  </p>
+<p>@Repository("testDao")  
+public class TestDao {  
+    public void exception(Integer id) throws Exception {  </p>
+<p>switch(id) {  </p>
+<p>case 1:  </p>
+<p>throw new BusinessException("12", "dao12");  </p>
+<p>case 2:  </p>
+<p>throw new BusinessException("22", "dao22");  </p>
+<p>case 3:  </p>
+<p>throw new BusinessException("32", "dao32");  </p>
+<p>case 4:  </p>
+<p>throw new BusinessException("42", "dao42");  </p>
+<p>case 5:  </p>
+<p>throw new BusinessException("52", "dao52");  </p>
+<p>default:  </p>
+<p>throw new ParameterException("Dao Parameter Error");  </p>
+<p>}  
+    }  
+}  </p>
+<p>3.2.3 Service层代码 </p>
+<p>Java代码  </p>
+<p>public interface TestService {  
+    public void exception(Integer id) throws Exception;  </p>
+<p>public void dao(Integer id) throws Exception;  </p>
+<p>}  
+  
+@Service("testService")  
+public class TestServiceImpl implements TestService {  
+    @Resource  </p>
+<p>private TestDao testDao;  </p>
+<p>public void exception(Integer id) throws Exception {  </p>
+<p>switch(id) {  </p>
+<p>case 1:  </p>
+<p>throw new BusinessException("11", "service11");  </p>
+<p>case 2:  </p>
+<p>throw new BusinessException("21", "service21");  </p>
+<p>case 3:  </p>
+<p>throw new BusinessException("31", "service31");  </p>
+<p>case 4:  </p>
+<p>throw new BusinessException("41", "service41");  </p>
+<p>case 5:  </p>
+<p>throw new BusinessException("51", "service51");  </p>
+<p>default:  </p>
+<p>throw new ParameterException("Service Parameter Error");  </p>
+<p>}  
+    }  
+  
+    @Override  </p>
+<p>public void dao(Integer id) throws Exception {  </p>
+<p>testDao.exception(id);  
+    }  
+}  </p>
+<p>3.2.4 Controller层代码 </p>
+<p>Java代码  </p>
+<p>@Controller  
+public class TestController {  
+    @Resource  </p>
+<p>private TestService testService;  </p>
+<p>@RequestMapping(value = "/controller.do", method = RequestMethod.GET)  </p>
+<p>public void controller(HttpServletResponse response, Integer id) throws Exception {  </p>
+<p>switch(id) {  </p>
+<p>case 1:  </p>
+<p>throw new BusinessException("10", "controller10");  </p>
+<p>case 2:  </p>
+<p>throw new BusinessException("20", "controller20");  </p>
+<p>case 3:  </p>
+<p>throw new BusinessException("30", "controller30");  </p>
+<p>case 4:  </p>
+<p>throw new BusinessException("40", "controller40");  </p>
+<p>case 5:  </p>
+<p>throw new BusinessException("50", "controller50");  </p>
+<p>default:  </p>
+<p>throw new ParameterException("Controller Parameter Error");  </p>
+<p>}  
+    }  
+      
+    @RequestMapping(value = "/service.do", method = RequestMethod.GET)  </p>
+<p>public void service(HttpServletResponse response, Integer id) throws Exception {  </p>
+<p>testService.exception(id);  
+    }  
+      
+    @RequestMapping(value = "/dao.do", method = RequestMethod.GET)  </p>
+<p>public void dao(HttpServletResponse response, Integer id) throws Exception {  </p>
+<p>testService.dao(id);  
+    }  
+}  </p>
+<p>3.2.5 JSP页面代码 </p>
+<p>Java代码  </p>
+<p>&lt;%@ page contentType="text/html; charset=UTF-8"%&gt;  </p>
+<p>&lt;html&gt;  
+&lt;head&gt;  
+&lt;title&gt;Maven Demo&lt;/title&gt;  
+&lt;/head&gt;  
+&lt;body&gt;  
+&lt;h1&gt;所有的演示例子&lt;/h1&gt;  
+&lt;h3&gt;[url=./dao.do?id=1]Dao正常错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;h3&gt;[url=./dao.do?id=10]Dao参数错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;h3&gt;[url=./dao.do?id=]Dao未知错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;h3&gt;[url=./service.do?id=1]Service正常错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;h3&gt;[url=./service.do?id=10]Service参数错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;h3&gt;[url=./service.do?id=]Service未知错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;h3&gt;[url=./controller.do?id=1]Controller正常错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;h3&gt;[url=./controller.do?id=10]Controller参数错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;h3&gt;[url=./controller.do?id=]Controller未知错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;h3&gt;[url=./404.do?id=1]404错误[/url]&lt;/h3&gt;  </p>
+<p>&lt;/body&gt;  
+&lt;/html&gt;  </p>
+<p>3.3 集成异常处理 3.3.1 使用SimpleMappingExceptionResolver实现异常处理 1、在Spring的配置文件applicationContext.xml中增加以下内容： </p>
+<p>Xml代码  </p>
+<p>&lt;bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"&gt;  
+    &lt;!-- 定义默认的异常处理页面，当该异常类型的注册时使用 --&gt;  </p>
+<p>&lt;property name="defaultErrorView" value="error"&gt;&lt;/property&gt;  </p>
+<p>&lt;!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception --&gt;  </p>
+<p>&lt;property name="exceptionAttribute" value="ex"&gt;&lt;/property&gt;  </p>
+<p>&lt;!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 --&gt;  </p>
+<p>&lt;property name="exceptionMappings"&gt;  </p>
+<p>&lt;props&gt;  </p>
+<p>&lt;prop key="cn.basttg.core.exception.BusinessException"&gt;error-business&lt;/prop&gt;  </p>
+<p>&lt;prop key="cn.basttg.core.exception.ParameterException"&gt;error-parameter&lt;/prop&gt;  </p>
+<p>&lt;!-- 这里还可以继续扩展对不同异常类型的处理 --&gt;  </p>
+<p>&lt;/props&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>2、启动测试项目，经验证，Dao层、Service层、Controller层抛出的异常（业务异常BusinessException、参数异常ParameterException和其它的异常Exception）都能准确显示定义的异常处理页面，达到了统一异常处理的目标。 3、从上面的集成过程可知，使用SimpleMappingExceptionResolver进行异常处理，具有集成简单、有良好的扩展性、对已有代码没有入侵性等优点，但该方法仅能获取到异常信息，若在出现异常时，对需要获取除异常以外的数据的情况不适用。 3.3.2 实现HandlerExceptionResolver 接口自定义异常处理器 1、增加HandlerExceptionResolver 接口的实现类MyExceptionHandler，代码如下： </p>
+<p>Java代码  </p>
+<p>public class MyExceptionHandler implements HandlerExceptionResolver {  
+  
+    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,  </p>
+<p>Exception ex) {  
+        Map&lt;String, Object&gt; model = new HashMap&lt;String, Object&gt;();  </p>
+<p>model.put("ex", ex);  </p>
+<p>// 根据不同错误转向不同页面  </p>
+<p>if(ex instanceof BusinessException) {  </p>
+<p>return new ModelAndView("error-business", model);  </p>
+<p>}else if(ex instanceof ParameterException) {  </p>
+<p>return new ModelAndView("error-parameter", model);  </p>
+<p>} else {  </p>
+<p>return new ModelAndView("error", model);  </p>
+<p>}  
+    }  
+}  </p>
+<p>2、在Spring的配置文件applicationContext.xml中增加以下内容： </p>
+<p>Xml代码  </p>
+<p>&lt;bean id="exceptionHandler" class="cn.basttg.core.exception.MyExceptionHandler"/&gt;  </p>
+<p>3、启动测试项目，经验证，Dao层、Service层、Controller层抛出的异常（业务异常BusinessException、参数异常ParameterException和其它的异常Exception）都能准确显示定义的异常处理页面，达到了统一异常处理的目标。 4、从上面的集成过程可知，使用实现HandlerExceptionResolver接口的异常处理器进行异常处理，具有集成简单、有良好的扩展性、对已有代码没有入侵性等优点，同时，在异常处理时能获取导致出现异常的对象，有利于提供更详细的异常处理信息。 3.3.3 使用@ExceptionHandler注解实现异常处理 1、增加BaseController类，并在类中使用@ExceptionHandler注解声明异常处理，代码如下： </p>
+<p>Java代码  </p>
+<p>public class BaseController {  
+    /*<em> 基于@ExceptionHandler异常处理 </em>/  </p>
+<p>@ExceptionHandler  </p>
+<p>public String exp(HttpServletRequest request, Exception ex) {  </p>
+<p>request.setAttribute("ex", ex);  </p>
+<p>// 根据不同错误转向不同页面  </p>
+<p>if(ex instanceof BusinessException) {  </p>
+<p>return "error-business";  </p>
+<p>}else if(ex instanceof ParameterException) {  </p>
+<p>return "error-parameter";  </p>
+<p>} else {  </p>
+<p>return "error";  </p>
+<p>}  
+    }  
+}  </p>
+<p>2、修改代码，使所有需要异常处理的Controller都继承该类，如下所示，修改后的TestController类继承于BaseController： </p>
+<p>Java代码  </p>
+<p>public class TestController extends BaseController  </p>
+<p>3、启动测试项目，经验证，Dao层、Service层、Controller层抛出的异常（业务异常BusinessException、参数异常ParameterException和其它的异常Exception）都能准确显示定义的异常处理页面，达到了统一异常处理的目标。 4、从上面的集成过程可知，使用@ExceptionHandler注解实现异常处理，具有集成简单、有扩展性好（只需要将要异常处理的Controller类继承于BaseController即可）、不需要附加Spring配置等优点，但该方法对已有代码存在入侵性（需要修改已有代码，使相关类继承于BaseController），在异常处理时不能获取除异常以外的数据。 3.4 未捕获异常的处理 对于Unchecked Exception而言，由于代码不强制捕获，往往被忽略，如果运行期产生了Unchecked Exception，而代码中又没有进行相应的捕获和处理，则我们可能不得不面对尴尬的404、500……等服务器内部错误提示页面。 我们需要一个全面而有效的异常处理机制。目前大多数服务器也都支持在Web.xml中通过&lt;error-page&gt;(Websphere/Weblogic)或者&lt;error-code&gt;(Tomcat)节点配置特定异常情况的显示页面。修改web.xml文件，增加以下内容： </p>
+<p>Xml代码  </p>
+<p>&lt;!-- 出错页面定义 --&gt;  
+&lt;error-page&gt;  
+    &lt;exception-type&gt;java.lang.Throwable&lt;/exception-type&gt;  </p>
+<p>&lt;location&gt;/500.jsp&lt;/location&gt;  </p>
+<p>&lt;/error-page&gt;  
+&lt;error-page&gt;  
+    &lt;error-code&gt;500&lt;/error-code&gt;  </p>
+<p>&lt;location&gt;/500.jsp&lt;/location&gt;  </p>
+<p>&lt;/error-page&gt;  
+&lt;error-page&gt;  
+    &lt;error-code&gt;404&lt;/error-code&gt;  </p>
+<p>&lt;location&gt;/404.jsp&lt;/location&gt;  </p>
+<p>&lt;/error-page&gt;  
+  
+&lt;!-- 这里可继续增加服务器错误号的处理及对应显示的页面 --&gt;  </p>
+<p>4 解决结果 1、运行测试项目显示的首页，如下图所示： 2、业务错误显示的页面，如下图所示： 3、参数错误显示的页面，如下图所示： 4、未知错误显示的页面，如下图所示： 5、服务器内部错误页面，如下图所示： 5 总结 综合上述可知，Spring MVC集成异常处理3种方式都可以达到统一异常处理的目标。从3种方式的优缺点比较，若只需要简单的集成异常处理，推荐使用SimpleMappingExceptionResolver即可；若需要集成的异常处理能够更具个性化，提供给用户更详细的异常信息，推荐自定义实现HandlerExceptionResolver接口的方式；若不喜欢Spring配置文件或要实现“零配置”，且能接受对原有代码的适当入侵，则建议使用@ExceptionHandler注解方式。 6 源代码 源代码项目如下所示，为Maven项目，若需运行，请自行获取相关的依赖包。 点击这里获取源代码 7 参考资料 [1] Spring MVC统一处理异常的方法 http://hi.baidu.com/99999999hao/blog/item/25da70174bfbf642f919b8c3.html [2] SpringMVC 异常处理初探 http://exceptioneye.iteye.com/blog/1306150 [3] Spring3 MVC 深入研究 http://elf8848.iteye.com/blog/875830 [4] Spring MVC异常处理 http://blog.csdn.net/rj042/article/details/7380442</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>GSON使用笔记（3） -- 如何反序列化出List</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/4038.html" rel="bookmark"
+                   title="Permalink to GSON使用笔记（3） -- 如何反序列化出List">GSON使用笔记（3） -- 如何反序列化出List</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>GSON使用笔记（3） -- 如何反序列化出List
+时间 2014-06-26 17:57:06  CSDN博客原文  http://blog.csdn.net/zxhoo/article/details/34856061</p>
+<p>本文通过3个问题来讨论如何使用 GSON 把JSON反序列化为List。</p>
+<p>问题1
+有这样两个类：
+class MyObj {
+    int x;
+}</p>
+<p>class MyList {
+    List&lt;MyObj&gt; objList = new LinkedList&lt;&gt;();
+}
+那下面的测试能通过吗？
+@Test
+    public void test1() {
+        MyList myList = new Gson().fromJson("{objList:[]}", MyList.class);
+        Assert.assertEquals(LinkedList.class, myList.objList.getClass());
+    }
+答案1
+答案是，测试 通不过 ！原因是GSON不知道objList的具体类型，因此只能选择默认的ArrayList。更详细的解释，可以参考这篇文章和ConstructorConstructor类的源代码。如果确实想让GSON创建LinkedList实例该怎么办呢？也简单，就是给objList一个更具体的类型：
+class MyList {
+    LinkedList&lt;MyObj&gt; objList = new LinkedList&lt;&gt;();
+}
+问题2
+下面的测试能通过吗？
+@Test
+    public void test2() {
+        ArrayList&lt;?&gt; list = new Gson().fromJson("[{x:1}]", ArrayList.class);
+        Assert.assertEquals(1, list.size());
+        Assert.assertEquals(MyObj.class, list.get(0).getClass());
+    }
+答案2
+很明显，不能。因为fromJson方法不能从"[{x:1}]"参数推测出数组里放的是MyObj类型的对象，也无法从ArrayList.class参数得到这个信息。那么改成下面这样呢？
+ArrayList&lt;MyObj&gt; list = new Gson().fromJson("[{x:1}]", ArrayList&lt;MyObj&gt;.class);
+更糟糕，连编译都无法通过！因为Java的泛型是用 擦拭法
+实现的，说白了只是编译器提供给程序员的语法糖，根本不存在ArrayList&lt;MyObj&gt;这样一个类。那么怎样才能让GSON反序列化出我们想要的泛型对象呢？答案是，请TypeToken帮忙：
+@Test
+  public void test3() {
+    Type type = new TypeToken&lt;ArrayList&lt;MyObj&gt;&gt;() {}.getType();
+    ArrayList&lt;MyObj&gt; list = new Gson().fromJson("[{x:1}]", type);
+    Assert.assertEquals(1, list.size());
+    Assert.assertEquals(MyObj.class, list.get(0).getClass());
+  }
+GSON提供了 TypeToken 这个类来帮助我们捕获（capture）像ArrayList&lt;MyObj&gt;这样的泛型信息。test3()的第一行代码创建了一个 匿名内部类 ，这样，Java编译器就会把泛型信息编译到这个匿名内部类里，然后在运行时就可以被 getType() 方法用 反射API 提取到。
+问题3
+如果我想写一个通用的方法，把json反序列化成List，下面这个方法可行吗？
+public static &lt;T&gt; ArrayList&lt;T&gt; jsonToList(String json, Class&lt;T&gt; classOfT) {
+        Type type = new TypeToken&lt;ArrayList&lt;T&gt;&gt;() {}.getType();
+        return new Gson().fromJson(json, type);
+    }
+这个测试能通过吗？
+@Test
+    public void test4() {
+        ArrayList&lt;MyObj&gt; list = jsonToList("[{x:1}]", MyObj.class);
+        Assert.assertEquals(1, list.size());
+        Assert.assertEquals(MyObj.class, list.get(0).getClass());
+    }
+答案3
+答案是，方法不可行（虽然能编译通过），测试通不过！还是因为Java泛型的 擦除法 ，详细的回答可以看stackoverflow上的 这个问题 。那还有办法实现jsonToList()这个通用方法呢？有的，只是稍微复杂一点：
+public static &lt;T&gt; ArrayList&lt;T&gt; jsonToList(String json, Class&lt;T&gt; classOfT) {
+  Type type = new TypeToken&lt;ArrayList&lt;JsonObject&gt;&gt;(){}.getType();
+  ArrayList&lt;JsonObject&gt; jsonObjs = new Gson().fromJson(json, type);</p>
+<p>ArrayList&lt;T&gt; listOfT = new ArrayList&lt;&gt;();
+  for (JsonObject jsonObj : jsonObjs) {
+      listOfT.add(new Gson().fromJson(jsonObj, classOfT));
+  }</p>
+<p>return listOfT;
+    }
+分两步，先反序列化出ArrayList&lt;JsonObject&gt;，然后在一个个的把JsonObject转成classOfT类型的对象。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

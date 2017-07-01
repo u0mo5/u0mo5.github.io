@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>Java实现图片内容无损任意角度旋转</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3751.html" rel="bookmark"
+                   title="Permalink to Java实现图片内容无损任意角度旋转">Java实现图片内容无损任意角度旋转</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>转自：http://blog.csdn.net/heliang7/article/details/7309394
+主要问题是如何在图片做旋转后计算出新图片的长宽。
+在java 2d和基本math库的帮助下，其实利用简单的计算就可以知道。</p>
+<p>以下算法只是计算出旋转小于90度时的公式。当旋转大于90时，可以先把问题域换算到锐角的情况，再进行计算即可。
+如下图所示，需要计算出来的是len_delta的长度，就是有双竖线的位置，它是新图片要增加的宽。（要增加的高度同理可得。）
+其实只要知道len的长度，还有len和len_delta的夹角，就可以算出len_delta的长度了。
+1. len的长度。注意到它是等腰三角形的底边，顶角为angel， 容易得到len=2<em>R</em>sin(angel/2)
+2. len和len_delta的夹角。先可以计算出angel_alpha，也就是等腰三角形的底角 angel_alpha = (PI - angel) / 2
+    然后是R和原图像的底边的夹角angel_delta，显然其tan值是原图片的高宽比（注意计算增加的高度时是宽高比）。用arctan求出其角度。
+    len和len_delta的夹角 = PI - angel_alpha - angel_delta
+3. len_delta = len * cos(len和len_delta的夹角)</p>
+<p>java代码示例如下</p>
+<p>[java] view plaincopy</p>
+<p>&lt;pre name="code" class="java"&gt;import java.awt.Dimension;  </p>
+<p>import java.awt.Graphics2D;  
+import java.awt.Image;  
+import java.awt.Rectangle;  
+import java.awt.image.BufferedImage;  
+  
+public class RotateImage {  
+  
+    public static BufferedImage Rotate(Image src, int angel) {  </p>
+<p>int src_width = src.getWidth(null);  </p>
+<p>int src_height = src.getHeight(null);  </p>
+<p>// calculate the new image size  </p>
+<p>Rectangle rect_des = CalcRotatedSize(new Rectangle(new Dimension(  </p>
+<p>src_width, src_height)), angel);  
+  
+        BufferedImage res = null;  </p>
+<p>res = new BufferedImage(rect_des.width, rect_des.height,  </p>
+<p>BufferedImage.TYPE_INT_RGB);  
+        Graphics2D g2 = res.createGraphics();  
+        // transform  </p>
+<p>g2.translate((rect_des.width - src_width) / 2,  </p>
+<p>(rect_des.height - src_height) / 2);  </p>
+<p>g2.rotate(Math.toRadians(angel), src_width / 2, src_height / 2);  </p>
+<p>g2.drawImage(src, null, null);  </p>
+<p>return res;  </p>
+<p>}  
+  
+    public static Rectangle CalcRotatedSize(Rectangle src, int angel) {  </p>
+<p>// if angel is greater than 90 degree, we need to do some conversion  </p>
+<p>if (angel &gt;= 90) {  </p>
+<p>if(angel / 90 % 2 == 1){  </p>
+<p>int temp = src.height;  </p>
+<p>src.height = src.width;  
+                src.width = temp;  
+            }  
+            angel = angel % 90;  </p>
+<p>}  
+  
+        double r = Math.sqrt(src.height <em> src.height + src.width </em> src.width) / 2;  </p>
+<p>double len = 2 <em> Math.sin(Math.toRadians(angel) / 2) </em> r;  </p>
+<p>double angel_alpha = (Math.PI - Math.toRadians(angel)) / 2;  </p>
+<p>double angel_dalta_width = Math.atan((double) src.height / src.width);  </p>
+<p>double angel_dalta_height = Math.atan((double) src.width / src.height);  </p>
+<p>int len_dalta_width = (int) (len * Math.cos(Math.PI - angel_alpha  </p>
+<p>- angel_dalta_width));  
+        int len_dalta_height = (int) (len * Math.cos(Math.PI - angel_alpha  </p>
+<p>- angel_dalta_height));  
+        int des_width = src.width + len_dalta_width * 2;  </p>
+<p>int des_height = src.height + len_dalta_height * 2;  </p>
+<p>return new java.awt.Rectangle(new Dimension(des_width, des_height));  </p>
+<p>}  
+}&lt;/pre&gt;&lt;br&gt;  
+&lt;pre&gt;&lt;/pre&gt;  
+&lt;p&gt;JUnit测试代码如下，将图片路径改为你自己准备测试用的图片路径即可。&lt;/p&gt;  
+&lt;p&gt;&lt;/p&gt;  
+&lt;pre name="code" class="java"&gt;&lt;pre name="code" class="java"&gt;import java.awt.image.BufferedImage;  </p>
+<p>import java.io.File;  
+import java.io.IOException;  
+  
+import javax.imageio.ImageIO;  
+  
+import junit.framework.Assert;  
+  
+import org.junit.Test;  
+  
+import Jugnoo.RotateImage;  
+  
+public class RotateImageTest {  
+  
+    @Test  </p>
+<p>public void testRotate() throws IOException {  </p>
+<p>BufferedImage src = ImageIO.read(new File("d:/dog.jpg"));  </p>
+<p>BufferedImage des = RotateImage.Rotate(src, 30);  </p>
+<p>Assert.assertNotNull(des);  
+        Assert.assertTrue(ImageIO.write(des, "jpg", new File("d:/dog2.jpg")));  </p>
+<p>// bigger angel  </p>
+<p>des = RotateImage.Rotate(src, 150);  </p>
+<p>Assert.assertNotNull(des);  
+        Assert.assertTrue(ImageIO.write(des, "jpg", new File("d:/dog3.jpg")));  </p>
+<p>// bigger angel  </p>
+<p>des = RotateImage.Rotate(src, 270);  </p>
+<p>Assert.assertNotNull(des);  
+        Assert.assertTrue(ImageIO.write(des, "jpg", new File("d:/dog4.jpg")));  </p>
+<p>}  
+  
+}&lt;/pre&gt;&lt;br&gt;  
+&lt;br&gt;  
+&lt;pre&gt;&lt;/pre&gt;  
+&lt;p&gt;&lt;/p&gt;  
+&lt;pre&gt;&lt;/pre&gt;  
+&lt;pre&gt;&lt;/pre&gt;  
+  </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

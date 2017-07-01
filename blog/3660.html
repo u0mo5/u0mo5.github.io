@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>面向对象---大纲笔记</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3660.html" rel="bookmark"
+                   title="Permalink to 面向对象---大纲笔记">面向对象---大纲笔记</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>面向对象的小结  1 封装     1 类：特征 行为 整体使用    2 方法：一段业务逻辑    3 访问修饰符：数据访问权限  2 继承    1 extends    2 只能继承1个类 但可以实现多个接口    3 子类继承父类后 将具有      {      子类的成员      父类的成员      }  3 多态    1意义：多种形态 提高扩展性 维护型     1.1 同一个类型的引用指向不同的对象 有不同的表现   ----cut     1.2 同一个对象被造型不同的类型时   有不同的功能   ----儿子他妈    2向上造型     父类的引用指向子类的对象    3强制转换     3.1 引用指向的对象就是该类型的     3.2 引用指向的对象实现了该接口     3.3 转换失败，classCastException类型转换失败哦      建议强转之前进行加instanceof判断</p>
+<p>面向对象内容 1类  对象
+类是对象的模板对象时类的实例
+先找对向 抽类 设计成员变量 和方法成员变量 对象的特征方法 对象的行为一个类可以创建多个对象这些对象 结构相同 数据不同
+引用类型之间画等号 传址 指向同一个对象直接类型之间画等号 传值 赋值
+一个文件中可以有多个类 但只能有一个 public 的类 而且这个类的名必须与文件名相同
+引用的值为null 不能点操作了 否则空指针异常
+====================================================== 　　2重载
+1.1. 方法的重载1.1.1. 方法的签名
+方法的签名包含如下两个方面：方法名和参数列表。Java语法规定，一个类中不可以有两个方法签名完全相同的方法，
+即：一个类中不可以有两个方法的方法名和参数列表都完全相同，
+但是，如果一个类的两个方法只是方法名相同而参数列表不同，是可以的。下面看下如下代码：
+-----------------------------------------------------------------  构造方法 
+构造方法 与类名同名 而且没有返回值类型构造方法常常给成员变量初始化构造方法传减对象时被自动调用若不写构造 编译器 默认提供了一个无参构造若自己写了 编译器不再默认提供构造方法可以重载
+this 指代当前对象 谁调用就是谁 局部变量给成员变量赋值     就近原则  全是局部变量类中的普通方法 默认的都隐式的有个this  成员和局部没冲突的时候 如果冲突就必须有thisthis.成员变量名   访问成员变量this.方法名()     调用方法this()            调用本类的构造方法
+  引用类型  数组
+============================================ 3内存管理 
+程序报内存不够 是jvm内存不够    修改jvm配置  堆 栈 方法区 不同的东西 放的位置不同堆 new 类 数组 接口 对象 成员变量 栈 局域变量------------------------------------------------------------
+堆用于存储new的对象，包括成员变量当对象没有任何引用指向时 被视为垃圾System.gc() 垃圾回收器不定时回收堆中的垃圾对象被回收 成员变量跟着消失 想快些 通过gc回收方法 可建议快点来收当无用对象一直没有被回收时 会造成内存的泄漏 严重的泄漏 会造成程序的崩溃 所以建议确定对象不在使用时 及时将对象设为null-----------------------------------------------------------------------栈 用于存储所有局部变量 调用方法时，在栈中分配该方法对应的栈帧 栈帧中包括方法参数及局部变量 统称局部变量 方法调用结束后 栈帧被清除 局部变量随之消失--------------------------------------------------------------------方法区 用于存储类的字节码 类中的字节码信息以及方法 方法只有一份
+======================================
+  继承
+　　　　　　　　　　继承 有效实现代码的重用 是为了多态　　　　　　　　　　 继承后 子类具有自己所特有和父类共有的 属性和方法 
+　　　　　　　　　　 extends 只能继承一个 　　　　　　　　　　构造子类之前 必须先构造父类 子类第一行默认有super();调用父类无参构造函数（构造器是不能被继承的）
+　　　　　　　　　　　　　　super 指代当前对象的父类对象　　　　　　　　　　　　　　super.   父类的成员变量　　　　　　　　　　　　　　super.方法  父类的方法　　　　　　　　　　　　　　super（）   父类的构造方法
+===================================
+ 4重写 
+  两个类 （子 父）  签名相同 方法体不同  子重写了父 能点出来什么 看类型 重写后调那个方法 看对象  Aoo  Boo  Aoo g()
+-----------------------------------
+　　　　　　　　　　　　　两小一大 
+-----------------------------------
+　　　　　　重写与重载区别
+重写方法重写发生在父子类之间，需要从写的方法必须与父类方法一致，访问权限可以上升 不可以下降 重载 ： 发生在一个类中， 两个方法的方法名一致，方法参数不同， 与返回值和访问权限无关
+=======================================================
+  访问修饰符
+访问控制修饰符public ：  　　　　公有的   　　　　　　同类 同包 子类 其他protected ：　　　受保护的  　　　　　同类 同包 子类default                 默认    　　　　　　同类 同包private ： 　　　　私有的   　　　　　  同类类的访问修饰 public 默认类成员访问修饰 4个全可以
+-------------------------------------------------------------------------------------   packge import
+========================================================= static 静态的   　　　　　　　　　　　　成员变量 静态变量 类 一份 类名.静态变量名 
+　　　　　　　　　　　　何时用： 所有对象共享这一数据    　　　　　　　　　　　实例变量  　　　　　　　　　　　　静态方法 类名.静态方法名   没有隐式的this的传递 其中不能你访问实例变量   　　　　　　　　　　　何时用 方法的处理只与方法的参数有关 与对象无关 　　　　　　　　　　　　块 属于类 方法区 一份  　　　　　　　　　　　　类被加载时执行 只执行一次 　　　　　　　　　　　　何时用 初始化静态资源
+----------------------------------------------
+静态方法中只能直接访问静态成员   可以new一个 间接访问非静态方法中 可以直接访问静态和非静态成员 -----------------------------------------何时用静态方法方法与对象无关 只与方法参数有关Math.random()Arrays.sort()---------------------------------------------------
+=========================================================== final 不可变  　　　　　　　　　　　　 1 修饰变量 意味变量不可改变　　　　　　　　　　　　　2 修饰方法 方法不能被重写　　　　　　　　　　　　　3 修饰类    类不能被继承
+------------------------------------------------
+　　　　　　　　
+1.1final 修饰变量a》修饰成员变量 两种方式初始化声明同时初始化构造函数初始化
+b》也可修饰局部变量 使用前初始化即可
+=========================================================== 5抽象类 　　　　　　　　　　abstract修饰词　　　　　被子类继承 封装公共的成员
+　　　　　　　　　　　　　　　抽象类的特点 　　　　　　　　　　　　　　　　1 有构造器的　　　　　　　　　　　　　　　　 2 可以有实现方法 有方法体 也可以没有方法体 　　　　　　　　　　　　　　　　3 可以没有抽象方法　　　　　　　　　　　　　　　　 4 抽象类 不可以面向对象 
+------------------------------------------------------------------------------------  接口　　　　　　　　　　　　interface声明　　　　　 指定 一个标准 规范 限制子类的行为
+接口可以看成是特殊的抽象类  是一个标准 一个规范   引用类型遵守了标准 就能干某件事接口 由interface 关键字定于 只能包含 常量 和抽象方法接口 不能 实例化-----完全抽象的抽象类 需要被实现类实现接口后 必须实现接口中所有抽象方法  public一个类可以实现多个接口若又继承又实现时 先继承后实现向上造型 父类可以是接口 抽象类注明引用子类对象类实现接口  接口继承接口
+======================================================================= 6多态
+ 向上造型 　　　　　　　　　父类型声明子类 通用 但只能调用父类 类型  不能 使用子类特殊部分
+-------------------------------------------------------------------------------------------------   内部类   　　　　　　　　　
+　　　　　　　　　　　　　　　   定义成员内部类   　　　　　　　　　　　　　　一个类outer可以定于在另一各类内部 inner 　　　　　　　　　　　　　　默认省略了Outer.this.(当前类的外部类对象) 　　　　　　　　　　　　　　内部类对象一般只在外部类中创建　　　　　　　　　　　　　　inner 通常只服务于 Outer 　　　　　　　　　　　　　　inner 可以直接访问 outer的成员outer.this.name  包括私有的
+-------------------------------------------------------------------------------------
+   内部类 四种：匿名内部类 成员内部类 静态内部类 局部内部类          1 成员内部类          class FemaleMonkey{          class LiuWM{          }          }    //相当于成员方法 可以有构造期                  2静态     class FemaleMonkey{          static class LiuWM{          }          }   //引用外部 的必须是static                  3局部  public void eat(){          (只能final) class Banana{                }            }        4匿名类   new Tread(){};   //实现接口
+===============================================================</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

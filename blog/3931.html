@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>SSH (Struts2+Spring3.0+Hibernate3)框架（二） 框架的配置</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3931.html" rel="bookmark"
+                   title="Permalink to SSH (Struts2+Spring3.0+Hibernate3)框架（二） 框架的配置">SSH (Struts2+Spring3.0+Hibernate3)框架（二） 框架的配置</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>一、准备工作：
+1. JDK -&gt; jdk1.6.0_17 安装(环境变量配置):
+　　JAVA_HOME = C: jdk1.6.0_17;
+　　PATH = %JAVA_HOME%in; %JAVA_HOME%jrein;
+　　CLASSPATH = .;%JAVA_HOME%lib  ools.jar;%JAVA_HOME%libdt.jar;
+在Cmd -&gt; java –version 查看JDK的版本是否与刚配好的版本一致。
+2. apache-tomcat-6.0.24：解压即可；3. myEclipse 8.5：安装(略)：
+　　最高可提供：　　
+　　框架：Java EE 5 　　
+　　Spring 3.0
+　　Hibernate 3.3
+　　Struts 2.1 4.
+　　DB：以MySQL 5.1为例。
+ 
+二、打开myEclipse先配置好Tomcat服务器和JDK 操作好下图所示：
+　　1. Window -&gt; Preferences -&gt; Java: Installed JREs 在这里可以不使用myEclipse自带的JDK，得Add…自己安装好的JDK：
+　　2. Window -&gt; Preferences -&gt; MyEclipse -&gt; Servers: Tomcat 6.x  在这里配置Tomcat服务器，我们这里是选择6.x。Browse…自己将Tomcat解压放的目录，再选择Enable，将它启用，然后Apply应用一下就Ok了。
+　　3. Window -&gt; Preferences: Tomcat 6.x -&gt; JDK 选择前面我们配好的JDK版本。　　4. 现在我们来启动Tomcat服务器，打开内部的浏览器测试Tomcat有没有配置成功，如下图所示：则表示Tomcat服务器配置成功。
+　　5. Window -&gt; Preferences -&gt; Java -&gt; Build Path: User Libraries 在这里配置用户自己要用jar包的Libraries。&lt;说明&gt; 这一步可以到后面需要添加自己的jar包时，再做也可以的。
+　　6. Window -&gt; Preferences -&gt; Java Build Path：在这里将自己上面配置好的Libraries添加到编译请求的路径里。&lt;说明&gt; 这一步可以到后面需要添加自己的jar包时，再做也可以的。三、创建好Web项目，最先Add Spring如下图所示：
+　　1. 选择项目名，右击 -&gt;MyEclipse -&gt;Add Spring Capabilities…
+　　2. 勾选好Spring3.0 的五个核心Libraries，注意将它们Copy到/WebRoot/WEB-INF/lib目录下，再点击Next &gt; ：
+　　3. 完成后，项目中将会出现Spring添加的东西，有时候可能会出现不名的错误，现在暂时不需管它(推荐刷新项目)，有些原因是因为Spring的Xml配置文件里引入的东西有冲突。
+四、创建数据源，切换到MyEclipse Database Explorer 窗口，如下图所示：
+　　1. 在左边DB Browser的窗口里，右击选择New…新建一个数据源，出如下图所示的窗口：根据自己项目所建的数据库来选择配置，引入连接驱动JARs包。
+　　2. 配好后，点击Test Driver来测试配置连接是否成功。下图所示则表示成功了，再进行下一步操作。　　3. Schema Details选择连接映射的数据库，没必要将全部的数据库连接进来。
+　　4. 配置好以后，然后选择它将它Open connection…打开看一看，能否将数据连接过来：五、再将窗口切换回来，现在添加Hibernate 3.3　　1. 选择项目名，右击 -&gt;MyEclipse -&gt;Add Hibernate Capabilities…，这里可以选择支持Annotations注解方式来进行SSH的集成。注意将Library Copy到/WebRoot/WEB-INF/lib目录下：
+　　2. 在对话框中选择Spring configuration file，表示我们希望将Hibernate托管给Spring进行管理，这是将Hibernate与Spring进行整合的基础。然后点击Next：
+　　3. 在出现的对话框中选择Existing Spring configuration file。因为我们已经添加了Spring的配置文件，所以这里选择的是已存在的配置文件。MyEclipse会自动找到存在的那个文件。　　然后在SessionFactory ID中输入Hibernate的SessionFactory在Spring配置文件中的Bean ID的名字，这里我们输入sessionFactory即可。然后点击Next：
+　　4. 在出现的对话框中的Bean Id里面输入数据源在Spring中的Bean ID的名字，这里我们输入dataSource。然后在DB Driver里面选择我们刚刚配置好的ssh，MyEclipse会将其余的信息自动填写到表格里面。然后点击Next　　5. 在出现的对话框中取消Create SessionFactory class。点击Finish即可。
+六、最后再Add Struts Capabilities: Struts2.1　　1. 选择Struts 2.x之后配置窗口会变成下图所示，导入Struts2.1的Jars不可选入到/WebRoot/WEB-INF/lib目录下。（以后我们再讲怎自己手动Add Struts整合）　　2. 下一步再根据自己的情况另勾选Struts集成的应用包，Finish 一下就好了。 
+　　第二种： 自己手动添加Struts整合：找到自己收录的Struts 2.x架包，手动将Jars Ctrl+C再Ctrl+V到/WebRoot/WEB-INF/lib目录下， 再将主要的xml配置文件struts.xml拷贝到~/src/目录下即可。</p>
+<p>到这里，我们整个项目的框架就算初步成形了，下面我们可以到MyEclipse Java Enterprise视图下查看一下整个项目的结构，再进行后续操作。如下图所示：
+七、Hibernate Reverse Engineering反向生成Pojo类，自动生成映射关系：　　1. 再进入到MyEclipse Database Explorer视图，全选中所有的表，右击选择Hibernate Reverse Engineering…操作，如下图所示：　　2. Java src folder: 选项Browse…到自己新建好的包下面，我这里是放到Model(或者DTO)层，如下图所示：
+　　3. 再选择<em>.hbm.xml和POJO映射，注意我们不需选择：□Create abstract class，再Next:　　4. 下一步再选择Id Generator的生成策略，我们选native，再点Next&gt;，如下图所示:
+　　5. 接下来，默认选项，直接点击Finish完成这项操作，如下图所示：　　6. 最后回到MyEclipse Java Enterprise视图，查看是否已成功生成映射文件，如下图所示：　　
+　　到这里我们就将SSH整合的所有操作都做好了，接下来就是进行编码工作，修改相应的XML配置文件，最后到完成项目，发布web项目， 启动web服务器，运行测试项目。祝君马到成功！~<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong></em>*
+ </p>
+<p>分类: web开发框架</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>

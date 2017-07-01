@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>Ubuntu下安装使用Xfce4</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://u0mo5.github.io/blog/theme/pygment.css" />
+
+        <script src="http://u0mo5.github.io/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="http://u0mo5.github.io/blog/">读书圈博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://u0mo5.github.io/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="http://u0mo5.github.io/blog/3623.html" rel="bookmark"
+                   title="Permalink to Ubuntu下安装使用Xfce4">Ubuntu下安装使用Xfce4</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="http://u0mo5.github.io/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>安装：
+代码:
+sudo  apt-get  install  xfce4  xfce4-taskbar-plugin
+(xfce4-taskbar-plugin是我需要，你可不用，完整安装xfce4 的桌面环境: sudo apt-get install xfld-desktop ) 现在直接 sudo apt-get install xubuntu-desktop 就可以了！ 会安装以下组件：
+引用:
+a2ps (1:4.13b-4.2ubuntu0.1) emacsen-common (1.4.15) gtk2-engines-xfce (2.3.0cvs20050306-2) libdbh1.0-1 (1.0.22-1) libgtkhtml2-0 (2.6.3-1) libxfce4mcs-client-2 (4.2.1-1) libxfce4mcs-manager-2 (4.2.1-1) libxfce4util-1 (4.2.1-1) libxfcegui4-3 (4.2.1-1) mousepad (0.2.0-1ubuntu1) rox-filer (1:2.2.0-xfld.2) xfcalendar (4.2.1-1ubuntu1) xfce4 (4.2.1.1-2ubuntu2) xfce4-appfinder (4.2.1-1ubuntu1) xfce4-cpugraph-plugin (0.2.2.xfld-3ubuntu1) xfce4-icon-theme (4.2.1-1) xfce4-iconbox (4.2.1-1ubuntu1) xfce4-mcs-manager (4.2.1-1ubuntu1) xfce4-mcs-plugins (4.2.1-1ubuntu2) xfce4-mixer (1:4.2.1-2ubuntu1) xfce4-mixer-lib-alsa (1:4.2.1-2ubuntu1) xfce4-panel (4.2.1.1-1ubuntu1) xfce4-session (4.2.1-2ubuntu1) xfce4-systray (4.2.1-1) xfce4-taskbar-plugin (0.2.2-3ubuntu1) xfce4-toys (4.2.1-1ubuntu1) xfce4-trigger-launcher (4.2.1-1ubuntu1) xfce4-utils (4.2.1-1) xfdesktop4 (4.3.6.4-1ubuntu2) xffm4 (1:4.2.1-1) xfprint4 (4.2.1-1ubuntu2) xfwm4 (4.2.1-1ubuntu1) xfwm4-themes (4.2.1-1)
+*2005/8/1注：今天在Archlinux讨论区看到一篇精简XFCE4的，我参照一下，相信在Ubuntu也行得通，虽然速度快，但肯定比默认少很多特性的。现在整理如下：
+引用:
+XFCE4有几十个包,大多是可选件. xfdesktop4 (4.3.6.4-1ubuntu2) xfwm4 (4.2.1-1ubuntu1) xfce4-panel (4.2.1.1-1ubuntu1) xfce4-session (4.2.1-2ubuntu1) xfce4-mcs-manager (4.2.1-1ubuntu1) 这5个包是核心啊,分别是 桌面管理器 窗口管理器 按钮面板 会话管理器 和 SETTINGS MANAGER.它们还依赖3个LIB开头的包,安装过程中这3个包会自动安装.这一共8个包,就是XFCE4正常运行的最小要求了. 在 ~/.xinitrc中添加exec /opt/xfce4/bin/xfce4-session,然后startx,桌面就出来了~~ 可是这桌面上还少了一个重要的东东,任务栏,也就是TASKBAR,不见了~~~ 任务栏是一个叫xftaskbar4的程序,包含在xfce-utils这个包里头,可是这个包里头的东东可多了,有用的也就一个xftaskbar4而已,没必要安装整个包的,大家可以去 http://www.xfce.org 下载xfce-utils的。如： http://www.us.xfce.org/archive/xfce-4.2 ... 2.2.tar.gz 先./configure --prefix,然后进一个叫xftaskbar的目录,进去单独make &amp; make install,一切OK了. （其实也可以直接安装 xfce4-taskbar-plugin (0.2.2-3ubuntu1) 这包，把任务栏显示在panel 上。add by yongyi） 精简后的XFCE4只有10来M,而且很大一部分是被LOCALE文件给占用的,LOCALE文件不影响运行速度,所以咱就留着它了~~~现在的XFCE4,哈哈,样子还是那么PL,可是运行速度直追BLACKBOX~~~哦耶!
+重启，在GDM的会话中就会有xfce会话的了。选择，登陆。 登陆系统时间比Gnome和KDE都要快，但肯定没ICEWM快的了[emot]laugh[/emot]。界面默认就给人感觉挺舒服的了。在设置管理器的“用户界面”和“窗口管理器”中选好自己喜欢的字体就可以正式使用了罗。 XFCE4自带了fstab manager和menu editer，方便极了。 使用小技巧： 一、xfce中如何添加桌面快捷方式？ 法一： 1. 在/etc/xdg/xfce4-session/xfce4-session.rc关于xfdesktop的注释掉，改成ROX如下 PHP代码:
+代码:</p>
+<h1>Client3_Command=xfdesktop Client3_Command=rox,-p,$USER</h1>
+<p>2.桌面图标只要打开ROX，把相应程序命令拖到桌面就可以了，如把/usr/bin/mozilla-firefox拖到桌面就行 桌面背景，菜单只要在ROX的选项里改 图标图形在图标上按右键会出现选项的 法二： 不用安装rox-session，使用桌面快捷方式和xfce4桌面菜单的方法 1. 安装 deskmenu apt-get install deskmenu 2. 修改 /etc/xfce4/default.session 2.1 将 /etc/xfce4/default.session 文件中的 xfdesktop &amp; 删除 2.2 在 /etc/xfce4/default.session 文件最后一行加上 rox -p Default &amp; deskmenu --button=3 --file=/etc/deskmenurc.debian &amp; 3. 重新启动会话，将“rox-filer”--“选项”--“相容性”--“pass all backdrop mouse clicks to windwos manager"选中。 4. 可以使用桌面快捷方式和xfce4桌面菜单了。但中文菜单显示不正常，可将其修改为英文。 将/etc/deskmenurc.debian文件以UTF-8编码保存，可以正常显示中文菜单了！ 法三：也可以使用idesk,nautilus等管理桌面而实现桌面图标。 二、怎样让scim自动启动呀？ 法一： 修改 ~/.config/xfce4/xinitrc : #增加下面一行 scim&amp; xftaskbar4&amp; xfdesktop&amp; xfcalendar &amp; 法二： test -d ~/Desktop/Autostart || mkdir -p ~/Desktop/Autostart cat &gt; ~/Desktop/Autostart/fcitx-autostart.sh &lt;&lt;EOF #!/bin/sh fcitx &amp; EOF chmod +x ~/Desktop/Autostart/fcitx-autostart.sh 三、怎样隐藏xfce自带的那个Taskbar？ 法一： 修改 ~/.config/xfce4/xinitrc : 把 xftaskbar4&amp; 注释掉 ： scim&amp; #xftaskbar4&amp; xfdesktop&amp; xfcalendar &amp; 法二： 找到~/.cache/sessions/xfce4-session-ubuntu:0文件，删除了含有xftaskbar4的行（共有3处）。重新启动X后就可以。 法三： 直接xkil掉顶部任务条 ，在主面板中添加任务栏； 退出xfce4，记得选“保存会话” 法四： 我的方法是。。。修改/etc/xdg/xfce4/xinitrc 注释掉xftaskbar4 四、Xfce设置键盘快捷键： 设置 --&gt; 窗口管理器 --&gt; 键盘 --&gt; 添加。 新添加之后，你会发现在~/.theme下会有你刚刚新添加的那个名字了。 五、Rox中在第二次打开中文名的HTML文件时会提示路径错误（乱码了）？ 原因是local与文件名编码不符，如locale 用了 UTF-8 ， 但是文件名用了 GBK 编码 把文件名编码转换为 utf8 就行： 好像是用iconv命令。我还没试，因为我打算用nautilus，但ROX真的很快！ 六、Trash or Recycle Bin怎么变出来？要在XFFM那看吗？可是在ROX删除了东东，在XFFM的垃圾桶那找不到！ 还发现Xffm中删除东西，在它自身的垃圾桶也找不到的，形同虚设了。 别人说是#kdesktop 或 #naulitus 就可以了，可为什么我这不行？看来还是要用nautilus或konqueror作为FM的了。 七、如何减少或增加workspace？ 找到~/.config/xfce4/mcs_settings/workspaces.xml，xml文件很明了，作相应减少或增加的修改就行了。 八、xfce4中利用添加启动器运行synaptic gnome-sudo synaptic：  九、如何不出现Gnome桌面运行nautilus？
+代码:
+nautilus --no-desktop --browser
+十、安装xfce icons (etiquette) 和 xfwm4 themes （其它主题安装方法类同） 下载 Etiquette Icons http://gnome-look.org/content/show.php?content=19853 到xfce论坛下载 etiquette.Xfce icons和 opus3-icomax themes 解压 etiquette &amp; etiquette Xfce into: $prefix$/share/icons 默认是: /usr/share/icons，并注意文件夹名是etiquette，而不是Etiquette 解压 opus3-icomax 到 /usr/share/themes 十一、相关资源： （1）xfce官方站： http://www.xfce.org/ http://xfce-goodies.berlios.de/ （从 Xfce-Goodies 项目页面上可以下载到和Xfce 4 桌面环境相关的附加程序和艺术品(图片图像)等。） (2)FAQ http://wiki.xfce.org/faq.zh_cn （3）主题 http://www.xfce-look.org/ （4）wiki http://wiki.ubuntu.org.cn/index.php/Xfc ... 4doc_index</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="http://u0mo5.github.io/blog/category/android.html">android</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/api.html">api</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/git.html">git</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/go.html">go</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/hack.html">hack</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/ios.html">ios</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/java.html">java</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/javascript.html">javascript</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/linux.html">linux</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/mysql.html">mysql</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/operation.html">operation</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/others.html">others</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/php.html">php</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/program.html">program</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/python.html">python</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/read.html">read</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/soft.html">soft</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/success.html">success</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/test.html">test</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/vcs.html">vcs</a></li>
+		<li><a href="http://u0mo5.github.io/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="http://bookfuns.com">读书圈</a></li>
+    <li><a href="http://123.bookfuns.com">网址大全</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="http://u0mo5.github.io/blog/theme/js/plugins.js"></script>
+</body>
+</html>
