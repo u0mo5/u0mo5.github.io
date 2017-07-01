@@ -3,9 +3,9 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'u0mo5'
-SITENAME = u'读书圈博客'
-SITEURL = 'http://u0mo5.github.io/blog'
-# SITEURL = ''
+SITENAME = u'逍遥の博客'
+# SITEURL = 'http://u0mo5.github.io/blog'
+SITEURL = '/blog'
 # SITEURL = 'http://127.0.0.1:43110/18nikLV3pMs6VGaUPGwr6TZuJKAFW4NezE'
 
 PATH = 'content'
