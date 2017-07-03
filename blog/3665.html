@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>由一个简单算法想到的程序员素养问题</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3665.html" rel="bookmark"
+                   title="Permalink to 由一个简单算法想到的程序员素养问题">由一个简单算法想到的程序员素养问题</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>题记：五月从帝都回到武汉，旅游半个月后开始找新工作，六月选择了一家华中地区为数不多的移动互联网公司入职至今，略有感触——比较帝都码农与武汉码农的平均水平，就跟两个城市的经济发展水平差异一样大，不是说武汉这边没有优秀的程序员（我也算半个嘛），而是说平均水平确实不如其他一线城市。想想也正常，巨头公司都扎堆北上广深，以极具竞争力的薪酬福利和巨头光环吸引着广大程序员，反观武汉的互联网发展尚处在初级阶段，无论从公司规模、名气还是最实际的薪酬福利方面均不如一线城市，自然无法吸引广大程序员咯。本人在新公司待了近三个月，慢慢发现代码中的一些问题，而这些问题中除开因为个人能力短时间无法解决的，剩下的就是我想探讨的程序员素养问题。
+ 
+　　先说下我所认为的程序员素养吧，我认为应包括以下几个方面呢：1，扎实的功底——扎实掌握操作系统，数据结构等大学基本课程，鼓吹基础无用论的，必定是个三流程序员。2，学习心态——对你所调用的，一定要有好奇心，尽可能花时间去了解API背后的东西，去了解系统框架是如何运作；对新的领域，一定要有好奇心，多尝试多学习，他山之石，可以攻玉。3，善于自学、总结、发问——工作后没有人去手把手教你，只要自己刻苦专研，并总结成博客或者笔记之类的成果，才又提高；在遇到自己能力范围内解决不了的问题，要善于向牛人请求点播，而一针见血的问题往往也会收获一针见血的回答。
+ 
+　　举一个简单的例子来讨论素养1，需求如下：已经完成排序的1万条数据，现在需要取前5000条作为最终数据，考虑到数据量较大，如果是新建列表，遍历旧列表的5000条并重新建立引用，有(引用类型所占字节 * 5000)字节的空间上的浪费，而且这种方式显得比较笨拙。
+ 
+　　所以，略加思索后写出了以下代码：
+ 
+复制代码
+List&lt;Item&gt; rankItems = new ArrayList&lt;Item&gt;();
+// 生成数据+排序
+...
+while (rankItems.size() &gt; 5000) {
+    rankItems.remove(rankItems.size() - 1);
+}
+复制代码
+　　简单分析，对于ArrayList大家都不陌生，是以数组方式实现的链表，remove(index)方法实质上调用的是System.arraycopy()方法，源码如下：
+ 
+复制代码
+    /<strong>
+     <em> Removes the object at the specified location from this list.
+     </em>
+     <em> @param index
+     </em>            the index of the object to remove.
+     <em> @return the removed object.
+     </em> @throws IndexOutOfBoundsException
+     <em code location &lt; 0 || &gt;=" size()">             when 
+     </em>/
+    @Override public E remove(int index) {
+        Object[] a = array;
+        int s = size;
+        if (index &gt;= s) {
+            throwIndexOutOfBoundsException(index, s);
+        }
+        @SuppressWarnings("unchecked") E result = (E) a[index];
+        System.arraycopy(a, index + 1, a, index, --s - index);
+        a[s] = null;  // Prevent memory leak
+        size = s;
+        modCount++;
+        return result;
+    }
+复制代码
+　　System.arraycopy()是native方法，调用的应该是C语言中的memcpy()，虽然copy的source地址和dest地址都是相同的，无需分配新内存，但是要经过5000次的内存IO读写才能删除ArrayList中的数据。究其原因是因为ArrayList的数组实现方式，不利于在指定位置做添加/删除操作，所以思考后有了以下代码：
+ 
+复制代码
+List&lt;Item&gt; rankItems = new LinkedList&lt;Item&gt;();
+// 生成数据+排序
+...
+while (rankItems.size() &gt; 5000) {
+    rankItems.remove(rankItems.size() - 1);
+}
+复制代码
+　　再分析LinkedList的删除效率，是否比ArrayList高了呢？LinkedList的remove(index)方法实现如下：
+ 
+复制代码
+/</strong>
+     <em> Removes the object at the specified location from this {@code LinkedList}.
+     </em>
+     <em> @param location
+     </em>            the index of the object to remove
+     <em> @return the removed object
+     </em> @throws IndexOutOfBoundsException
+     <em code location &lt; 0 || &gt;=" size()">             if 
+     </em>/
+    @Override
+    public E remove(int location) {
+        if (0 &lt;= location &amp;&amp; location &lt; size) {
+            Link&lt;E&gt; link = voidLink;
+            if (location &lt; (size / 2)) {
+                for (int i = 0; i &lt;= location; i++) {
+                    link = link.next;
+                }
+            } else {
+                for (int i = size; i &gt; location; i--) {
+                    link = link.previous;
+                }
+            }
+            Link&lt;E&gt; previous = link.previous;
+            Link&lt;E&gt; next = link.next;
+            previous.next = next;
+            next.previous = previous;
+            size--;
+            modCount++;
+            return link.data;
+        }
+        throw new IndexOutOfBoundsException();
+    }
+复制代码
+　　LinkedList的删除操作很简单，只需要修改指定index对象其前后对象的引用即可，但是在指针移动到指定index之前，需要移动1/2个列表长度，效率并非最高，能否将移动的操作也简化掉呢？既然是已排好序的列表，每次删除都删除列表末尾的对象，那我们可以使用LinkedList提供的removeLast()方法，代码如下：
+ 
+复制代码
+List&lt;Item&gt; rankItems = new LinkedList&lt;Item&gt;();
+// 生成数据+排序
+...
+while (rankItems.size() &gt; 5000) {
+    rankItems.removeLast();
+}
+复制代码
+　　分析removeLast()的效率，LinkedList的removeLast()方法实现如下：
+ 
+复制代码
+/<em><em>
+     </em> Removes the last object from this {@code LinkedList}.
+     </em>
+     <em> @return the removed object.
+     </em> @throws NoSuchElementException
+     <em>             if this {@code LinkedList} is empty.
+     </em>/
+    public E removeLast() {
+        Link&lt;E&gt; last = voidLink.previous;
+        if (last != voidLink) {
+            Link&lt;E&gt; previous = last.previous;
+            voidLink.previous = previous;
+            previous.next = voidLink;
+            size--;
+            modCount++;
+            return last.data;
+        }
+        throw new NoSuchElementException();
+    }
+复制代码
+　　LinkedList的removeLast()方法没有移动指针的操作，只需要借助于列表尾的voidLink，即可完成对列表尾部对象的删除，效率上较高。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

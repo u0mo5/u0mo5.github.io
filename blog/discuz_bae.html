@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>百度云bae安装discuz论坛教程</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/discuz_bae.html" rel="bookmark"
+                   title="Permalink to 百度云bae安装discuz论坛教程">百度云bae安装discuz论坛教程</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>作者：孤风一剑   发布：2013-05-11 13:37   栏目：站长在线   点击：6,846次   41条评论</p>
+<p>各位草根们有福啦，弄了几天，终于可以在bae上搭建discuz论坛了，下面我就简洁精准的介绍哦，安装步骤（请严格按照安装步骤，不然不能保证正常运行)</p>
+<p>在有了PHP应用后开始：</p>
+<p>1.创建百度云存储Bucket，最少为30m，并修改Bucket的属性为公开读.</p>
+<ol>
+<li>
+<p>将压缩包解压，并将upload/bcs/config.php文件中BAIDU_BCS_BUCKET修改为第1步创建的百度云存储Bucket名。</p>
+</li>
+<li>
+<p>将upload目录上传到百度BAE.</p>
+</li>
+</ol>
+<p>4 .查看百度mysql的数据库名，并点击设置，将数据库默认字符集编码修改为utf8 (utf8_general_ci)。</p>
+<ol>
+<li>
+<p>启用百度cache(缓存), 最少30m. 如果之前已经启用百度cache并且安装过discuz,请停用后再次启用。</p>
+</li>
+<li>
+<p>打开http://xxx.duapp.com/install/index.php来开始安装，过程中需要提供第4步百度mysql数据库的名称</p>
+</li>
+<li>
+<p>删除install目录</p>
+</li>
+</ol>
+<p>8.进入到后台管理，点击全局--〉上传设置，填写"本地附件 URL 地址"为http://bcs.duapp.com/xxx/data/attachment。xxx为第一步创建的bucket名称。</p>
+<p>该版本解决问题:</p>
+<p>1.解决云平台不能使用的问题</p>
+<p>2.解决QQ互联不能使用的问题</p>
+<p>3.支持BAE伪静态。
+程序下载地址：​Discuz_X2.5_SC_UTF8 for BAE1.4.rar
+或者 http://pan.baidu.com/share/link?shareid=460906&amp;uk=3375362207</p>
+<p>下面分享伪静态：</p>
+<p>主题列表页伪静态规则</p>
+<p>1:论坛后台</p>
+<p>2：全局-SEO设置-URL静态化</p>
+<p>3：论坛主题列表页、论坛主题内容页将“可用”勾上（Rewrite兼容性选择否，其他东西全部默认）</p>
+<p>4：BAE后台</p>
+<p>5：版本管理-高级-配置</p>
+<p>6：添加</p>
+<p>7：规则类型：url</p>
+<p>8：规则：/forum-(w+)-([0-9]+).html</p>
+<p>9：执行：/forum.php?mod=forumdisplay&amp;fid=$1&amp;page=$2&amp;%1</p>
+<p>10：保存</p>
+<p>主题内容页伪静态规则：</p>
+<p>1:论坛后台</p>
+<p>2：全局-SEO设置-URL静态化</p>
+<p>3：论坛主题列表页、论坛主题内容页将“可用”勾上（Rewrite兼容性选择否，其他东西全部默认）</p>
+<p>4：BAE后台</p>
+<p>5：版本管理-高级-配置</p>
+<p>6：添加</p>
+<p>7：规则类型：url</p>
+<p>8：规则：/thread-([0-9]+)-([0-9]+)-([0-9]+).html</p>
+<p>9：执行：/forum.php?mod=viewthread&amp;tid=$1&amp;extra=page%3D$3&amp;page=$2&amp;%1</p>
+<p>10：保存</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

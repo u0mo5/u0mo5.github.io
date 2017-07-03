@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>更换JAVA程序的界面风格</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3656.html" rel="bookmark"
+                   title="Permalink to 更换JAVA程序的界面风格">更换JAVA程序的界面风格</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>/<em>这个程序主要更换JAVA的界面风格的 </em> 后两个Mac,CTK风格要在相关的操作系统上才能实现 <em>/import java.awt.</em>;import javax.swing.<em>;import java.awt.event.</em>;
+public class JFrameButton extends JFrame implements ActionListener{    JButton windLook = new JButton("Windows 窗口");    JButton unixLook = new JButton("Unix 窗口");    JButton javaLook = new JButton("Java 窗口");    JButton macLook = new JButton("Mac 窗口");    JButton gtkLook = new JButton("GTK 窗口");    JLabel label = new JLabel("选择界面的风格"); public JFrameButton() {  this.setLayout(new FlowLayout());  this.add(label);  this.add(windLook);  windLook.addActionListener(this);  this.add(unixLook);  unixLook.addActionListener(this);  this.add(javaLook);  javaLook.addActionListener(this);  this.add(macLook);  macLook.addActionListener(this);  this.add(gtkLook);  gtkLook.addActionListener(this); 
+}
+ public void actionPerformed(ActionEvent e) {  String look = "javax.swing.plaf.metal.MetalLookAndFeel";  if(e.getSource()==javaLook)   look = "javax.swing.plaf.metal.MetalLookAndFeel";  else if(e.getSource()==windLook)   look = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";  else if(e.getSource()==unixLook)   look = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";  else if(e.getSource()==macLook)   look = "com.sun.java.swing.plaf.mac.MacLookAndFeel";  else if(e.getSource()==gtkLook)   look = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
+   try  {   UIManager.setLookAndFeel(look);   SwingUtilities.updateComponentTreeUI(this);  }  catch(Exception ex)  {   System.out.println("Exception:"+ex);   } } public static void main(String[] args) {  JFrameButton jwb = new JFrameButton();  jwb.setTitle("界面风格设置");  jwb.setLocationRelativeTo(null);//窗口居中显示  jwb.setResizable(false);  jwb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  jwb.setSize(600,100);  jwb.setVisible(true); }}
+程序运行的效果：</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>PHP－－进行模块化设计</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/4077.html" rel="bookmark"
+                   title="Permalink to PHP－－进行模块化设计">PHP－－进行模块化设计</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>PHP－－进行模块化设计
+［来源］ 达内    ［编辑］ 达内   ［时间］2012-10-30</p>
+<p>导航模块可以简单列为一个关于三级页面链接的HTML文件。通常你可以通过用另一种颜色来标明对当前区域的链接来暗示用户他们现在所在的站点的区域。导航可以是位于页面左边的链接列表
+ 
+　　HP中的include和require中的两个函数，能在网站的设计中提高网站的建设效率与维护，现详细讲解如下：
+　　include 函数与C中同名的预处理命令是不同的，它是一个给出文件名(如：include(test.PHP))，PHP就把文件调用于include的位置，并方试图解释该文件，它与函数的差别在于，只有执行include语句时，代码才被解析，因此在设计中通常在if语句中包含调用来得用这一优点;而require H数则总是包含了指定的文件，即使它位于if 语句中不被执行的地方。大家可以在PHP邮件列表的讨论中可以看见到这个问题：即require比include要快，因为PHP可以在通读代码的前期就可将指定文件插入到脚本中。所以在程序设计中若将一个文件包含在一个控制块中(如：if,switch,while,for),则用include,而其它情况就使用requirc 函数。
+　　为什么我们应在PHP程序中使用include 和require呢?首先，首先是因为这样使代码可读性更好，其次是它可将站点分成 模块，这使得可以使在网站的设计中你只要编写了要复用的脚本，便可以在整个站点的建设及以后项目中复用，而不需要你重复工作，极大的提高了工作效率。许多web站点必须依赖一些重复的要素，如始终如一的导航条，它可以方便用户操作，但却给建设和维护站点D来很大问题。每一页都有必须重复的代码块贴在上面。把它做成模块并在每一个需要的页面中include or rquire 它，当需要修改时只需要修改一次即可，即只修改include的脚本模块即可。所以在一个网站的建设中，应该分析站点那部分是重复的?然后把重复的代码写成模块。如下是对站点模块划分的一种方式：
+　　0、信息屏幕 1、数据库和文件动作 2、H数 3、布局 4、导航条。
+　　现详细措述如下：
+　　网站的核心是它所含的信息页面，其它的东西都是点缀。屏幕上显示的可以是HTML，也可以是PHP代码，从数据库或文件中提取并格式化数据，这些屏幕可根据其数量继续划分成各部分，这样比其他方法更有助于维护。第一屏的模块都与站点上可访问的页面相对应。根据页面在站点上出现的位置，可有相应的导航和布局。这样信息屏幕模块就成为选其余模块的关键。如网站的新闻发布系统。
+　　导航模块可以简单列为一个关于三级页面链接的HTML文件。通常你可以通过用另一种颜色来标明对当前区域的链接来暗示用户他们现在所在的站点的区域。导航可以是位于页面左边的链接列表。每个按纽都是一个图像。在鼠标通过时它们会有所改变。可以创建一个模块，根据所选择的屏幕模块决定区域。相对来讲，用if语句来显示对当前区域链接的一种变换版本是比较容易的。
+　　在构建站点时，极有可能碰上重复出现的代码段。用函数模块可以用来把这些功能放起。
+　　好了对include和require的介绍就到这里了，相信对大家在网站的建设中会起到帮助。在下一篇数据库操作的封装就应用了include和require，希望能帮助大理解及起到抛砖引玉作用。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

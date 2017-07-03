@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>常用的API接口，返回JSON格式的服务API接口</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/4185.html" rel="bookmark"
+                   title="Permalink to 常用的API接口，返回JSON格式的服务API接口">常用的API接口，返回JSON格式的服务API接口</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>物流接口</p>
+<p>快递接口:
+http://www.kuaidi100.com/query?type=快递公司代号&amp;postid=快递单号 
+ps:快递公司编码:申通="shentong" EMS="ems" 顺丰="shunfeng" 圆通="yuantong" 中通="zhongtong" 韵达="yunda" 天天="tiantian" 汇通="huitongkuaidi" 全峰="quanfengkuaidi" 德邦="debangwuliu" 宅急送="zhaijisong"</p>
+<p>谷歌接口</p>
+<p>FeedXml转json接口:
+http://ajax.googleapis.com/ajax/services/feed/load?q=Feed地址&amp;v=1.0
+备选参数:callback：&amp;callback=foo就会在json外面嵌套foo({})方便做jsonp使用。
+备选参数:n：返回多少条记录。</p>
+<p>百度接口</p>
+<p>百度百科接口:
+http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&amp;format=json&amp;appid=379020&amp;bk_key=关键字&amp;bk_length=600
+查询出错示例如下：查看原始页面 {"error_code":"20000","error_msg":"search word not found"}</p>
+<p>天气接口</p>
+<p>百度接口:
+http://api.map.baidu.com/telematics/v3/weather?location=嘉兴&amp;output=json&amp;ak=5slgyqGDENN7Sy7pw29IUvrZ 
+location:城市名或经纬度 ak:开发者密钥 output:默认xml
+气象局接口:
+http://m.weather.com.cn/data/101010100.html 
+ 新浪接口:
+http://php.weather.sina.com.cn/iframe/index/w_cl.php?code=js&amp;day=0&amp;city=&amp;dfc=1&amp;charset=utf-8
+参数中city如果给了参数就是相关的城市,否则会自动判断
+day=0的话是今天
+返回的参数 大家看着办吧,具体的我也不清楚,新浪没给API。</p>
+<p>音乐接口</p>
+<p>虾米接口
+http://kuang.xiami.com/app/nineteen/search/key/歌曲名称/diandian/1/page/歌曲当前页?_=当前毫秒&amp;callback=getXiamiData 
+QQ空间音乐接口
+http://qzone-music.qq.com/fcg-bin/cgi_playlist_xml.fcg?uin=QQ号码&amp;json=1&amp;g_tk=1916754934
+QQ空间收藏音乐接口
+http://qzone-music.qq.com/fcg-bin /fcg_music_fav_getinfo.fcg?dirinfo=0&amp;dirid=1&amp;uin=QQ号&amp; p=0.519638272547262&amp;g_tk=1284234856
+多米音乐接口
+http://v5.pc.duomi.com/search-ajaxsearch-searchall?kw=关键字&amp;pi=页码&amp;pz=每页音乐数
+soso接口
+http://cgi.music.soso.com/fcgi-bin/fcg_search_xmldata.q?source=10&amp;w=关键字&amp;perpage=1&amp;ie=utf-8</p>
+<p>视频接口</p>
+<p>土豆接口
+http://api.tudou.com/v3/gw?method=album.item.get&amp; appKey=Appkey&amp;format=json&amp;albumId=视频剧集ID&amp;pageNo=当前页&amp; pageSize=每页显示</p>
+<p>地图接口</p>
+<p>阿里云根据地区名获取经纬度接口
+http://gc.ditu.aliyun.com/geocoding?a=苏州市 
+参数解释: 纬度,经度 type 001 (100代表道路，010代表POI，001代表门址，111可以同时显示前三项)
+阿里云根据经纬度获取地区名接口
+http://gc.ditu.aliyun.com/regeocoding?l=39.938133,116.395739&amp;type=001 
+获取用户的IP,国家代码缩写,经纬度
+http://www.telize.com/geoip?callback=a 
+参数解释: callback是回调函数</p>
+<p>IP接口</p>
+<p>新浪接口(ip值为空的时候 获取本地的)
+http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&amp;ip=218.4.255.255
+淘宝接口
+http://ip.taobao.com/service/getIpInfo.php?ip=63.223.108.42</p>
+<p>手机信息查询接口</p>
+<p>淘宝网接口
+http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=手机号
+拍拍接口
+http://virtual.paipai.com/extinfo/GetMobileProductInfo?mobile=手机号&amp;amount=10000&amp;callname=getPhoneNumInfoExtCallback 
+百付宝接口
+https://www.baifubao.com/callback?cmd=1059&amp;callback=phone&amp;phone=手机号
+115接口
+http://cz.115.com/?ct=index&amp;ac=get_mobile_local&amp;callback=jsonp1333962541001&amp;mobile=手机号
+有道接口
+http://www.youdao.com/smartresult-xml/search.s?jsFlag=true&amp;type=mobile&amp;q=手机号
+手机在线接口
+http://api.showji.com/Locating/www.showji.com.aspx?m=手机号&amp;output=json&amp;callback=querycallback</p>
+<p>视频信息接口</p>
+<p>优酷
+http://v.youku.com/player/getPlayList/VideoIDS/视频ID (比如 http://v.youku.com/v_show/id_XNTQxNzc4ODg0.html的ID就是XNTQxNzc4ODg0)</p>
+<p>翻译、词典接口</p>
+<p>腾讯
+http://dict.qq.com/dict?q=词语</p>
+<p>腾讯的部分接口</p>
+<p>获取QQ昵称和用户头像
+http://r.qzone.qq.com/cgi-bin/user/cgi_personal_card?uin=QQ(不过是jsonp哦)
+ </p>
+<p>其他接口</p>
+<p>360笑话接口
+http://xiaohua.hao.360.cn/m/itxt?page=1&amp;callback=jsonp7</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>最快速的Android开发环境搭建ADT-Bundle及Hello World</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3711.html" rel="bookmark"
+                   title="Permalink to 最快速的Android开发环境搭建ADT-Bundle及Hello World">最快速的Android开发环境搭建ADT-Bundle及Hello World</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>( 由于现在Google已经推出了android studio，想快速加入到android开发的同学也能更便捷的配置开发环境了，有兴趣的同学可以在这里找到android studio的一些资料。http://www.android-studio.org/ ）
+ 
+正文：
+ 
+ADT-Bundle for Windows 是由Google Android官方提供的集成式IDE，已经包含了Eclipse，你无需再去下载Eclipse，并且里面已集成了插件，它解决了大部分新手通过eclipse来配置Android开发环境的复杂问题。
+有了ADT-Bundle，新涉足安卓开发的同学也无需再像以前那样在网上参考繁琐的配置教程，可以轻松一步到位进行Android应用开发。
+第一步：JAVA SDK（JDK）的安装：
+可以去问百度下载JDK，也可以到官方下载JDK。
+官方下载地址： http://www.oracle.com/technetwork/java/javase/downloads/index.html
+ 
+第二步： 下载ADT-Bundle for Windows
+官方下载地址：http://developer.android.com/sdk/index.html
+ 
+第三步：安装ADT-Bundle
+直接把下载下来的的adt-bundle-windows-xxx-xxx.zip，解压到你需要安装的位置。
+ 
+第四步：安装Android SDK
+打开解压出来的文件夹里面的 SDK Manager.exe    （也可以运行eclipse/eclipse.exe 然后通过Windows -&gt; Android SDK Manager打开）</p>
+<p>勾选上你想要开发的目标手机安卓版本，最好是全部勾上，然后点击Install Package 按提示 next，accept允许等待安装（这是一个慢长的过程）</p>
+<p>第五步：配置Android AVD（虚拟模拟器）
+打开Eclipse（eclipse/eclipse.exe），（运行启动的eclipse可能看上去有些不一样，可以通过windows把一些常用的窗口，工具条显示出来），然后从Windows-&gt;Android Virtual Device Manger打开AVD管理器。
+点击 New按钮 创建你一新的AVD，如下图，我做了一个简单说明，参数其实你都是可以自己随意填的，点击OK就行了。</p>
+<p>你配置的这个AVD是会做为你安卓应用的默认调试摸拟器，当然你也可以配置多个。
+ 
+第六步：创建一个Hello World项目
+通过File -&gt; New-&gt; Android Application Project, 然后输入Hello World（项目名字），next，finish。
+ 
+第七步：从运行Hello World
+直接点击Run  Debug（快捷键F11）就可以在你配置的模拟器里运行了。
+ 
+有了ADT-Bundle这个东西，方便了很多。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

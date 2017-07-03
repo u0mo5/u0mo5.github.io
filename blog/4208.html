@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>优秀API设计的十大原则</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/4208.html" rel="bookmark"
+                   title="Permalink to 优秀API设计的十大原则">优秀API设计的十大原则</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>优秀API设计的十大原则
+2015-09-23    分类：编程开发、设计模式、首页精华暂无人评论
+分享到：更多4</p>
+<p>二十万年薪PHP工程师培养计划
+成为被疯抢的Android牛人
+风中叶讲Java重难点
+Linux运维基础课程</p>
+<p>本文由码农网 – 小峰原创翻译，转载请看清文末的转载要求，欢迎加入技术翻译小组！
+每个软件开发人员都使用API。“优秀”的API设计就像魔法。不过，我不知道有多少人可以解释为什么有的API很复杂、很难学，而有的则干净、简单、使用起来堪称是一种快乐。关于这个问题，我将在文中回答，并提供优秀API设计的十条法则。</p>
+<p>1.只做你今天需要的
+这是最顶级的规则。只解决今天必须解决的问题，最小化需要完成的答案。解决明天的问题的诱惑力是巨大的。但是一定要顶住诱惑！不要提前发布代码，重点是注重缩小发布周期。如果需要花几个小时的时间来回答新问题，那么就不用再猜测明天会出现什么问题了。
+2.API模块化
+将大型问题转化为规模较小的、可单独解决的问题。模块化API更容易学习，并且可以随时间而改变。你可以用新模块替代旧模块。可以一个一个地教导模块。也可以将API的实验部分从稳定或传统的部分中单独分出来。
+3.使用结构化语法
+使用结构化的API语法：用thing.action或thing.property代替do_action_with_thing。语法将自然而然地适应模块化的方法，其中每个模块是一个类。
+4.使用自然语义
+不要发明新概念。只使用开发人员众所周知的概念，作为类系统的基础。如果你发现自己需要解释概念，那说明你出错了：要么你在解决以后的问题，要么你正在错误地构建API。
+5.API的自我约定
+每个类都要严格使用相同的样式和约定。一致性是指当一个人学会这一个类时，他就能够融会贯通地掌握全部的类。文档化约定，让它们成为贡献者必须的标准。
+6.API的可扩展性
+易扩展性有许多好处，并不仅仅在于受到贡献者的欢迎。它还可以让你延缓实现功能，因为“如果需要的话，后面再添加也很方便”。不需要的功能就不添加，这也是一种双赢。
+7.完全测试
+每个类和方法必须经过恶意代码的完全测试。要像写代码一样写测试，然后像API提供给外界约定文档一样使用测试。每当代码改变的时候就运行这些测试。不要担心代码覆盖率。重要的是外部约定。也可以考虑使用约定生命周期。
+8.分层式成长
+保持API突出重点，然后在顶部将新的API分层，以便于它们能随着时间的推移成长。可扩展性并不意味着无限期的成长。明确API的范围，并在范围内执行。
+9.保持简单易用
+最终的测试要看API的简单易用程度。你写的例子，能不能让你的代码看起来更简单？你是不是强迫用户说明他们不在乎的选项？有没有毫无价值的额外步骤？要注重约减少API的可视面积。
+10.保持可移植性
+不要让系统概念泄漏到API。整洁有目的地抽象：这个API可以运行在任何操作系统上。API必须能够隐藏实现，但要注意第4条规则，以及要使用自然抽象。
+欢迎大家说说自己的看法。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

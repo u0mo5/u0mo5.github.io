@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>Mac 安装activate-power-mode atom</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/4237.html" rel="bookmark"
+                   title="Permalink to Mac 安装activate-power-mode atom">Mac 安装activate-power-mode atom</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>Mac 安装activate-power-mode atom</p>
+<p>标签： atommac
+2015-12-02 14:53 308人阅读 评论(0) 收藏 举报</p>
+<p>分类：
+git（2） </p>
+<p>版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+<p>先不废话，上效果图  最近被这个atom的效果图刷屏了，所以自己也跃跃欲试来尝试一下，我的操作系统是mac OS X El Caption,版本10.11.1，陈述一下这个过程中遇到的一些问题。</p>
+<p>安装atom。第一步当然是要安装atom了，附上mac版下载地址Atom官网，点击安装包安装即可。
+下载这个插件，附上下载地址目前最新0.3.2版本，得到一个zip文件activate-power-mode-0.3.2.zip
+将zip文件放到atom的安装路径下 在终端输入 cp activate-power-mode-0.3.2.zip ~/.atom/packages 解压文件 unzip activate-power-mode-0.3.2.zip, 在当前目录下你可以看见activate-power-mode-0.3.2文件夹
+进入插件目录 cd activate-power-mode-0.3.2，会有若干文件，此时需要atom和apm指令，没有配置过得可以先打开atom程序，点击菜单栏的Atom中的下拉列表，选择Install Shell Commands,,会有如下提示，点击OK，atom和apm指令安装完毕。</p>
+<p>在activate-power-mode-0.3.2目录下执行安装插件指令 apm install,安装成功。</p>
+<p>在atom程序中，开启activate-power-mode的快捷键是control+alt + o,或者在菜单栏中的Packages的下拉列表中有activate-power-mode，点击Toggle.</p>
+<p>结果并没有我想的那么简单，又报错了，好事多磨吧，右侧会弹红色警告弹框，提示Cannot find module ‘lodash.throttle’，点击弹框中的额view issue,这个问题已经有人提出过，附上讨论地址Cannot find module ‘lodash.throttle讨论</p>
+<p>看完大家的讨论之后，知道需要依赖一个lodash.throttle文件，在activate-power-mode-0.3.2目录中执行指令npm install lodash.throttle，发现npm指令不存在，所以再去配置npm环境，npm是node package manager的缩写，搜索npm找不到想要的结果，node package manager倒是可以搜索到有效内容。
+会发现矛头都指向了node.js这个文件，附上下载地址node.js下载，文件不打，按提示安装即可,他将在机器上安装Node.js和npm,安装完后就可以执行npm指令了
+重复第8条的操作，执行指令npm install lodash.throttle，出现下图提示，表示安装成功，下面打开atom程序，开启震动状态，尽情享受屏幕的晃动吧，我觉得如果可以加上声音，效果就更赞了</p>
+<p>上一篇解决ScrollView嵌套ListView问题</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

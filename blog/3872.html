@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>最简单的mybatis增删改查样例</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3872.html" rel="bookmark"
+                   title="Permalink to 最简单的mybatis增删改查样例">最简单的mybatis增删改查样例</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>最简单的mybatis增删改查样例 Book.java </p>
+<p>Java代码  </p>
+<p>package com.bookstore.app;  
+  
+import java.io.Serializable;  
+  
+public class Book implements Serializable {  
+  
+    private static final long serialVersionUID = 233559895466038160L;  </p>
+<p>private String isbn;  </p>
+<p>private String name;  </p>
+<p>private String price;  </p>
+<p>public String getIsbn() {  </p>
+<p>return isbn;  </p>
+<p>}  
+  
+    public void setIsbn(String isbn) {  </p>
+<p>this.isbn = isbn;  </p>
+<p>}  
+  
+    public String getPrice() {  </p>
+<p>return price;  </p>
+<p>}  
+  
+    public void setPrice(String price) {  </p>
+<p>this.price = price;  </p>
+<p>}  
+  
+    public void setName(String name) {  </p>
+<p>this.name = name;  </p>
+<p>}  
+  
+    public String getName() {  </p>
+<p>return name;  </p>
+<p>}  
+@Override  
+    public String toString() {  </p>
+<p>return "BookName: " + this.name + ", price: " + this.price;  </p>
+<p>}  
+  
+}  </p>
+<p>mybatis-config.xml </p>
+<p>Xml代码  </p>
+<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;  
+&lt;!DOCTYPE configuration  
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;  </p>
+<p>&lt;configuration&gt;  
+    &lt;settings&gt;  </p>
+<p>&lt;setting name="lazyLoadingEnabled" value="false" /&gt;  </p>
+<p>&lt;/settings&gt;  </p>
+<p>&lt;typeAliases&gt;  </p>
+<p>&lt;typeAlias alias="Book" type="com.bookstore.app.Book" /&gt;  </p>
+<p>&lt;/typeAliases&gt;  </p>
+<p>&lt;environments default="development"&gt;  </p>
+<p>&lt;environment id="development"&gt;  </p>
+<p>&lt;transactionManager type="JDBC" /&gt;  </p>
+<p>&lt;dataSource type="POOLED"&gt;  </p>
+<p>&lt;property name="driver" value="com.mysql.jdbc.Driver" /&gt;  </p>
+<p>&lt;property name="url" value="jdbc:mysql://localhost:3306/mybatis" /&gt;  </p>
+<p>&lt;property name="username" value="root" /&gt;  </p>
+<p>&lt;property name="password" value="root" /&gt;  </p>
+<p>&lt;/dataSource&gt;  </p>
+<p>&lt;/environment&gt;  </p>
+<p>&lt;/environments&gt;  </p>
+<p>&lt;mappers&gt;  </p>
+<p>&lt;mapper resource="com/bookstore/config/bookMapper.xml" /&gt;  </p>
+<p>&lt;/mappers&gt;  </p>
+<p>&lt;/configuration&gt;  </p>
+<p>bookMapper.xml </p>
+<p>Xml代码  </p>
+<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;  
+&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;  </p>
+<p>&lt;mapper namespace="com.bookstore.app.bookMapper"&gt;  
+    &lt;select id="getBookByName" resultType="Book" parameterType="string"&gt;  </p>
+<p>select *  
+        from book  
+        where name=#{name}  </p>
+<p>&lt;/select&gt;  </p>
+<p>&lt;insert id="insertBook" parameterType="Book"&gt;  </p>
+<p>insert into book(isbn, name, price)  
+        value(#{isbn}, #{name}, #{price})  
+    &lt;/insert&gt;  </p>
+<p>&lt;update id="updateBook" parameterType="Book"&gt;  </p>
+<p>update book   
+        set  
+        name=#{name},  </p>
+<p>price=#{price}  </p>
+<p>where isbn=#{isbn}  </p>
+<p>&lt;/update&gt;  </p>
+<p>&lt;delete id="deleteBook" parameterType="String"&gt;  </p>
+<p>delete from book where name=#{name}       </p>
+<p>&lt;/delete&gt;  </p>
+<p>&lt;/mapper&gt;  </p>
+<p>BookApp.java </p>
+<p>Java代码  </p>
+<p>package com.bookstore.app;  
+  
+import java.io.IOException;  
+import java.io.Reader;  
+  
+import org.apache.ibatis.io.Resources;  
+import org.apache.ibatis.session.SqlSession;  
+import org.apache.ibatis.session.SqlSessionFactory;  
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;  
+  
+public class BookApp {  
+    public static void main(String[] args) throws IOException {  </p>
+<p>String resource = "com/bookstore/config/mybatis-config.xml";  </p>
+<p>Reader reader = Resources.getResourceAsReader(resource);  
+        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder()  </p>
+<p>.build(reader);  
+        SqlSession session = sessionFactory.openSession();  
+        //查询  </p>
+<p>Book book = (Book) session.selectOne(  
+                "com.bookstore.app.bookMapper.getBookByName", "Spring In Action");  </p>
+<p>System.out.println(book.toString());  
+        //修改  </p>
+<p>book.setName("Spring In Action 2ed Edition");  </p>
+<p>book.setPrice("59");  </p>
+<p>session.update("com.bookstore.app.bookMapper.updateBook", book);  </p>
+<p>//插入  </p>
+<p>Book newBook = new Book();  </p>
+<p>newBook.setIsbn("ISBN978-7-121-10577-7");  </p>
+<p>newBook.setName("人人都是产品经理");  </p>
+<p>newBook.setPrice("45");  </p>
+<p>session.insert("com.bookstore.app.bookMapper.insertBook", newBook);  </p>
+<p>//删除  </p>
+<p>session.delete("com.bookstore.app.bookMapper.deleteBook", "Struts In Action");  </p>
+<p>session.commit();  
+    }  
+}  </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

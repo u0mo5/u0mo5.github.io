@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>Hadoop的辉煌还能延续多久？</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/4028.html" rel="bookmark"
+                   title="Permalink to Hadoop的辉煌还能延续多久？">Hadoop的辉煌还能延续多久？</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>Hadoop的辉煌还能延续多久？
+发表于2012-08-27 16:03| 89045次阅读| 来源gigaom.com| 0 条评论| 作者Mike Miller</p>
+<p>HadoopMapRaduceDremelPregelGoogle大数据</p>
+<p>摘要：Hadoop已经成为大数据的代名词。短短几年间，Hadoop从一种边缘技术成为事实上的标准。而另一方面，MapReduce在谷歌已不再显赫。当企业瞩目MapReduce的时候，谷歌好像早已进入到了下一个时代。</p>
+<p>Hadoop技术已经无处不在。不管是好是坏，Hadoop已经成为大数据的代名词。短短几年间，Hadoop从一种边缘技术成为事实上的标准。看来，不仅现在Hadoop是企业大数据的标准，而且在未来，它的地位似乎一时难以动摇。</p>
+<p>谷歌文件系统与MapReduce
+我们先来探讨一下Hadoop的灵魂——MapReduce。面对数据的爆炸性增长，谷歌的工程师Jeff Dean和Sanjay Ghemawat架构并发布了两个开创性的系统：谷歌文件系统（GFS）和谷歌MapReduce（GMR）。前者是一个出色而实用的解决方案-使用常规的硬件扩展并管理数据，后者同样辉煌，造就了一个适用于大规模并行处理的计算框架。
+谷歌MapReduce（GMR）为普通开发者/用户进行大数据处理提供了简易的方式，并使之快速、具备容错性。谷歌文件系统（GFS）和谷歌MapReduce（GMR）也为谷歌搜索引擎对网页进行抓取、分析提供了核心动力。
+再回头看看开源世界中的Hadoop，Apache Hadoop的分布式文件系统（HDFS）和Hadoop MapReduce完全是谷歌文件系统（GFS）和谷歌MapReduce（GMR）的开源实现。Hadoop项目已经发展成为一个生态系统，并触及了大数据领域的方方面面。但从根本上，它的核心是MapReduce。
+Hadoop是否可以赶超谷歌？
+一个有趣的现象是，MapReduce在谷歌已不再显赫。当企业瞩目MapReduce的时候，谷歌好像早已进入到了下一个时代。事实上，我们谈论的这些技术早就不是新技术了，MapReduce也不例外。
+我希望在后Hadoop时代下面这些技术能够更具竞争性。尽管许多Apache社区的项目和商业化Hadoop项目都非常活跃，并以来自HBase、Hive和下一代MapReduce（YARN）的技术不断完善着Hadoop体系，我依然认为，Hadoop核心（HDFS和Zookeeper）需要脱离MapReduce并以全新的架构增强自己的竞争力，真正与谷歌技术一较高下。
+过滤不断增长的索引，分析不断变化的数据集。Hadoop的伟大之处在于，它一旦开始运行，就会飞速地分析你的数据。尽管如此，在每次分析数据之前，即添加、更改或删除数据之后，我们都必须将整个数据集进行流式处理。这意味着，随着数据集的膨胀，分析时间也会随之增加，且不可预期。
+那么，谷歌又是怎么做到搜索结果越来越实时呈现呢？一个名为Percolator的增量处理引擎取代了谷歌MapReduce（GMR）。通过对新建、更改和已删除文档的处理，并使用二级索引进行高效的分类、查询，谷歌能够显著地降低实现其目标的时间。
+Percolator的作者写道：“将索引系统转化为一个增量系统……文档平均处理延迟的因子降低到了现在的100。”这句话的意思是，索引Web上新内容的速度比之前MapReduce系统快了100倍。
+谷歌Dremel即时数据分析解决方案
+谷歌和Hadoop社区曾致力于构建基于MapReduce的易用性即时数据分析工具，如谷歌的并行处理语言Sawzall，Apache Pig和Hive。但对熟知SQL的人们而言，他们忽略了一个基本事实-构建MapReduce的目标就在于管理数据处理工作。它的核心能力在于工作流管理，而不是即时数据分析。
+与之形成鲜明对比的是，很多BI或数据分析查询基本上都要求即时、交互和低延迟。这意味着，使用Hadoop不仅需要规划流程图，而且需要为许多查询分析裁减不必要的工作流。即便如此，我们也要花费数分钟等待工作开始，然后花费数小时等待工作流完成，并且这个过程也非常不利于交互式体验。因此，谷歌研发了Dremel予以应对。Dremel是Google 的“交互式”数据分析系统，可以在几秒钟内处理PB级别的数据，并能轻松应对即时查询。
+Google Dremel的设计特点：
+Dremel是一个可扩展的大型系统。在一个PB级别的数据集上面，将任务缩短到秒级，无疑需要大量的并发。磁盘的顺序读速度在100MB/S上下，那么在1S内处理1TB数据，意味着至少需要有1万个磁盘的并发读! Google一向是用廉价机器办大事的好手。但是机器越多，出问题概率越大，如此大的集群规模，需要有足够的容错考虑，保证整个分析的速度不被集群中的个别节点影响。 
+Dremel是MapReduce的补充。和MapReduce一样，Dremel也需要GFS这样的文件系统作为存储层。在设计之初，Dremel并非是MapReduce的替代品，它只是可以执行非常快的分析，在使用的时候，常常用它来处理MapReduce的结果集或者用来建立分析原型。 
+Dremel的数据模型是嵌套的。互联网数据常常是非关系型的。Dremel还需要有一个灵活的数据模型，这个数据模型至关重要。Dremel支持一个嵌套的数据模型，类似于JSON。而传统的关系模型，由于不可避免的有大量的JOIN操作，在处理如此大规模的数据的时候，往往是有心无力的。
+Dremel中的数据是采用列式存储的。使用列式存储，分析的时候，可以只扫描需要的那部分数据的时候，减少CPU和磁盘的访问量。同时列式存储是压缩友好的，使用压缩，可以综合CPU和磁盘，发挥最大的效能。
+Dremel结合了Web搜索和并行DBMS的技术。Dremel借鉴了Web搜索中的“查询树”的概念，将一个相对巨大复杂的查询，分割成较小较简单的查询。大事化小，小事化了，能并发的在大量节点上跑。另外，和并行DBMS类似，Dremel可以提供了一个SQL-like的接口，就像Hive和Pig那样。
+谷歌的图数据计算框架Pregel
+谷歌MapReduce是专门为抓取、分析世界上最庞大的图形架构-internet而设计的，但针对大规模图算法（如图遍历（BFS）、PageRank，最短路径（SSSP）等）的计算则显得效率低下。因此，谷歌构建了Pregel。</p>
+<p>Pregel给人的印象非常深刻。Pregel不仅能高效执行SSSP或PageRank算法，更令人惊讶的是，公布的数据显示Pregel处理一个有着几十亿节点、上万亿条边的图，只需数分钟即可完成，其执行时间随着图的大小呈线性增长。
+Pregel基于BSP模型，就是“计算”-“通信”-“同步”的模式：</p>
+<p>输入输出为有向图
+分成超步
+以节点为中心计算，超步内每个节点执行自己的任务，执行节点的顺序不确定
+两个超步之间是通信阶段</p>
+<p>在Pregel中，以节点为中心计算。Step 0时每节点都活动着，每个节点主动“给停止投票”进入不活动状态。如果接收到消息，则激活。没有活动节点和消息时，整个算法结束。容错是通过检查点来做的。在每个超步开始的时候，对主从节点分别备份。
+总结
+尽管当前大数据技术的核心依然是Hadoop，但谷歌却已经为我们展现了许多更先进的大数据技术。谷歌开发这些技术的本意并不是要立刻抛弃掉MapReduce，但毫无疑问这是未来大数据技术的趋势。尽管已经出现了上述大数据技术的开源实现，但我们不禁要问，Hadoop的辉煌还能延续多久？（张志平/编译）
+原文链接：Why the days are numbered for hadoop as we know it</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

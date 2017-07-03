@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>SSH框架系列：Spring配置多个数据源</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3908.html" rel="bookmark"
+                   title="Permalink to SSH框架系列：Spring配置多个数据源">SSH框架系列：Spring配置多个数据源</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>分类： 【java】2013-12-09 16:59 1247人阅读 评论(0) 收藏 举报</p>
+<p>1.问题的引入
+         对于普通的SSH框架而言，一般配置一个数据源，一个SessionFactory，一个事务管理和对应的ProxyCreate。那么当项目需要操作多个数据库时，如何配置呢？
+方案1
+配置2个数据源，2个对应的SessionFactory，2个事务等。Spring的配置如下：
+ </p>
+<p>[html] view plaincopy
+ </p>
+<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;  
+&lt;beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"  </p>
+<p>xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"  </p>
+<p>xsi:schemaLocation="http://www.springframework.org/schema/beans  </p>
+<p>http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+    http://www.springframework.org/schema/tx   
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+    http://www.springframework.org/schema/aop  
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;  </p>
+<p>&lt;!-- 引入datasource配置文件 --&gt;  </p>
+<p>&lt;context:property-placeholder location="classpath:datasource.properties" /&gt;  </p>
+<p>&lt;!--创建mysql jdbc数据源 --&gt;  </p>
+<p>&lt;bean id="mysqlDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  </p>
+<p>destroy-method="close"&gt;  </p>
+<p>&lt;property name="driverClass" value="${jdbc.mysql.driver}" /&gt;  </p>
+<p>&lt;property name="jdbcUrl" value="${jdbc.mysql.url}" /&gt;  </p>
+<p>&lt;property name="user" value="${jdbc.mysql.username}" /&gt;  </p>
+<p>&lt;property name="password" value="${jdbc.mysql.password}" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的最小连接数 --&gt;  </p>
+<p>&lt;property name="minPoolSize" value="10" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的最大连接数 --&gt;  </p>
+<p>&lt;property name="maxPoolSize" value="30" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的连接的最大空闲时间 --&gt;  </p>
+<p>&lt;property name="maxIdleTime" value="1800" /&gt;  </p>
+<p>&lt;property name="acquireIncrement" value="2" /&gt;  </p>
+<p>&lt;property name="maxStatements" value="0" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的初始化连接数 --&gt;  </p>
+<p>&lt;property name="initialPoolSize" value="2" /&gt;  </p>
+<p>&lt;property name="idleConnectionTestPeriod" value="1800" /&gt;  </p>
+<p>&lt;!-- 当连接失败时，尝试重新连接的次数 --&gt;  </p>
+<p>&lt;property name="acquireRetryAttempts" value="30" /&gt;  </p>
+<p>&lt;property name="breakAfterAcquireFailure" value="true" /&gt;  </p>
+<p>&lt;property name="testConnectionOnCheckout" value="false" /&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--创建oracle jdbc数据源 --&gt;  </p>
+<p>&lt;bean id="oracleDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  </p>
+<p>destroy-method="close"&gt;  </p>
+<p>&lt;property name="driverClass" value="${jdbc.oracle.driver}" /&gt;  </p>
+<p>&lt;property name="jdbcUrl" value="${jdbc.oracle.url}" /&gt;  </p>
+<p>&lt;property name="user" value="${jdbc.oracle.username}" /&gt;  </p>
+<p>&lt;property name="password" value="${jdbc.oracle.password}" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的最小连接数 --&gt;  </p>
+<p>&lt;property name="minPoolSize" value="10" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的最大连接数 --&gt;  </p>
+<p>&lt;property name="maxPoolSize" value="30" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的连接的最大空闲时间 --&gt;  </p>
+<p>&lt;property name="maxIdleTime" value="1800" /&gt;  </p>
+<p>&lt;property name="acquireIncrement" value="2" /&gt;  </p>
+<p>&lt;property name="maxStatements" value="0" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的初始化连接数 --&gt;  </p>
+<p>&lt;property name="initialPoolSize" value="2" /&gt;  </p>
+<p>&lt;property name="idleConnectionTestPeriod" value="1800" /&gt;  </p>
+<p>&lt;!-- 当连接失败时，尝试重新连接的次数 --&gt;  </p>
+<p>&lt;property name="acquireRetryAttempts" value="1" /&gt;  </p>
+<p>&lt;property name="breakAfterAcquireFailure" value="true" /&gt;  </p>
+<p>&lt;property name="testConnectionOnCheckout" value="false" /&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!-- 创建MysqlSessionFactory--&gt;  </p>
+<p>&lt;bean id="mysqlSessionFactory"  </p>
+<p>class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"&gt;  </p>
+<p>&lt;property name="dataSource" ref="mysqlDataSource" /&gt;  </p>
+<p>&lt;property name="hibernateProperties"&gt;  </p>
+<p>&lt;props&gt;  </p>
+<p>&lt;prop key="hibernate.show_sql"&gt;true&lt;/prop&gt;  </p>
+<p>&lt;prop key="hibernate.dialect"&gt;org.hibernate.dialect.MySQLDialect&lt;/prop&gt;  </p>
+<p>&lt;prop key="current_session_context_class"&gt;thread&lt;/prop&gt;  </p>
+<p>&lt;/props&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;property name="mappingResources"&gt;  </p>
+<p>&lt;list&gt;  </p>
+<p>&lt;value&gt;edu/njupt/zhb/model/mysql/Student.hbm.xml&lt;/value&gt;  </p>
+<p>&lt;/list&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!-- 创建OracleSessionFactory--&gt;  </p>
+<p>&lt;bean id="oracleSessionFactory"  </p>
+<p>class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"&gt;  </p>
+<p>&lt;property name="dataSource" ref="oracleDataSource" /&gt;  </p>
+<p>&lt;property name="hibernateProperties"&gt;  </p>
+<p>&lt;props&gt;  </p>
+<p>&lt;prop key="hibernate.show_sql"&gt;true&lt;/prop&gt;  </p>
+<p>&lt;prop key="hibernate.dialect"&gt;org.hibernate.dialect.OracleDialect&lt;/prop&gt;  </p>
+<p>&lt;prop key="current_session_context_class"&gt;thread&lt;/prop&gt;  </p>
+<p>&lt;/props&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;property name="mappingResources"&gt;  </p>
+<p>&lt;list&gt;  </p>
+<p>&lt;value&gt;edu/njupt/zhb/model/oracle/Student.hbm.xml&lt;/value&gt;  </p>
+<p>&lt;/list&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!-- 配置Mysql事务 --&gt;  </p>
+<p>&lt;bean id="mysqlTransactionManager"  </p>
+<p>class="org.springframework.orm.hibernate4.HibernateTransactionManager"&gt;  </p>
+<p>&lt;property name="sessionFactory"&gt;  </p>
+<p>&lt;ref local="mysqlSessionFactory" /&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--Mysql hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到--&gt;  </p>
+<p>&lt;bean id="mysqlTransactionInterceptor"  </p>
+<p>class="org.springframework.transaction.interceptor.TransactionInterceptor"&gt;  </p>
+<p>&lt;property name="transactionManager"&gt;  </p>
+<p>&lt;ref local="mysqlTransactionManager" /&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;property name="transactionAttributes"&gt;  </p>
+<p>&lt;props&gt;  </p>
+<p>&lt;prop key="register"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="get*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="find*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="select*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="query*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="sync*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="finish*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="add*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="insert*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="edit*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="update*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="save*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="remove*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="delete*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="modify*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="*"&gt;PROPAGATION_REQUIRED,-java.lang.Exception&lt;/prop&gt;  </p>
+<p>&lt;/props&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!-- 配置oracle事务 --&gt;  </p>
+<p>&lt;bean id="oracleTransactionManager"  </p>
+<p>class="org.springframework.orm.hibernate4.HibernateTransactionManager"&gt;  </p>
+<p>&lt;property name="sessionFactory"&gt;  </p>
+<p>&lt;ref local="oracleSessionFactory" /&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--Mysql hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到--&gt;  </p>
+<p>&lt;bean id="oracleTransactionInterceptor"  </p>
+<p>class="org.springframework.transaction.interceptor.TransactionInterceptor"&gt;  </p>
+<p>&lt;property name="transactionManager"&gt;  </p>
+<p>&lt;ref local="oracleTransactionManager" /&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;property name="transactionAttributes"&gt;  </p>
+<p>&lt;props&gt;  </p>
+<p>&lt;prop key="register"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="get*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="find*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="select*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="query*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="sync*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="finish*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="add*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="insert*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="edit*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="update*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="save*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="remove*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="delete*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="modify*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="*"&gt;PROPAGATION_REQUIRED,-java.lang.Exception&lt;/prop&gt;  </p>
+<p>&lt;/props&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!-- autoproxy 自动创建代理--&gt;  </p>
+<p>&lt;bean id="ProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"&gt;  </p>
+<p>&lt;property name="beanNames"&gt;  </p>
+<p>&lt;list&gt;  </p>
+<p>&lt;value&gt;*ServiceImpl&lt;/value&gt;  </p>
+<p>&lt;/list&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;property name="interceptorNames"&gt;  </p>
+<p>&lt;list&gt;  </p>
+<p>&lt;value&gt;mysqlTransactionInterceptor&lt;/value&gt;  </p>
+<p>&lt;value&gt;oracleTransactionInterceptor&lt;/value&gt;  </p>
+<p>&lt;/list&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*注入Mysql Dao</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>--&gt;  </p>
+<p>&lt;bean id="mysqlBaseDao" class="edu.njupt.zhb.dao.MysqlBaseDao"&gt;  </p>
+<p>&lt;property name="sessionFactory" ref="mysqlSessionFactory"&gt;&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*注入Oracle Dao</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>--&gt;  </p>
+<p>&lt;bean id="oracleBaseDao" class="edu.njupt.zhb.dao.OracleBaseDao"&gt;  </p>
+<p>&lt;property name="sessionFactory" ref="oracleSessionFactory"&gt;&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*注入Services</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>*--&gt;  </p>
+<p>&lt;!--<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*注入Action</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>*--&gt;  </p>
+<p>&lt;/beans&gt;  </p>
+<p>优缺点分析：
+ 
+优点：我们能够在程序中正常得使用2个不同的Dao，而且可以调用dao的getSessionFactory().getCurrentSession()，使用起来特别的方便。每个Dao都有自己的事务管理，安全性各方面和一个数据库一样。
+缺点：由于事务的配置和自动创建代理的配置，只要有一个数据库连接不了，即便两外一个数据库可以连接，整个项目仍然无法正常启动。对于一些特殊的应用场景，该方案有着很大的缺陷。
+比如某项目的需求为：一个项目需要同时操作2个数据库，如果一个数据库无法连接，那么项目就操作另外一个数据库，同时，将操作的动作记录下来，等另外一个数据库可以连接的时候，再将之前的操作同步到这个数据库中。而且要求，当项目启动的时候，即便只有一个数据库可以连接，那么项目仍然要正常运行。
+方案2
+为了解决上述的需求，我们将其中一个数据库作为本地数据库，另外一个作为远程数据库，当远程数据库无法连接时，我们跳过。整个项目使用本地数据库即可，同时将需要同步的数据，保存起来，待可连接时，再同步。
+ </p>
+<p>[html] view plaincopy
+ </p>
+<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;  
+&lt;beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"  </p>
+<p>xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"  </p>
+<p>xsi:schemaLocation="http://www.springframework.org/schema/beans  </p>
+<p>http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+    http://www.springframework.org/schema/tx   
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+    http://www.springframework.org/schema/aop  
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;  </p>
+<p>&lt;!-- 引入datasource配置文件 --&gt;  </p>
+<p>&lt;context:property-placeholder location="classpath:datasource.properties" /&gt;  </p>
+<p>&lt;!--创建mysql jdbc数据源 --&gt;  </p>
+<p>&lt;bean id="mysqlDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  </p>
+<p>destroy-method="close"&gt;  </p>
+<p>&lt;property name="driverClass" value="${jdbc.mysql.driver}" /&gt;  </p>
+<p>&lt;property name="jdbcUrl" value="${jdbc.mysql.url}" /&gt;  </p>
+<p>&lt;property name="user" value="${jdbc.mysql.username}" /&gt;  </p>
+<p>&lt;property name="password" value="${jdbc.mysql.password}" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的最小连接数 --&gt;  </p>
+<p>&lt;property name="minPoolSize" value="10" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的最大连接数 --&gt;  </p>
+<p>&lt;property name="maxPoolSize" value="30" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的连接的最大空闲时间 --&gt;  </p>
+<p>&lt;property name="maxIdleTime" value="1800" /&gt;  </p>
+<p>&lt;property name="acquireIncrement" value="2" /&gt;  </p>
+<p>&lt;property name="maxStatements" value="0" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的初始化连接数 --&gt;  </p>
+<p>&lt;property name="initialPoolSize" value="2" /&gt;  </p>
+<p>&lt;property name="idleConnectionTestPeriod" value="1800" /&gt;  </p>
+<p>&lt;!-- 当连接失败时，尝试重新连接的次数 --&gt;  </p>
+<p>&lt;property name="acquireRetryAttempts" value="30" /&gt;  </p>
+<p>&lt;property name="breakAfterAcquireFailure" value="true" /&gt;  </p>
+<p>&lt;property name="testConnectionOnCheckout" value="false" /&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--创建oracle jdbc数据源 --&gt;  </p>
+<p>&lt;bean id="oracleDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  </p>
+<p>destroy-method="close"&gt;  </p>
+<p>&lt;property name="driverClass" value="${jdbc.oracle.driver}" /&gt;  </p>
+<p>&lt;property name="jdbcUrl" value="${jdbc.oracle.url}" /&gt;  </p>
+<p>&lt;property name="user" value="${jdbc.oracle.username}" /&gt;  </p>
+<p>&lt;property name="password" value="${jdbc.oracle.password}" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的最小连接数 --&gt;  </p>
+<p>&lt;property name="minPoolSize" value="10" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的最大连接数 --&gt;  </p>
+<p>&lt;property name="maxPoolSize" value="30" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的连接的最大空闲时间 --&gt;  </p>
+<p>&lt;property name="maxIdleTime" value="1800" /&gt;  </p>
+<p>&lt;property name="acquireIncrement" value="2" /&gt;  </p>
+<p>&lt;property name="maxStatements" value="0" /&gt;  </p>
+<p>&lt;!-- 指定连接数据库连接池的初始化连接数 --&gt;  </p>
+<p>&lt;property name="initialPoolSize" value="2" /&gt;  </p>
+<p>&lt;property name="idleConnectionTestPeriod" value="1800" /&gt;  </p>
+<p>&lt;!-- 当连接失败时，尝试重新连接的次数 --&gt;  </p>
+<p>&lt;property name="acquireRetryAttempts" value="1" /&gt;  </p>
+<p>&lt;property name="breakAfterAcquireFailure" value="true" /&gt;  </p>
+<p>&lt;property name="testConnectionOnCheckout" value="false" /&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!-- 创建MysqlSessionFactory--&gt;  </p>
+<p>&lt;bean id="mysqlSessionFactory"  </p>
+<p>class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"&gt;  </p>
+<p>&lt;property name="dataSource" ref="mysqlDataSource" /&gt;  </p>
+<p>&lt;property name="hibernateProperties"&gt;  </p>
+<p>&lt;props&gt;  </p>
+<p>&lt;prop key="hibernate.show_sql"&gt;true&lt;/prop&gt;  </p>
+<p>&lt;prop key="hibernate.dialect"&gt;org.hibernate.dialect.MySQLDialect&lt;/prop&gt;  </p>
+<p>&lt;prop key="current_session_context_class"&gt;thread&lt;/prop&gt;  </p>
+<p>&lt;/props&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;property name="mappingResources"&gt;  </p>
+<p>&lt;list&gt;  </p>
+<p>&lt;value&gt;edu/njupt/zhb/model/mysql/Student.hbm.xml&lt;/value&gt;  </p>
+<p>&lt;/list&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!-- 创建OracleSessionFactory--&gt;  </p>
+<p>&lt;bean id="oracleSessionFactory"  </p>
+<p>class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"&gt;  </p>
+<p>&lt;property name="dataSource" ref="oracleDataSource" /&gt;  </p>
+<p>&lt;property name="hibernateProperties"&gt;  </p>
+<p>&lt;props&gt;  </p>
+<p>&lt;prop key="hibernate.show_sql"&gt;true&lt;/prop&gt;  </p>
+<p>&lt;prop key="hibernate.dialect"&gt;org.hibernate.dialect.OracleDialect&lt;/prop&gt;  </p>
+<p>&lt;prop key="current_session_context_class"&gt;thread&lt;/prop&gt;  </p>
+<p>&lt;/props&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;property name="mappingResources"&gt;  </p>
+<p>&lt;list&gt;  </p>
+<p>&lt;value&gt;edu/njupt/zhb/model/oracle/Student.hbm.xml&lt;/value&gt;  </p>
+<p>&lt;/list&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!-- 配置Mysql事务 --&gt;  </p>
+<p>&lt;bean id="mysqlTransactionManager"  </p>
+<p>class="org.springframework.orm.hibernate4.HibernateTransactionManager"&gt;  </p>
+<p>&lt;property name="sessionFactory"&gt;  </p>
+<p>&lt;ref local="mysqlSessionFactory" /&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--Mysql hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到--&gt;  </p>
+<p>&lt;bean id="mysqlTransactionInterceptor"  </p>
+<p>class="org.springframework.transaction.interceptor.TransactionInterceptor"&gt;  </p>
+<p>&lt;property name="transactionManager"&gt;  </p>
+<p>&lt;ref local="mysqlTransactionManager" /&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;property name="transactionAttributes"&gt;  </p>
+<p>&lt;props&gt;  </p>
+<p>&lt;prop key="register"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="get*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="find*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="select*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="query*"&gt;PROPAGATION_REQUIRED,readOnly&lt;/prop&gt;  </p>
+<p>&lt;prop key="sync*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="finish*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="add*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="insert*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="edit*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="update*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="save*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="remove*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="delete*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="modify*"&gt;PROPAGATION_REQUIRED&lt;/prop&gt;  </p>
+<p>&lt;prop key="*"&gt;PROPAGATION_REQUIRED,-java.lang.Exception&lt;/prop&gt;  </p>
+<p>&lt;/props&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!-- autoproxy 自动创建代理--&gt;  </p>
+<p>&lt;bean id="ProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"&gt;  </p>
+<p>&lt;property name="beanNames"&gt;  </p>
+<p>&lt;list&gt;  </p>
+<p>&lt;value&gt;*ServiceImpl&lt;/value&gt;  </p>
+<p>&lt;/list&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;property name="interceptorNames"&gt;  </p>
+<p>&lt;list&gt;  </p>
+<p>&lt;value&gt;mysqlTransactionInterceptor&lt;/value&gt;  </p>
+<p>&lt;/list&gt;  </p>
+<p>&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*注入Mysql Dao</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>--&gt;  </p>
+<p>&lt;bean id="mysqlBaseDao" class="edu.njupt.zhb.dao.MysqlBaseDao"&gt;  </p>
+<p>&lt;property name="sessionFactory" ref="mysqlSessionFactory"&gt;&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*注入Oracle Dao</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>--&gt;  </p>
+<p>&lt;bean id="oracleBaseDao" class="edu.njupt.zhb.dao.OracleBaseDao"&gt;  </p>
+<p>&lt;property name="sessionFactory" ref="oracleSessionFactory"&gt;&lt;/property&gt;  </p>
+<p>&lt;/bean&gt;  </p>
+<p>&lt;!--<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*注入Services</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>*--&gt;  </p>
+<p>&lt;!--<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*注入Action</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>*--&gt;  </p>
+<p>&lt;/beans&gt;  </p>
+<p>这种配置下，oracleBaseDao的数据源的属性：acquireRetryAttempts的值配置为1，即便无法连接，我们也只需要连接一次，不会出现“卡住”的情况。而且，由于oracleBaseDao中，我们没有配置事务，因此，dao无法获得getCurrentSession，只能通过sessionFactory().openSession()来使用Hibernate。同时为了捕获异常，我们将session设置成手动提交的方式。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

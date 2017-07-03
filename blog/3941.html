@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>hibernate通过数据库表反向生成实体类</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3941.html" rel="bookmark"
+                   title="Permalink to hibernate通过数据库表反向生成实体类">hibernate通过数据库表反向生成实体类</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>步骤一：
+window--&gt;open Perspective--&gt;MyEclipse Java Persistence</p>
+<p>进行了上面的 操作后会出现一个视图DB Brower:MyEclipse Derby，</p>
+<p>点击右键新建new一个在出现的面板Database Driver中，Driver template中选择Oracle(ThinDriver)这里以oracle软件为例,如果是mysql就选mysql的</p>
+<p>driver name可以随意取，Connection URL就写平常的JDBC中的 URL，jdbc:oracle:thin:@127.0.0.1:1521&gt;]:，用户名，用户密码 也是的，接下来add Jars添加oracle的驱动包，点Test Driver测试下是否可用，点击Finish完成，这时在视图中会出现你写的driver name的那个图标了，点击图标可以看到数据库中所有的表 。
+ 
+步骤二：
+选中项目右键 --&gt;MyEclipse--&gt;add Hibernate Capabilities</p>
+<p>这里我们选择hibernate3.2然后如果需要用到在实体类 上添加注释的话那么选中紧挨着的Enable Hibernate Annotations Support</p>
+<p>然后下一步选中一个目录存放自动生成hibernate.cfg.xml文件</p>
+<p>下一步选中一个DB Driver中我们第一步建立的那个， </p>
+<p>然后下一步选中一个目录（选择目录和包）存放自动生成的 HibernateSessionFactory工具类</p>
+<p>点Finish完成
+步骤三：
+ 
+反转，到DB Brower中那个新建的选中点开到所有表选中并且点击右键---&gt;Hibernate Reverse Enginnering</p>
+<p>选中目录存放将要反转出来的实体类并且勾选中Create POJO&lt;&gt;DB（add Hibernate mapping..用来在实体类中添加注释映射，可选可不选）,选中Update Hibernate configuration..用来将生成的实体类映射到上一步生成的hibernate.cfg.xml中去，</p>
+<p>接着再下一步到typeMapping 这里选中Hibernate type类型，再到Id Generator这里，可以设置成为native，Generate version and timestamp tag是用来在有version字样的数据库列生成表的字段时自动加上@version注解，同样可选可不选，然后点击Finish完成。 就可以回到my eclipse enterprise视图下面看到所生成的实体类以及配置文件。</p>
+<p>分享： </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

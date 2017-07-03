@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>树莓派学习笔记——Restful服务 采用slim php apache</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3820.html" rel="bookmark"
+                   title="Permalink to 树莓派学习笔记——Restful服务 采用slim php apache">树莓派学习笔记——Restful服务 采用slim php apache</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>0.前言
+&nbsp; &nbsp; 前些时间沉迷于Restful，采用PHP+Slim+MySQL实现了一些简单的API函数。但是这些工作都是在windows中实现（采用wamp server集成安装包），但是转到linux中还确实有些不一样，下面就使用树莓派尝试一把。
+&nbsp;
+1.安装php和apache2
+&nbsp; &nbsp; 在这里仅安装php和apache2，如果需要安装mysql请再增加php5-mysql和mysql-server
+&nbsp; &nbsp; sudo apt-get update
+&nbsp; &nbsp; sudo apt-get install apache2 php
+&nbsp; &nbsp;&nbsp;
+2.配置apache2
+&nbsp;&nbsp;&nbsp; 【为什么配置apache】
+&nbsp; &nbsp; 需要打开apache中的url重定向功能，例如api/leds/1，请示并不存在该文件，而是通过响应的代码生成响应。默认情况下，apache关闭了url重定向功能，所有才有了以下的设备。
+&nbsp; &nbsp; 关于windows中的设置请查看博文——【PHP再学习4—— slim框架学习和使用】
+&nbsp; &nbsp; 【目录说明】
+&nbsp; &nbsp; 若使用wamp server集成安装包，那么apache2相关配置文件位于wamp安装目录inapacheApache2.4.4conf
+&nbsp; &nbsp; 若在linux环境配置文件就显得有些不一样了，配置文件位于&nbsp;/etc/apache2，文件名为apache2.conf
+&nbsp; &nbsp;&nbsp;配置文件并不是有一个文件组成，还包括该目录下其他文件夹下的配置文件。
+&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp; 【1】使能mode_rewirte
+&nbsp; &nbsp;&nbsp;sudo a2enmod rewrite
+&nbsp; &nbsp;&nbsp;【2】修改配置文件 使用.htaccess文件
+&nbsp; &nbsp; 配置文件位于/etc/apache2/sites-available，文件名为default。
+&nbsp; &nbsp; 在&lt;Directory /var/www/&gt;设置中，原定为AllowOverride None，意为不使用.htaccess文件，可修改为AllowOverride FileInfo，意为使用.htaccess中的相关设置。
+&nbsp; &nbsp;&lt;Directory /var/www/&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Options Indexes FollowSymLinks MultiViews
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # changed from None to FileInfo
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;AllowOverride FileInfo
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Order allow,deny
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; allow from all
+&nbsp; &nbsp; &lt;/Directory&gt;
+&nbsp; &nbsp; 【3】重启Apache</p>
+<p>&nbsp; &nbsp;&nbsp;sudo service apache2 restart
+&nbsp;
+3.安装slim
+&nbsp; &nbsp; 安装的具体方法有很多，这里就说说其中的一种。
+&nbsp; &nbsp; 【使用Git克隆文件】
+&nbsp; &nbsp; 可在home下建立一个临时文件，例如slim_temp(mkdir slim_temp)
+&nbsp; &nbsp; CD至该目录，输入以下指令
+&nbsp;&nbsp;&nbsp; git clone&nbsp;https://github.com/codeguy/Slim</p>
+<p>&nbsp; &nbsp;&nbsp;【复制文件到/var/www/ 目录】
+&nbsp; &nbsp; 把index.php文件，Slim文件夹和.htaccess文件 拷贝到/var/www/目录
+&nbsp; &nbsp; 请注意/var/www/目录的所有者为root，复制前可修改该目录的所有者为pi
+&nbsp; &nbsp;&nbsp;sudo chown -R pi /var/www
+&nbsp; &nbsp; &nbsp;
+4.简单的测试
+&nbsp; &nbsp; 使用火狐浏览器中的HTTPRequest工具，POST方法。
+&nbsp; &nbsp;</p>
+<p>图1 发送POST请求
+5.总结
+&nbsp; &nbsp; 虽然树莓派做Http server能力有限，但是过程非常有趣。通过过程学习了很多apache2配置的知识。
+&nbsp;
+6.参考资料
+1.【ubuntu apache2安装和卸载】
+2.【How to enable mod_rewrite in Apache】</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

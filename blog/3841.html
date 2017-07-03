@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>Java：String和Date、Timestamp之间的转换</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3841.html" rel="bookmark"
+                   title="Permalink to Java：String和Date、Timestamp之间的转换">Java：String和Date、Timestamp之间的转换</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>一、String与Date（java.util.Date）互转
+ 
+     1.1 String -&gt; Date
+ </p>
+<p>Java代码  </p>
+<p>String dateStr = "2010/05/04 12:34:23";  </p>
+<p>Date date = new Date();  </p>
+<p>//注意format的格式要与日期String的格式相匹配  </p>
+<p>DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  </p>
+<p>try {  </p>
+<p>date = sdf.parse(dateStr);  
+            System.out.println(date.toString());  
+        } catch (Exception e) {  </p>
+<p>e.printStackTrace();  
+        }  </p>
+<p>1.2 Date -&gt; String
+ 
+   日期向字符串转换，可以设置任意的转换格式format</p>
+<p>Java代码  </p>
+<p>String dateStr = "";  </p>
+<p>Date date = new Date();  </p>
+<p>//format的格式可以任意  </p>
+<p>DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  </p>
+<p>DateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH/mm/ss");  </p>
+<p>try {  </p>
+<p>dateStr = sdf.format(date);  
+            System.out.println(dateStr);  
+            dateStr = sdf2.format(date);  
+            System.out.println(dateStr);  
+        } catch (Exception e) {  </p>
+<p>e.printStackTrace();  
+        }  </p>
+<p>二、String与Timestamp互转
+ 
+ 
+   2.1 String -&gt;Timestamp
+ 
+ 
+   使用Timestamp的valueOf()方法</p>
+<p>Java代码  </p>
+<p>Timestamp ts = new Timestamp(System.currentTimeMillis());  </p>
+<p>String tsStr = "2011-05-09 11:49:45";  </p>
+<p>try {  </p>
+<p>ts = Timestamp.valueOf(tsStr);  
+            System.out.println(ts);  
+        } catch (Exception e) {  </p>
+<p>e.printStackTrace();  
+        }  </p>
+<p>注：String的类型必须形如： yyyy-mm-dd hh:mm:ss[.f...] 这样的格式，中括号表示可选，否则报错！！！ 
+    如果String为其他格式，可考虑重新解析下字符串，再重组~~
+ 
+    2.2 Timestamp -&gt; String
+ 
+  使用Timestamp的toString()方法或者借用DateFormat
+ </p>
+<p>Java代码  </p>
+<p>Timestamp ts = new Timestamp(System.currentTimeMillis());  </p>
+<p>String tsStr = "";  </p>
+<p>DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  </p>
+<p>try {  </p>
+<p>//方法一  </p>
+<p>tsStr = sdf.format(ts);  
+            System.out.println(tsStr);  
+            //方法二  </p>
+<p>tsStr = ts.toString();  
+            System.out.println(tsStr);  
+        } catch (Exception e) {  </p>
+<p>e.printStackTrace();  
+        }  </p>
+<p>很容易能够看出来，方法一的优势在于可以灵活的设置字符串的形式。
+三、Date（ java.util.Date ）和Timestamp互转
+ 
+  声明：查API可知，Date和Timesta是父子类关系
+ 
+ 
+  3.1 Timestamp -&gt; Date
+ 
+ </p>
+<p>Java代码  </p>
+<p>Timestamp ts = new Timestamp(System.currentTimeMillis());  </p>
+<p>Date date = new Date();  </p>
+<p>try {  </p>
+<p>date = ts;  
+            System.out.println(date);  
+        } catch (Exception e) {  </p>
+<p>e.printStackTrace();  
+        }  </p>
+<p>很简单，但是此刻date对象指向的实体却是一个Timestamp，即date拥有Date类的方法，但被覆盖的方法的执行实体在Timestamp中。
+ 
+ 
+   3.2 Date -&gt; Timestamp
+ 
+   父类不能直接向子类转化，可借助中间的String~~~~
+   注：使用以下方式更简洁
+   Timestamp ts = new Timestamp(date.getTime());
+ </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

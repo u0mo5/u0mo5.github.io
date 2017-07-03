@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>struts2令牌(token)内部原理</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3918.html" rel="bookmark"
+                   title="Permalink to struts2令牌(token)内部原理">struts2令牌(token)内部原理</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>小菜最近接触了struts2中的令牌知识，由于该知识点比较重要，因此想弄明白些，于是满怀信心的上网查阅资料，结果让小菜很无奈，网上的资料千篇一律，总结出来就一句话：“访问页面时，在页面产生一个token id，同时在服务器的session中保存一个同样的id，提交时判断如果相同怎么样不相同怎么样。。。”
+    可能是小菜愚笨，实在是无法从这么精炼的描述中体会令牌的精髓。
+    肤浅的那么一说，然后上来就是一堆代码，有时候对初学者的帮助可能不是很大，如果能够介绍一下其中的原理，无疑会加快读者学习速度。
+    经过刻苦的研究，下面小菜来介绍一下，令牌究竟是如何做到防止界面刷新的。
+    本文不涉及令牌具体用法，只讲原理。
+    首先需要说明的是，在struts2框架中使用令牌基本上就是两步：
+        l  在jsp页面中使用&lt;s:token&gt;&lt;/s:token&gt;标签，可以放在表单中任何位置，这个标签的作用就是在页面中产生一个token id，可以通过“查看源文件”的形式看到。为什么要放在表单中呢？因为这个是要提交到服务器的，要不然服务器怎么知道你的id是多少？
+        l  在struts2核心配置文件中为token拦截器添加参数，来指明需要拦截哪些方法，例如：&lt;interceptor-ref name="token"&gt;&lt;param name="includeMethods"&gt;save&lt;/param&gt;&lt;/interceptor-ref&gt;，指明拦截save方法。当然也可以用excludeMethods来声明不拦截哪些方法。
+                  
+令牌生成原理图：</p>
+<p>从图中可以看出，如果某个jsp页面中有token标签，那么无论是请求这个界面还是内部转发到这个界面，我们统一说成是“渲染界面”的时候，都会造成token id的产生或者更新。
+    一定要搞清楚，这里是请求的jsp页面，此时可以产生令牌，但令牌不会起作用，因为它拦截的不是jsp，而是通过反射机制调用的方法。
+ 
+令牌拦截原理图：</p>
+<p>从图中可以看出，令牌可以拦截的是Action中的方法。
+     如果方法需要被拦截，会判断session中的token id和提交过来的token id是否相等。如果不相等，则直接跳转到预先配置好的界面，session中的token id不变；如果相等，则执行请求的方法，关键的一点是，此时session中的token id会被清空！这个步骤非常关键！
+ 
+综上，关于令牌的使用，记住以下几点，基本可以应对各种复杂的令牌应用场景
+ 
+    l  注意令牌的产生时机，它是在加载(或渲染)带有token标签的jsp页面时产生的，与请求或者转发无关，与方法是否被拦截无关。
+    l  由于服务器端的token id是保存在session中的，因此不同的页面间可以共享，使用时注意，避免混乱。
+    l  如果访问的方法属于被拦截的方法，验证通过之后，会清空session中的token id；如果验证不通过，session 中的token id不变，直到下一次加载(或渲染)带有token标签的jsp页面。
+ 
+    再多啰嗦一些，为什么验证通过后要清空session中的token id呢？其实不难理解，从宏观上来思考，重复提交有一个必然的特征：它的token id是上一个。因此只要保证验证通过后session中保存的token id变化即可，清空是最直接的办法。要想通过验证，只有一个途径：重新加载(或渲染)带有token标签的jsp页面，使客户端的token id和服务器端的token id一致。
+    小菜总是希望自己的文章能够帮助更多的人，因此写的有点啰嗦，大家见谅！</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

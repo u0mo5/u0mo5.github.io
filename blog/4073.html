@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>MYSQL导入导出.sql文件</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/4073.html" rel="bookmark"
+                   title="Permalink to MYSQL导入导出.sql文件">MYSQL导入导出.sql文件</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>MYSQL导入导出.sql文件
+ </p>
+<p>一.MYSQL的命令行模式的设置：桌面-&gt;我的电脑-&gt;属性-&gt;环境变量-&gt;新建-&gt;PATH=“；pathmysqlin;”其中path为MYSQL的安装路径。二.简单的介绍一下命令行进入MYSQL的方法：1.C:&gt;mysql -h hostname -u username -p按ENTER键，等待然后输入密码。这里hostname为服务器的名称，如localhost，username为MYSQL的用户名，如root。进入命令行后可以直接操作MYSQL了。2.简单介绍一下MYSQL命令：   mysql-&gt;CREATE DATABASE dbname;//创建数据库   mysql-&gt;CREATE TABLE tablename;//创建表   mysql-&gt;SHOW DATABASES;//显示数据库信息，有那些可用的数据库。  mysql-&gt;USE dbname;//选择数据库   mysql-&gt;SHOW TABLES;//显示表信息，有那些可用的表   mysql-&gt;DESCRIBE tablename;//显示创建的表的信息三.从数据库导出数据库文件：1.将数据库mydb导出到e:mysqlmydb.sql文件中：打开开始-&gt;运行-&gt;输入cmd    进入命令行模式c:&gt;mysqldump -h localhost -u root -p mydb &gt;e:mysqlmydb.sql然后输入密码，等待一会导出就成功了，可以到目标文件中检查是否成功。2.将数据库mydb中的mytable导出到e:mysqlmytable.sql文件中：c:&gt;mysqldump -h localhost -u root -p mydb mytable&gt;e:mysqlmytable.sql3.将数据库mydb的结构导出到e:mysqlmydb_stru.sql文件中：c:&gt;mysqldump -h localhost -u root -p mydb --add-drop-table &gt;e:mysqlmydb_stru.sql四.从外部文件导入数据到数据库中：从e:mysqlmydb2.sql中将文件中的SQL语句导入数据库中：1.从命令行进入mysql，然后用命令CREATE DATABASE mydb2;创建数据库mydb2。2.退出mysql 可以输入命令exit；或者quit；3.在CMD中输入下列命令：c:&gt;mysql -h localhost -u root -p mydb2 &lt; e:mysqlmydb2.sql然后输入密码，就OK了。五.下面谈一下关于导入文件大小限制问题的解决：默认情况下：mysql 对导入文件大小有限制的，最大为2M，所以当文件很大时候，直接无法导入，下面就这个问题的解决列举如下：1.在php.ini中修改相关参数：影响mysql导入文件大小的参数有三个：    memory_limit=128M,upload_max_filesize=2M,post_max_size=8M修改upload_max_filesize=200 M  这里修改满足你需要的大小，可以同时修改其他两项memory_limit=250M  post_max_size=200M这样就可以导入200M以下的.sql文件了。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

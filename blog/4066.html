@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>设计和实现OLAP解决方案</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/4066.html" rel="bookmark"
+                   title="Permalink to 设计和实现OLAP解决方案">设计和实现OLAP解决方案</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>设计和实现OLAP解决方案
+ </p>
+<p>第一讲 简介首先，啥叫数据仓库？
+数据仓库就是数据的仓库！用外文说叫Data Warehouse，简称DW。
+是不是哐当倒下一片啊，要不咱换个专业点的说法？
+数据仓库是一个面向主题的、集成的、相对稳定的、反映历史变化的、包含商业信息的数据集合，用于支持管理决策。
+看得懂不？谅你也不懂。
+算了，别叫这真了。
+等你明白了舍生取义，你自然会明白什么是数据仓库的。
+ 
+数据仓库里面有大量包含商业信息的数据，但是我们很难从中捕获信息，因为数据仓库一般有很大的数据量，要整理这些数据还是很麻烦的。
+ 
+OLAP系统就是来解决其中一部份目标的。
+先说什么是OLAP，发音噢勒普。联机分析处理，还是看不懂吧？
+就是让你高效访问数据仓库的。
+相对应的有一个OLTP，叫联机事务处理，就是我们平常用的数据库。
+OLTP通常有大量并发添加和修改，随时变化，包含大量的数据，具有复杂的结构。
+ 
+当我们把OLTP装载到DW中，一般就不再有修改，随着数据的增加而定期更新，而不是随频繁发生的事务而更新。结构和安全性也更简化，目的是提高分析查询的效率，而不是进行事务处理。
+ 
+还有数据集市，叫Data Mart，数据集市是数据仓库的一种特殊形式，典型的数据集市包含面向专门主题的适合特定业务功能的企业数据子集。
+你可以认为数据集市是数据仓库的一部份。
+ 
+ 
+第二讲 OLAP概述OLAP 技术使数据仓库能够快速响应重复而复杂的分析查询，从而使数据仓库能有效地用于联机分析。OLAP 的多维数据模型和数据聚合技术可以组织并汇总大量的数据，以便能够利用联机分析和图形工具迅速对数据进行评估。当分析人员搜寻答案或试探可能性时，在得到对历史数据查询的回答后，经常需要进行进一步查询。OLAP 系统可以快速灵活地为分析人员提供实时支持。
+ 
+通常的OLAP应用有财务报表、市场分析、市场计划、客户服务等。
+目前国内已经有大量丰富的应用，比如银行、证券、电信、生产、销售行业，都有很多的成功案例。
+ 
+在OLAP中，数据不再以关系型数据结构存放，而是以多维的数据结构存放。不再具有Detail的数据，而是只有Roll up后的信息。
+ 
+微软的Analysis Service是一个不错的OLAP系统，一点不吹牛的说，它处理速度快，查询速度快，功能完整，支持海量数据，而且处理后的数据量很小，没有数据爆炸的问题。
+ 
+ 
+第三讲 数据仓库结构
+数据仓库的基本结构就是Star Schema和SnowFlake Schema，星型结构和雪花结构。
+了解结构之前先得理解两个基本名词：事实表FactTable和维度表Dimension Table。
+什么是事实和维度呢？我今天在U-mart买了两块巧克力，价格23.54￥。
+这就是一个事实。其中包含的信息有客户：我；日期：今天；地点：U-mart；产品：巧克力；数量：2；价格：23.54￥。客户、日期、地点、产品就是维度Dimension，数量和价格是度量值Measure。
+ 
+ 
+ 
+这就是一个星型架构。
+维度表至少包含维度的Key和Name，Key和Name可以是同一列。维度也可能没有维度表，比如这个架构中的日期维度就没有维度表。
+一个多维数据集架构Cube Schema有且只有一个事实表，不过你要用几个base table组合成一个view来做事实表也可以。(Cube 的Partition里面可以使用不同的事实表，这是后话。)
+ 
+维度是有层次level的，一个维度至少有两个层次，在大多数情况下维度的成员会按金字塔形布局排列，最上面总有一个All的层次，比如客户维度就有(所有客户)-(客户)这两个层次。维度除了常规维度外，还有父子维度、虚拟维度等。后面会详细介绍各种维度。
+如果一个维度有多于2个层次，那么这个维度可能有多个维度表，例如：
+ 
+ 
+ 
+这样的就是雪花结构。
+ 
+ 
+From: http://dev-club.esnai.com/club/bbs/elist.asp?page=6&amp;nofolder=&amp;path=&amp;boardid=23</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>

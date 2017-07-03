@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>六种方式实现hibernate查询，及IDE推荐</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/3961.html" rel="bookmark"
+                   title="Permalink to 六种方式实现hibernate查询，及IDE推荐">六种方式实现hibernate查询，及IDE推荐</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="1970-01-01T00:00:00+08:00">
+                周四 01 一月 1970
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p>这些天过的好乱，也许是因为考完试了，心里有些松懈吧。也许是最近发生的事对我有些触动吧。感觉自己都已经不懂自己了。面对一些人的教导，我很感激。因为很多话都对我有非常大的帮助和启发，也让我除了做技术，玩编程外，明白了很多道理，也许这就是一个人成熟的过程吧。我真的很希望我能够忘掉以前的不懂事，忘掉以前的轻狂，踏踏实实的做技术。
+           自己的“真理”有时也会错，自己的想法有时也很“天真”。我真的很想静一静。晚饭后看了
+一个在百度实习的师兄写的一篇日志，觉得写的很棒，明白了高手的一个定义，或者说是一种境界，一种
+高深的东西。
+           我很想从现在做起，使自己能够真正享受编程带来的快乐，没有虚荣，没有竞争，没有杂念。只有快乐，只有充实，只有无悔。当然我说到做到，那篇日志讲的是一个从点到面，从面到点的哲理。我觉得有必要写一个hibernate的总结性随笔，从点到面，讲讲hibernate查询的6种方法。分别是HQL查询，对象化查询Criteria方法，动态查询DetachedCriteria，例子查询，sql查询，命名查询。
+           如果单纯的使用hibernate查询数据库只需要懂其中的一项就可以完成想要实现的一般功能，但是从一个点，让我们掌握6中方法，则提供了更多选择。每一种方法都有其适用的情况与前提。
+HQL查询
+HQL是hibernate自己的一套查询语言，于SQL语法不同，具有跨数据库的优点。示例代码：</p>
+<p>static void query(String name){  Session s=null;  try{   s=HibernateUtil.getSession();      //from后面是对象，不是表名   String hql="from Admin as admin where admin.aname=:name";//使用命名参数，推荐使用，易读。   Query query=s.createQuery(hql);   query.setString("name", name);      List&lt;Admin&gt; list=query.list();      for(Admin admin:list){    System.out.println(admin.getAname());   }  }finally{   if(s!=null)   s.close();  } }</p>
+<p>适用情况：常用方法，比较传统，类似jdbc。缺点：新的查询语言，适用面有限，仅适用于Hibernate框架。
+对象化查询Criteria方法：
+ </p>
+<p>static void cri(String name,String password){  Session s=null;  try{   s=HibernateUtil.getSession();      Criteria c=s.createCriteria(Admin.class);   c.add(Restrictions.eq("aname",name));//eq是等于，gt是大于，lt是小于,or是或   c.add(Restrictions.eq("apassword", password));      List&lt;Admin&gt; list=c.list();   for(Admin admin:list){    System.out.println(admin.getAname());   }  }finally{   if(s!=null)   s.close();  } }</p>
+<p>适用情况：面向对象操作，革新了以前的数据库操作方式，易读。缺点：适用面较HQL有限。
+动态分离查询DetachedCriteria
+ </p>
+<p>static List dc(DetachedCriteria dc) {  Session s = HibernateUtil.getSession();  Criteria c = dc.getExecutableCriteria(s);  List rs = c.list();  s.close();  return rs; }</p>
+<p>DetachedCriteria dc = DetachedCriteria.forClass(User.class);  int id = 1;  if (id != 0)   dc.add(Restrictions.eq("id", id));  Date age = new Date();  if (age != null)   dc.add(Restrictions.le("birthday", age));  List users = dc(dc);  System.out.println("离线查询返回结果：" + users);</p>
+<p>适用情况：面向对象操作，分离业务与底层，不需要字段属性摄入到Dao实现层。  缺点：适用面较HQL有限。
+例子查询</p>
+<p>static List example(User user) {  Session s = HibernateUtil.getSession();  List&lt;User&gt; users = s.createCriteria(User.class).add(    Example.create(user)).list();  // List&lt;User&gt;  // users2=s.createCriteria(User.class).add((Example.create(user)).ignoreCase())  // .createCriteria("child").add((Example.create(user))).list();  return users; }</p>
+<p>适用情况：面向对象操作。   缺点：适用面较HQL有限，不推荐。
+sql查询</p>
+<p>static List sql() {  Session s = HibernateUtil.getSession();  Query q = s.createSQLQuery("select * from user").addEntity(User.class);  List&lt;User&gt; rs = q.list();  s.close();  return rs; }</p>
+<p>适用情况：不熟悉HQL的朋友，又不打算转数据库平台的朋友，万能方法   缺点：破坏跨平台，不易维护，不面向对象。
+命名查询
+ 
+static List namedQuery(int id) {  Session s = HibernateUtil.getSession();  Query q = s.getNamedQuery("getUserById");  q.setInteger("id", id);  return q.list(); }
+ </p>
+<p>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN""http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;&lt;hibernate-mapping&gt;    &lt;class name="com.sy.vo.User" table="user" catalog="news"&gt;         &lt;/class&gt;    &lt;!-- 命名查询：定义查询条件 --&gt;    &lt;query name="getUserById"&gt;     &lt;![CDATA[from User where id=:id]]&gt;    &lt;/query&gt;    &lt;!-- 命名查询中使用sql，不推荐使用，影响跨数据库    &lt;sql-query name="getUserById2"&gt;     &lt;![CDATA[select * from User where ]]&gt;    &lt;/sql-query&gt; --&gt;&lt;/hibernate-mapping&gt;</p>
+<p>适用情况：万能方法，有点像ibatis轻量级框架的操作，方便维护。  缺点：不面向对象。基于hql和sql，有一定缺陷。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>
