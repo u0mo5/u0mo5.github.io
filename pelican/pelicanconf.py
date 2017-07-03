@@ -30,8 +30,11 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
          ('You can modify those links in your config file', '#'),)
 
 # Social widget
-SOCIAL = (('读书圈', 'http://bookfuns.com'),
-          ('网址大全', 'http://123.bookfuns.com'),)
+SOCIAL = (('搜索', '/'),
+          ('导航', '/123'),
+	      ('文档', '/doc'),	  
+		  ('博客', '/blog'),	  
+		 )
 
 DEFAULT_PAGINATION = 10
 THEME = 'pelican-themes/gum'
