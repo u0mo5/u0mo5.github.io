@@ -1,3 +1,0 @@
-|kill -9 pid结束进程 \\ kill -HUP pid 相当于重启 |
-
-\\
