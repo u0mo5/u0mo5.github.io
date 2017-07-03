@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+
+        <title>header函数</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/blog/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/blog/theme/pygment.css" />
+
+        <script src="/blog/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/blog/">逍遥の博客 <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/blog/">首页</a></li>
+
+
+              </ul>
+
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/blog/header.html" rel="bookmark"
+                   title="Permalink to header函数">header函数</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2017-07-03T02:04:00+08:00">
+                周一 03 七月 2017
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/blog/author/u0mo5.html"> u0mo5</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <p><strong>1.定义header参数和接收：</strong>  </p>
+<div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">*定义---</span>
+<span class="cm">*ajax方式:</span>
+<span class="cm">*/</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>  
+                    <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span>  
+                    <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;default.aspx&quot;</span><span class="p">,</span>  
+                    <span class="nx">beforeSend</span>: <span class="kt">function</span><span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="p">{</span>  
+                        <span class="nx">request</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="s2">&quot;Chenxizhang&quot;</span><span class="p">);</span>  
+                    <span class="p">},</span>  
+                    <span class="nx">success</span>: <span class="kt">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>  
+                        <span class="nx">alert</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>  
+                    <span class="p">}</span>  
+                <span class="p">})</span> 
+<span class="c1">//curl方式:</span>
+
+<span class="nx">$url</span> <span class="o">=</span> <span class="s1">&#39;http://www.example.com&#39;</span><span class="p">;</span>
+<span class="nx">$header</span> <span class="o">=</span> <span class="nx">array</span><span class="p">(</span><span class="s1">&#39;token:JxRaZezavm3HXM3d9pWnYiqqQC1SJbsU&#39;</span><span class="p">,</span><span class="s1">&#39;language:zh&#39;</span><span class="p">,</span><span class="s1">&#39;region:GZ&#39;</span><span class="p">);</span>
+<span class="nx">$content</span> <span class="o">=</span> <span class="nx">array</span><span class="p">(</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;fdipzone&#39;</span>
+<span class="p">);</span>
+
+<span class="nx">$response</span> <span class="o">=</span> <span class="nx">tocurl</span><span class="p">(</span><span class="nx">$url</span><span class="p">,</span> <span class="nx">$header</span><span class="p">,</span> <span class="nx">$content</span><span class="p">);</span>
+<span class="nx">$data</span> <span class="o">=</span> <span class="nx">json_decode</span><span class="p">(</span><span class="nx">$response</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="nx">echo</span> <span class="s1">&#39;POST data:&#39;</span><span class="p">;</span>
+<span class="nx">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
+<span class="nx">print_r</span><span class="p">(</span><span class="nx">$data</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]);</span>
+<span class="nx">echo</span> <span class="s1">&#39;&lt;/pre&gt;&#39;</span><span class="p">;</span>
+<span class="nx">echo</span> <span class="s1">&#39;Header data:&#39;</span><span class="p">;</span>
+<span class="nx">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
+<span class="nx">print_r</span><span class="p">(</span><span class="nx">$data</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">]);</span>
+<span class="nx">echo</span> <span class="s1">&#39;&lt;/pre&gt;&#39;</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * 发送数据</span>
+<span class="cm"> * @param String $url     请求的地址</span>
+<span class="cm"> * @param Array  $header  自定义的header数据</span>
+<span class="cm"> * @param Array  $content POST的数据</span>
+<span class="cm"> * @return String</span>
+<span class="cm"> */</span>
+<span class="kd">function</span> <span class="nx">tocurl</span><span class="p">(</span><span class="nx">$url</span><span class="p">,</span> <span class="nx">$header</span><span class="p">,</span> <span class="nx">$content</span><span class="p">){</span>
+    <span class="nx">$ch</span> <span class="o">=</span> <span class="nx">curl_init</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">substr</span><span class="p">(</span><span class="nx">$url</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39;https&#39;</span><span class="p">){</span>
+        <span class="nx">curl_setopt</span><span class="p">(</span><span class="nx">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_SSL_VERIFYPEER</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span> <span class="c1">// 跳过证书检查</span>
+        <span class="nx">curl_setopt</span><span class="p">(</span><span class="nx">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_SSL_VERIFYHOST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>  <span class="c1">// 从证书中检查SSL加密算法是否存在</span>
+    <span class="p">}</span>
+    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nx">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nx">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nx">$url</span><span class="p">);</span>
+    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nx">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nx">$header</span><span class="p">);</span>
+    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nx">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nx">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_POSTFIELDS</span><span class="p">,</span> <span class="nx">http_build_query</span><span class="p">(</span><span class="nx">$content</span><span class="p">));</span>
+    <span class="nx">$response</span> <span class="o">=</span> <span class="nx">curl_exec</span><span class="p">(</span><span class="nx">$ch</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">$error</span><span class="o">=</span><span class="nx">curl_error</span><span class="p">(</span><span class="nx">$ch</span><span class="p">)){</span>
+        <span class="nx">die</span><span class="p">(</span><span class="nx">$error</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">curl_close</span><span class="p">(</span><span class="nx">$ch</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">$response</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/*</span>
+<span class="cm">*接收----</span>
+<span class="cm">*接收  ajax</span>
+<span class="cm">*$_SERVER[&#39;HTTP_TEST&#39;];</span>
+<span class="cm">*接收curl</span>
+<span class="cm">*/</span>
+<span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nx">$post_data</span> <span class="o">=</span> <span class="nx">$_POST</span><span class="p">;</span>
+<span class="nx">$header</span> <span class="o">=</span> <span class="nx">get_all_headers</span><span class="p">();</span>
+
+<span class="nx">$ret</span> <span class="o">=</span> <span class="nx">array</span><span class="p">();</span>
+<span class="nx">$ret</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">$post_data</span><span class="p">;</span>
+<span class="nx">$ret</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">$header</span><span class="p">;</span>
+
+<span class="nx">header</span><span class="p">(</span><span class="s1">&#39;content-type:application/json;charset=utf8&#39;</span><span class="p">);</span>
+<span class="nx">echo</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nx">$ret</span><span class="p">,</span> <span class="nx">JSON_UNESCAPED_UNICODE</span><span class="o">|</span><span class="nx">JSON_PRETTY_PRINT</span><span class="p">);</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * 获取自定义的header数据</span>
+<span class="cm"> */</span>
+<span class="kd">function</span> <span class="nx">get_all_headers</span><span class="p">(){</span>
+
+    <span class="c1">// 忽略获取的header数据</span>
+    <span class="nx">$ignore</span> <span class="o">=</span> <span class="nx">array</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">,</span><span class="s1">&#39;accept&#39;</span><span class="p">,</span><span class="s1">&#39;content-length&#39;</span><span class="p">,</span><span class="s1">&#39;content-type&#39;</span><span class="p">);</span>
+
+    <span class="nx">$headers</span> <span class="o">=</span> <span class="nx">array</span><span class="p">();</span>
+
+    <span class="nx">foreach</span><span class="p">(</span><span class="nx">$_SERVER</span> <span class="kr">as</span> <span class="nx">$key</span><span class="o">=&gt;</span><span class="nx">$value</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">substr</span><span class="p">(</span><span class="nx">$key</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">===</span><span class="s1">&#39;HTTP_&#39;</span><span class="p">){</span>
+            <span class="nx">$key</span> <span class="o">=</span> <span class="nx">substr</span><span class="p">(</span><span class="nx">$key</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+            <span class="nx">$key</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="nx">$key</span><span class="p">);</span>
+            <span class="nx">$key</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="nx">$key</span><span class="p">);</span>
+            <span class="nx">$key</span> <span class="o">=</span> <span class="nx">strtolower</span><span class="p">(</span><span class="nx">$key</span><span class="p">);</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">in_array</span><span class="p">(</span><span class="nx">$key</span><span class="p">,</span> <span class="nx">$ignore</span><span class="p">)){</span>
+                <span class="nx">$headers</span><span class="p">[</span><span class="nx">$key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">$value</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">$headers</span><span class="p">;</span>
+
+<span class="p">}</span>
+<span class="o">?&gt;</span>
+</pre></div>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+<h4>站内搜索</h4>
+              <div class="navbar-search pull-right">
+                <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=8305292233022102519' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+              </div>    
+
+<h4>页面</h4>
+
+ <ul>
+  </ul>
+
+<h4>分类</h4>
+<ul class="blank">
+		<li><a href="/blog/category/android.html">android</a></li>
+		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/git.html">git</a></li>
+		<li><a href="/blog/category/go.html">go</a></li>
+		<li><a href="/blog/category/hack.html">hack</a></li>
+		<li><a href="/blog/category/ios.html">ios</a></li>
+		<li><a href="/blog/category/java.html">java</a></li>
+		<li><a href="/blog/category/javascript.html">javascript</a></li>
+		<li><a href="/blog/category/linux.html">linux</a></li>
+		<li><a href="/blog/category/mysql.html">mysql</a></li>
+		<li><a href="/blog/category/operation.html">operation</a></li>
+		<li><a href="/blog/category/others.html">others</a></li>
+		<li><a href="/blog/category/php.html">php</a></li>
+		<li><a href="/blog/category/program.html">program</a></li>
+		<li><a href="/blog/category/python.html">python</a></li>
+		<li><a href="/blog/category/read.html">read</a></li>
+		<li><a href="/blog/category/soft.html">soft</a></li>
+		<li><a href="/blog/category/success.html">success</a></li>
+		<li><a href="/blog/category/test.html">test</a></li>
+		<li><a href="/blog/category/vcs.html">vcs</a></li>
+		<li><a href="/blog/category/windows.html">windows</a></li>
+</ul>
+
+
+<h4>标签</h4>
+
+
+<nav class="widget">
+  <h4>友情链接</h4>
+  <ul class="blank">
+    <li><a href="/">搜索</a></li>
+    <li><a href="/123">导航</a></li>
+    <li><a href="/doc">文档</a></li>
+    <li><a href="/blog">博客</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/blog/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/blog/theme/js/libs/gumby.min.js"></script>
+  <script src="/blog/theme/js/plugins.js"></script>
+</body>
+</html>
