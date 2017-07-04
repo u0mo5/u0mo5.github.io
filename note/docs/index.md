@@ -1,4 +1,4 @@
-# Welcome to MkDocs
+# 欢迎来到逍遥の笔记
 
 For full documentation visit [mkdocs.org](http://mkdocs.org).
 

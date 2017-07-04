@@ -9,5 +9,9 @@ Summary:
 
 
 ```
-$(&quot;#customers_select&quot;).val(&#39;&#39;).trigger(&#39;change&#39;);function clears(element){     &nbsp; &nbsp;$(element)[0].reset();     &nbsp; &nbsp;$(&#39;select&#39;).val(&#39;&#39;).trigger(&#39;change&#39;);//select2 清空    };
+    function clears(element){
+        $(element)[0].reset();
+        $("input").val('');
+        $('select').val('').trigger('change');//select2 清空
+    };
 ```

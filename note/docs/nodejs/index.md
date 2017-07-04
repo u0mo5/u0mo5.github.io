@@ -3,15 +3,22 @@
 For full documentation visit [Nodejs](https://nodejs.org/zh-cn/).
 
 ## Install
-你可以通过运行以下命令。
+**1.nodejs环境配置教程**
 
-`sudo yum install epel-release`   
-		
+***1.1 安装node*** 
 
-`sudo yum install nodejs`                    
-		
+	`sudo yum install epel-release `
+    `sudo yum install nodejs  `
+    `node -v  `
 
-`sudo yum install npm`  
+
+***1.2 升级node***  
+     首先安装n模块：  
+        `npm install -g n `   
+
+***1.3.升级npm***  
+    `npm install npm@latest -g  ` 
+    
 
 
 
