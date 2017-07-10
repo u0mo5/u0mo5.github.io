@@ -1,1 +1,1 @@
-cmd.exe
+pelican content

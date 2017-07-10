@@ -63,7 +63,11 @@
               </address>
             </footer><!-- /.post-info -->
             <div class="entry-content">
-              <div class="highlight"><pre><span></span>$(&amp;quot;#customers_select&amp;quot;).val(&amp;#39;&amp;#39;).trigger(&amp;#39;change&amp;#39;);function clears(element){     &amp;nbsp; &amp;nbsp;$(element)[0].reset();     &amp;nbsp; &amp;nbsp;$(&amp;#39;select&amp;#39;).val(&amp;#39;&amp;#39;).trigger(&amp;#39;change&amp;#39;);//select2 清空    };
+              <div class="highlight"><pre><span></span>    function clears(element){
+        $(element)[0].reset();
+        $(&quot;input&quot;).val(&#39;&#39;);
+        $(&#39;select&#39;).val(&#39;&#39;).trigger(&#39;change&#39;);//select2 清空
+    };
 </pre></div>
             </div><!-- /.entry-content -->
 
@@ -85,6 +89,7 @@
 <ul class="blank">
 		<li><a href="/blog/category/android.html">android</a></li>
 		<li><a href="/blog/category/api.html">api</a></li>
+		<li><a href="/blog/category/essay.html">essay</a></li>
 		<li><a href="/blog/category/git.html">git</a></li>
 		<li><a href="/blog/category/go.html">go</a></li>
 		<li><a href="/blog/category/hack.html">hack</a></li>
