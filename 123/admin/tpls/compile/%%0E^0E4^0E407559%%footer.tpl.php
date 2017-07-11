@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.25, created on 2016-09-07 13:22:01
+<?php /* Smarty version 2.6.25, created on 2017-07-11 13:12:19
          compiled from footer.tpl */ ?>
 <p style="text-align:center;padding:15px;color:#6B7355;
 font-family:Verdana;
