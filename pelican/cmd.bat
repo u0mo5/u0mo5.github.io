@@ -1,2 +1,0 @@
-pelican content
-pause
