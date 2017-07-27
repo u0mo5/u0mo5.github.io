@@ -654,6 +654,7 @@ widget: ["widget", "软件", [
 video: ["video", "视频", [
 ["百度", "http://video.baidu.com/v?ct=301989888&rn=20&pn=0&db=0&s=7&word={key}"],
 ["腾讯", "https://v.qq.com/x/search/?q={key}"],
+["哔哩", "http://http://search.bilibili.com/all?keyword={key}"],
 ["优酷", "http://so.youku.com/search_video/q_{key}"],
 ["土豆", "http://so.tudou.com/isearch.do?kw={key}"],
 ["有道", "http://video.youdao.com/search?q={key}"],
@@ -667,6 +668,8 @@ mp3: ["mp3", "音乐", [
 pic: ["pic", "图片", [
 ["百度", "http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&word={key}&t=12"],
 ["360", "http://image.haosou.com/i?q={key}"],
+["搜GIF", "http://www.soogif.com/search/{key}"],
+["小猪", "http://www.piggif.com/search/{key}"],
 ["花瓣", "http://huaban.com/search/?q={key}"]]],
 buy: ["buy", "购物", [
 ["淘宝", "https://s.taobao.com/search?q={key}"],
