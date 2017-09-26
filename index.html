@@ -1,115 +1,221 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh-cn">
 <head>
-<meta http-equiv="x-ua-compatible" content="ie=7" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>逍遥の网站</title>
-<meta http-equiv="Content-Language" content="zh-CN" />
-<meta name="description" content="搜索引擎" />
-<meta name="keywords" content="搜素引擎 逍遥 u0mo5" />
-<link href="./style/search.css" rel="stylesheet" type="text/css"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>WIN10-UI-DEMO</title>
+    <link rel='Shortcut Icon' type='image/x-icon' href='./win10/img/windows.ico'>
+    <script type="text/javascript" src="./win10/js/jquery-2.2.4.min.js"></script>
+    <link href="./win10/css/animate.css" rel="stylesheet">
+    <script type="text/javascript" src="./win10/component/layer-v3.0.3/layer/layer.js"></script>
+    <link rel="stylesheet" href="./win10/component/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="./win10/css/default.css" rel="stylesheet">
+    <script type="text/javascript" src="./win10/js/win10.js"></script>
+    <style>
+        * {
+            font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu
+        }
+        /*磁贴自定义样式*/
+        .win10-block-content-text {
+            line-height: 44px;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        Win10.onReady(function () {
+
+            //设置壁纸
+            Win10.setBgUrl({
+                main:'./win10/img/wallpapers/main.jpg',
+                mobile:'./win10/img/wallpapers/mobile.jpg',
+            });
+
+            Win10.setAnimated([
+                'animated flip',
+                'animated bounceIn',
+            ], 0.01);
+
+            setTimeout(function () {
+                Win10.newMsg('官方交流一群', '欢迎各位大侠加入讨论：<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=4Er0u8i">[点击加入]205546163</a>')
+            }, 2500);
+
+            setTimeout(function () {
+                Win10.openUrl('//win10ui.yuri2.cn/src/broadcast.html','<i class="fa fa-newspaper-o icon red"></i>最新资讯',[['300px', '380px'],'rt'])
+            },2000);
+
+
+        });
+
+        //该函数可删除 Orz
+        function win10_forgive_me() {
+            Win10.enableFullScreen();
+            layer.alert('点击展示下一版本特性', {}, function(index){
+                var blue=$('<img src="./win10/img/presentation/bluescreen.jpg" style="position: fixed;width: 100%;height:100%;top:0;z-index:9999999999" />');
+                setTimeout(function () {
+                    $('body').append(blue);
+                },3000);
+                setTimeout(function () {
+                    blue.remove();
+                    Win10.disableFullScreen();
+                    setTimeout(function () {
+                        layer.msg('开个玩笑，别打我');
+
+                    },1000);
+                },7000);
+                layer.close(index);
+            });
+
+        }
+    </script>
 </head>
-<!--
-<body style="background-image:url(http://bookfuns.com/Vendor/Pic/bing.php); overflow:auto;">
--->
-<body style="overflow:auto;">
-
-
-
-   
-    <div style="text-align:center;margin-top:15px;"><a href="http://www.bookfuns.com" target="_blank"><img src="./style/images/logo.jpg" title="读书圈" /></a></div>
-
-	<div id="soContent" style="margin:0 auto;margin-top:15px;"></div>
-	<div style="    
+<body>
+<div id="win10">
+    <div class="desktop">
 	
-	clear: both;
-    display: block;
-    text-align: center; 
-    margin: 0px auto;
-    position: absolute;
-    bottom: 100px;
-    width: 100%; font-family: '微软雅黑'; font-size: 14px;"
-    >
-	  
-
-	<h3>
-<!--	    著作权归作者所有。-->
-<!--商业转载请联系作者获得授权，非商业转载请注明出处。-->
-<!--作者：u0mo5 bookfuns.com -->
-<!--链接：//says.bookfuns.com/js.php-->
-
-
-<script type="text/javascript" src="/says/action/js"></script><div id="says"><script>says()</script></div>
-
-	</h3>
-
-			<br>  
-				<br>  
-
-
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-      <p align="center">       
-
-		<a href="./blog" target="_blank" style="color:#aaa; text-decoration:none;"><font color="RED" size=2>我的博客</font></a>		
-		<a href="./123" target="_blank" style="color:#aaa; text-decoration:none;"><font color="RED" size=2>网址大全</font></a>	
-		<!--<a href="http://admin.bookfuns.com" target="_blank" style="color:#aaa; text-decoration:none;"><font color="blue" size=2>后台登录</font></a>-->
-		</p>
-    
-	  
-	  <p>
-      <span style="color:#aaa;">版权信息.<a href="./" target="_blank" style="color:#aaa; text-decoration:none;">逍遥</a> &copy; 2005-2017  <a href="https://t.alipayobjects.com/images/mobilecodec/T17_FBXdRbXXXXXXXX" target="_blank" style="color:#f00; text-decoration:none;">捐献</a></span></p>
-
-			<br>  
-<iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=99" width="160" height="36" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
-
-				<br>
-<div style="display:none;">				
-				
-
-</div>
-<br>
+	
+		<!-- 桌面快捷方式 start-->
+        <div id="win10-shortcuts" class="shortcuts-hidden">
+		
+		<!-- 搜索引擎 start-->
+            <div class="shortcut" onclick="Win10.openUrl('./so/index.html','<img class=\'icon\' src=\'http://android-artworks.25pp.com/fs08/2017/09/18/10/110_c0f9775786846d9d85f5fda8bd42f54e_con_130x130.png\'/>搜索引擎')">
+                <img class="icon" src="http://android-artworks.25pp.com/fs08/2017/09/18/10/110_c0f9775786846d9d85f5fda8bd42f54e_con_130x130.png"/>
+                <div class="title">搜索引擎</div>
+            </div>
+		<!-- 搜索引擎 end-->
+		
+		<!-- 网址导航 start-->
+            <div class="shortcut" onclick="Win10.openUrl('./123/index.html','<img class=\'icon\' src=\'http://android-artworks.25pp.com/fs08/2017/05/23/3/110_4f11920ea44d79901fe3778fea7764ca_con_130x130.png\'/>网址导航')">
+                <img class="icon" src="http://android-artworks.25pp.com/fs08/2017/05/23/3/110_4f11920ea44d79901fe3778fea7764ca_con_130x130.png"/>
+                <div class="title">网址导航</div>
+            </div>
+		<!-- 网址导航 end-->
+		
+        </div>
+		<!-- 桌面快捷方式 end-->
+		
+		
+        <div id="win10-desktop-scene"></div>
     </div>
-	<script type="text/javascript" src="./js/so.js"></script>
-	<script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script>
-	<script type="text/javascript">
- 	var txtObj = document.getElementById("alertSpan");
+    <div id="win10-menu" class="hidden">
+        <div class="list win10-menu-hidden animated animated-slideOutLeft">
+            <div class="item"><i class="red icon fa fa-wrench fa-fw"></i><span>API测试</span></div>
+            <div class="sub-item" onclick="Win10.openUrl('./win10/child.html','子页')">父子页沟通</div>
+            <div class="sub-item" onclick="Win10.commandCenterOpen()">打开消息中心</div>
+            <div class="sub-item" onclick="Win10.newMsg('API测试','通过API可以发送消息至消息中心，自定义标题与内容(点击我试试)',function() {alert('click')})">发送带回调的消息</div>
+            <div class="sub-item" onclick="Win10.menuClose()">关闭菜单</div>
+            <div class="item" ><i class="blue icon fa fa-gavel fa-fw"></i>辅助工具</div>
+            <div class="sub-item" onclick="Win10.openUrl('win10ui.yuri2.cn/src/tools/builder-shortcut.html','图标代码生成器')">桌面图标代码生成器</div>
+            <div class="sub-item" onclick="Win10.openUrl('win10ui.yuri2.cn/src/tools/builder-tile.html','磁贴代码生成器')">磁贴代码生成器</div>
+            <div class="sub-item" onclick="Win10.openUrl('win10ui.yuri2.cn/src/tools/builder-menu.html','菜单代码生成器')">菜单代码生成器</div>
+            <div class="item" onclick="Win10.aboutUs()"><i class="purple icon fa fa-info-circle fa-fw"></i>关于</div>
+            <div class="item" onclick="layer.open({
+                title:'支持作者',
+                type: 1,
+                area:'300px',
+                offset:'50px',
+                shadeClose:true,
+                content: '<img width=\'300\' src=\'./win10/img/presentation/donation.jpg\' />'
+            })"><i class="green icon fa fa-thumbs-up fa-fw"></i>捐赠</div>
+            <div class="item" onclick=" Win10.exit();"><i class="black icon fa fa-power-off fa-fw"></i>关闭</div>
+        </div>
+        <div class="blocks">
+            <div class="menu_group">
+                <div class="title">
+                    应用示例
+                </div>
+                <div loc="1,1" size="6,3" class="block">
+                    <div class="content red detail" >
+                        <iframe style="margin-top: 10px" frameborder="no" border="0" marginwidth="0" marginheight="0" width=264 height=110 src="//music.163.com/outchain/player?type=2&id=110771&auto=0&height=90"></iframe>
+                    </div>
+                    <div class="content red cover">
+                        <img width="264" style="position: relative;top: -50px;" src="./win10/img/presentation/wangyiyun.gif" />
+                    </div>
+                </div>
+                <div loc="1,4" size="4,4" class="block">
+                    <div class="content blue cover" style="font-size: 30px;line-height: 176px;text-align: center">
+                        <i class="fa fa-cloud fa-fw"></i> 天气
+                    </div>
+                    <div class="content detail" style="background-color: rgb(46,147,217)">
+                        <iframe src="//www.seniverse.com/weather/weather.aspx?uid=U43DF172E7&cid=CHBJ000000&l=&p=SMART&a=1&u=C&s=13&m=2&x=1&d=1&fc=&bgc=2E93D9&bc=&ti=0&in=0&li=" frameborder="0" scrolling="no" width="200" height="300" allowTransparency="true"></iframe>
+                    </div>
+                </div>
+                <div loc="5,4" size="2,2" class="block">
+                    <div class="content">
+                        <img style="display: inline-block;border-radius: 4px" width="88px" src="http://q2.qlogo.cn/headimg_dl?bs=824831811&dst_uin=824831811&src_uin=824831811&fid=824831811&spec=100&url_enc=0&referer=bu_interface&term_type=PC"/>
+                    </div>
+                </div>
+                <div loc="5,6" size="2,2" class="block" onclick="win10_forgive_me()">
+                    <div class="content red">
+                        <div style="text-align: center;font-size: 30px;line-height: 44px"><i class="fa fa-bug fa-fw"></i></div>
+                        <div style="text-align: center;font-size: 16px;line-height: 44px">别点我</div>
+                    </div>
+                </div>
+            </div>
 
-	//回调函数，用于获取用户当前选择的文字
- 	function show(str){
-		txtObj.innerHTML = str;
-	}
-
-	var params = {
-	"XOffset":0, //提示框位置横向偏移量,单位px
-	"YOffset":0, //提示框位置纵向偏移量,单位px
-	"width":204, //提示框宽度，单位px
-	"fontColor":"#f70", //提示框文字颜色
-	"fontColorHI":"#FFF",	//提示框高亮选择时文字颜色
-	"fontSize":"12px",		//文字大小
-	"fontFamily":"宋体",	//文字字体
-	"borderColor":"gray", 	//提示框的边框颜色
-	"bgcolorHI":"#03c",		//提示框高亮选择的颜色
-	"sugSubmit":false		//在选择提示词条是是否提交表单
-	};
-
- 	BaiduSuggestion.bind("ipt1",params,show);
-	
-</script>
-
-
-
-
-
-
+            <div class="menu_group">
+                <div class="title">
+                    常用场景
+                </div>
+                <div loc="1,1" size="4,3" class="block">
+                    <div class="content" style="background-color: orangered">
+                        <div class="win10-block-content-text" style="font-size: 26px;line-height: 88px">WIN10-UI</div>
+                        <div class="win10-block-content-text">显示信息</div>
+                    </div>
+                </div>
+                <div loc="5,1" size="2,1" class="block">
+                    <div class="content" style="background-color: green">
+                        <div  class="win10-block-content-text">文字按钮</div>
+                    </div>
+                </div>
+                <div loc="5,2" size="2,2" class="block">
+                    <div class="content">
+                        <img style="width: 40px;height: 40px;margin: 5px auto;display: block" src="./win10/img/icon/baidu.png">
+                        <div class="win10-block-content-text">图标按钮</div>
+                    </div>
+                </div>
+                <div loc="1,4" size="6,3" class="block">
+                    <div class="content" style="background: url('./win10/img/presentation/1.png');background-size: auto">
+                        <div style="line-height:132px;text-align: center;">显示图片</div>
+                    </div>
+                </div>
+                <div loc="1,7" size="2,1" class="block">
+                    <div class="content" style="background-color: grey" onclick="Win10.openUrl('//www.baidu.com')">
+                        <div class="win10-block-content-text">内部链接</div>
+                    </div>
+                </div>
+                <div loc="3,7" size="2,1" class="block">
+                    <div class="content" style="background-color: blue" onclick="window.open('https://www.baidu.com')">
+                        <div class="win10-block-content-text">外部链接</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="win10-menu-switcher"></div>
+    </div>
+    <div id="win10_command_center" class="hidden_right">
+        <div class="title">
+            <h4 style="float: left">消息中心 </h4>
+            <span id="win10_btn_command_center_clean_all">全部清除</span>
+        </div>
+        <div class="msgs"></div>
+    </div>
+    <div id="win10_task_bar">
+        <div id="win10_btn_group_left" class="btn_group">
+            <div id="win10_btn_win" class="btn"><span class="fa fa-windows"></span></div>
+            <div class="btn" id="win10-btn-browser"><span class="fa fa-internet-explorer"></span></div>
+        </div>
+        <div id="win10_btn_group_middle" class="btn_group"></div>
+        <div id="win10_btn_group_right" class="btn_group">
+            <div class="btn" id="win10_btn_time">
+                <!--0:00<br/>-->
+                <!--1993/8/13-->
+            </div>
+            <div class="btn" id="win10_btn_command"><span id="win10-msg-nof" class="fa fa-comment-o"></span></div>
+            <div class="btn" id="win10_btn_show_desktop"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,21 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+
+#注释不屏蔽掉   .env
+
+# Log Files
+*.log
+
+#test
+cmd.bat
+
