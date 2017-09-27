@@ -1182,7 +1182,7 @@
         "group": "tools",
         "name": "teambition",
         "desc": "",
-        "icon": "http:\/\/img5sw.baidu.com\/soft\/39\/20716\/faebbfbbf7ffdb7691a79469d2698aad.png?version=3575993503",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/09/15/10/110_902ba91930b5952bbbf5b7786f2218b4_con_130x130.png",
         "width": "800",
         "height": "600",
         "simple": 0,
@@ -1656,19 +1656,6 @@
         "resize": 1,
         "undefined": 0
     },
-    "百度DOC": {
-        "type": "url",
-        "content": "http:\/\/word.baidu.com\/",
-        "group": "tools",
-        "name": "百度DOC",
-        "desc": "在线文档编辑、分享",
-        "icon": "baidudoc.png",
-        "width": "80%",
-        "height": "80%",
-        "simple": 0,
-        "resize": 1,
-        "undefined": 0
-    },
     "创可贴": {
         "type": "url",
         "content": "https:\/\/www.chuangkit.com\/startdesign",
@@ -1688,7 +1675,7 @@
         "group": "tools",
         "name": "trello",
         "desc": "项目管理云平台",
-        "icon": "trello.png",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/07/26/2/115_deee54b7482d4d467c020ef588ad41cc_con_130x130.png",
         "width": "800",
         "height": "600",
         "simple": 0,
