@@ -75,7 +75,7 @@ ini_set('memory_limit', '32M');
 // 静态 HTML 目录
 defined('STATIC_HTML') || define('STATIC_HTML', mod_config::get_one_config('yl_path_html'));
 // 静态 HTML
-$url= 1==1?"/123":"/123";
+$url= 1==1?"":"";
 defined('HOST') || define('HOST', $url.'' );
 $path_info = pathinfo($_SERVER['PHP_SELF']);
 $path_x = rtrim(strtr(dirname($path_info['dirname']), array('\\' => '/')), '/');

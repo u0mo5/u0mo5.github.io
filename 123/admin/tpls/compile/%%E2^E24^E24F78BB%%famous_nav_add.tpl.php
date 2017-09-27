@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.25, created on 2016-09-07 16:36:48
+<?php /* Smarty version 2.6.25, created on 2017-07-14 14:16:48
          compiled from famous_nav_add.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'date_format', 'famous_nav_add.tpl', 30, false),)), $this); ?>

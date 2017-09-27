@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.25, created on 2016-02-17 20:18:11
+<?php /* Smarty version 2.6.25, created on 2017-07-14 13:29:24
          compiled from cool_site_list.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'date_format', 'cool_site_list.tpl', 63, false),)), $this); ?>
