@@ -180,7 +180,14 @@
 
                         </div>
                     </div>
-                    <a class="install-btn" href="http://dev.711cms.com/app/2.html" target="_blank">下载</a>
+                    <a class="install-btn" 
+						<% if(list[i].type=="app"){ %>
+						onclick='<%= list[i].content %>' 
+						<% }  %>
+						<% if(list[i].type=="url"){ %>
+						href='<%= list[i].content %>' 
+						<% }  %>
+					target="_blank">打开</a>
                 </li>
                 <%     }
                     }
