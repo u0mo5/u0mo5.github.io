@@ -1746,6 +1746,32 @@
         "simple": 0,
         "resize": 1,
         "undefined": 0
+    },
+    "哔哩哔哩": {
+        "type": "app",
+        "content": "window.open('https://www.bilibili.com/');",
+        "group": "movie",
+        "name": "哔哩哔哩",
+        "desc": "哔哩哔哩",
+        "icon": "http://7xilfp.com5.z0.glb.clouddn.com/icon/150215082633.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
+    "新浪微博": {
+        "type": "app",
+        "content": "window.open('http://weibo.com');",
+        "group": "life",
+        "name": "新浪微博",
+        "desc": "新浪微博",
+        "icon": "http://7xilfp.com5.z0.glb.clouddn.com/icon/150127092430.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
     }
 }
             };
