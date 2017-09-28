@@ -7,6 +7,8 @@
 
 
 ## 目录索引  
-* [framework](javascript:framework:index)  
-* [function](javascript:function:index)  
-* [plugin](javascript:plugin:index)  
+* [click](javascript:function:click)  
+* [date](javascript:function:date)  
+* [onkeyup](javascript:function:onkeyup)  
+
+
