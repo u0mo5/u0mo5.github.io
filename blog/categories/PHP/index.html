@@ -69,16 +69,12 @@
 
 
 
-<meta name="description" content="1.定义header参数和接收：   /** *定义--- *ajax方式: */  $.ajax({                       type: &amp;quot;GET&amp;quot;,                       url: &amp;quot;default.aspx&amp;quot;,                       beforeSend: function(request">
-<meta property="og:type" content="article">
-<meta property="og:title" content="header函数">
-<meta property="og:url" content="http://yoursite.com/2017/09/28/php/header/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/categories/PHP/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.定义header参数和接收：   /** *定义--- *ajax方式: */  $.ajax({                       type: &amp;quot;GET&amp;quot;,                       url: &amp;quot;default.aspx&amp;quot;,                       beforeSend: function(request">
-<meta property="og:updated_time" content="2017-09-28T06:01:08.505Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="header函数">
-<meta name="twitter:description" content="1.定义header参数和接收：   /** *定义--- *ajax方式: */  $.ajax({                       type: &amp;quot;GET&amp;quot;,                       url: &amp;quot;default.aspx&amp;quot;,                       beforeSend: function(request">
+<meta name="twitter:title" content="Hexo">
 
 
 
@@ -108,13 +104,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/28/php/header/"/>
+  <link rel="canonical" href="http://yoursite.com/categories/PHP/"/>
 
 
 
 
 
-  <title>header函数 | Hexo</title>
+  <title>Kategorie: PHP | Hexo</title>
   
 
 
@@ -133,7 +129,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -227,267 +223,55 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block category">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>PHP<small>Kategorie</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2017/09/28/php/header/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="u0mo5">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/blog/2017/09/28/php/header/" itemprop="url">
+              
+                <span itemprop="name">header函数</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">header函数</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-28T13:48:37+08:00">
-                2017-09-28
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-09-28T13:48:37+08:00"
+              content="2017-09-28" >
+          09-28
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p><strong>1.定义header参数和接收：</strong>  </p>
-<pre><code>/**
-*定义---
-*ajax方式:
-*/
-
-$.ajax({  
-                    type: &quot;GET&quot;,  
-                    url: &quot;default.aspx&quot;,  
-                    beforeSend: function(request) {  
-                        request.setRequestHeader(&quot;Test&quot;, &quot;Chenxizhang&quot;);  
-                    },  
-                    success: function(result) {  
-                        alert(result);  
-                    }  
-                }) 
-//curl方式:
-
-$url = &apos;http://www.example.com&apos;;
-$header = array(&apos;token:JxRaZezavm3HXM3d9pWnYiqqQC1SJbsU&apos;,&apos;language:zh&apos;,&apos;region:GZ&apos;);
-$content = array(
-        &apos;name&apos; =&gt; &apos;fdipzone&apos;
-);
-
-$response = tocurl($url, $header, $content);
-$data = json_decode($response, true);
-
-echo &apos;POST data:&apos;;
-echo &apos;&lt;pre&gt;&apos;;
-print_r($data[&apos;post&apos;]);
-echo &apos;&lt;/pre&gt;&apos;;
-echo &apos;Header data:&apos;;
-echo &apos;&lt;pre&gt;&apos;;
-print_r($data[&apos;header&apos;]);
-echo &apos;&lt;/pre&gt;&apos;;
-
-/**
- * 发送数据
- * @param String $url     请求的地址
- * @param Array  $header  自定义的header数据
- * @param Array  $content POST的数据
- * @return String
- */
-function tocurl($url, $header, $content){
-    $ch = curl_init();
-    if(substr($url,0,5)==&apos;https&apos;){
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true);  // 从证书中检查SSL加密算法是否存在
-    }
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($content));
-    $response = curl_exec($ch);
-    if($error=curl_error($ch)){
-        die($error);
-    }
-    curl_close($ch);
-    return $response;
-}
-/*
-*接收----
-*接收  ajax
-*$_SERVER[&apos;HTTP_TEST&apos;];
-*接收curl
-*/
-&lt;?php
-$post_data = $_POST;
-$header = get_all_headers();
-
-$ret = array();
-$ret[&apos;post&apos;] = $post_data;
-$ret[&apos;header&apos;] = $header;
-
-header(&apos;content-type:application/json;charset=utf8&apos;);
-echo json_encode($ret, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
-
-/**
- * 获取自定义的header数据
- */
-function get_all_headers(){
-
-    // 忽略获取的header数据
-    $ignore = array(&apos;host&apos;,&apos;accept&apos;,&apos;content-length&apos;,&apos;content-type&apos;);
-
-    $headers = array();
-
-    foreach($_SERVER as $key=&gt;$value){
-        if(substr($key, 0, 5)===&apos;HTTP_&apos;){
-            $key = substr($key, 5);
-            $key = str_replace(&apos;_&apos;, &apos; &apos;, $key);
-            $key = str_replace(&apos; &apos;, &apos;-&apos;, $key);
-            $key = strtolower($key);
-
-            if(!in_array($key, $ignore)){
-                $headers[$key] = $value;
-            }
-        }
-    }
-
-    return $headers;
-
-}
-?&gt;
-</code></pre>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/blog/2017/09/28/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -495,10 +279,6 @@ function get_all_headers(){
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
