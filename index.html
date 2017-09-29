@@ -9,6 +9,7 @@
     <script type="text/javascript" src="./win10/js/jquery-2.2.4.min.js"></script>
     <link href="./win10/css/animate.css" rel="stylesheet">
     <script type="text/javascript" src="./win10/component/layer-v3.0.3/layer/layer.js"></script>
+    <script type="text/javascript" src="./win10/js/jheartbeat.js"></script>
     <link rel="stylesheet" href="./win10/component/font-awesome-4.7.0/css/font-awesome.min.css">
     <link href="./win10/css/default.css" rel="stylesheet">
     <script type="text/javascript" src="./win10/js/win10.js"></script>
@@ -38,12 +39,25 @@
             ], 0.01);
 
             setTimeout(function () {
+                //Win10.openUrl('./win10/broadcast.html','<i class="fa fa-newspaper-o icon red"></i>最新资讯',[['300px', '380px'],'rt'])
+            },2000);
+
+            
+            setTimeout(function () {
                 Win10.newMsg('官方交流一群', '欢迎各位大侠加入讨论：<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=4Er0u8i">[点击加入]205546163</a>')
             }, 2500);
 
-            setTimeout(function () {
-                //Win10.openUrl('./win10/broadcast.html','<i class="fa fa-newspaper-o icon red"></i>最新资讯',[['300px', '380px'],'rt'])
-            },2000);
+
+            //心跳包  每日语录
+            $.jheartbeat.set({
+            url: "http://118.89.182.231:10000/says", // The URL that jHeartbeat will retrieve
+            delay: 600000, // How often jHeartbeat should retrieve the URL
+            div_id: "test_div"}, // Where the data will be appended.
+                function (){
+                // Callback Function
+                    Win10.newMsg('每日语录', this.data);
+                });
+
 
 
         });
