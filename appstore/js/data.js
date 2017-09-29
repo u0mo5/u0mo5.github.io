@@ -324,18 +324,6 @@
         "simple": 0,
         "resize": 1
     },
-    "QQ提醒": {
-        "type": "app",
-        "content": "window.open(\"http:\/\/qzs.qq.com\/snsapp\/app\/bee\/widget\/open.htm\");",
-        "group": "office",
-        "name": "QQ提醒",
-        "desc": "",
-        "icon": "http:\/\/appimg2.qq.com\/bee\/ac\/global\/favicon.ico",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1
-    },
     " 沈阳有线": {
         "type": "app",
         "content": "window.open(\"http:\/\/www.sygd.com\/index.php\");",
