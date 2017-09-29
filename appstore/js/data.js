@@ -1205,7 +1205,7 @@
     },
     "屏幕尺子": {
         "type": "app",
-        "content": "window.open('\/\/ruler.bookfuns.com');",
+        "content": "window.open('/ruler');",
         "group": "tools",
         "name": "屏幕尺子",
         "desc": "",
@@ -1216,39 +1216,13 @@
         "resize": 1,
         "undefined": 0
     },
-    "魅阅读": {
-        "type": "app",
-        "content": "window.open('\/\/news.bookfuns.com')",
-        "group": "reader",
-        "name": "魅阅读",
-        "desc": "来自： 小桑",
-        "icon": "https:\/\/sangsir.com\/favicon.ico",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1,
-        "undefined": 0
-    },
     "国内报纸": {
         "type": "app",
-        "content": "window.open('\/\/paper.bookfuns.com');",
+        "content": "window.open('/paper');",
         "group": "reader",
         "name": "国内报纸",
         "desc": "",
         "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/a\/0c\/c410a922380fc65156f3cf6e78cf80ca_68_68.png",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1,
-        "undefined": 0
-    },
-    "雷锋网": {
-        "type": "app",
-        "content": "window.open('http:\/\/www.leiphone.com');",
-        "group": "reader",
-        "name": "雷锋网",
-        "desc": "",
-        "icon": "http:\/\/admin.bookfuns.com\/static\/images\/file_icon\/icon_app\/internet.png",
         "width": "800",
         "height": "600",
         "simple": 0,
@@ -1320,19 +1294,6 @@
         "resize": 1,
         "undefined": 0
     },
-    "系统下载": {
-        "type": "url",
-        "content": "http:\/\/app.bookfuns.com\/gho\/index.html",
-        "group": "others",
-        "name": "系统下载",
-        "desc": "",
-        "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/a\/77\/52debca94e5b5329f50950b0b98d477a_256_256.png",
-        "width": "1024",
-        "height": "600",
-        "simple": 0,
-        "resize": 1,
-        "undefined": 0
-    },
     "交管12123": {
         "type": "app",
         "content": "window.open('http:\/\/ln.122.gov.cn');",
@@ -1361,7 +1322,7 @@
     },
     "网址导航": {
         "type": "app",
-        "content": "window.open('\/\/123.bookfuns.com');",
+        "content": "window.open('/123/index.html');",
         "group": "life",
         "name": "网址导航",
         "desc": "",
