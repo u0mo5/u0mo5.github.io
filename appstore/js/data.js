@@ -588,18 +588,6 @@
         "simple": 0,
         "resize": 1
     },
-    "MP3": {
-        "type": "url",
-        "content": "plugins\/music",
-        "group": "music",
-        "name": "MP3",
-        "desc": "",
-        "icon": "qqmusic.png",
-        "width": "350",
-        "height": "290",
-        "simple": 1,
-        "resize": 1
-    },
     "搜索引擎": {
         "type": "url",
         "content": "plugins\/so",
@@ -1541,7 +1529,7 @@
     },
     "读书圈音乐平台": {
         "type": "app",
-        "content": "window.open('http:\/\/home\/music');",
+        "content": "window.open('/music');",
         "group": "music",
         "name": "读书圈音乐平台",
         "desc": "\/lab.sangsir.com\/music\/",
