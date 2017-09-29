@@ -1116,18 +1116,6 @@
         "simple": 0,
         "resize": 1
     },
-    "番茄工作法": {
-        "type": "url",
-        "content": "http:\/\/bookfuns.com\/plugins\/tomato",
-        "group": "tools",
-        "name": "番茄工作法",
-        "desc": "",
-        "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/f\/73\/fd4073453a720233db076266bd04a73f_256_256.png",
-        "width": "600",
-        "height": "400",
-        "simple": 1,
-        "resize": 0
-    },
     "网页设计颜色代码表": {
         "type": "app",
         "content": "window.open('plugins\/color');",
@@ -1269,7 +1257,7 @@
     },
     "计算器": {
         "type": "app",
-        "content": "window.open('\/\/app.bookfuns.com\/calc\/jsq_base.html');",
+        "content": "window.open('https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/swf/calculator.swf');",
         "group": "tools",
         "name": "计算器",
         "desc": "",
