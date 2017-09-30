@@ -42,7 +42,7 @@
                 //Win10.openUrl('./win10/broadcast.html','<i class="fa fa-newspaper-o icon red"></i>最新资讯',[['300px', '380px'],'rt'])
             },2000);
 
-            
+
             setTimeout(function () {
                 Win10.newMsg('官方交流一群', '欢迎各位大侠加入讨论：<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=4Er0u8i">[点击加入]205546163</a>')
             }, 2500);
@@ -50,8 +50,8 @@
 
             //心跳包  每日语录
             $.jheartbeat.set({
-            url: "http://118.89.182.231:10000/says", // The URL that jHeartbeat will retrieve
-            delay: 600000, // How often jHeartbeat should retrieve the URL
+            url: "http://118.89.182.231:10000/says/jsonp", // The URL that jHeartbeat will retrieve
+            delay: 60000, // How often jHeartbeat should retrieve the URL
             div_id: "test_div"}, // Where the data will be appended.
                 function (){
                 // Callback Function
