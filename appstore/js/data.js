@@ -87,7 +87,7 @@
     "tool.lu": {
         "type": "url",
         "content": "http:\/\/tool.lu\/",
-        "group": "tools",
+        "group": "code",
         "name": "tool.lu",
         "desc": "",
         "icon": "http:\/\/tool.lu\/favicon.ico",
@@ -99,7 +99,7 @@
     "php100推荐工具": {
         "type": "url",
         "content": "http:\/\/tool.php100.com\/",
-        "group": "tools",
+        "group": "code",
         "name": "php100推荐工具",
         "desc": "",
         "icon": "http:\/\/www.php100.com\/favicon.ico",
@@ -255,7 +255,7 @@
     "开源中国工具": {
         "type": "url",
         "content": "http:\/\/tool.oschina.net\/",
-        "group": "tools",
+        "group": "code",
         "name": "开源中国工具",
         "desc": "",
         "icon": "http:\/\/tool.oschina.net\/img\/favicon.ico",
@@ -351,7 +351,7 @@
     "百度静态资源公共库": {
         "type": "app",
         "content": "window.open('http:\/\/cdn.code.baidu.com');",
-        "group": "tools",
+        "group": "code",
         "name": "百度静态资源公共库",
         "desc": "",
         "icon": "http:\/\/eiv.baidu.com\/hmt\/icon\/21.gif",
@@ -375,7 +375,7 @@
     "RunJS": {
         "type": "app",
         "content": "window.open('http:\/\/runjs.cn\/');",
-        "group": "tools",
+        "group": "code",
         "name": "RunJS",
         "desc": "",
         "icon": "oexe.png",
@@ -459,7 +459,7 @@
     "github": {
         "type": "app",
         "content": "window.open('https:\/\/github.com');",
-        "group": "tools",
+        "group": "code",
         "name": "github",
         "desc": "",
         "icon": "https:\/\/github.com\/apple-touch-icon.png",
@@ -999,7 +999,7 @@
     "菜鸟工具": {
         "type": "app",
         "content": "window.open('http:\/\/c.runoob.com\/');",
-        "group": "tools",
+        "group": "code",
         "name": "菜鸟工具",
         "desc": "",
         "icon": "oexe.png",
@@ -1083,7 +1083,7 @@
     "stackoverflow": {
         "type": "app",
         "content": "window.open('http:\/\/stackoverflow.com\/');",
-        "group": "reader",
+        "group": "code",
         "name": "stackoverflow",
         "desc": "",
         "icon": "http:\/\/cdn.sstatic.net\/Sites\/stackoverflow\/img\/favicon.ico",
@@ -1143,7 +1143,7 @@
     "teambition": {
         "type": "app",
         "content": "window.open('http:\/\/www.teambition.com\/');",
-        "group": "tools",
+        "group": "code",
         "name": "teambition",
         "desc": "",
         "icon": "http://android-artworks.25pp.com/fs08/2017/09/15/10/110_902ba91930b5952bbbf5b7786f2218b4_con_130x130.png",
@@ -1584,7 +1584,7 @@
     "trello": {
         "type": "app",
         "content": "window.open(\"https:\/\/trello.com\/\");",
-        "group": "tools",
+        "group": "code",
         "name": "trello",
         "desc": "项目管理云平台",
         "icon": "http://android-artworks.25pp.com/fs08/2017/07/26/2/115_deee54b7482d4d467c020ef588ad41cc_con_130x130.png",
@@ -1623,10 +1623,23 @@
     "石墨文档": {
         "type": "url",
         "content": "https:\/\/shimo.im\/desktop",
-        "group": "tools",
+        "group": "office",
         "name": "石墨文档",
         "desc": "shimo",
         "icon": "http://android-artworks.25pp.com/fs08/2017/09/11/5/110_51e8b9ad5ff73f705f6e2ca895b19c0a_con_130x130.png",
+        "width": "90%",
+        "height": "80%",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
+	"印象笔记": {
+        "type": "app",
+        "content": "window.open('https://www.yinxiang.com/');",
+        "group": "office",
+        "name": "印象笔记",
+        "desc": "shimo",
+        "icon": "http://7xilfp.com5.z0.glb.clouddn.com/usericon/4991c599f44b9755d58a2682c2ea5bc8.png",
         "width": "90%",
         "height": "80%",
         "simple": 0,

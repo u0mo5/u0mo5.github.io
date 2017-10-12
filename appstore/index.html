@@ -124,6 +124,11 @@
                 <span>音乐</span>
             </a>
                     </li>
+		<li class="nav-item">
+                        <a class="first-link" onclick="init('code')">
+                <span>编程</span>
+            </a>
+                    </li>			
         
         <li class="nav-item">
                         <a class="first-link" onclick="init('others')">
@@ -189,7 +194,7 @@
                             <%= list[i].name %>
                         </a>
                         <div class="meta">
-                            <a class="tag-link" href="http://dev.711cms.com/softs/2.html">影音图像</a>
+                            <a class="tag-link" href="#"><%= list[i].group %></a>
                             <span class="install-count">10066 人安装</span>
                             <span class="dot"></span>
                             <span title="14030940">14030940</span>
