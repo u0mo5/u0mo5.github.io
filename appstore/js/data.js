@@ -1710,6 +1710,19 @@
         "simple": 0,
         "resize": 1,
         "undefined": 0
+    },
+	    "房贷计算器": {
+        "type": "app",
+        "content": "window.open('http://newhouse.fang.com/house/tools.htm');",
+        "group": "tools",
+        "name": "房贷计算器",
+        "desc": "房贷计算器",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/10/09/1/110_7ecbee4a49828f007c736f0d8a1f21a9_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
     }
 }
             };
