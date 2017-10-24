@@ -35,7 +35,7 @@ img, div, input{behavior:url("/123/public/widget/snow/js/iepngfix/iepngfix.htc")
 
         // My own arbitrary use of isMobile, as an example
         (function () {
-            var MOBILE_SITE = 'http://m.bookfuns.com', // site to redirect to
+            var MOBILE_SITE = '/m', // site to redirect to
                 NO_REDIRECT = 'noredirect'; // cookie to prevent redirect
 
             // I only want to redirect iPhones, Android phones and a handful of 7" devices
@@ -63,7 +63,7 @@ img, div, input{behavior:url("/123/public/widget/snow/js/iepngfix/iepngfix.htc")
      -->   
 	   <ul id="set">
             <li class="sethome"><a onclick="Yl.setHome(this,this.href); return false;" target="_self" href="/123">把设为主页</a></li>
-            <li><a href="/123/" target="_parent" class="active">标准版</a>  | <a href="//m.bookfuns.com" target="_parent" >手机版</a></li>
+            <li><a href="/123/" target="_parent" class="active">标准版</a>  | <a href="/m" target="_parent" >手机版</a></li>
             <!--<li id="skinlist"><a class="blue" title="蓝色">1</a><a class="green" title="绿色">2</a><a class="pink" title="粉色">3</a></li>
             <li class="setting"><a target="_self" href="javascript:void(0);" id="showSetting">个性设置</a></li>-->
         </ul>
