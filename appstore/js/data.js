@@ -1071,7 +1071,7 @@
     "推酷": {
         "type": "app",
         "content": "window.open(\"http:\/\/www.tuicool.com\/\");",
-        "group": "reader",
+        "group": "code",
         "name": "推酷",
         "desc": "",
         "icon": "http:\/\/static2.tuicool.com\/images\/icon72.png",
@@ -1737,13 +1737,13 @@
         "resize": 1,
         "undefined": 0
     },
-	    "人人都是产品经理": {
+	    "segmentfault": {
         "type": "app",
-        "content": "window.open('http://www.woshipm.com/');",
+        "content": "window.open('https://segmentfault.com/');",
         "group": "code",
-        "name": "人人都是产品经理",
-        "desc": "人人都是产品经理",
-        "icon": "http://android-artworks.25pp.com/fs08/2017/10/01/1/2_8fa70ccbdf3a528752b686304aab7fbe_con_130x130.png",
+        "name": "segmentfault",
+        "desc": "segmentfault",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/08/10/0/110_31926409b08cf675622442f0c6a215e5_con_130x130.png",
         "width": "800",
         "height": "600",
         "simple": 0,
