@@ -1762,6 +1762,32 @@
         "simple": 0,
         "resize": 1,
         "undefined": 0
+    },
+	    "AcFun": {
+        "type": "app",
+        "content": "window.open('http://www.acfun.cn/');",
+        "group": "movie",
+        "name": "AcFun",
+        "desc": "A站 ACFUN",
+        "icon": "http://7xilfp.com5.z0.glb.clouddn.com/icon/150309033931.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
+	    "东方财富网": {
+        "type": "app",
+        "content": "window.open('http://www.eastmoney.com/');",
+        "group": "reader",
+        "name": "东方财富网",
+        "desc": "东方财富网",
+        "icon": "http://7xilfp.com5.z0.glb.clouddn.com/icon/150127091819.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
     }
 }
             };
