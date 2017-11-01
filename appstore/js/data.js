@@ -60,6 +60,19 @@
         "simple": 0,
         "resize": 1
     },
+	"国内报纸": {
+        "type": "app",
+        "content": "window.open('/paper');",
+        "group": "reader",
+        "name": "国内报纸",
+        "desc": "",
+        "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/a\/0c\/c410a922380fc65156f3cf6e78cf80ca_68_68.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
     "凤凰网": {
         "type": "url",
         "content": "http:\/\/www.ifeng.com\/",
@@ -468,18 +481,6 @@
         "simple": 0,
         "resize": 1
     },
-    "搜搜": {
-        "type": "app",
-        "content": "window.open('.\/plugins\/so');",
-        "group": "life",
-        "name": "搜搜",
-        "desc": "",
-        "icon": "internet.png",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1
-    },
     "七牛云": {
         "type": "app",
         "content": "window.open('http:\/\/www.qiniu.com\/');",
@@ -571,18 +572,6 @@
         "name": "电子宠物（松鼠）",
         "desc": "",
         "icon": "oexe.png",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1
-    },
-    "搜索引擎": {
-        "type": "url",
-        "content": "plugins\/so",
-        "group": "reader",
-        "name": "搜索引擎",
-        "desc": "",
-        "icon": "http:\/\/img5sw.baidu.com\/soft\/bf\/35013\/9ff6e7b641ffecc916d4bd78a765e8fe.png?version=1496723797",
         "width": "800",
         "height": "600",
         "simple": 0,
@@ -819,7 +808,7 @@
     "QQ": {
         "type": "app",
         "content": "window.open('http:\/\/web2.qq.com\/');",
-        "group": "life",
+        "group": "office",
         "name": "QQ",
         "desc": "",
         "icon": "http:\/\/0.web.qstatic.com\/webqqpic\/style\/images\/alloylogo.png",
@@ -828,13 +817,13 @@
         "simple": 0,
         "resize": 1
     },
-    "新浪微博": {
+	"钉钉": {
         "type": "app",
-        "content": "window.open('http:\/\/weibo.com\/');",
-        "group": "life",
-        "name": "新浪微博",
+        "content": "window.open('https://im.dingtalk.com/');",
+        "group": "office",
+        "name": "钉钉",
         "desc": "",
-        "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/4\/4b\/89c84a36d3cdbfef226b42b073d9f4b4_68_68.png",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/10/31/0/110_03bed92004de425df5fb194737e59487_con_130x130.png",
         "width": "800",
         "height": "600",
         "simple": 0,
@@ -903,7 +892,7 @@
     "微信": {
         "type": "app",
         "content": "window.open('https:\/\/wx.qq.com');",
-        "group": "life",
+        "group": "office",
         "name": "微信",
         "desc": "",
         "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/7\/ed\/15891412e00a12fdec0bbe290b42ced7_68_68.png",
@@ -915,7 +904,7 @@
     "QQ邮箱": {
         "type": "app",
         "content": "window.open(\"https:\/\/mail.qq.com\");    ",
-        "group": "tools",
+        "group": "office",
         "name": "QQ邮箱",
         "desc": "",
         "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/3\/b9\/aa7113bace0efde137d84e07a4b57b93_68_68.png",
@@ -1011,7 +1000,7 @@
     "WPS": {
         "type": "app",
         "content": "window.open('https:\/\/qing.wps.cn');",
-        "group": "tools",
+        "group": "office",
         "name": "WPS",
         "desc": "",
         "icon": "http:\/\/img2.template.cache.wps.cn\/wpsweb\/images\/product\/beta\/2015-01-17\/ml_img1.png",
@@ -1027,18 +1016,6 @@
         "name": "百度号码查询",
         "desc": "",
         "icon": "http:\/\/sjws.bdstatic.com\/static\/img\/favicon_01b8d43.ico",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1
-    },
-    "美女图片": {
-        "type": "app",
-        "content": "window.open('\/plugins\/mm');",
-        "group": "others",
-        "name": "美女图片",
-        "desc": "",
-        "icon": "http:\/\/80c.cc\/k0d\/static\/images\/app\/mn.png",
         "width": "800",
         "height": "600",
         "simple": 0,
@@ -1204,19 +1181,7 @@
         "resize": 1,
         "undefined": 0
     },
-    "国内报纸": {
-        "type": "app",
-        "content": "window.open('/paper');",
-        "group": "reader",
-        "name": "国内报纸",
-        "desc": "",
-        "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/a\/0c\/c410a922380fc65156f3cf6e78cf80ca_68_68.png",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1,
-        "undefined": 0
-    },
+
     "计算器": {
         "type": "app",
         "content": "window.open('https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/swf/calculator.swf');",
@@ -1675,7 +1640,7 @@
     "新浪微博": {
         "type": "app",
         "content": "window.open('http://weibo.com');",
-        "group": "life",
+        "group": "office",
         "name": "新浪微博",
         "desc": "新浪微博",
         "icon": "http://7xilfp.com5.z0.glb.clouddn.com/icon/150127092430.png",
