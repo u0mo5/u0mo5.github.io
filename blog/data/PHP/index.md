@@ -10,10 +10,10 @@ For full documentation visit [php.net](http://php.net/).
 ### [7特性变化](http://www.jb51.net/article/73788.htm)  
 
 ## 目录索引  
-* [install](PHP:install:index)  
-* [standard](PHP:standard:index)  
-* [framework](PHP:framework:index)  
-* [function](PHP:function:index)  
-* [package](PHP:package:index)  
+* [安装](PHP:install:index)  
+* [规范](PHP:standard:index)  
+* [框架](PHP:framework:index)  
+* [函数](PHP:function:index)  
+* [包管理](PHP:package:index)  
 
 
