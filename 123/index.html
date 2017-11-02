@@ -1,850 +1,912 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=7">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="shortcut icon" href="/123/public/images/favicon.ico" type="image/x-icon" />
-<meta name="keywords" content="读书圈 bookfuns.com bookfuns" />
-<meta name="description" content="读书圈 bookfuns.com bookfuns" />
-<title>读书圈</title>
-<link href="/123/public/home/style/new_green/base.css" rel="stylesheet" type="text/css" />
-<style id="temp-css" type="text/css"></style>
-<script type="text/javascript" src="/123/public/home/js/base.js"></script>
-<script type="text/javascript" src="/123/public/home/js/core.js"></script>
-<script type="text/javascript">if(Cookie.get('layout')){window.location.href='kp.html';}</script>
-<base target="_blank" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <META NAME="ROBOTS" CONTENT="NOODP">
+    <META name="description" content="网址大全">
+    <title>网址大全</title>
+    <style>
+        body {
+            background: #fff;
+        }
 
+        body, p, dl, dd, table, td, th, input, img, form, div, ul, li {
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+        }
 
-<!--雪花特效1
+        .siteTitle {
+            font-size: 14px;
+            font-weight: bold;
+            color: #01439A;
+        }
 
-<style type="text/css">
-body{background:url("/123/public/widget/snow/images/bg.gif") no-repeat center top fixed; margin-top:0px;}
-img, div, input{behavior:url("/123/public/widget/snow/js/iepngfix/iepngfix.htc");}
-</style>
-<script src="/123/public/widget/snow/js/snow.js" type="text/javascript"></script>
-<script>createSnow("/123/public/widget/snow/images/", 50);</script>
+        #header {
+            width: 904px;
+            margin: 0 auto;
+            font-size: 14px;
+        }
 
+        #header a:link, #header a:visited, #header a:active {
+            text-decoration: none;
+            color: #004398;
+        }
 
- -->
+        #header a:hover {
+            text-decoration: underline;
+            color: #B33035;
+        }
 
+        .headerTab {
+            width: 100%;
+            margin: 20px 0 5px 0;
+        }
 
-    <script>
-        // Minified version of isMobile included in the HTML since it's small
-        !function(a){var b=/iPhone/i,c=/iPod/i,d=/iPad/i,e=/(?=.*bAndroidb)(?=.*bMobileb)/i,f=/Android/i,g=/(?=.*bAndroidb)(?=.*bSD4930URb)/i,h=/(?=.*bAndroidb)(?=.*b(?:KFOT|KFTT|KFJWI|KFJWA|KFSOWI|KFTHWI|KFTHWA|KFAPWI|KFAPWA|KFARWI|KFASWI|KFSAWI|KFSAWA)b)/i,i=/IEMobile/i,j=/(?=.*bWindowsb)(?=.*bARMb)/i,k=/BlackBerry/i,l=/BB10/i,m=/Opera Mini/i,n=/(CriOS|Chrome)(?=.*bMobileb)/i,o=/(?=.*bFirefoxb)(?=.*bMobileb)/i,p=new RegExp("(?:Nexus 7|BNTV250|Kindle Fire|Silk|GT-P1000)","i"),q=function(a,b){return a.test(b)},r=function(a){var r=a||navigator.userAgent,s=r.split("[FBAN");return"undefined"!=typeof s[1]&&(r=s[0]),s=r.split("Twitter"),"undefined"!=typeof s[1]&&(r=s[0]),this.apple={phone:q(b,r),ipod:q(c,r),tablet:!q(b,r)&&q(d,r),device:q(b,r)||q(c,r)||q(d,r)},this.amazon={phone:q(g,r),tablet:!q(g,r)&&q(h,r),device:q(g,r)||q(h,r)},this.android={phone:q(g,r)||q(e,r),tablet:!q(g,r)&&!q(e,r)&&(q(h,r)||q(f,r)),device:q(g,r)||q(h,r)||q(e,r)||q(f,r)},this.windows={phone:q(i,r),tablet:q(j,r),device:q(i,r)||q(j,r)},this.other={blackberry:q(k,r),blackberry10:q(l,r),opera:q(m,r),firefox:q(o,r),chrome:q(n,r),device:q(k,r)||q(l,r)||q(m,r)||q(o,r)||q(n,r)},this.seven_inch=q(p,r),this.any=this.apple.device||this.android.device||this.windows.device||this.other.device||this.seven_inch,this.phone=this.apple.phone||this.android.phone||this.windows.phone,this.tablet=this.apple.tablet||this.android.tablet||this.windows.tablet,"undefined"==typeof window?this:void 0},s=function(){var a=new r;return a.Class=r,a};"undefined"!=typeof module&&module.exports&&"undefined"==typeof window?module.exports=r:"undefined"!=typeof module&&module.exports&&"undefined"!=typeof window?module.exports=s():"function"==typeof define&&define.amd?define("isMobile",[],a.isMobile=s()):a.isMobile=s()}(this);
+        .logo {
+            display: block;
+            margin: 22px 10px 0 0;
+        }
 
+        .formInput {
+            font-size: 16px;
+            padding: 3px 0 2px 2px;
+            width: 340px;
+        }
 
-        // My own arbitrary use of isMobile, as an example
-        (function () {
-            var MOBILE_SITE = '/m', // site to redirect to
-                NO_REDIRECT = 'noredirect'; // cookie to prevent redirect
+        .sb {
+            font-size: 14px;
+            height: 2em;
+            width: 5.6em;
+        }
 
-            // I only want to redirect iPhones, Android phones and a handful of 7" devices
-            if (isMobile.apple.phone || isMobile.android.phone || isMobile.seven_inch) {
+        #container {
+            width: 904px;
+            margin: 15px auto 0 auto;
+            font-size: 14px;
+            line-height: 200%;
+        }
 
-                // Only redirect if the user didn't previously choose
-                // to explicitly view the full site. This is validated
-                // by checking if a "noredirect" cookie exists
-                if ( document.cookie.indexOf(NO_REDIRECT) === -1 ) {
-                    document.location = MOBILE_SITE;
-                }
-            }
-        })();
-    </script>
+        #container a:link, #container a:visited, #container a:active {
+            text-decoration: none;
+            color: #004398;
+        }
 
+        #container a:hover {
+            text-decoration: underline;
+            color: #B33035;
+        }
+
+        #leftSide {
+            padding: 2px;
+            float: left;
+            margin: 0 8px 0 0;
+            background: #eff5fb;
+        }
+
+        #leftwraper {
+            background-color: #FAFBFD;
+            width: 158px;
+            border: 1px #ace solid;
+            padding: 0 14px 0 18px;
+        }
+
+        .leftContent {
+            padding: 12px 0 14px 6px;
+            border-bottom: 1px dotted #ABCEEE;
+        }
+
+        .lastContent {
+            padding: 12px 0 14px 6px;
+        }
+
+        #rightSide {
+            width: 700px;
+            float: left;
+        }
+
+        #search {
+            width: 698px;
+            border: 1px solid #D9E9F8;
+            background: #eff5fb;
+        }
+
+        #searchWraper {
+            width: 694px;
+            margin: 0 2px 2px 2px;
+            background: #fff;
+        }
+
+        #search table {
+            margin: 10px auto 10px auto;
+            margin: 0 3px 3px 3px;
+        }
+
+        .s1 {
+            background-color: #F0F5FB;
+            width: 100%;
+            height: 27px;
+        }
+
+        .s1 div {
+            float: left;
+            padding-left: 10px;
+        }
+
+        .s1 a {
+            display: block;
+            margin-right: 8px;
+            float: right;
+        }
+
+        #siteAll {
+            width: 698px;
+            border: 1px solid #D9E9F8;
+            margin: 12px 0 0 0;
+            background: #eff5fb;
+        }
+
+        #siteAllWrapper {
+            width: 694px;
+            margin: 0 2px 2px 2px;
+            padding: 0 0 3px 0;
+            background: #fff;
+        }
+
+        #siteAll table {
+            margin: 0 auto;
+        }
+
+        #siteAll .pl {
+            text-align: center;
+            width: 50px;
+            padding: 0 15px 0 0;
+        }
+
+        #siteAll .pl a:link, #siteAll .pl a:visited, #siteAll .pl a:active, #siteAll .pl a:hover {
+            color: #A60514;
+        }
+
+        #siteAll .pr {
+            text-align: center;
+            width: 60px;
+        }
+
+        #siteAll .ry {
+            background-color: #F0F5FB;
+        }
+
+        #siteAll .connect a {
+            margin: 0 !important;
+        }
+
+        #siteAll .connect .dot {
+            margin: 0 2px;
+        }
+
+        #siteAll .r40 span {
+            margin-right: 40px;
+            zoom: 1;
+        }
+
+        #siteAll .r20 span {
+            margin-right: 20px;
+            zoom: 1;
+        }
+
+        #siteAll .r30 span {
+            float: left;
+            margin-right: 32px;
+            zoom: 1;
+        }
+
+        #siteAll .r40 a {
+            margin-right: 40px;
+            zoom: 1;
+        }
+
+        #siteAll .r20 a {
+            float: left;
+            margin-right: 24px;
+            zoom: 1;
+        }
+
+        #siteAll .r30 a {
+            float: left;
+            margin-right: 20px;
+            zoom: 1;
+        }
+
+        #footer {
+            margin: 21px 0 0 0;
+            font-size: 12px;
+        }
+
+        .f1 a:link, .f1 a:visited, .f1 a:active {
+            text-decoration: none;
+            color: #004398;
+        }
+
+        .f2 {
+            color: #77c;
+        }
+
+        .f2 a:link, .f2 a:visited, .f2 a:active {
+            text-decoration: none;
+            color: #77c;
+        }
+
+        #footer a:hover {
+            text-decoration: underline;
+            color: #B33035;
+        }
+
+        #hao_more_event {
+            color: #004398;
+            cursor: pointer;
+        }
+
+        #hao_more_popup {
+            position: absolute;
+            left: -2px;
+            float: left;
+            z-index: 2000;
+            width: 58px;
+            border: 1px solid #B0BEC7;
+            text-align: left;
+            background: #fff;
+            margin-top: 3px;
+        }
+
+        #hao_more_popup li {
+            line-height: 20px;
+            list-style: none;
+        }
+
+        #hao_more_popup a {
+            color: #004398;
+            text-decoration: none;
+            display: block;
+            padding-left: 3px;
+        }
+
+        #hao_more_popup a:hover {
+            color: #fff;
+            background: #316AC5;
+            text-decoration: none;
+        }
+
+        #sugOut {
+            position: relative;
+        }
+
+        #sug {
+            position: absolute;
+            float: left;
+            left: 0;
+            top: 0;
+            border: 1px solid #817F82;
+            display: none;
+            -moz-user-select: none;
+            z-index: 1000;
+        }
+
+        #sug td {
+            line-height: 22px;
+            height: 22px;
+            padding-left: 3px;
+            font: 14px verdana;
+        }
+
+        .mo td {
+            background-color: #36c;
+            color: #fff;
+        }
+
+        .ml td {
+            border: 0 solid #fff;
+            background-color: #fff;
+            color: #000;
+        }
+
+        #sug_t a:link, #sug_t a:visited, #sug_t a:hover {
+            text-decoration: none;
+            font-size: 14px;
+            color: #000;
+            width: 100%;
+            display: block;
+        }
+
+        .ft18 {
+            font-size: 14px;
+        }
+
+        #siteAllWrapper .s1 {
+            background-color: transparent;
+            height: auto;
+        }
+
+        #header {
+            position: relative;
+        }
+
+        #header a.to-new {
+            position: absolute;
+            top: -1px;
+            right: 0;
+            border: 1px solid #CECECE;
+            width: 96px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 24px;
+            color: #6B7B9B;
+        }
+
+        #header a.to-new:hover {
+            color: #0000D0;
+        }
+
+        #fm {
+            padding: 4px 0 0;
+        }
+
+        #fmsite li, #qs-result li {
+            overflow: hidden;
+            width: 16.6%;
+            text-align: center;
+        }
+
+        .clearfix, #ls dl, #cate ul, #content {
+            zoom: 1;
+        }
+
+        .clearfix:after, #ls dl:after, #cate ul:after, #content:after {
+            content: "\0020";
+            display: block;
+            clear: both;
+            height: 0;
+        }
+
+        ul.clearfix li {
+            float: left;
+        }
+    </style>
 </head>
-<body>
-	<div class="holiday_effect"></div>
+<body onload="document.f.word.focus()">
+<script src="http://site.baidu.com/pub/js/site.js?v=1.0.5"></script>
+<div id="header">
+    <!--<a href="http://site.baidu.com/" class="to-new">访问新版</a>-->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td style="width:147px">
+                <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&amp;id=8&amp;num=3" width="225" height="80" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 
-<em class="filter" style="display:none;"></em>
-<div id="wrap">
-    <div id="top" class="clearfix">
-	<!-- 作废
-        <div id="weather"><script>if(top.location == self.location){document.write('<iframe width="540" height="22" frameborder="0" scrolling="no" allowtransparency="true" src="public/widget/weather/index.html"></iframe>')} </script> </div>
-     -->   
-	   <ul id="set">
-            <li class="sethome"><a onclick="Yl.setHome(this,this.href); return false;" target="_self" href="/123">把设为主页</a></li>
-            <li><a href="/123/" target="_parent" class="active">标准版</a>  | <a href="/m" target="_parent" >手机版</a></li>
-            <!--<li id="skinlist"><a class="blue" title="蓝色">1</a><a class="green" title="绿色">2</a><a class="pink" title="粉色">3</a></li>
-            <li class="setting"><a target="_self" href="javascript:void(0);" id="showSetting">个性设置</a></li>-->
-        </ul>
-    </div>
-    <div id="header">
-        <div class="box clearfix">
-            <h1 id="logo"><embed  width="117" height="69" src="/123/public/swf/clock.swf" type="application/x-shockwave-flash"></embed></h1>
-
-			<div id="bn">
-                <ul id="cal">
-                    <li class="date"><script type="text/javascript">document.write(Calendar.day());</script> </li>
-                    <li class="lcal"><script type="text/javascript">document.write(Calendar.cnday());</script> </li>
-                    <li class="m"><a href="http://tool.115.com/live/calendar/" class="hl">黄历</a><a href="http://astro.114la.com/" class="yc">运程</a><a href="public/widget/clock/index.html" class="clock">闹钟</a></li>
-                </ul>
-                <div id="bn2">
-                <script type="text/javascript" src="static/js/header.js"></script>
-                </div>
-            </div>
-        </div>
-        <b class="rc-bt"><b></b></b></div>
-        
-    <div id="search">
-        <div id="ex">
-                </div>
-        <div id="sm" class="clearfix">
-            <ul id="sm_tab">
-                                <li s_tab="js_type_8" >新闻</li>
-                                <li s_tab="js_type_2"  class="active" default="1">网页</li>
-                                <li s_tab="js_type_9" >MP3</li>
-                                <li s_tab="js_type_10" >视频</li>
-                                <li s_tab="js_type_11" >图片</li>
-                                <li s_tab="js_type_12" >地图</li>
-                                <li s_tab="js_type_13" >问答</li>
-                                <li s_tab="js_type_14" >购物</li>
+            </td>
+            <td align="center">
+                <div align="left" style="width:630px">
+                    <div class="headerTab">
+                        <div style="position:relative;float:right;padding-right:294px;z-index:2000;">
+                            <dl id="hao_more_event" onmouseover="morePopup(event,'over');return false;"
+                                onmousedown="morePopup(event,'down');return false;"
+                                onmouseout="morePopup(event,'out');return false;">
+                                <dd>更 多<font size=1>▼</font></dd>
+                            </dl>
+                            <ul id="hao_more_popup" style="display:none">
+                                <li><a href="http://hi.baidu.com" target="_blank">空 间</a></li>
+                                <li><a href="http://baike.baidu.com" target="_blank">百 科</a></li>
+                                <li><a href="http://youa.baidu.com" target="_blank">有 啊</a></li>
+                                <li><a href="http://map.baidu.com" target="_blank">地 图</a></li>
+                                <li><a href="http://wenku.baidu.com/" target="_blank">文 库</a></li>
+                                <li><a href="http://dict.baidu.com" target="_blank">词 典</a></li>
+                                <li><a href="http://top.baidu.com" target="_blank">风云榜</a></li>
                             </ul>
-        </div>
-        <div id="sb" class="clearfix">
-
-                        <div id="js_type_8"  style="display:none;">
-                <div class="sw">
-                    <p id="sw_8">
-                                                                                                                                                                                                                                                            </p><!--/ keywords-->
-                </div>
-                <div class="sf">
-                    <form action="http://115.com/s" method="get" target="_blank">
-                        <a href="http://115.com" id="sf_label" rel="lk"><img src="static/images/s/115.gif" width="105" height="35" rel="img" /></a><input type="text" name="q" class="int" autocomplete="off" rel="kw"/><input class="searchint" type="submit" value="115聚搜" rel="btn" />
-                        <div class="ctrl">
-                                                                                                                                                                                                                                                                                                <label><input class="radio" type="radio" value="engine_29" name="search_select" rad="engine_29"  checked="checked" />百度</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <label><input class="radio" type="radio" value="engine_33" name="search_select" rad="engine_33"  />谷歌</label>
-                                                                                                                                                                                                                                                                        <label><input class="radio" type="radio" value="engine_27" name="search_select" rad="engine_27"  />SOSO</label>
-                                                                                                                                                                                    </div>
-                    </form>
-                </div>
-            </div>
-                        <div id="js_type_2" >
-                <div class="sw">
-                    <p id="sw_2">
-                                                                                    <a href="http://bookfuns.com">读书圈</a>
-                                                                                                                <a href="http://www.soso.com/q?w=%E5%A4%A9%E6%B0%94">天气</a>
-                                                                                                                <a href="http://astro.fashion.qq.com/">星座</a>
-                                                                                                                <a href="http://www.baidu.com/s?ie=utf-8&bs=mm&f=8&rsv_bp=1&wd=mm&inputT=0">mm</a>
-                                                                        </p><!--/ keywords-->
-                </div>
-                <div class="sf">
-                    <form action="http://115.com/s" method="get" target="_blank">
-                        <a href="http://115.com" id="sf_label" rel="lk"><img src="static/images/s/115.gif" width="105" height="35" rel="img" /></a><input type="text" name="q" class="int" autocomplete="off" rel="kw"/><input class="searchint" type="submit" value="115聚搜" rel="btn" />
-                        <div class="ctrl">
-                                                                                <label><input class="radio" type="radio" value="engine_4" name="search_select" rad="engine_4"  checked="checked" />百度</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                    <label><input class="radio" type="radio" value="engine_13" name="search_select" rad="engine_13"  />谷歌</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <label><input class="radio" type="radio" value="engine_36" name="search_select" rad="engine_36"  />搜狗</label>
-                                                                                                            <label><input class="radio" type="radio" value="engine_22" name="search_select" rad="engine_22"  />SOSO</label>
-                                                                            </div>
-                    </form>
-                </div>
-            </div>
-                        <div id="js_type_9"  style="display:none;">
-                <div class="sw">
-                    <p id="sw_9">
-                                                                                                                                                                                                                                                            </p><!--/ keywords-->
-                </div>
-                <div class="sf">
-                    <form action="http://115.com/s" method="get" target="_blank">
-                        <a href="http://115.com" id="sf_label" rel="lk"><img src="static/images/s/115.gif" width="105" height="35" rel="img" /></a><input type="text" name="q" class="int" autocomplete="off" rel="kw"/><input class="searchint" type="submit" value="115聚搜" rel="btn" />
-                        <div class="ctrl">
-                                                                                                                                    <label><input class="radio" type="radio" value="engine_16" name="search_select" rad="engine_16"  checked="checked" />百度</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <label><input class="radio" type="radio" value="engine_24" name="search_select" rad="engine_24"  />谷歌</label>
-                                                                                                                                                                                                                    <label><input class="radio" type="radio" value="engine_23" name="search_select" rad="engine_23"  />SOSO</label>
-                                                                                                                                                                                                                                                                                                                                                </div>
-                    </form>
-                </div>
-            </div>
-                        <div id="js_type_10"  style="display:none;">
-                <div class="sw">
-                    <p id="sw_10">
-                                                                                                                                                                                                                                                            </p><!--/ keywords-->
-                </div>
-                <div class="sf">
-                    <form action="http://115.com/s" method="get" target="_blank">
-                        <a href="http://115.com" id="sf_label" rel="lk"><img src="static/images/s/115.gif" width="105" height="35" rel="img" /></a><input type="text" name="q" class="int" autocomplete="off" rel="kw"/><input class="searchint" type="submit" value="115聚搜" rel="btn" />
-                        <div class="ctrl">
-                                                                                                                                                                                                                                            <label><input class="radio" type="radio" value="engine_28" name="search_select" rad="engine_28"  checked="checked" />115搜索</label>
-                                                                                                                                                                                                                                                                                                                            <label><input class="radio" type="radio" value="engine_17" name="search_select" rad="engine_17"  />百度</label>
-                                                                                                                                                                                                                                                                                                                                                                                <label><input class="radio" type="radio" value="engine_25" name="search_select" rad="engine_25"  />谷歌</label>
-                                                                                                                                                                                                                                                                                            </div>
-                    </form>
-                </div>
-            </div>
-                        <div id="js_type_11"  style="display:none;">
-                <div class="sw">
-                    <p id="sw_11">
-                                                                                                                                                                                                                                                            </p><!--/ keywords-->
-                </div>
-                <div class="sf">
-                    <form action="http://115.com/s" method="get" target="_blank">
-                        <a href="http://115.com" id="sf_label" rel="lk"><img src="static/images/s/115.gif" width="105" height="35" rel="img" /></a><input type="text" name="q" class="int" autocomplete="off" rel="kw"/><input class="searchint" type="submit" value="115聚搜" rel="btn" />
-                        <div class="ctrl">
-                                                                                                                                                                                        <label><input class="radio" type="radio" value="engine_18" name="search_select" rad="engine_18"  checked="checked" />百度</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <label><input class="radio" type="radio" value="engine_26" name="search_select" rad="engine_26"  />谷歌</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                    </form>
-                </div>
-            </div>
-                        <div id="js_type_12"  style="display:none;">
-                <div class="sw">
-                    <p id="sw_12">
-                                                                                                                                                                                                                                                            </p><!--/ keywords-->
-                </div>
-                <div class="sf">
-                    <form action="http://115.com/s" method="get" target="_blank">
-                        <a href="http://115.com" id="sf_label" rel="lk"><img src="static/images/s/115.gif" width="105" height="35" rel="img" /></a><input type="text" name="q" class="int" autocomplete="off" rel="kw"/><input class="searchint" type="submit" value="115聚搜" rel="btn" />
-                        <div class="ctrl">
-                                                                                                                                                                                                                                                                                                                                                                                                        <label><input class="radio" type="radio" value="engine_32" name="search_select" rad="engine_32"  checked="checked" />百度</label>
-                                                                                                                                                                                                                    <label><input class="radio" type="radio" value="engine_21" name="search_select" rad="engine_21"  />谷歌</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                    </form>
-                </div>
-            </div>
-                        <div id="js_type_13"  style="display:none;">
-                <div class="sw">
-                    <p id="sw_13">
-                                                                                                                                                                                                                                                            </p><!--/ keywords-->
-                </div>
-                <div class="sf">
-                    <form action="http://115.com/s" method="get" target="_blank">
-                        <a href="http://115.com" id="sf_label" rel="lk"><img src="static/images/s/115.gif" width="105" height="35" rel="img" /></a><input type="text" name="q" class="int" autocomplete="off" rel="kw"/><input class="searchint" type="submit" value="115聚搜" rel="btn" />
-                        <div class="ctrl">
-                                                                                                                                                                                                                                                                                                                                                    <label><input class="radio" type="radio" value="engine_31" name="search_select" rad="engine_31"  checked="checked" />百度</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                    </form>
-                </div>
-            </div>
-                        <div id="js_type_14"  style="display:none;">
-                <div class="sw">
-                    <p id="sw_14">
-                                                                                                                                                                                                                                                            </p><!--/ keywords-->
-                </div>
-                <div class="sf">
-                    <form action="http://115.com/s" method="get" target="_blank">
-                        <a href="http://115.com" id="sf_label" rel="lk"><img src="static/images/s/115.gif" width="105" height="35" rel="img" /></a><input type="text" name="q" class="int" autocomplete="off" rel="kw"/><input class="searchint" type="submit" value="115聚搜" rel="btn" />
-                        <div class="ctrl">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <label><input class="radio" type="radio" value="engine_34" name="search_select" rad="engine_34"  checked="checked" />卓越</label>
-                                                                                                                                                                                                                                        </div>
-                    </form>
-                </div>
-            </div>
-                       
-            <div id="suggest" style="display:none"></div>
-        </div>
-    </div>
-    
-        
-    <div id="hot">            </div>
-    <div id="content">
-        <div id="cate"><b class="rc-tp"><b></b></b>
-            <div class="box">
-                <div id="tool">
-                    <h2 class="tool-title">实用工具<span><a href="http://tool.115.com/" rel="nr">更多&raquo;</a></span></h2>
-                    <ul>
-                                                                            <li><a href="http://www.12306.cn/mormhweb/">12306</a></li>
-                                                    <li><a href="http://www.smskb.com/">列车时刻</a></li>
-                                                    <li><a href="http://tool.115.com/bus/">公交查询</a></li>
-                                                    <li><a href="http://www.soso.com/tb.q">搜搜天气</a></li>
-                                                    <li><a href="http://open.baidu.com/special/time/">北京时间</a></li>
-                                                    <li><a href="http://site.baidu.com/list/wannianli.htm">万 年 历</a></li>
-                                                    <li><a href="http://caipiao.hao123.com/">彩票开奖</a></li>
-                                                    <li><a href="http://translate.google.cn/">在线翻译</a></li>
-                                                    <li><a href="http://tool.115.com/shouji/">手机位置</a></li>
-                                                    <li><a href="http://app.baidu.com/widget?appid=116526&keyword=%E8%AE%A1%E7%AE%97%E5%99%A8">计算器</a></li>
-                                                    <li><a href="http://tool.115.com/finance/rate/">外汇牌价</a></li>
-                                                    <li><a href="http://tool.115.com/live/idcard/">身 份 证</a></li>
-                                                    <li><a href="http://ip.chinaz.com/">IP 地址</a></li>
-                                                    <li><a href="http://tool.115.com/live/express/">快递查询</a></li>
-                                                    <li><a href="http://www.chinapost.com.cn/">中国邮政</a></li>
-                                                    <li><a href="http://flashhq.gw.com.cn/main.html">股票行情</a></li>
-                                                    <li><a href="http://map.baidu.com/" style="color:#FF0000">百度地图</a></li>
-                                                    <li><a href="http://tool.chinaz.com/speedtest.aspx">网速测试</a></li>
-                                                    <li><a href="http://yun.baidu.com/">百度网盘</a></li>
-                                                    <li><a href="http://s.m.sohu.com/baopan">智能报盘</a></li>
-                                            </ul>
-
-
-
-
-                </div>
-                                                    <h2>读书圈</h2>
-                    <ul class="c2">
-                                            <li ><a href="/123/html/diy/index.htm">自定义</a></li>
-                                        </ul>
-                                    <h2>娱乐休闲</h2>
-                    <ul>
-                                            <li ><a href="/123/html/Sousuo_Yinqing/index.htm">搜索</a></li>
-                                            <li ><a href="/123/html/catalog/1672.htm">舞蹈</a></li>
-                                            <li ><a href="/123/html/lady/index.htm">美女</a></li>
-                                            <li ><a href="/123/html/yinyue_mp3/index.htm">音乐</a></li>
-                                            <li ><a href="/123/html/kuanpin_yingshi/index.htm">视频</a></li>
-                                            <li ><a href="/123/html/youxi_wangyou/index.htm">游戏</a></li>
-                                            <li ><a href="/123/html/news/index.htm">新闻</a></li>
-                                            <li ><a href="/123/html/movie/index.htm">电影</a></li>
-                                            <li ><a href="/123/html/wenxue_xiaoshuo/index.htm">小说</a></li>
-                                            <li ><a href="/123/html/tiyu_jianshen/index.htm">体育</a></li>
-                                            <li ><a href="/123/html/football/index.htm">足球</a></li>
-                                            <li ><a href="/123/html/nba/index.htm">NBA</a></li>
-                                            <li ><a href="/123/html/bizhi_tuku/index.htm">美图</a></li>
-                                            <li ><a href="/123/html/xingzuo/index.htm">星相</a></li>
-                                            <li ><a href="/123/html/dongman/index.htm">动漫</a></li>
-                                            <li ><a href="/123/html/fun/index.htm">笑话</a></li>
-                                            <li ><a href="/123/html/luntan_shequ/index.htm">社区</a></li>
-                                            <li ><a href="/123/html/love/index.htm">交友</a></li>
-                                            <li ><a href="/123/html/star/index.htm">明星</a></li>
-                                            <li ><a href="/123/html/sheying/index.htm">摄影</a></li>
-                                            <li ><a href="/123/html/junshi/index.htm">军事</a></li>
-                                        </ul>
-                                    <h2>生活服务</h2>
-                    <ul>
-                                            <li ><a href="http://tool.115.com/tianqi">天气</a></li>
-                                            <li ><a href="http://tool.115.com/">查询</a></li>
-                                            <li ><a href="/123/html/caijinggushi/index.htm">股票</a></li>
-                                            <li ><a href="/123/html/jijinlicai/index.htm">基金</a></li>
-                                            <li ><a href="/123/html/wangshanggouwu/index.htm">购物</a></li>
-                                            <li ><a href="/123/html/bank/index.htm">银行</a></li>
-                                            <li ><a href="/123/html/car/index.htm">汽车</a></li>
-                                            <li ><a href="/123/html/fangchanjiaju/index.htm">房产</a></li>
-                                            <li ><a href="/123/html/caipiao/index.htm">彩票</a></li>
-                                            <li ><a href="/123/html/shouji/index.htm">手机</a></li>
-                                            <li ><a href="/123/html/yiliaobaojian/index.htm">健康</a></li>
-                                            <li ><a href="/123/html/law/index.htm">法律</a></li>
-                                            <li ><a href="/123/html/zhaoshangjiameng/index.htm">招商</a></li>
-                                            <li ><a href="/123/html/shaonian_ertong/index.htm">亲子</a></li>
-                                            <li ><a href="/123/html/sex/index.htm">两性</a></li>
-                                            <li ><a href="/123/html/chongwuhuaniao/index.htm">宠物</a></li>
-                                            <li ><a href="/123/html/lvyouchuxing/index.htm">旅游</a></li>
-                                            <li ><a href="/123/html/fashion/index.htm">时尚</a></li>
-                                            <li ><a href="/123/html/yingyangmeishi/index.htm">美食</a></li>
-                                            <li ><a href="/123/html/life/index.htm">生活</a></li>
-                                            <li ><a href="/123/html/yule/index.htm">娱乐</a></li>
-                                            <li ><a href="/123/html/map/index.htm">地图</a></li>
-                                            <li ><a href="/123/html/rencai_zhaopin/index.htm">招聘</a></li>
-                                        </ul>
-                                    <h2>学习教育</h2>
-                    <ul>
-                                            <li ><a href="/123/html/jiaoyu/index.htm">教育</a></li>
-                                            <li ><a href="/123/html/wendang/index.htm">文档</a></li>
-                                            <li ><a href="/123/html/waiyu_xuexi/index.htm">外语</a></li>
-                                            <li ><a href="/123/html/kaoshi/index.htm">考试</a></li>
-                                            <li ><a href="/123/html/gaokao/index.htm">高考</a></li>
-                                            <li ><a href="/123/html/kaoyan/index.htm">考研</a></li>
-                                            <li ><a href="http://www.hao123.com/edu">大学</a></li>
-                                            <li ><a href="/123/html/xiaoyuan/index.htm">校园</a></li>
-                                            <li ><a href="/123/html/shehui_wenhua/index.htm">人文</a></li>
-                                            <li ><a href="/123/html/chuguo_liuxue/index.htm">留学</a></li>
-                                            <li ><a href="/123/html/yishu_aihao/index.htm">爱好</a></li>
-                                            <li ><a href="/123/html/zongjiao/index.htm">宗教</a></li>
-                                            <li ><a href="/123/html/gongyi/index.htm">公益</a></li>
-                                            <li ><a href="/123/html/kexue_jishu/index.htm">科技</a></li>
-                                            <li ><a href="/123/html/catalog/2376.htm">学籍</a></li>
-                                        </ul>
-                                    <h2>数码电脑</h2>
-                    <ul>
-                                            <li ><a href="/123/html/soft/index.htm">软件</a></li>
-                                            <li ><a href="/123/html/Yingjian_Zixun/index.htm">硬件</a></li>
-                                            <li ><a href="/123/html/it/index.htm">IT</a></li>
-                                            <li ><a href="/123/html/mail/index.htm">邮箱</a></li>
-                                            <li ><a href="/123/html/Heike_Anquan/index.htm">黑客</a></li>
-                                            <li ><a href="/123/html/BT/index.htm">BT</a></li>
-                                            <li ><a href="/123/html/desktop/index.htm">桌面</a></li>
-                                            <li ><a href="/123/html/blog/index.htm">博客</a></li>
-                                            <li ><a href="/123/html/liaotian_qq/index.htm">聊天</a></li>
-                                            <li ><a href="/123/html/shuma_shishang/index.htm">数码</a></li>
-                                        </ul>
-                                    <h2>行业技术</h2>
-                    <ul class="c2">
-                                            <li ><a href="/123/html/auto/index.htm">自动化</a></li>
-                                            <li ><a href="/123/html/jixie/index.htm">机械</a></li>
-                                            <li ><a href="/123/html/chuangye/index.htm">创业</a></li>
-                                            <li ><a href="/123/html/catalog/2398.htm">管理</a></li>
-                                            <li ><a href="/123/html/dianqi/index.htm">电气</a></li>
-                                            <li ><a href="/123/html/geipaishui/index.htm">给排水</a></li>
-                                            <li ><a href="/123/html/design/index.htm">设计</a></li>
-                                            <li ><a href="/123/html/Biancheng/index.htm">编程</a></li>
-                                            <li ><a href="/123/html/ziyuan/index.htm">资源</a></li>
-                                        </ul>
-                			            </div>
-						
- <!-- 微信公众号二维码-->
-<div class="box">
-<a href="http://bookfuns.com"><img src="/123/public/images/qrcode.jpg" width="220px" /></a>
-</div>
-						
-
-
-
-
-
-        <b class="rc-bt"><b></b></b></div>
-        <div id="main">
-            <div id="bm"><b class="rc-tp"><b></b></b>
-                <ul id="bm_tab" class="clearfix">
-                    <li id="bm-def" class="active" rel="fm">名站导航</li>
-                                        <li rel="bb0" url="" nocache=></li>
-                                    </ul><div id="qs"><b class="l"></b><div id="q_int" class="n"><div class="button-wrap"><input type="text" /></div></div><b class="r"></b></div>
-            </div>
-            <div id="bb">
-                <div class="box">
-                    <div id="fm">
-                        <ul id="topsite" class="clearfix">
-                                                        	                        </ul>
-                        <ul id="fmsite" class="clearfix">
-                                                                                    <li><a href="/" style="color:#2D6800;">【搜索】</a></li>
-                                                        <li><a href="http://fav" style="color:#B43800;">【书签】</a></li>
-                                                        <li><a href="/blog" style="color:#003080;">【博客】</a></li>
-                                                        <li><a href="http://localhost:8000" style="color:#006B9C;">【笔记】</a></li>
-                                                        <li><a href="http://www.forbeschina.com/" style="color:#001574;">福布斯</a></li>
-                                                        <li><a href="http://www.hurun.net/CN/HuList.aspx" class="red">胡润百富</a></li>
-                                                        <li><a href="http://pc.qq.com" style="color:#00B7F4;">腾讯软件</a></li>
-                                                        <li><a href="http://astro.fashion.qq.com/tarot/tarot.shtml" style="color:#ECA900;">塔罗占卜</a></li>
-                                                        <li><a href="http://tools.2345.com/naonao/" style="color:#E80098;">女巫店</a></li>
-                                                        <li><a href="http://astro.fashion.qq.com/" style="color:#330048;">腾讯星座</a></li>
-                                                        <li><a href="http://jiecao8.net/" style="color:#FF6430;">节操吧</a></li>
-                                                        <li><a href="http://www.qiushibaike.com/hot" style="color:#9C6B00;">糗事百科</a></li>
-                                                        <li><a href="http://baozoumanhua.com/" style="color:#00582C;">暴走漫画</a></li>
-                                                        <li><a href="http://chanyouji.com/" class="red">蝉游记</a></li>
-                                                        <li><a href="http://weibo.com/lixinglong" style="color:#FF5076;">李星龙摄影</a></li>
-                                                        <li><a href="http://www.google.com/culturalinstitute/project/art-project" style="color:#D08F00;">谷歌艺术馆</a></li>
-                                                        <li><a href="http://v.qq.com/class/" style="color:#0865FF;">精品课</a></li>
-                                                        <li><a href="http://v.baidu.com/show/1404.htm" style="color:#63B000;">《音乐下午茶》</a></li>
-                                                        <li><a href="http://huaban.com" class="red">花瓣网</a></li>
-                                                        <li><a href="http://www.fortunechina.com/" style="color:#907000;">财富</a></li>
-                                                        <li><a href="http://cctv.cntv.cn/" class="blue">《CCTV》</a></li>
-                                                        <li><a href="http://qzone.qq.com/" style="color:#C8A800;">Qzone</a></li>
-                                                        <li><a href="http://weibo.com" class="red">新浪微博</a></li>
-                                                        <li><a href="http://www.juzimi.com/" style="color:#DC5200;">句子迷</a></li>
-                                                        <li><a href="http://ln.qq.com/" class="blue">大辽网</a></li>
-                                                    </ul>
+                        </div>
+                        <a target="_blank" href="http://news.baidu.com/">新闻</a>&nbsp;&nbsp;&nbsp;<strong>网页</strong>&nbsp;&nbsp;&nbsp;<a
+                            target="_blank" href="http://tieba.baidu.com/">贴吧</a>&nbsp;&nbsp;&nbsp;<a target="_blank"
+                                                                                                      href="http://zhidao.baidu.com/">知道</a>&nbsp;&nbsp;&nbsp;<a
+                            target="_blank" href="http://music.baidu.com/">音乐</a>&nbsp;&nbsp;&nbsp;<a target="_blank"
+                                                                                                      href="http://image.baidu.com/">图片</a>&nbsp;&nbsp;&nbsp;<a
+                            target="_blank" href="http://video.baidu.com/">视频</a>&nbsp;&nbsp;&nbsp;
                     </div>
-                    <div id="qs-result" style="display:none;"></div>
+                    <div>
+                        <form target="_blank" name="f" method="get" action="http://www.baidu.com/s">
+
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td><input type="hidden" value="sitehao123_pg" name="tn"/>
+                                        <div id="sugOut"><input value="" size="42" name="word"
+                                                                onMouseOver="this.focus();" maxlength=100 id="kww"
+                                                                onFocus="this.select();" autocomplete="off"
+                                                                class="formInput"><br>
+                                            <div id="sug"></div>
+                                        </div>
+                                    </td>
+                                    <td>&nbsp;<input type="submit" class="sb" value="百度一下"/></td>
+                                    <!--<td>&nbsp;-->
+                                        <!--<a style="font-size:12px"-->
+                                                 <!--href="http://www.baidu.com/search/baidukuaijie_mp.html">把百度添加到桌面</a>&nbsp;|&nbsp;<a-->
+                                            <!--style="font-size:12px"-->
+                                            <!--onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://site.baidu.com/');return(false);"-->
+                                            <!--href="http://site.baidu.com">把本站设为主页</a>-->
+                                    <!--</td>-->
+                                </tr>
+                            </table>
+                            <input type="hidden" name="ie" value="utf-8"/>
+                        </form>
+                    </div>
                 </div>
-                <b class="rc-bt"><b></b></b></div>
-            <div id="hot2">
-                                
-            </div>
-			
-<!-- 图片轮 <div class="box">     播 -->
-<!-- 图片轮<iframe vspace="0" hspace="0" scrolling="no" frameborder="0" id="clip" name="clip" width="750" height="450"  src="public/widget/pic/index.html"></iframe>    播--> 
-<!-- 图片轮 </div>    播-->
+            </td>
+        </tr>
+    </table>
 
-
-<!-- 爱词霸每天一句话--> <div class="box">
-<!-- 每天一句话--> <script type="text/javascript" src="http://open.iciba.com/ds_open.php?id=19401&name=%E8%AF%BB%E4%B9%A6%E5%9C%88&auth=6564C8AA803FCAC797501D158AA8F2FD" charset="utf-8"></script>
-<!-- 每天一句话--> </div>
-
-
-            <div id="ls"><b class="rc-tp"><b></b></b>
-                <div class="box">
-                                          <dl id="local" style="visibility:hidden;">
-                        <dt id="loc_t"></dt>
-                        <dd class="l" id="loc_c"></dd>
-                        <dd class="m" id="loc_m"></dd>
-                    </dl>
-                                        <dl id="ls1"><dt><a href="/123/html/Sousuo_Yinqing/index.htm">搜 索</a></dt><dd class="l"><a href="http://baidu.com" class="blue">百度</a><a href="http://www.google.com.hk" >谷歌</a><a href="http://www.so.com" >360搜索</a><a href="http://www.2345.com/?k36970700" style="color:#006CCC;">2345</a><a href="http://www.hao123.com/" >hao123</a><a href="http://www.soso.com/" >搜搜</a><a href="http://cn.bing.com/" >必应</a><a href="http://www.qkankan.com" >国外大全</a></dd><dd class="m"><a href="/123/html/Sousuo_Yinqing/index.htm">更多 &raquo;</a></dd></dl><dl class="alt"id="ls2"><dt><a href="/123/html/wenxue_xiaoshuo/index.htm">小 说</a></dt><dd class="l"><a href="http://www.qidian.com/" class="red">起点中文</a><a href="http://book.douban.com" >豆瓣看书</a><a href="http://www.zongheng.com/?CO=114la" >纵横小说</a><a href="http://book.sina.com.cn/?c=spr_web_sq_114la_book_t001" >新浪小说</a><a href="http://www.hongxiu.com/?114la" >红袖言情</a></dd><dd class="m"><a href="/123/html/wenxue_xiaoshuo/index.htm">更多 &raquo;</a></dd></dl><dl id="ls3"><dt><a href="/123/html/news/index.htm">新 闻</a></dt><dd class="l"><a href="http://www.toutiao.com/" class="red">今日头条</a><a href="http://www.gov.cn/" >政府网</a><a href="http://cpc.people.com.cn/" class="red">共新网</a><a href="http://www.ifeng.com/" class="red">凤凰网</a><a href="http://news.sina.com.cn/" >新浪</a><a href="http://news.sohu.com/" >搜狐</a><a href="http://news.163.com/" >网易</a><a href="http://www.huanqiu.com/" >环球</a></dd><dd class="m"><a href="/123/html/news/index.htm">更多 &raquo;</a></dd></dl><dl class="alt"id="ls4"><dt><a href="/123/html/wendang/index.htm">文 档</a></dt><dd class="l"><a href="http://www.douban.com/" class="green">豆瓣</a><a href="http://wenku.baidu.com/" class="blue">百度文库</a><a href="http://www.docin.com/" style="color:#16B000;">豆丁网</a><a href="http://www.doc88.com/" style="color:#9C3F00;">道客巴巴</a></dd><dd class="m"><a href="/123/html/wendang/index.htm">更多 &raquo;</a></dd></dl><dl id="ls5"><dt><a href="/123/html/yinyue_mp3/index.htm">音 乐</a></dt><dd class="l"><a href="http://www.yinyuetai.com/" style="color:#669C00;">音悦台</a><a href="http://play.baidu.com/" class="blue">百度音乐盒</a><a href="http://www.xiami.com/" style="color:#C47A00;">虾米</a><a href="http://www.kuwo.cn/114la/index.htm" >酷我</a><a href="http://www.kugou.com/2219/" >酷狗</a><a href="http://www.1g1g.com/" class="red">亦歌</a></dd><dd class="m"><a href="/123/html/yinyue_mp3/index.htm">更多 &raquo;</a></dd></dl><dl class="alt"id="ls6"><dt><a href="/123/html/Biancheng/index.htm">编 程</a></dt><dd class="l"><a href="http://www.tuicool.com/" style="color:#009C30;">推酷</a><a href="https://segmentfault.com/" >segmentfault</a><a href="https://www.v2ex.com/" >V2EX</a><a href="http://www.csdn.net/" class="red">CSDN</a><a href="http://www.cnblogs.com/" style="color:#008194;">博客园</a><a href="http://www.cnbeta.com/" style="color:#0874FF;">cnbeta</a><a href="http://www.pcbeta.com/news/" style="color:#00A2EC;">远景</a><a href="http://www.36kr.com/" style="color:#3700A0;">36氪</a><a href="http://www.iteye.com/forums" class="blue">ITeye</a></dd><dd class="m"><a href="/123/html/Biancheng/index.htm">更多 &raquo;</a></dd></dl><dl id="ls7"><dt><a href="/123/html/youxi_wangyou/index.htm">游 戏</a></dt><dd class="l"><a href="http://www.17173.com/" >17173</a><a href="http://www.uuu9.com/" >游久网</a><a href="http://www.duowan.com/" >多玩网</a><a href="http://lol.qq.com/101/hero.shtml" >英雄联盟</a><a href="http://www.hearthstone.com.cn/home" style="color:#48C6FF;">炉石传说</a><a href="http://bns.qq.com/" class="red">剑灵</a></dd><dd class="m"><a href="/123/html/youxi_wangyou/index.htm">更多 &raquo;</a></dd></dl><dl class="alt"id="ls8"><dt><a href="/123/html/soft/index.htm">电 脑</a></dt><dd class="l"><a href="http://www.duote.com" >多特</a><a href="http://www.pc6.com/" style="color:#34ADFF;">PC6</a><a href="http://www.orsoon.com/" >未来</a><a href="http://www.52z.com/" >飞翔</a><a href="http://www.mydrivers.com/" >驱动之家</a><a href="http://www.xiazaiba.com/" style="color:#1BB000;">下载吧</a><a href="http://www.appinn.com/" >小众</a></dd><dd class="m"><a href="/123/html/soft/index.htm">更多 &raquo;</a></dd></dl><dl id="ls9"><dt><a href="/123/html/BT/index.htm">下 载</a></dt><dd class="l"><a href="http://www.ed2kers.com/" >驴客</a><a href="http://www.ed2000.com" >ED2000</a><a href="http://verycd.gdajie.com/" >逛驴</a><a href="http://www.pan1234.com/" >pan1234</a><a href="http://www.iverycd.com/" >爱驴</a><a href="http://www.wangpansou.cn/" >网盘搜</a></dd><dd class="m"><a href="/123/html/BT/index.htm">更多 &raquo;</a></dd></dl><dl class="alt"id="ls10"><dt><a href="/123/html/kuanpin_yingshi/index.htm">视 频</a></dt><dd class="l"><a href="http://v.qq.com/" style="color:#003DB4;">腾讯视频</a><a href="http://www.cntv.cn/" >CNTV</a><a href="http://tv.sohu.com/" >搜狐视频</a><a href="http://www.tudou.com/" >土豆网</a><a href="http://www.qiyi.com/" >奇艺</a><a href="http://www.youku.com/" style="color:#84C9FF;">优酷</a><a href="http://www.funshion.com" style="color:#F83600;">风行</a><a href="http://www.kankan.com/" >迅雷看看</a><a href="http://www.hunantv.com/" >芒果台</a></dd><dd class="m"><a href="/123/html/kuanpin_yingshi/index.htm">更多 &raquo;</a></dd></dl><dl id="ls11"><dt><a href="/123/html/junshi/index.htm">军 事</a></dt><dd class="l"><a href="http://military.china.com/" >中华网军事</a><a href="http://www.tiexue.net/" >铁血军事</a><a href="http://mil.huanqiu.com/" >环球军事</a><a href="http://mil.news.sina.com.cn/" >新浪军事</a><a href="http://news.ifeng.com/mil/" >凤凰网军事</a><a href="http://www.chinamil.com.cn/" >中国军网</a><a href="http://www.chinaiiss.org/" >战略网</a></dd><dd class="m"><a href="/123/html/junshi/index.htm">更多 &raquo;</a></dd></dl><dl class="alt"id="ls12"><dt><a href="/123/html/caijinggushi/index.htm">财 经</a></dt><dd class="l"><a href="http://www.cindasc.com" style="color:#FF2708;">信达证券</a><a href="http://finance.qq.com/" >腾讯财经</a><a href="http://www.eastmoney.com/" >东方财富网</a><a href="http://www.jrj.com/?from=90005" class="red">金融界</a><a href="http://www.hexun.com/" >和讯</a><a href="http://finance.sina.com.cn/" >新浪</a><a href="http://www.stockstar.com/" >证券之星</a></dd><dd class="m"><a href="/123/html/caijinggushi/index.htm">更多 &raquo;</a></dd></dl><dl id="ls13"><dt><a href="/123/html/mail/index.htm">邮 箱</a></dt><dd class="l"><a href="http://mail.qq.com/" style="color:#009847;">QQ邮箱</a><a href="http://live.com" >OUTLOOK</a><a href="http://www.gmail.com/" >GMail</a><a href="http://email.163.com/" >网易邮箱</a><a href="http://mail.sina.com.cn/" >新浪邮箱</a><a href="http://mail.cn.yahoo.com/" >雅虎邮箱</a></dd><dd class="m"><a href="/123/html/mail/index.htm">更多 &raquo;</a></dd></dl><dl class="alt"id="ls14"><dt><a href="/123/html/wangshanggouwu/index.htm">购 物</a></dt><dd class="l"><a href="http://www.taobao.com" style="color:#FF4928;">淘宝</a><a href="http://www.jd.com/" class="red">京东</a><a href="http://www.amazon.cn" >卓越网</a><a href="http://home.dangdang.com/" >当当网</a><a href="http://www.suning.com/" >苏宁</a><a href="http://www.gome.com.cn/" >国美</a><a href="http://meituan.com" style="color:#009494;">美团网</a><a href="http://58.com/" >58同城</a></dd><dd class="m"><a href="/123/html/wangshanggouwu/index.htm">更多 &raquo;</a></dd></dl><dl id="ls15"><dt><a href="/123/html/bank/index.htm">银 行</a></dt><dd class="l"><a href="http://www.icbc.com.cn/" >工行</a><a href="http://www.ccb.com/" >建行</a><a href="http://www.boc.cn/" >中行</a><a href="http://www.cmbchina.com/" >招商</a><a href="http://www.abchina.com/" >农行</a><a href="http://www.gdb.com.cn/" >广发</a><a href="http://www.chinaunionpay.com/" >银联</a><a href="http://www.paypal.com" >Paypal</a></dd><dd class="m"><a href="/123/html/bank/index.htm">更多 &raquo;</a></dd></dl><dl class="alt"id="ls16"><dt><a href="/123/html/car/index.htm">汽 车</a></dt><dd class="l"><a href="http://www.autohome.com.cn/" >汽车之家</a><a href="http://auto.qq.com/" >腾讯汽车</a><a href="http://www.cheshi.com/" >车市</a><a href="http://auto.sohu.com/?p=b5ed082ba0" >搜狐汽车</a><a href="http://auto.sina.com.cn/?c=spr_web_sq_114la_auto_t001" class="green">新浪汽车</a><a href="http://www.che168.com/" >车168</a><a href="http://www.ucar.cn/?1214" class="red">优卡二手车</a><a href="http://www.bitauto.com/?WT.mc_id=114la" >易车网</a></dd><dd class="m"><a href="/123/html/car/index.htm">更多 &raquo;</a></dd></dl><dl id="ls17"><dt><a href="/123/html/tiyu_jianshen/index.htm">体 育</a></dt><dd class="l"><a href="http://www.espnstar.com.cn" style="color:#0006C0;">ESPN</a><a href="http://china.nba.com/" class="red">NBA中文网</a><a href="http://sports.sina.com.cn/" >新浪体育</a><a href="http://sports.sohu.com/" >搜狐体育</a><a href="http://sports.163.com/" >网易体育</a><a href="http://sports.cn.yahoo.com/index.html?f=E114_3_1" >雅虎体育</a></dd><dd class="m"><a href="/123/html/tiyu_jianshen/index.htm">更多 &raquo;</a></dd></dl>
-				</div>
-				
-				<!-- 排行榜-->                
-<div class="box">
-<iframe vspace="0" hspace="0" scrolling="no" frameborder="0" id="clip" name="clip" width="200" height="353" src="http://top.baidu.com/clip?b=1&hd_h_info=1&width=160&hd_trend=0&hd_search=1&hd_border=1&hd_h=0&hd_meshline=0&hd_searches=1&col=1" ></iframe>
-<iframe vspace="0" hspace="0" scrolling="no" frameborder="0" id="clip" name="clip" width="200" height="353" src="http://top.baidu.com/clip?b=2&hd_h_info=1&width=160&hd_trend=0&hd_search=1&hd_border=1&hd_h=0&hd_meshline=0&hd_searches=1&col=1&p_name=%E4%BB%8A%E6%97%A5%E7%83%AD%E9%97%A8%E6%90%9C%E7%B4%A2%E6%8E%92%E8%A1%8C%E6%A6%9C" ></iframe>
-<iframe vspace="0" hspace="0" scrolling="no" frameborder="0" id="clip" name="clip" width="200" height="353" src="http://top.baidu.com/clip?b=450&hd_h_info=1&p_name=%E4%BB%8A%E6%97%A5%E7%95%85%E9%94%80%E4%B9%A6%E6%8E%92%E8%A1%8C%E6%A6%9C&hd_border=1&hd_search=1&hd_trend=1&hd_searches=1&col=1&width=200" ></iframe>
 </div>
-				
-				
+<div id="container">
+    <div id="leftSide">
+        <div id="leftwraper">
+            <div class="leftContent">
+                <div class="siteTitle">生活服务</div>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td>
+                    <tr>
+                        <td><a target="_blank" href="http://gouwu.hao123.com/?tn=yedi">购物</a></td>
+                        <td><a target="_blank" href="http://tejia.hao123.com/?tn=yedi">特价</a></td>
+                        <td><a target="_blank" href="http://haitao.hao123.com/?tn=yedi">海淘</a></td>
+                        <td><a target="_blank" href="http://life.hao123.com/">查询</a></td>
+                    </tr>
+                    <tr>
+                        <td><a target="_blank" href="http://www.hao123.com/stocknew">股票</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/stock">基金</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/bank">银行</a></td>
+                        <td><a target="_blank" href="http://caipiao.hao123.com/">彩票</a></td>
+                    </tr>
+                    <tr>
+                        <td><a target="_blank" href="http://www.hao123.com/auto">汽车</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/jtwzcx?tn=kuzhan_site">违章</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/map">地图</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/menu">菜谱</a></td>
+                    </tr>
+                    <tr>
+                        <td><a target="_blank" href="http://lady.hao123.com/?tn=yedi">女性</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/child">儿童</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/muying">母婴</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/health">健康</a></td>
+                    </tr>
+                    <tr>
+                        <td><a target="_blank" href="http://www.hao123.com/fangchan">房产</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/zhaopin">招聘</a></td>
+                        <td><a target="_blank" href="http://www.hao123.com/mobile">手机</a></td>
+                        <td><a target="_blank" href="http://go.hao123.com/">旅游</a></td>
+                    </tr>
+                    <tr>
+                        <td><a target="_blank" href="http://go.hao123.com/flight">机票</a></td>
+                        <td><a target="_blank" href="http://go.hao123.com/hotel">酒店</a></td>
+                        <td colspan="2"><a target="_blank" href="http://go.hao123.com/sales">特价游</a></td>
+                    </tr>
+                </table>
 
-                <b class="rc-bt"><b></b></b></div>
-								                     
+            </div>
+            <div class="leftContent">
+                <div class="siteTitle">娱乐休闲</div>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td><a href="http://music.hao123.com/" target="_blank">音乐</a></td>
+                        <td><a href="http://game.hao123.com/" target="_blank">游戏</a></td>
+                        <td><a href="http://www.hao123.com/video" target="_blank">视频</a></td>
+                        <td><a href="http://book.hao123.com/" target="_blank">小说</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://pic.hao123.com/meinv?act=live" target="_blank">美女</a></td>
+                        <td><a href="http://pic.hao123.com/" target="_blank">图片</a></td>
+                        <td><a href="http://www.hao123.com/qq" target="_blank">QQ</a></td>
+                        <td><a href="http://www.hao123.com/xingzuonew.html" target="_blank">星座</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://www.hao123.com/sports" target="_blank">体育</a></td>
+                        <td><a href="http://www.hao123.com/nba" target="_blank">NBA</a></td>
+                        <td><a href="http://news.hao123.com/soccer" target="_blank">足球</a></td>
+                        <td><a href="http://www.hao123.com/gaoxiao" target="_blank">搞笑</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://v.hao123.com/dianying/" target="_blank">电影</a></td>
+                        <td><a href="http://v.hao123.com/dianshi/" target="_blank">剧集</a></td>
+                        <td><a href="http://v.hao123.com/zongyi/" target="_blank">综艺</a></td>
+                        <td><a href="http://v.hao123.com/dongman/" target="_blank">动画</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://www.hao123.com/junshi" target="_blank">军事</a></td>
+                        <td><a href="http://news.hao123.com/" target="_blank">头条</a></td>
+                        <td><a href="http://www.hao123.com/star" target="_blank">娱乐</a></td>
+                        <td><a href="http://www.hao123.com/lishi" target="_blank">历史</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://www.hao123.com/love" target="_blank">交友</a></td>
+                        <td><a href="http://www.hao123.com/manhua" target="_blank">漫画</a></td>
+                        <td colspan="2"><a target="_blank" href="http://moe.hao123.com/">萌主页</a></td>
+                    </tr>
+                </table>
 
 
+            </div>
+            <div class="lastContent">
+                <div class="siteTitle">其他类别</div>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td><a href="http://soft.hao123.com/" target="_blank">软件</a></td>
+                        <td><a href="http://8.hao123.com/" target="_blank">投资</a></td>
+                        <td><a href="http://www.hao123.com/chongwu" target="_blank">宠物</a></td>
+                        <td><a href="http://www.hao123.com/aihao" _blank">爱好</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://www.hao123.com/hardware" target="_blank">数码</a></td>
+                        <td><a href="http://www.hao123.com/harcksafe" target="_blank">杀毒</a></td>
+                        <td><a href="http://www.hao123.com/desktop" target="_blank">桌面</a></td>
+                        <td><a href="http://www.hao123.com/sheying" target="_blank">摄影</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://www.hao123.com/exam" target="_blank">考试</a></td>
+                        <td><a href="http://www.hao123.com/exam/zhiye" target="_blank">课程</a></td>
+                        <td><a href="http://www.hao123.com/english" target="_blank">英语</a></td>
+                        <td><a href="http://www.hao123.com/eduhtm_qyqx" target="_blank">学习</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://www.hao123.com/licai" target="_blank">理财</a></td>
+                        <td><a href="http://www.hao123.com/worldzh" target="_blank">国外</a></td>
+                        <td><a href="http://www.hao123.com/sheji" target="_blank">设计</a></td>
+                        <td><a href="http://www.hao123.com/wendang" target="_blank">知识</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://www.hao123.com/zhiye" target="_blank">行业</a></td>
+                        <td><a href="http://www.hao123.com/law" target="_blank">法律</a></td>
+                        <td><a href="http://www.hao123.com/yisiu" target="_blank">琴棋</a></td>
+                        <td><a href="http://www.hao123.com/quyi" target="_blank">曲艺</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://www.hao123.com/loan" target="_blank">贷款</a></td>
+                        <td><a href="http://www.hao123.com/mail" target="_blank">邮箱</a></td>
+                        <td><a href="http://www.hao123.com/chat" target="_blank">聊天</a></td>
+                        <td><a href="http://www.hao123.com/sitemap" target="_blank">更多</a></td>
+                    </tr>
+                </table>
+
+            </div>
         </div>
-		
-		
     </div>
-	<!-- 连续剧排行榜-->
-	<!--
-	    <div id="fs">
+    <div id="rightSide">
+        <div id="search">
+            <div id="searchWraper">
+                <div class="s1">
+                    <div class="siteTitle">实用查询</div>
 
+                    <a target="_blank" href="http://life.hao123.com/">更多>></a>
 
-        <div class="box">
-		<div style="width:960px;height:300px;overflow:hidden;border:1px solid #000000;">
-			<div style="width:960px;height:500px;margin:-200px 0px 0px 0px;">
-　　	<IFRAME name=I1 src="http://v.hao123.com/dianshi/" marginwidth=-100 marginheight=-300 frameBorder=0 width=960 scrolling=no height=500 align="center"></IFRAME>
-	</div>	
-		</div>
-	</div>		
+                </div>
+                <div style="clear:both; display:none;">
+                </div>
+                <ul id="topsite" class="clearfix">
+                </ul>
+                <ul id="fmsite" class="clearfix">
+                    <li><a href="/" style="color:#2D6800;">【搜索】</a></li>
+                    <li><a href="http://fav" style="color:#B43800;">【书签】</a></li>
+                    <li><a href="/blog" style="color:#003080;">【博客】</a></li>
+                    <li><a href="http://localhost:8000" style="color:#006B9C;">【笔记】</a></li>
+                    <li><a href="http://www.forbeschina.com/" style="color:#001574;">福布斯</a></li>
+                    <li><a href="http://www.hurun.net/CN/HuList.aspx" class="red">胡润百富</a></li>
+                    <li><a href="http://pc.qq.com" style="color:#00B7F4;">腾讯软件</a></li>
+                    <li><a href="http://astro.fashion.qq.com/tarot/tarot.shtml" style="color:#ECA900;">塔罗占卜</a></li>
+                    <li><a href="http://tools.2345.com/naonao/" style="color:#E80098;">女巫店</a></li>
+                    <li><a href="http://astro.fashion.qq.com/" style="color:#330048;">腾讯星座</a></li>
+                    <li><a href="http://jiecao8.net/" style="color:#FF6430;">节操吧</a></li>
+                    <li><a href="http://www.qiushibaike.com/hot" style="color:#9C6B00;">糗事百科</a></li>
+                    <li><a href="http://baozoumanhua.com/" style="color:#00582C;">暴走漫画</a></li>
+                    <li><a href="http://chanyouji.com/" class="red">蝉游记</a></li>
+                    <li><a href="http://weibo.com/lixinglong" style="color:#FF5076;">李星龙摄影</a></li>
+                    <li><a href="http://www.google.com/culturalinstitute/project/art-project" style="color:#D08F00;">谷歌艺术馆</a>
+                    </li>
+                    <li><a href="http://v.qq.com/class/" style="color:#0865FF;">精品课</a></li>
+                    <li><a href="http://v.baidu.com/show/1404.htm" style="color:#63B000;">《音乐下午茶》</a></li>
+                    <li><a href="http://huaban.com" class="red">花瓣网</a></li>
+                    <li><a href="http://www.fortunechina.com/" style="color:#907000;">财富</a></li>
+                    <li><a href="http://cctv.cntv.cn/" class="blue">《CCTV》</a></li>
+                    <li><a href="http://qzone.qq.com/" style="color:#C8A800;">Qzone</a></li>
+                    <li><a href="http://weibo.com" class="red">新浪微博</a></li>
+                    <li><a href="http://www.juzimi.com/" style="color:#DC5200;">句子迷</a></li>
+                    <li><a href="http://ln.qq.com/" class="blue">大辽网</a></li>
+                </ul>
 
-
-        <b class="rc-bt"><b></b></b></div>
-	-->
-	
-	
-	
-    <div id="meta"><b class="rc-tp"><b></b></b>
-        <div class="box">
-            <ul>
-
-
-
-                            <li class="bd">
-            <strong><a href="/123/html/topic/game/index.htm">单机游戏</a></strong>
-                                    <a href="/123/html/topic/game/index.htm#26">魔兽争霸</a>
-                        <a href="/123/html/topic/game/index.htm#22">红色警戒</a>
-                        <a href="http://www.962.net/pcgame/3660.html">魔幻卡牌</a>
-                        <a href="/123/html/topic/game/index.htm#49">暗黑破坏神II</a>
-                        <a href="/123/html/topic/game/index.htm#54">帝国时代</a>
-                        <a href="/123/html/topic/game/index.htm#52">足球 FIFA</a>
-                        <a href="/123/html/topic/game/index.htm#48">极品飞车</a>
-                        <a href="/123/html/topic/game/index.htm#50">侠盗飞车</a>
-                        <a href="/123/html/topic/game/index.htm#41">连连看</a>
-                        <a href="/123/html/topic/game/index.htm#132">三国志</a>
-                                    <span class="more"><a href="/123/html/topic/game/index.htm">更多 &raquo;</a></span>
-        </li>
-                <li class="bd">
-            <strong><a href="/123/html/topic/webgame/index.htm">网络游戏</a></strong>
-                                    <a href="http://lol.qq.com/101/hero.shtml">英雄联盟</a>
-                        <a href="/123/html/topic/webgame/index.htm#11">魔兽世界</a>
-                        <a href="/123/html/topic/webgame/index.htm#15">梦幻西游</a>
-                        <a href="http://www.hearthstone.com.cn/home">炉石传说</a>
-                        <a href="http://bns.qq.com">剑灵</a>
-                        <a href="/123/html/topic/webgame/index.htm#78">地下城与勇士</a>
-                        <a href="/123/html/topic/webgame/index.htm#81">穿越火线</a>
-                        <a href="/123/html/topic/webgame/index.htm#98">QQ炫舞</a>
-                                    <span class="more"><a href="/123/html/topic/webgame/index.htm">更多 &raquo;</a></span>
-        </li>
-                <li class="bd">
-            <strong><a href="/123/html/topic/zhangzhuang/index.htm">站长工具</a></strong>
-                                    <a href="http://tool.chinaz.com/speedtest.aspx">宽带测速</a>
-                        <a href="http://ip.chinaz.com/">IP归属地</a>
-                        <a href="http://whois.chinaz.com/">whois查询</a>
-                        <a href="http://tool.chinaz.com/Seos/Sites.aspx">收录查询</a>
-                        <a href="http://alexa.chinaz.com/">Alexa排名查询</a>
-                        <a href="http://ping.chinaz.com/">ping</a>
-                        <a href="http://tool.chinaz.com/Same/">同IP站查询</a>
-                        <a href="http://mytool.chinaz.com/baidusort.aspx">百度收录查询</a>
-                        <a href="http://link.chinaz.com/">友链查询</a>
-                        <a href="http://pr.chinaz.com/">PR查询</a>
-                        <a href="http://tool.115.com/siteall/">综合查询</a>
-                        <a href="http://tool.chinaz.com/beian.aspx">备案查询</a>
-                                    <span class="more"><a href="/123/html/topic/zhangzhuang/index.htm">更多 &raquo;</a></span>
-        </li>
-                          <li class="bd">
-            <strong><a href="/123/html/catalog/links.htm">友情链接</a></strong>
-                        <a  href="http://m.kuaidi100.com" title="快递查询">快递查询</a>
-                        <span class="more"><a href="/123/html/catalog/links.htm">更多 &raquo;</a></span>
-         </li>
-                     </ul>
+            </div>
         </div>
-		
-		
-		
-		
+        <div id="siteAll">
+            <div id="siteAllWrapper">
+                <div class="s1">
+
+                    <div style="clear:both;"></div>
+                    <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
+
+                        <tr class=ry>
+                            <td class=pl><a href="http://v.hao123.baidu.com/" target="_blank">编程</a></td>
+                            <td class="r30">
+                                <a href="http://www.tuicool.com/" style="color:#009C30;">推酷</a><a
+                                    href="https://segmentfault.com/">segmentfault</a><a
+                                    href="https://www.v2ex.com/">V2EX</a><a href="http://www.csdn.net/" class="red">CSDN</a><a
+                                    href="http://www.cnblogs.com/" style="color:#008194;">博客园</a><a
+                                    href="http://www.cnbeta.com/" style="color:#0874FF;">cnbeta</a><a
+                                    href="http://www.pcbeta.com/news/" style="color:#00A2EC;">远景</a><a
+                                    href="http://www.36kr.com/" style="color:#3700A0;">36氪</a><a
+                                    href="http://www.iteye.com/forums" class="blue">ITeye</a>
+                            </td>
+                            <td class=pr><a href="http://v.hao123.com/" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr>
+                            <td class=pl><a href="https://www.hao123.com/" target="_blank">搜索</a></td>
+                            <td class="r30">
+                                <a href="http://baidu.com" class="blue">百度</a>
+                                <a href="http://www.google.com.hk">谷歌</a>
+                                <a href="http://www.so.com">360搜索</a>
+                                <a href="http://www.2345.com/?k36970700" style="color:#006CCC;">2345</a>
+                                <a href="http://www.hao123.com/">hao123</a>
+                                <a href="http://www.soso.com/">搜搜</a>
+                                <a href="http://cn.bing.com/">必应</a>
+                                <a href="http://www.qkankan.com">国外大全</a>
+                            </td>
+                            <td class=pr><a href="https://www.hao123.com/" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr class=ry>
+                            <td class=pl><a href="http://v.hao123.baidu.com/" target="_blank">视频</a></td>
+                            <td class="r30">
+                                <a href="http://www.youku.com/" target="_blank" style="color:#84C9FF;">优酷网</a>
+                                <a href=http://www.iqiyi.com/ target="_blank">爱奇艺高清</a>
+                                <a href="http://www.mgtv.com/" target="_blank">芒果TV</a>
+                                <a href="http://tv.sohu.com/" target="_blank">搜狐视频</a>
+                                <a href="http://v.hao123.baidu.com/" target="_blank">影视大全</a>
+                                <a href="http://v.qq.com/" target="_blank" style="color:#003DB4;">腾讯视频</a>
+                                <a href="http://www.cntv.cn/">CNTV</a>
+                            </td>
+                            <td class=pr><a href="http://v.hao123.com/" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr>
+                            <td class=pl><a href="http://game.hao123.com/" target="_blank">游戏</a></td>
+                            <td class="r30">
+                                <a href="http://www.17173.com/">17173</a><a href="http://www.uuu9.com/">游久网</a>
+                                <a href="http://www.duowan.com/">多玩网</a>
+                                <a href="http://www.gamersky.com/" target=_blank>游民星空</a>
+                                <a href="http://lol.qq.com/101/hero.shtml">英雄联盟</a>
+                                <a href="http://www.hearthstone.com.cn/home" style="color:#48C6FF;">炉石传说</a>
+                                <a href="http://bns.qq.com/" class="red">剑灵</a>
+                            </td>
+                            <td class=pr><a href="http://game.hao123.com/" target="_blank">更多>></a></td>
+                        </tr>
+
+                        <tr class=ry>
+                            <td class=pl><a href="http://tuijian.hao123.com/" target="_blank">新闻</a></td>
+                            <td class="r30">
+                                <a href="http://www.toutiao.com/" style="color:#b33035;">今日头条</a>
+                                <a href="http://www.gov.cn/">政府网</a>
+                                <a href="http://cpc.people.com.cn/" style="color:#b33035;">共新网</a>
+                                <a href="http://www.ifeng.com/" style="color:#b33035;">凤凰网</a>
+                                <a href="http://news.sina.com.cn/">新浪</a>
+                                <a href="http://news.sohu.com/">搜狐</a>
+                                <a href="http://news.163.com/">网易</a>
+                                <a href="http://www.huanqiu.com/">环球</a>
+                             </td>
+                            <td class=pr><a href="http://tuijian.hao123.com/" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr>
+                            <td class=pl><a href="http://tuijian.hao123.com/?type=military" target="_blank">军事</a></td>
+                            <td class="r30"><a href="http://military.china.com/zh_cn/" target=_blank>中华军事</a><a
+                                    href="http://news.ifeng.com/mil/" target="_blank">凤凰军事</a><a
+                                    href="http://www.tiexue.net/" target=_blank>铁血军事</a><a href="http://www.miercn.com/"
+                                                                                           target=_blank>米尔军事</a><a
+                                    href="http://mil.news.sina.com.cn/" target=_blank>新浪军事</a><a
+                                    href="https://lt.cjdby.net/" target="_blank">超级大本营</a></td>
+                            <td class=pr><a href="http://tuijian.hao123.com/?type=military" target="_blank">更多>></a>
+                            </td>
+                        </tr>
+                        <tr class=ry>
+                            <td class=pl><a href="http://www.hao123.com/sports" target="_blank">体育</a></td>
+                            <td class="r30"></a></span><span class="connect"><a href="http://sports.sina.com.cn/"
+                                                                                target="_blank">新浪体育</a></span><a
+                                    href="http://www.hao123.com/nba" target="_blank">NBA资讯</a></span><a
+                                    href="http://sports.sohu.com/" target="_blank">搜狐体育</a></span><a
+                                    href="http://sports.cntv.cn/" target="_blank">CCTV5</a></span><a
+                                    href="http://www.hupu.com/" target="_blank">虎扑体育</a></span><a
+                                    href="http://sports.qq.com/" target="_blank">腾讯体育</a></span><a
+                                    href="http://www.zhibo8.cc/" target="_blank">直播吧</a></td>
+                            <td class=pr><a href="http://www.hao123.com/sports" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr>
+                            <td class=pl><a href="http://www.hao123.com/mail" target="_blank">邮箱</a></td>
+                            <td class="r20"><a href="http://mail.163.com/" target="_blank">163邮箱</a><a
+                                    href="http://mail.126.com/" target="_blank">126邮箱</a><a
+                                    href="http://mail.aliyun.com/" target="_blank">阿里邮箱</a><a
+                                    href="http://mail.sina.com.cn/" target="_blank">新浪邮箱</a><a
+                                    href="http://mail.qq.com/" target="_blank">QQ邮箱</a><a
+                                    href="https://outlook.live.com/" target="_blank">Outlook</a><a
+                                    href="http://mail.10086.cn/" target="_blank">139邮箱</a></td>
+                            <td class=pr><a href="http://www.hao123.com/mail" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr class=ry>
+                            <td class=pl><a href="http://book.hao123.com/" target="_blank">小说</a></td>
+                            <td class="r30">
+                                <a href="http://www.qidian.com/" target="_blank">起点</a>
+                                <a href="http://www.xxsy.net/" target="_blank">潇湘书院</a>
+                                <a href="https://www.xs8.cn/" target="_blank">言情小说吧</a>
+                                <a href="http://www.zongheng.com/" target="_blank">纵横中文网</a>
+                                <a href="http://book.hao123.com/rank.html" target="_blank">小说排行</a>
+                                <a href="http://www.readnovel.com/" target="_blank">小说阅读网</a>
+                            </td>
+                            <td class=pr><a href="http://book.hao123.com/" target="_blank">更多>></a></td>
+                        </tr>
+
+                        <tr>
+                            <td class=pl><a href="http://tejia.hao123.com/?tn=kz" target="_blank">购物</a></td>
+                            <td class="r20">
+                                <a href=https://www.taobao.com/ target=_blank>淘宝</a>
+                                <a href=https://jd.com target=_blank>京东</a>
+                                <a href="https://tmall.com" target="_blank">天猫</a>
+                                <a href=https://www.suning.com  target=_blank>苏宁</a>
+                                <a href=http://you.163.com/ target=_blank>严选</a>
+                                <a href="https://2.taobao.com/" target="_blank">闲鱼</a>
+                                <a href="http://zhuanzhuan.58.com" target="_blank">转转</a>
+
+                            </td>
+                            <td class=pr><a href="http://tejia.hao123.com/?tn=kz" target="_blank">更多>></a></td>
+                        </tr>
+
+                        <tr class=ry>
+                            <td class=pl><a href="http://gouwu.hao123.com/?tn=kuzhan2" target="_blank">商城</a></td>
+                            <td class="r20"><a href=http://www.dangdang.com/ target=_blank>当当网</a><a
+                                    href=http://clickc.admaster.com.cn/c/a97122,b2057568,c1165,i0,m101,8a1,8b2,h
+                                    target=_blank>国美</a><a href="http://www.mogujie.com/" target="_blank">蘑菇街</a><a
+                                    href=https://www.amazon.cn/ target=_blank>亚马逊</a><a
+                                    href=http://shouji.hao123.com/ target=_blank>手机特惠</a><a
+                                    href="http://tejia.hao123.com/?tn=kuzhan" target="_blank">特价商城</a><a
+                                    href=http://www.yhd.com/ target=_blank>1号店</a></td>
+                            <td class=pr><a href="http://gouwu.hao123.com/?tn=kuzhan2" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr>
+                            <td class=pl><a href="http://shouji.hao123.com/?tn=kuzhan1" target="_blank">手机</a></td>
+                            <td class="r30"><a href="http://www.zol.com.cn/" target="_blank">中关村在线</a></span><a
+                                    href="http://mobile.pconline.com.cn/" target="_blank">太平洋手机</a></span><a
+                                    href="http://www.ithome.com/" target="_blank">IT之家</a></span><a
+                                    href="http://www.mi.com/" target="_blank">小米官网</a></span><a
+                                    href="http://www.zealer.com/" target="_blank">zealer测评</a></span><span
+                                    class="connect"><a href="http://www.10086.cn/" target="_blank">移动</a><span
+                                    class="dot">&#8226;</span><a
+
+                                    href="http://www.10010.com/" target="_blank">联通</a><span
+                                    class="dot">&#8226;</span><a href="http://www.189.cn/" target="_blank">电信</a></td>
+                            <td class=pr><a href="http://shouji.hao123.com/?tn=kuzhan1" target="_blank">更多>></a></td>
+                        </tr>
+
+
+                        <tr class=ry>
+                            <td class=pl><a href="http://music.hao123.com/" target="_blank">音乐</a></td>
+                            <td class="r30"><a href="http://music.baidu.com/" target="_blank">百度音乐</a><a
+                                    href=http://www.1ting.com/ target=_blank>一听音乐</a><a href="http://www.kugou.com/"
+                                                                                        target="_blank">酷狗音乐</a><a
+                                    href="http://www.kuwo.cn/" target="_blank">酷我音乐</a><a href="http://y.qq.com/"
+                                                                                          target="_blank">QQ音乐</a><a
+                                    href="http://music.hao123.com/tag/%E7%BB%8F%E5%85%B8%E8%80%81%E6%AD%8C"
+                                    target="_blank">经典老歌</a><a href="http://music.163.com/" target="_blank">网易云音乐</a>
+                            </td>
+                            <td class=pr><a href="http://music.hao123.com/" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr>
+                            <td class=pl><a href="http://www.hao123.com/shequ" target="_blank">社交</a></td>
+                            <td class="r30"><a href="http://tieba.baidu.com/" target="_blank">百度贴吧</a><a
+                                    href="http://www.tianya.cn/" target="_blank">天涯社区</a><a
+                                    href="http://www.jiayuan.com/" target=_blank>世纪佳缘</a><a
+                                    href=http://www.zhenai.com/ target=_blank>珍爱网</a><a href="http://www.baihe.com/"
+                                                                                        target="_blank">百合网</a><a
+                                    href="http://www.6.cn/" target="_blank">六间房秀场</a><a
+                                    href="http://www.hao123.com/video/live" target="_blank">美女秀场</a></td>
+                            <td class=pr><a href="http://www.hao123.com/shequ" target="_blank">更多>></a></td>
+                        </tr>
+
+
+                        <tr class=ry>
+                            <td class=pl><a href="http://go.hao123.com/" target="_blank">旅游</a></td>
+                            <td class="r30"><a
+                                    href="http://u.ctrip.com/union/CtripRedirect.aspx?TypeID=2&Allianceid=1630&sid=924228&OUID=&jumpUrl=http://www.ctrip.com/"
+                                    target="_blank">携程网</a><a href="https://www.qunar.com/?ex_track=auto_58c1128c"
+                                                              target="_blank">去哪儿</a><a href="http://www.qyer.com/"
+                                                                                        target="_blank">穷游网</a><a
+                                    href="http://www.mafengwo.cn/" target="_blank">蚂蜂窝</a><a
+                                    href="https://www.alitrip.com/" target="_blank">飞猪旅行</a></span><span
+                                    class="connect"><a href="http://go.hao123.com/flight?tn=kuzhan1"
+                                                       target="_blank">机票</a><span class="dot">&#8226;</span><a
+
+                                    href="http://go.hao123.com/hotel?tn=kuzhan1" target="_blank">酒店</a><span
+                                    class="dot">&#8226;</span><a href="http://go.hao123.com/train?tn=kuzhan1"
+                                                                 target="_blank">火车票</a></td>
+                            <td class=pr><a href="http://go.hao123.com/" target="_blank">更多>></a></td>
+                        </tr>
+
+                        <tr>
+                            <td class=pl><a href="http://life.hao123.com/?tn=kuzhan" target="_blank">生活</a></td>
+                            <td class="r30"><a href="http://www.baixing.com/" target="_blank">百姓网</a><a
+                                    href="http://www.ganji.com/" target="_blank">赶集网</a><a href="http://www.fang.com/"
+                                                                                           target=_blank>房天下</a><a
+                                    href="http://life.hao123.com/?tn=kuzhan_site&searchTab=kuaidi"
+                                    target="_blank">查快递</a><a href="http://life.hao123.com/jiaotong/?tn=kuzhan_site"
+                                                              target="_blank">交通违章</a></span><a
+                                    href="http://www.jxedt.com/" target="_blank">驾校一点通</a></span><a
+                                    href="http://www.lianjia.com/" target=_blank>链家网</a></td>
+                            <td class=pr><a href="http://life.hao123.com/?tn=kuzhan" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr class=ry>
+                            <td class=pl><a href="http://www.hao123.com/auto" target="_blank">汽车</a></td>
+                            <td class="r30"><a href="http://www.autohome.com.cn/" target="_blank">汽车之家</a><a
+                                    href="http://www.pcauto.com.cn/" target="_blank">太平洋汽车</a><a
+                                    href="http://www.bitauto.com/" target=_blank>易车网</a><a
+                                    href="http://auto.sina.com.cn/" target="_blank">新浪汽车</a><a
+                                    href="http://che.hao123.com/?tn=kuzhan" target="_blank">精选二手车</a><a
+                                    href="http://www.hao123.com/auto" target="_blank">汽车大全</a></td>
+                            <td class=pr><a href="http://www.hao123.com/auto" target="_blank">更多>></a></td>
+                        </tr>
+
+                        <tr>
+                            <td class=pl><a href="http://www.hao123.com/stocknew">财经</a></td>
+                            <td class="r30"><a href="http://www.eastmoney.com/" target="_blank">东方财富</a><a
+                                    href="http://finance.sina.com.cn/" target="_blank">新浪财经</a><a
+                                    href="http://finance.ifeng.com/" target=_blank>凤凰财经</a><a
+                                    href="http://www.stockstar.com/" target="_blank">证券之星</a><a
+                                    href="http://www.cnfol.com/" target="_blank">中金在线</a><a href="http://www.hexun.com/"
+                                                                                            target="_blank">和讯网</a><a
+                                    href="http://www.jrj.com.cn/" target="_blank">金融界</a></td>
+                            <td class=pr><a href="http://www.hao123.com/stocknew" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr class=ry>
+                            <td class=pl><a href="http://www.hao123.com/bank" target="_blank">银行</a></td>
+                            <td class="r30"><a href="http://www.icbc.com.cn/" target="_blank">工商银行</a><a
+                                    href="http://www.ccb.com/" target="_blank">建设银行</a><a
+                                    href="http://www.cmbchina.com/" target=_blank>招商银行</a><a
+                                    href="http://www.abchina.com/" target="_blank">农业银行</a><a href="http://www.boc.cn/"
+                                                                                              target="_blank">中国银行</a><a
+                                    href="http://www.bankcomm.com/" target="_blank">交通银行</a><a
+                                    href="https://www.alipay.com/" target="_blank">支付宝</a></td>
+                            <td class=pr><a href="http://www.hao123.com/bank" target="_blank">更多>></a></td>
+                        </tr>
+
+                        <tr>
+                            <td class=pl><a href="http://www.hao123.com/zhaopin" target="_blank">招聘</a></td>
+                            <td class="r20"><a href="http://www.zhaopin.com/" target="_blank">智联招聘</a><a
+                                    href="http://www.51job.com/" target=_blank>前程无忧</a><a href="http://www.chinahr.com/"
+                                                                                          target="_blank">中华英才网</a><a
+                                    href="https://www.liepin.com/" target=_blank>猎聘网</a><a
+                                    href="http://www.yingjiesheng.com/" target=_blank>应届生求职网</a><a
+                                    href="https://www.lagou.com/" target="_blank">拉勾网</a></td>
+                            <td class=pr><a href="http://www.hao123.com/zhaopin" target="_blank">更多>></a></td>
+                        </tr>
+
+                        <tr class=ry>
+                            <td class=pl><a href="http://www.hao123.com/bank" target="_blank">软件</a></td>
+                            <td class="r30">
+                                <a href="http://www.duote.com">多特</a>
+                                <a href="http://www.pc6.com/" style="color:#34ADFF;">PC6</a>
+                                <a href="http://www.orsoon.com/">未来</a>
+                                <a href="http://www.52z.com/">飞翔</a>
+                                <a href="http://www.mydrivers.com/">驱动之家</a>
+                                <a href="http://www.xiazaiba.com/" style="color:#1BB000;">下载吧</a>
+                                <a href="http://www.appinn.com/">小众</a>
+                            </td>
+                            <td class=pr><a href="http://soft.hao123.com/" target="_blank">更多>></a></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
+    <div style="clear:both;">
+    </div>
+    <div id="footer" align="center">
 
-
-    <div id="footer">
-
-<!-- 底角备用  -->
-
-	
-	
-<script type="text/javascript" src="/123/public/home/js/config.js"></script>
-<script type="text/javascript" src="/123/public/home/js/main.js"></script>
-<script type="text/javascript">
-    try{
-		if(window.SR){
-			SR.SearchData = {
-                                    engine_4: {
-						action: "http://www.baidu.com/s",
-						name: "wd",
-						btn: "百度一下",
-						img: ["百度","static/images/s/baidu.gif"],
-						url: "http://www.baidu.com",
-						params: {
-							ie:'utf8'
-						}
-                    },
-                                    engine_16: {
-						action: "http://mp3.baidu.com/m",
-						name: "word",
-						btn: "搜 索",
-						img: ["百度mp3","static/images/s/mp3.gif"],
-						url: "http://mp3.baidu.com/m?ie=utf-8&ct=134217728&word=",
-						params: {
-							f: "ms",
-ct: "134217728",
-ie:'utf-8'
-						}
-                    },
-                                    engine_18: {
-						action: "http://image.baidu.com/i",
-						name: "word",
-						btn: "搜 索",
-						img: ["百度图片","static/images/s/pic.gif"],
-						url: "http://image.baidu.com/",
-						params: {
-							ct: "201326592",
-cl: "2",
-pv: "",
-lm: "-1",
-ie:'utf-8'
-						}
-                    },
-                                    engine_28: {
-						action: "http://v.115.com/",
-						name: "q",
-						btn: "搜 索",
-						img: ["115影视","static/images/s/115.gif"],
-						url: "http://v.115.com",
-						params: {
-							
-						}
-                    },
-                                    engine_29: {
-						action: "http://news.baidu.com/ns",
-						name: "word",
-						btn: "搜 索",
-						img: ["百度新闻","static/images/s/news.gif"],
-						url: "http://news.baidu.com/",
-						params: {
-							ie:'utf8'
-						}
-                    },
-                                    engine_31: {
-						action: "http://zhidao.baidu.com/q",
-						name: "word",
-						btn: "百度一下",
-						img: ["百度一下","static/images/s/zhidao.gif"],
-						url: "http://zhidao.baidu.com/q?pt=ylmf_ik",
-						params: {
-							tn: "ikaslist",
-ct: "17",
-pt: "ylmf_ik",
-ie:'utf8'
-						}
-                    },
-                                    engine_32: {
-						action: "http://map.baidu.com/m",
-						name: "word",
-						btn: "百度一下",
-						img: ["百度地图","static/images/s/baidu.gif"],
-						url: "http://map.baidu.com/",
-						params: {
-							ie:'utf8'
-						}
-                    },
-                                    engine_13: {
-						action: "http://www.google.com.hk/search",
-						name: "q",
-						btn: "谷歌搜索",
-						img: ["谷歌","static/images/s/google.gif"],
-						url: "http://www.google.com.hk/webhp?prog=aff&client=pub",
-						params: {
-							client:'pub-0194889602661524',
-channel :'2000040001',
-forid :'1',
-prog :'aff',
-hl :'zh-CN',
-source :'sdo_sb_html',
-ie:'utf8'
-						}
-                    },
-                                    engine_17: {
-						action: "http://video.baidu.com/v",
-						name: "word",
-						btn: "百度视频",
-						img: ["百度视频","static/images/s/video.gif"],
-						url: "http://video.baidu.com/",
-						params: {
-							ct:'301989888',
-rn:'20',
-pn:'0',
-db:'0',
-s:'0',
-fbl:'800',
-ie:'utf-8'
-						}
-                    },
-                                    engine_21: {
-						action: "http://ditu.google.cn/maps",
-						name: "q",
-						btn: "搜 索",
-						img: ["谷歌地图","static/images/s/google.gif"],
-						url: "http://ditu.google.cn/",
-						params: {
-							ie:'utf8'
-						}
-                    },
-                                    engine_24: {
-						action: "http://www.google.cn/music/search",
-						name: "q",
-						btn: "搜 索",
-						img: ["谷歌","static/images/s/google.gif"],
-						url: "http://www.google.cn/music/homepage",
-						params: {
-							aq: "f",
-ie: "utf8",
-oe: "utf8",
-hl: "zh-CN"
-						}
-                    },
-                                    engine_26: {
-						action: "http://images.google.com.hk/images",
-						name: "q",
-						btn: "搜 索",
-						img: ["谷歌","static/images/s/google.gif"],
-						url: "http://images.google.com.hk/imgcat/imghp?hl=zh-CN",
-						params: {
-							gbv: "2",
-source: "hp",
-hl: "zh-CN",
-ie:'utf8'
-						}
-                    },
-                                    engine_33: {
-						action: "http://news.google.com.hk/news/search",
-						name: "q",
-						btn: "搜 索",
-						img: ["谷歌","static/images/s/google.gif"],
-						url: "http://news.google.com.hk/",
-						params: {
-							ie:'utf8'
-						}
-                    },
-                                    engine_23: {
-						action: "http://cgi.music.soso.com/fcgi-bin/m.q",
-						name: "w",
-						btn: "搜 索",
-						img: ["搜搜mp3","static/images/s/soso.gif"],
-						url: "http://music.soso.com/?cid=union.s.wh",
-						params: {
-							unc: "s200000_7",
-cid: "union.s.wh",
-ie:'utf-8'
-						}
-                    },
-                                    engine_25: {
-						action: "http://www.google.com.hk/search",
-						name: "q",
-						btn: "搜 索",
-						img: ["谷歌","static/images/s/google.gif"],
-						url: "http://www.google.com.hk/videohp",
-						params: {
-							tbo: "p",
-tbs: "vid:1",
-source: "vgc",
-ie:'utf8'
-						}
-                    },
-                                    engine_34: {
-						action: "http://www.amazon.cn/search/search.asp",
-						name: "searchWord",
-						btn: "搜 索",
-						img: ["卓越","static/images/s/joyo.gif"],
-						url: "http://www.amazon.cn/",
-						params: {
-							
-						}
-                    },
-                                    engine_27: {
-						action: "http://news.soso.com/n.q",
-						name: "w",
-						btn: "搜 索",
-						img: ["搜搜新闻","static/images/s/soso.gif"],
-						url: "http://news.soso.com/?cid=union.s.wh",
-						params: {
-							cid: "union.s.wh",
-ie:'utf-8'
-						}
-                    },
-                                    engine_36: {
-						action: "http://www.sogou.com/sogou",
-						name: "query",
-						btn: "搜狗搜索",
-						img: ["搜狗","static/images/s/sogou.gif"],
-						url: "http://www.sogou.com/index.php?pid=sogou-site-cdf1035c34ec3802",
-						params: {
-							pid:'sogou-site-cdf1035c34ec3802'
-						}
-                    },
-                                    engine_22: {
-						action: "http://www.soso.com/q",
-						name: "w",
-						btn: "搜 索",
-						img: ["SOSO","static/images/s/soso.gif"],
-						url: "http://www.soso.com/?unc=s200000_7&cid=union.s.wh",
-						params: {
-							unc: "s200000_7",
-cid: "union.s.wh",
-ie:'utf-8'
-						}
-                    },
-                				none:{}
-            }	
-		}
-		
-		var sbBox = document.getElementById('sb');
-		var sbForms = sbBox.getElementsByTagName('form');
-		for(var i = 0,len = sbForms.length; i < len; i++){
-			sbForms[i].reset();
-		}
-		
-		var sbRadios = sbBox.getElementsByTagName('input');
-		var inputTxtArr = [];
-		if(sbRadios.length){
-			var setRadios = [];
-			for(var i = 0,len = sbRadios.length; i < len; i++){
-				var input = sbRadios[i];
-				if(input.getAttribute("rad") && input.checked){
-					setRadios.push(input);
-				}
-				else if(input.getAttribute("rel") == "kw"){
-					var key = inputTxtArr.push(input);
-					input.setAttribute("index",key - 1);
-					
-				}
-			}
-			try{
-			for(var i = 0,len = setRadios.length; i < len; i++){
-				var input = setRadios[i];
-				
-				SR.RadioMod.ClickRadio(input);
-			}
-			}catch(e){}
-		}
-	}catch(e){}
-    </script>
-
-	<!-- 
-<div class="tongji"><script src="http://s4.cnzz.com/z_stat.php?id=1257362837&web_id=1257362837" language="JavaScript"></script></div>
-
-
-basic scripts		
-
-
- -->
-<!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(["setDomains", ["*.bookfuns.com"]]);
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//bookfuns.com/plugins/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '1']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//bookfuns.com/plugins/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
-
+    </div>
+</div>
+    <script src="http://site.baidu.com/pub/js/sug.js?v=1.0.4"></script>
 
 </body>
 </html>
-<!--作废代码-->
-<!--以图片调用任务
-<img src="../task/index.php" style="width:0px; height:0px;display:none;" />
--->
