@@ -97,6 +97,30 @@
         "simple": 0,
         "resize": 1
     },
+	"github": {
+        "type": "app",
+        "content": "window.open('https:\/\/github.com');",
+        "group": "code",
+        "name": "github",
+        "desc": "",
+        "icon": "https:\/\/github.com\/apple-touch-icon.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1
+    },
+		"TaoCode": {
+        "type": "app",
+        "content": "window.open('http://code.taobao.org');",
+        "group": "code",
+        "name": "TaoCode",
+        "desc": "",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/03/29/4/110_bbbc612d41464e70dbac40899e940fe2_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1
+    },
     "tool.lu": {
         "type": "url",
         "content": "http:\/\/tool.lu\/",
@@ -469,18 +493,7 @@
         "simple": 0,
         "resize": 1
     },
-    "github": {
-        "type": "app",
-        "content": "window.open('https:\/\/github.com');",
-        "group": "code",
-        "name": "github",
-        "desc": "",
-        "icon": "https:\/\/github.com\/apple-touch-icon.png",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1
-    },
+
     "七牛云": {
         "type": "app",
         "content": "window.open('http:\/\/www.qiniu.com\/');",
