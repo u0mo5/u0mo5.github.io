@@ -926,6 +926,18 @@
         "simple": 0,
         "resize": 1
     },
+	"腾讯企业邮箱": {
+        "type": "app",
+        "content": "window.open('https://exmail.qq.com/');    ",
+        "group": "office",
+        "name": "腾讯企业邮箱",
+        "desc": "",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/11/01/11/110_ec1afa303f8daea28e7c22054b8be82c_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1
+    },
     "起点中文": {
         "type": "app",
         "content": "window.open('http:\/\/www.qidian.com')",
