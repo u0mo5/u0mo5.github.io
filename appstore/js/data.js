@@ -1726,6 +1726,19 @@
         "resize": 1,
         "undefined": 0
     },
+		"camera360": {
+        "type": "app",
+        "content": "window.open('http://web.camera360.com/');",
+        "group": "tools",
+        "name": "camera360",
+        "desc": "camera360",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/11/22/7/110_7ad2a160513af31606c0d9a9ced9727e_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
 	    "人人都是产品经理": {
         "type": "app",
         "content": "window.open('http://www.woshipm.com/');",
