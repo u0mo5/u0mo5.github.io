@@ -12,6 +12,18 @@
         "simple": 0,
         "resize": 1
     },
+	    "盛名时刻表": {
+        "type": "app",
+        "content": "window.open('http://smskb.com/')",
+        "group": "life",
+        "name": "盛名时刻表",
+        "desc": "",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/05/26/5/2_fe4ff53207f0b39538048d2310091922_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1
+    },
     "百度地图": {
         "type": "url",
         "content": "http:\/\/map.baidu.com\/",
