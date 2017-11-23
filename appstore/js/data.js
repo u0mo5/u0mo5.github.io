@@ -208,7 +208,7 @@
     "美图秀秀": {
         "type": "url",
         "content": "http:\/\/xiuxiu.web.meitu.com\/baidu\/",
-        "group": "life",
+        "group": "tools",
         "name": "美图秀秀",
         "desc": "",
         "icon": "http:\/\/mshopimg4.meitudata.com\/56373fabc52f380458.png",
@@ -265,11 +265,11 @@
         "simple": 0,
         "resize": 1
     },
-    "Docs": {
+    "Office365": {
         "type": "app",
-        "content": "window.open('https:\/\/docs.com\/zh-cn');",
+        "content": "window.open('https://www.office.com/zh-cn');",
         "group": "office",
-        "name": "Docs",
+        "name": "Office365",
         "desc": "",
         "icon": "http:\/\/c.s-microsoft.com\/en-us\/CMSImages\/office_symbol.png?version=8a3d8983-7b8d-c5b3-875b-504f8b2d0fa2",
         "width": "800",
@@ -469,6 +469,18 @@
         "simple": 0,
         "resize": 1
     },
+	"有道翻译": {
+        "type": "app",
+        "content": "window.open('http://fanyi.youdao.com/')",
+        "group": "office",
+        "name": "有道翻译",
+        "desc": "",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/11/21/3/110_4961b3115019d820b22fc11d33244c38_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1
+    },
     "今日头条": {
         "type": "app",
         "content": "window.open('http:\/\/toutiao.com\/')",
@@ -590,18 +602,6 @@
         "simple": 0,
         "resize": 1
     },
-    "电子宠物（松鼠）": {
-        "type": "url",
-        "content": ".\/plugins\/pet\/hamster.swf",
-        "group": "life",
-        "name": "电子宠物（松鼠）",
-        "desc": "",
-        "icon": "oexe.png",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1
-    },
     "时钟": {
         "type": "url",
         "content": "plugins\/clock",
@@ -689,7 +689,7 @@
     "好照片": {
         "type": "url",
         "content": "http:\/\/www.haozhaopian.com\/flash\/",
-        "group": "life",
+        "group": "tools",
         "name": "好照片",
         "desc": "好照片",
         "icon": "http:\/\/img5sw.baidu.com\/soft\/de\/14298\/96aad1605724251883397b1c44d08c38.png?version=338873066",
@@ -725,7 +725,7 @@
     "PS": {
         "type": "url",
         "content": "http:\/\/www.webps.cn\/",
-        "group": "life",
+        "group": "tools",
         "name": "PS",
         "desc": "PS",
         "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/f\/b5\/510ba2ae2df4ffeecace365284f0ab5f_68_68.png",
@@ -1013,7 +1013,7 @@
     "百度脑图": {
         "type": "app",
         "content": "window.open(\"http:\/\/naotu.baidu.com\/\");    ",
-        "group": "tools",
+        "group": "office",
         "name": "百度脑图",
         "desc": "",
         "icon": "http:\/\/img5sw.baidu.com\/soft\/3b\/15140\/39cd3bc720c08f2be94b09c46253a93d.png?version=482057557",
@@ -1733,6 +1733,19 @@
         "name": "camera360",
         "desc": "camera360",
         "icon": "http://android-artworks.25pp.com/fs08/2017/11/22/7/110_7ad2a160513af31606c0d9a9ced9727e_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
+	"幕布": {
+        "type": "app",
+        "content": "window.open('https://mubu.com/');",
+        "group": "office",
+        "name": "幕布",
+        "desc": "幕布",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/11/10/11/1_7b8d853be286c54fd708d4aebb1b8117_con_130x130.png",
         "width": "800",
         "height": "600",
         "simple": 0,
