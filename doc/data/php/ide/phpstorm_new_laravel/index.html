@@ -1,0 +1,72 @@
+<p>
+    在使用Laravel框架前，要先做一些准备工作。这也是我这几天折腾出来的心得。
+</p>
+<h1>
+    1️⃣安装Composer
+</h1>
+<p>
+    这个非常简单，通过PhpStorm很容易办到。<br/>打开PhpStorm的设置<strong>⌘+,</strong>找到<strong>Languages&amp;Frameworks-&gt;PHP</strong>目录下的<strong>Composer</strong>，先配置好PHP所在目录，然后点击<em>Click here to download from get composer.org</em>，PhpStorm就会自动为你安装Composer。<br/>
+</p>
+<div class="image-package imagebubble" widget="ImageBubble">
+    <img src="http://upload-images.jianshu.io/upload_images/3127883-0d1bb4592f9b908b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/3127883-0d1bb4592f9b908b.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"/><br/>
+    <div class="image-caption"></div>
+</div>
+<h1>
+    2️⃣安装Node.js
+</h1>
+<p>
+    打开<a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a>，下载node.js，然后直接运行安装即可。<br/>接下来打开PhpStorm配置Node.js。打开PhpStorm的设置<strong>⌘+,</strong>找到<strong>Languages&amp;Frameworks</strong>目录下的<strong>Node.js and NPM</strong>，配置一下Node.js和NPM包的所在位置。<br/>
+</p>
+<div class="image-package imagebubble" widget="ImageBubble">
+    <img src="http://upload-images.jianshu.io/upload_images/3127883-3f5d25476aa2f8b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/3127883-3f5d25476aa2f8b2.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"/><br/>
+    <div class="image-caption"></div>
+</div>
+<h1>
+    3️⃣使用PhpStorm创建Laravel项目。
+</h1>
+<div class="image-package imagebubble" widget="ImageBubble">
+    <img src="http://upload-images.jianshu.io/upload_images/3127883-60239f00e8e3d049.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/3127883-60239f00e8e3d049.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"/><br/>
+    <div class="image-caption"></div>
+</div>
+<h6>
+    创建新项目
+</h6>
+<div class="image-package imagebubble" widget="ImageBubble">
+    <img src="http://upload-images.jianshu.io/upload_images/3127883-bfc7e7d5287bb6c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/3127883-bfc7e7d5287bb6c0.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"/><br/>
+    <div class="image-caption"></div>
+</div>
+<h6>
+    选择<em>Composer Project</em>，在<em>Filter packages</em>中输入<strong>laravel/laravel</strong>，在<em>Available packages</em>中选中，然后点击<em>Create</em>创建项目。
+</h6>
+<div class="image-package imagebubble" widget="ImageBubble">
+    <img src="http://upload-images.jianshu.io/upload_images/3127883-68624214bcd7277c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/3127883-68624214bcd7277c.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"/><br/>
+    <div class="image-caption"></div>
+</div>
+<h6>
+    创建完成后，点击Gulp，系统会提示你<em>&quot;Failed to list tasks&quot;</em>。运行Gulp会得到如下结果：
+</h6>
+<div class="image-package imagebubble" widget="ImageBubble">
+    <img src="http://upload-images.jianshu.io/upload_images/3127883-ec7ab0993fab9191.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/3127883-ec7ab0993fab9191.png?imageMogr2/auto-orient/strip%7CimageView2/2" class="imagebubble-image"/><br/>
+    <div class="image-caption"></div>
+</div>
+<h6>
+    发现问题，那就解决问题喽。
+</h6>
+<h6>
+    先在<strong>终端Terminal</strong>输入<code>node -v</code>检查一下Node.js的版本，然后再输入<code>sudo npm install --global gulp</code>安装Gulp，再输入<code>npm install</code>。
+</h6>
+<h6>
+    安装完成后，运行一下<em>Gulp</em>发现已经可以运行了。
+</h6>
+<h1>
+    💏Boys&amp;Girls让我们开始PHP的开发吧～
+</h1>
+<p>
+    <br/><br/>
+</p>
+<div>
+    文／星痕_Destiny（简书作者）<br/>原文链接：http://www.jianshu.com/p/65be895cfa81<br/>著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。
+</div>
+<p>
+    <br/>
+</p>

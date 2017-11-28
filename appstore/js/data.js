@@ -689,7 +689,7 @@
     "好照片": {
         "type": "url",
         "content": "http:\/\/www.haozhaopian.com\/flash\/",
-        "group": "tools",
+        "group": "image",
         "name": "好照片",
         "desc": "好照片",
         "icon": "http:\/\/img5sw.baidu.com\/soft\/de\/14298\/96aad1605724251883397b1c44d08c38.png?version=338873066",
@@ -725,7 +725,7 @@
     "PS": {
         "type": "url",
         "content": "http:\/\/www.webps.cn\/",
-        "group": "tools",
+        "group": "image",
         "name": "PS",
         "desc": "PS",
         "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/f\/b5\/510ba2ae2df4ffeecace365284f0ab5f_68_68.png",
@@ -1001,7 +1001,7 @@
     "图片压缩": {
         "type": "app",
         "content": "window.open('http:\/\/www.atool.org\/image-resize.php');",
-        "group": "tools",
+        "group": "image",
         "name": "图片压缩",
         "desc": "",
         "icon": "http:\/\/www.atool.org\/favicon.ico",
@@ -1121,7 +1121,7 @@
     "网页设计颜色代码表": {
         "type": "app",
         "content": "window.open('plugins\/color');",
-        "group": "tools",
+        "group": "image",
         "name": "网页设计颜色代码表",
         "desc": "",
         "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/1\/24\/7775bbea0b02484f485084f6fbbbf241_256_256.png",
@@ -1133,7 +1133,7 @@
     "tinypng": {
         "type": "app",
         "content": "window.open('https:\/\/tinypng.com\/');",
-        "group": "tools",
+        "group": "image",
         "name": "tinypng",
         "desc": "",
         "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/c\/4d\/4706f24b1ff5a8ffec282efc3cf0d4dc_68_68.png",
@@ -1169,7 +1169,7 @@
     "alloydesigner": {
         "type": "app",
         "content": "javascript:(function(){var w=window,d=w.document,b=d.body,s=d.createElement(\"script\");s.src=\"\/\/alloyteam.github.io\/AlloyDesigner\/release\/alloydesigner.js\";b.appendChild(s);})();",
-        "group": "tools",
+        "group": "image",
         "name": "alloydesigner",
         "desc": "",
         "icon": "http:\/\/alloyteam.github.io\/AlloyDesigner\/images\/eg4.png",
@@ -1430,7 +1430,7 @@
     "图标坊": {
         "type": "app",
         "content": "window.open('https:\/\/lilac.gitlab.io\/IconStudio\/');",
-        "group": "tools",
+        "group": "image",
         "name": "图标坊",
         "desc": "",
         "icon": "https:\/\/lilac.gitlab.io\/IconStudio\/favicon.ico",
@@ -1534,7 +1534,7 @@
     "Vector Magic": {
         "type": "url",
         "content": "https:\/\/zh.vectormagic.com\/",
-        "group": "tools",
+        "group": "image",
         "name": "Vector Magic",
         "desc": "转换成矢量图",
         "icon": "http://static.kodcloud.com/kod/static/4.21/images/file_icon/icon_app/vector.png",
@@ -1547,7 +1547,7 @@
     "腾讯canvas": {
         "type": "app",
         "content": "window.open(\"http:\/\/canvas.qq.com\/templates\");",
-        "group": "tools",
+        "group": "image",
         "name": "腾讯canvas",
         "desc": "在线图片设计工具",
         "icon": "http://static.kodcloud.com/kod/static/4.21/images/file_icon/icon_app/qqcanvas.png",
@@ -1612,7 +1612,7 @@
     "ProcessOn": {
         "type": "url",
         "content": "http:\/\/processon.com\/diagrams",
-        "group": "tools",
+        "group": "image",
         "name": "ProcessOn",
         "desc": "免费在线作图，实时协作",
         "icon": "http://static.kodcloud.com/kod/static/4.21/images/file_icon/icon_app/on.png",
@@ -1729,7 +1729,7 @@
 		"camera360": {
         "type": "app",
         "content": "window.open('http://web.camera360.com/');",
-        "group": "tools",
+        "group": "image",
         "name": "camera360",
         "desc": "camera360",
         "icon": "http://android-artworks.25pp.com/fs08/2017/11/22/7/110_7ad2a160513af31606c0d9a9ced9727e_con_130x130.png",

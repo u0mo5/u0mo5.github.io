@@ -1,0 +1,82 @@
+例如：
+
+复制代码
+代码如下:
+
+\\
+document.getElementById("someID").innerText("hi");
+
+\\
+如果ID为"someID"的元素不存在，我们将得到Javascript运行错误：document.getElementById("someID") is null
+\\
+正确的写法应该是：
+
+复制代码
+代码如下:
+
+\\
+obj = document.getElementById("someID"); \\
+if (obj){ \\
+obj.innerText("hi"); \\
+}
+
+\\
+那么在jQuery，我们如何判断页面元素存在与否呢？如果参照上面的传统Javascript的写法，我们第一个想到的办法一定是：
+
+复制代码
+代码如下:
+
+\\
+if ($("#someID")){ \\
+$("#someID").text("hi"); \\
+}
+
+\\
+可是这么写是不对的！因为jQuery对象永远都有返回值，所以$("someID") 总是TRUE ，IF语句没有起到任何判断作用。正确的写法应该是：
+
+复制代码
+代码如下:
+
+\\
+if ( $("#someID").length > 0 ) { \\
+$("#someID").text("hi"); \\
+}
+
+\\
+注意 ：判断某个页面元素存在与否在jQuery实际上是没有必要的，jQuery本身会忽略 对一个不存在的元素进行操作，并且不会报错。
+
+复制代码
+代码如下:
+
+\\
+$(document).ready(function(){ \\
+var value=$('#btn_delXml').length; \\
+if(value>0) \\
+{ \\
+alert('Extsts'); \\
+} \\
+else \\
+{ \\
+alert('not Extsts'); \\
+} \\
+})
+
+\\
+下面是其它说明虽然类似，但有些文字说明\\
+有的时候，要根据页面加载的内容不同而作不同的操作，这个时候，判断页面上是否存在这个元素（或对象）变得尤为重要。如果写JavaScript来实现，较为麻烦，而jQuery却能很容易的实现这个功能。
+\\
+我们知道，jQuery选择器获取页面的element时，无论element是否存在，都会返回一个对象。例如：
+\\
+var my_element = $("#element_Id" )
+\\
+此时的变量my_element就是一个对象，既然是一个对象，这个对象就具有length的属性，因此，用以下代码可以判断元素（对象）是否存在：
+
+复制代码
+代码如下:
+
+\\
+if(my_element.length>0){ \\
+alert("element is exist.");  \\
+}else{ \\
+alert("element not be found");  \\
+}

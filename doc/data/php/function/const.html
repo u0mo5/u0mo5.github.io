@@ -1,0 +1,220 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<p>
+    <span style="white-space: nowrap;">PHP_Const&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">常量 规则：&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">1 总是大写&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">2 A-Z 及 从127～255的ASCII字符&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">3 全局范围&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">4 用define函数定义&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">5 只能包含标量数据 如Boolean integer float string&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">6 前面不可加美元符&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">PHP自带常量=特殊常量&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">不区分大小写&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">_LINE_ &nbsp; &nbsp; &nbsp; &nbsp;文件中的当前行号&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">_FILE_ &nbsp; &nbsp; &nbsp; &nbsp;文件的完整路径+文件名&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">_FUNCTION_ &nbsp; &nbsp;函数名称&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">_CLASS_ &nbsp; &nbsp; &nbsp; &nbsp;类名称&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">_METHOD_ &nbsp; &nbsp;类的方法名&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">_LINE_&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">php脚本行数 如果引用文件 则在引用文件内的该常量为被引用文件的行&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">而非引用文件的行 即向下传递&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">_FILE_&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">原理同上</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">define部分：&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">宏不仅可以用来代替常数值，还可以用来代替表达式，甚至是代码段。</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">（宏的功能很强大，但也容易出错，所以其利弊大小颇有争议。）</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">宏的语法为：&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">#define 宏名称 宏值&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">作为一种建议和一种广大程序员共同的习惯，宏名称经常使用全部大写的字母。</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">利用宏的优点：&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">1)让代码更简洁明了&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">当然，这有赖于你为宏取一个适当的名字。一般来说，宏的名字更要注重有明确直观的意义，有时宁可让它长点。&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">2)方便代码维护&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">对宏的处理，在编译过程中称为“预处理”。</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">也就是说在正式编译前，编译器必须先将代码出现的宏，用其相应的宏值替换，这个过程有点像你我在文字处理软件中的查找替换。所以在代码中使用宏表达常数，归根结底还是使用了立即数，并没有明确指定这个量的类型。&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">const部分&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">常量定义的格式为：&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">const 数据类型 常量名 = 常量值;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">常量必须一开始就指定一个值，然后，在以后的代码中，我们不允许改变此常量的值。&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">两者之间的区别：&nbsp;</span>
+</p>
+<p>
+    <span style="white-space: nowrap;">1 内存空间的分配上。</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">define进行宏定义的时候，不会分配内存空间，编译时会在main函数里进行替换，只是单纯的替换，不会进行任何检查,</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">比如类型，语句结构等，即宏定义常量只是纯粹的置放关系，如#define null 0；</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">编译器在遇到null时总是用0代替null它没有数据类型（还有疑问请找C语言书籍看预处理部分或者看MSDN.</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">const定义的常量 具有数据类型，</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">定义数据类型的常量便于编译器进行数据检查，使程序可能出现错误进行排查,</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">所以const与define之间的区别在于</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">const定义常量排除了程序之间的不安全性.</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">define定义全局常量，在任何地方都可以访问</span>
+</p>
+<p>
+    <span style="white-space: nowrap;"><br/></span>
+</p>
+<p>
+    <span style="white-space: nowrap;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const用于类成员变量定义,只能用类名访问不能更改</span>
+</p>
+<p>
+    <br/>
+</p>
