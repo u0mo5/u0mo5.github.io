@@ -7,3 +7,4 @@
 * [slim](PHP:framework:slim:index)  
 * [swoole](PHP:framework:swoole:index)  
 * [workerman](PHP:framework:workerman:index)  
+* [php-resque](PHP:framework:php-resque:index)  
