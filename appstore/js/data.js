@@ -1597,8 +1597,21 @@
         "undefined": 0
     },
     "一起写office": {
-        "type": "url",
-        "content": "https:\/\/yiqixie.com\/d\/home",
+        "type": "app",
+        "content": "window.open('https://yiqixie.com');",
+        "group": "tools",
+        "name": "一起写office",
+        "desc": "在线协作office",
+        "icon": "http://static.kodcloud.com/kod/static/4.21/images/file_icon/icon_app/yiqixie.png",
+        "width": "90%",
+        "height": "80%",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
+	"uzer.me": {
+        "type": "app",
+        "content": "window.open('https://uzer.me');",
         "group": "tools",
         "name": "一起写office",
         "desc": "在线协作office",
@@ -1610,8 +1623,8 @@
         "undefined": 0
     },
     "ProcessOn": {
-        "type": "url",
-        "content": "http:\/\/processon.com\/diagrams",
+        "type": "app",
+        "content": "window.open('http://processon.com/diagrams');",
         "group": "image",
         "name": "ProcessOn",
         "desc": "免费在线作图，实时协作",
@@ -1624,7 +1637,7 @@
     },
     "石墨文档": {
         "type": "url",
-        "content": "https:\/\/shimo.im\/desktop",
+        "content": "window.open('https://shimo.im/desktop');",
         "group": "office",
         "name": "石墨文档",
         "desc": "shimo",
