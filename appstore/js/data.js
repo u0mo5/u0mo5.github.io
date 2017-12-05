@@ -1258,6 +1258,19 @@
         "resize": 1,
         "undefined": 0
     },
+    "百度企业信用": {
+        "type": "app",
+        "content": "window.open('https://xin.baidu.com/');",
+        "group": "life",
+        "name": "百度企业信用",
+        "desc": "",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/08/14/5/2_c4a7cedffaee120c6dab77fb1c3f9090_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
     "沈阳医疗保险": {
         "type": "app",
         "content": "window.open('http:\/\/www.syyb.gov.cn\/');",
@@ -1369,6 +1382,32 @@
         "name": "快递查询",
         "desc": "快递查询",
         "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/6\/d5\/449c311e51e1d552b4ca98a35832bd56_68_68.png",
+        "width": "600",
+        "height": "420",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
+    "百度百聘": {
+        "type": "app",
+        "content": "window.open('http://zhaopin.baidu.com/');",
+        "group": "life",
+        "name": "百度百聘",
+        "desc": "",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/02/22/8/110_7215cb0db048e897e1900fa5c2caf88b_con_130x130.png",
+        "width": "600",
+        "height": "420",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
+    "BOSS": {
+        "type": "app",
+        "content": "window.open('http://www.zhipin.com/');",
+        "group": "life",
+        "name": "BOSS",
+        "desc": "",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/11/21/8/110_037d01a07b0fbbe8d3ba5d08a5dfbcc9_con_130x130.png",
         "width": "600",
         "height": "420",
         "simple": 0,
