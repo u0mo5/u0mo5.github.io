@@ -653,9 +653,15 @@
                 		        "children":[
                 		                    {
                 		                     "id":"2.3.0.8",
+                		                     "text":"datatable",
+                		                     "url":"http://www.datatables.club"
+                		                    },
+                		                    {
+                		                     "id":"2.3.0.8",
                 		                     "text":"jqgrid",
                 		                     "url":"http://www.trirand.com/blog/"
-                		                    },{
+                		                    },
+                		                    {
                 		                     "id":"2.3.0.8",
                 		                     "text":"bootstrap_table",
                 		                     "url":"http://bootstrap-table.wenzhixin.net.cn/examples"
