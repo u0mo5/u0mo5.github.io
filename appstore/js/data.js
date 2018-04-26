@@ -337,6 +337,18 @@
         "simple": 0,
         "resize": 1
     },
+    "沈阳政府网": {
+        "type": "app",
+        "content": "window.open('http://www.shenyang.gov.cn');",
+        "group": "life",
+        "name": "沈阳政府网",
+        "desc": "",
+        "icon": "http://android-artworks.25pp.com/fs08/2017/08/23/5/110_b20149365861221f194c10bdd1f7deaf_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1
+    },
     "沈阳市养老保险": {
         "type": "app",
         "content": "window.open(\"http:\/\/www.ylbxglzx.cn\/indexservlet\");",
@@ -556,7 +568,7 @@
     },
     "萌否": {
         "type": "app",
-        "content": "window.open('.\/plugins\/fm')",
+        "content": "window.open('/fm')",
         "group": "music",
         "name": "萌否",
         "desc": "",
@@ -604,7 +616,7 @@
     },
     "时钟": {
         "type": "url",
-        "content": "plugins\/clock",
+        "content": "/clock",
         "group": "life",
         "name": "时钟",
         "desc": "时钟挂件",
@@ -616,7 +628,7 @@
     },
     "天气": {
         "type": "url",
-        "content": "plugins\/weather",
+        "content": "/weather",
         "group": "life",
         "name": "天气",
         "desc": "天气预报",
@@ -734,18 +746,6 @@
         "simple": 0,
         "resize": 1
     },
-    "豆瓣电台": {
-        "type": "url",
-        "content": "http:\/\/douban.fm\/partner\/qq_plus",
-        "group": "music",
-        "name": "豆瓣电台",
-        "desc": "豆瓣电台",
-        "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/8\/ed\/afbe4cc22b93a2796c37b95675fc7ed8_68_68.png",
-        "width": "545",
-        "height": "460",
-        "simple": 0,
-        "resize": 1
-    },
     "搜狐影视": {
         "type": "url",
         "content": "http:\/\/tv.sohu.com\/upload\/sohuapp\/index.html?api_key=9ca7e3cdef8af010b947f4934a427a2c",
@@ -767,6 +767,30 @@
         "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/5\/d3\/69b48ddc8cc9e306abcb5363341a0d35_68_68.png",
         "width": "800",
         "height": "600",
+        "simple": 0,
+        "resize": 1
+    },
+    "豆瓣电台": {
+        "type": "url",
+        "content": "http:\/\/douban.fm\/partner\/qq_plus",
+        "group": "music",
+        "name": "豆瓣电台",
+        "desc": "豆瓣电台",
+        "icon": "http:\/\/img.wdjimg.com\/mms\/icon\/v1\/8\/ed\/afbe4cc22b93a2796c37b95675fc7ed8_68_68.png",
+        "width": "545",
+        "height": "460",
+        "simple": 0,
+        "resize": 1
+    },
+    "喜马拉雅FM": {
+        "type": "app",
+        "content": "window.open('http://www.ximalaya.com/explore/')",
+        "group": "music",
+        "name": "喜马拉雅FM",
+        "desc": "喜马拉雅FM",
+        "icon": "http://appimg.hicloud.com/hwmarket/files/application/icon144/d98b933b06c14e10af81346dcbeb0ba3.png",
+        "width": "545",
+        "height": "460",
         "simple": 0,
         "resize": 1
     },
@@ -855,8 +879,8 @@
         "resize": 1
     },
     "万年历": {
-        "type": "url",
-        "content": "plugins\/wannianli\/wangnianli.htm",
+        "type": "app",
+        "content": "window.open('/wannianli/wangnianli.htm');",
         "group": "life",
         "name": "万年历",
         "desc": "",
@@ -945,6 +969,18 @@
         "name": "腾讯企业邮箱",
         "desc": "",
         "icon": "http://android-artworks.25pp.com/fs08/2017/11/01/11/110_ec1afa303f8daea28e7c22054b8be82c_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1
+    },
+	"阿里企业邮箱": {
+        "type": "app",
+        "content": "window.open('https://qiye.aliyun.com/');    ",
+        "group": "office",
+        "name": "腾讯企业邮箱",
+        "desc": "",
+        "icon": "https://www.alimei.com/images/ali_youxiang.png",
         "width": "800",
         "height": "600",
         "simple": 0,
@@ -1046,6 +1082,18 @@
         "simple": 0,
         "resize": 1
     },
+    "腾讯文档": {
+        "type": "app",
+        "content": "window.open('https://docs.qq.com');",
+        "group": "office",
+        "name": "腾讯文档",
+        "desc": "",
+        "icon": "http://android-artworks.25pp.com/fs08/2018/04/18/7/110_971e46c68bb5ea50104ce0ffc4096592_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1
+    },
     "百度号码查询": {
         "type": "app",
         "content": "window.open('http:\/\/haoma.baidu.com\/query');",
@@ -1053,18 +1101,6 @@
         "name": "百度号码查询",
         "desc": "",
         "icon": "http:\/\/sjws.bdstatic.com\/static\/img\/favicon_01b8d43.ico",
-        "width": "800",
-        "height": "600",
-        "simple": 0,
-        "resize": 1
-    },
-    "打字通": {
-        "type": "app",
-        "content": "window.open('plugins\/ztype');",
-        "group": "game",
-        "name": "打字通",
-        "desc": "",
-        "icon": "oexe.png",
         "width": "800",
         "height": "600",
         "simple": 0,
@@ -1120,7 +1156,7 @@
     },
     "网页设计颜色代码表": {
         "type": "app",
-        "content": "window.open('plugins\/color');",
+        "content": "window.open('/color');",
         "group": "image",
         "name": "网页设计颜色代码表",
         "desc": "",
@@ -1455,7 +1491,7 @@
     },
     "谷歌hosts": {
         "type": "app",
-        "content": "window.open('plugins\/hosts\/google_hosts.txt');",
+        "content": "window.open('https://laod.cn/hosts/2017-google-hosts.html');",
         "group": "others",
         "name": "谷歌hosts",
         "desc": "",
@@ -1726,10 +1762,23 @@
         "resize": 1,
         "undefined": 0
     },
+    "嘀哩嘀哩": {
+        "type": "app",
+        "content": "window.open('http://www.dilidili.wang/');",
+        "group": "movie",
+        "name": "嘀哩嘀哩",
+        "desc": "嘀哩嘀哩",
+        "icon": "http://www.dilidili.wang/uploads/allimg/180207/290_1759223041.jpg",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
     "新浪微博": {
         "type": "app",
         "content": "window.open('http://weibo.com');",
-        "group": "office",
+        "group": "reader",
         "name": "新浪微博",
         "desc": "新浪微博",
         "icon": "http://7xilfp.com5.z0.glb.clouddn.com/icon/150127092430.png",
@@ -1868,6 +1917,32 @@
         "simple": 0,
         "resize": 1,
         "undefined": 0
-    }
+    },
+	    "雪球": {
+        "type": "app",
+        "content": "window.open('https://xueqiu.com/');",
+        "group": "reader",
+        "name": "雪球",
+        "desc": "雪球",
+        "icon": "http://android-artworks.25pp.com/fs08/2018/02/05/0/110_645ded2eed0e2f7a129e6501e5b5e097_con_130x130.png",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    },
+	    "TED": {
+        "type": "app",
+        "content": "window.open('https://www.ted.com/');",
+        "group": "reader",
+        "name": "TED",
+        "desc": "TED",
+        "icon": "https://pa.tedcdn.com/favicon.ico",
+        "width": "800",
+        "height": "600",
+        "simple": 0,
+        "resize": 1,
+        "undefined": 0
+    }    
 }
             };
