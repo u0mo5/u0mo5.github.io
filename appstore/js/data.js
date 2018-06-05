@@ -121,13 +121,13 @@
                         "simple": 0,
                         "resize": 1
                     },
-                    "TaoCode": {
+                    "码云": {
                         "type": "app",
-                        "content": "window.open('http://code.taobao.org');",
+                        "content": "window.open('https://gitee.com');",
                         "group": "code",
-                        "name": "TaoCode",
+                        "name": "码云",
                         "desc": "",
-                        "icon": "http://android-artworks.25pp.com/fs08/2017/03/29/4/110_bbbc612d41464e70dbac40899e940fe2_con_130x130.png",
+                        "icon": "https://gitee.com/logo_icon.png",
                         "width": "800",
                         "height": "600",
                         "simple": 0,
