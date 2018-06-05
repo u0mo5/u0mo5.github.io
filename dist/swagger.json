@@ -1,0 +1,38 @@
+{
+    "swagger": "2.0",
+    "paths": {
+        "/Api_Order/ajaxJcal": {
+            "post": {
+                "tags": [
+                    "Api_Order"
+                ],
+                "summary": "\u83b7\u53d6\u65e5\u5386\u63a5\u53e3",
+                "description": "\u83b7\u53d6\u65e5\u5386\u63a5\u53e3",
+                "parameters": [
+                    {
+                        "name": "bid",
+                        "in": "formData",
+                        "description": "\u5c0f\u9662ID",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "formData",
+                        "description": "\u8ba2\u5355ID",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "months",
+                        "in": "formData",
+                        "description": "\u6708\u4efd\uff08\u9017\u53f7\u5206\u5272\u5b57\u7b26\u4e32\uff09",
+                        "required": false,
+                        "type": "string"
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {}
+}

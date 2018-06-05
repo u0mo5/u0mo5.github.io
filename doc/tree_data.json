@@ -295,6 +295,10 @@
 		        "text":"原生JS",
 		        "url":"markdown/markdown.html"
 	            },{
+		        "id":"2.1.1",
+		        "text":"ECMAScript",
+		        "url":"http://es6.ruanyifeng.com/"
+	            },{
 	            "id":"2.2",
 		        "text":"框架",
 		        "url":"http://thinkyoung.duapp.com/public/umeditor/index.html",
@@ -327,7 +331,39 @@
                 	            },{
                 		        "id":"2.2.4",
                 		        "text":"vue.js",
-                		        "url":"http://cn.vuejs.org/"
+                		        "url":"http://cn.vuejs.org/",
+                		        "children":[
+                		                    {
+                		                     "id":"2.2.4.1",
+                		                     "text":"vuejs官网",
+                		                     "url":"http://cn.vuejs.org/"  
+                		                    },
+                		                    {
+                		                     "id":"2.2.4.2",
+                		                     "text":"vue-router",
+                		                     "url":"https://router.vuejs.org/zh-cn/"  
+                		                    },
+                		                    {
+                		                     "id":"2.2.4.3",
+                		                     "text":"vuex",
+                		                     "url":"https://vuex.vuejs.org/zh-cn/"  
+                		                    },
+                		                    {
+                		                     "id":"2.2.4.4",
+                		                     "text":"vux",
+                		                     "url":"https://vux.li/"  
+                		                    },
+                		                    {
+                		                     "id":"2.2.4.5",
+                		                     "text":"iview",
+                		                     "url":"https://www.iviewui.com/"  
+                		                    },
+                		                    {
+                		                     "id":"2.2.4.6",
+                		                     "text":"mpvue",
+                		                     "url":"http://mpvue.com/"  
+                		                    }
+                		                   ]
                 	            },{
                 		        "id":"2.2.4",
                 		        "text":"reactjs",
@@ -840,6 +876,30 @@
             	            }
 		                   
 		                   ]
+	            }
+               ]
+    },
+    {
+	"id":"997",
+	"text":"手册大全",
+	"state":"closed",
+	"children":[
+	            {
+		        "id":"997.1",
+		        "text":"MDN手册",
+		        "url":"https://developer.mozilla.org/zh-CN/"
+	            },{
+	            "id":"997.2",
+		        "text":"开源中国手册",
+		        "url":"http://tool.oschina.net/apidocs/"   
+	            },{
+	            "id":"997.2",
+		        "text":"菜鸟教程手册",
+		        "url":"http://www.runoob.com/"   
+	            },{
+	            "id":"997.3",
+		        "text":"w3school手册",
+		        "url":"http://www.w3school.com.cn"   
 	            }
                ]
     },
