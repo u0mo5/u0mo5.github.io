@@ -6,25 +6,19 @@
       "icon": "/static/img/icon/baidu.png",
       "title": "搜索引擎",
       "openType": "openLink",
-      "url":"http://bookfuns.com/so"
+      "url":"/so"
     },
     {
       "icon": "/static/img/icon/hao123.png",
       "title": "网址大全",
       "openType": "openLink",
-      "url": "http://bookfuns.com/123"
+      "url": "/123"
     },
     {
       "icon": "/static/img/icon/appstore.png",
       "title": "应用商店",
       "openType": "openLink",
-      "url": "http://bookfuns.com/appstore"
-    },
-    {
-      "icon": "/static/img/icon/toutiao.png",
-      "title": "沈阳头条",
-      "openType": "openLink",
-      "url": "http://syhot.cn"
+      "url": "/appstore"
     }
   ]
 }
