@@ -2065,7 +2065,7 @@
                         "group": "protocol",
                         "name": "【phpstudy】",
                         "desc": "【phpstudy】",
-                        "icon": "http://img.php.cn/upload/manual/000/000/001/58ab98e5a7e06382.jpg",
+                        "icon": "http://www.xiazaiba.com/uploadfiles/ico/2014/1217/thumb_48_48_2014121715293112728.png",
                         "width": "800",
                         "height": "600",
                         "simple": 0,
