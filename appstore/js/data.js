@@ -1435,6 +1435,19 @@
                         "resize": 1,
                         "undefined": 0
                     },
+                    "迅影网": {
+                        "type": "app",
+                        "content": "window.open('http://www.xunyingwang.com/');",
+                        "group": "movie",
+                        "name": "迅影网",
+                        "desc": "",
+                        "icon": "oexe.png",
+                        "width": "800",
+                        "height": "600",
+                        "simple": 0,
+                        "resize": 1,
+                        "undefined": 0
+                    },
                     "电影天堂": {
                         "type": "app",
                         "content": "window.open('http://www.dytt8.net/');",
