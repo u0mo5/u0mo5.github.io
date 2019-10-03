@@ -1,1 +1,177 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>读书圈</title><meta name=viewport content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no"><link rel=stylesheet href=/static/css/animate.css><link rel=stylesheet href=/static/css/default.css><link rel=stylesheet href=/static/font-awesome-4.7.0/css/font-awesome.min.css><script src=/static/js/jquery-2.2.4.min.js></script><script src=/static/layer-v3.0.3/layer/layer.js></script><script src=/static/config.js></script><link href=/static/css/app.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.js></script><script type=text/javascript src=/static/js/vendor.js></script><script type=text/javascript src=/static/js/app.js></script></body></html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>沈阳热搜网</title>
+<meta http-equiv="Content-Language" content="zh-CN" />
+<meta name="description" content="沈阳热搜网  最好的搜索引擎大全" />
+<meta name="keywords" content="沈阳热搜网 沈阳热搜 syhot 搜素引擎 逍遥 u0mo5" />
+<meta name="baidu-site-verification" content="2dCoAQCzZ5" />
+<link rel="shortcut icon" href="/so/style/images/favicon.ico" type="image/x-icon" />
+<link href="/so/style/search.css" rel="stylesheet" type="text/css"/>
+<!-- dock -->
+    <style type="text/css">
+        *{margin: 0;padding:0;}
+        #wrapper{position: absolute;bottom: 0;text-align: center;width: 100%;}
+    </style>
+    <script type="text/javascript">
+
+		   
+        window.onload=function(){
+           document.onmousemove=function(ev){
+               var oevent=ev||event;
+               var aimg=document.getElementsByClassName('dock');
+               var odiv=document.getElementById('wrapper');
+               for(var i=0;i<aimg.length;i++){
+                      var x=aimg[i].offsetLeft+aimg[i].offsetWidth/2;
+                      var y=aimg[i].offsetTop+odiv.offsetTop+aimg[i].offsetHeight/2;
+                      var a=x-oevent.clientX;
+                      var b=y-oevent.clientY;
+                      var dis=parseInt(Math.sqrt(a*a+b*b));
+                      var scale=1-dis/200;
+                    if(scale<0.5){
+                        scale=0.5;
+                    }
+                    aimg[i].width=scale*128;
+               }
+           }
+        }
+
+    </script>
+<!-- dock -->
+
+</head>
+<!--
+<body style="background-image:url(http://bookfuns.com/Vendor/Pic/bing.php); overflow:auto;">
+-->
+<body style="overflow:auto;">
+
+
+
+   
+    <div style="text-align:center;margin-top:15px;"><a href="/" target="_blank"><img src="/so/style/images/logo.png" title="沈阳爆款" /></a></div>
+
+	<div id="soContent" style="margin:0 auto;margin-top:15px;"></div>
+	
+	
+<!-- dock -->	
+<div id="wrapper">
+    <a href="/123" target="_blank">                     <img src="https://android-artworks.25pp.com/fs08/2016/06/07/6/1_1b6f94388b17b7de064c6b702c4b8766_con_130x130.png" class="dock" width="64"></a>
+    <a href="/appstore" target="_blank">                <img src="https://android-artworks.25pp.com/fs08/2018/06/15/2/110_3a7b858b7dac3675dc1514e7dbaeb489_con_130x130.png" class="dock" width="64"></a>
+    <a href="https://www.toutiao.com/" target="_blank"><img src="https://android-artworks.25pp.com/fs08/2018/08/23/2/110_8e04277835c4af397010c4190dd7db4f_con_130x130.png" class="dock" width="64"></a>
+    <a href="https://www.tuicool.com/" target="_blank"><img src="https://android-artworks.25pp.com/fs08/2018/04/25/10/110_d100cb3021ba688bf7a114ffa6ed5183_con_130x130.png" class="dock" width="64"></a>
+    <a href="https://www.oschina.net/" target="_blank"><img src="https://android-artworks.25pp.com/fs08/2018/08/22/10/110_a490139d1896e15d71fd6802a42c68ff_con_130x130.png" class="dock" width="64"></a>
+	<a href="https://drive.wps.cn/" target="_blank">    <img src="https://android-artworks.25pp.com/fs08/2018/08/21/6/110_3fbc7f1f9e7a03d6e28fd4751a5a940f_con_130x130.png" class="dock" width="64"></a>
+	<a href="https://mail.qq.com" target="_blank">      <img src="http://img.wdjimg.com/mms/icon/v1/3/b9/aa7113bace0efde137d84e07a4b57b93_68_68.png" class="dock" width="64"></a>
+	<a href="https://music.163.com" target="_blank">    <img src="https://android-artworks.25pp.com/fs08/2018/08/06/3/110_318564b2615402ff9b04ec253586839d_con_130x130.png" class="dock" width="64"></a>
+	<a href="http://www.iqiyi.com/" target="_blank">    <img src="http://img.wdjimg.com/mms/icon/v1/4/e4/9fcda10e0d2f260dc70069f2cbb97e44_68_68.png" class="dock" width="64"></a>
+    <a href="https://github.com/u0mo5" target="_blank"> <img src="http://android-artworks.25pp.com/fs08/2016/12/23/10/102_976343d1b2e93a3feb2fa4e5da5cce82_con_130x130.png" class="dock" width="64"></a>
+    <a href="https://gitee.com/thinkyoung" target="_blank"><img src="https://android-artworks.25pp.com/fs08/2017/09/05/1/110_7c5cd4647ddc28c2882d1802fd4da9ad_con_130x130.png" class="dock" width="64"></a>
+    <a href="https://www.aliyun.com" target="_blank">   <img src="https://android-artworks.25pp.com/fs08/2017/03/29/4/110_bbbc612d41464e70dbac40899e940fe2_con_130x130.png" class="dock" width="64"></a>
+    <a href="/doc" target="_blank">       <img src="https://android-artworks.25pp.com/fs08/2018/12/06/7/110_ef827950451ec8ee7514293f52709274_con_130x130.png" class="dock" width="64"></a>
+    <a href="/manage" target="_blank">       <img src="https://android-artworks.25pp.com/fs08/2016/06/06/9/1_c71336e5f8132a091e18b043b4eabbde_con_130x130.png" class="dock" width="64"></a>
+    <a href="http://kod.loc" target="_blank">       <img src="https://android-artworks.25pp.com/fs08/2016/06/07/3/1_09bd140025679d76ed5825350cc16490_con_130x130.png" class="dock" width="64"></a>
+    <a href="javascript:window.open('http://'+window.location.hostname+':8888')" target="_blank">       <img src="https://android-artworks.25pp.com/fs08/2018/05/14/7/110_1c3b974626eeb63954693f2b47c50afd_con.png" class="dock" width="64"></a>
+    <!--<a href="/QR" target="_blank">       <img src="https://android-artworks.25pp.com/fs08/2016/06/09/5/1_715292476292bf14a9eb5ca35b1f343d_con_130x130.png" class="dock" width="64"></a>-->
+    <a href="https://gitee.com/oauth/authorize?client_id=feec7115bb6f4b4636ecde3266ee9f00403c37649ec8113e5371c1e974a059d3&redirect_uri=http://m.loc/oauth/gitee&response_type=code" target="_blank">       <img src="https://android-artworks.25pp.com/fs08/2016/06/08/7/1_721eaef647fcc381ae568272d7c4fc13_con_130x130.png" class="dock" width="64"></a>
+    <!-- <a href="javascript:void(0)" target="_blank">       <img src="https://android-artworks.25pp.com/fs08/2017/04/19/10/2_f2b4f58de26356d626addf4b83e3a38d_con_130x130.png" class="dock" width="64"></a> -->
+</div>
+<!-- dock -->
+
+
+
+	<div style="    
+	
+	clear: both;
+    display: block;
+    text-align: center; 
+    margin: 0px auto;
+    position: absolute;
+    bottom: 100px;
+    width: 100%; font-family: '微软雅黑'; font-size: 14px;"
+    >
+	  
+
+	<h3>
+<!--	    著作权归作者所有。-->
+<!--商业转载请联系作者获得授权，非商业转载请注明出处。-->
+<!--作者：u0mo5 bookfuns.com -->
+<!--链接：//says.bookfuns.com/js.php-->
+
+
+<script type="text/javascript" src="/Front_Says/js"></script><div id="says"><script>says()</script></div>
+
+	</h3>
+
+			<br>  
+				<br>  
+
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+<div style="display:none;">		
+	  
+	  
+      <p align="center">       
+
+		<a href="/doc" target="_blank" style="color:#aaa; text-decoration:none;"><font color="RED" size=2>我的笔记</font></a>		
+		<a href="/123" target="_blank" style="color:#aaa; text-decoration:none;"><font color="RED" size=2>网址大全</font></a>	
+		<!--<a href="http://admin.bookfuns.com" target="_blank" style="color:#aaa; text-decoration:none;"><font color="blue" size=2>后台登录</font></a>-->
+		</p>
+    
+	  
+	  <p>
+      <span style="color:#aaa;">版权信息.<a href="./" target="_blank" style="color:#aaa; text-decoration:none;">逍遥</a> &copy; 2005-2018  <a href="/static/pay/alipay.jpg" target="_blank" style="color:#f00; text-decoration:none;">捐献</a></span></p>
+
+			<br>  
+<!--
+<iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=99" width="160" height="36" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+-->
+				<br>
+		
+				
+
+</div>
+<br>
+    </div>
+	<script type="text/javascript" src="/so/js/so.js"></script>
+	<script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script>
+	<script type="text/javascript">
+ 	var txtObj = document.getElementById("alertSpan");
+
+	//回调函数，用于获取用户当前选择的文字
+ 	function show(str){
+		txtObj.innerHTML = str;
+	}
+
+	var params = {
+	"XOffset":0, //提示框位置横向偏移量,单位px
+	"YOffset":0, //提示框位置纵向偏移量,单位px
+	"width":204, //提示框宽度，单位px
+	"fontColor":"#f70", //提示框文字颜色
+	"fontColorHI":"#FFF",	//提示框高亮选择时文字颜色
+	"fontSize":"12px",		//文字大小
+	"fontFamily":"宋体",	//文字字体
+	"borderColor":"gray", 	//提示框的边框颜色
+	"bgcolorHI":"#03c",		//提示框高亮选择的颜色
+	"sugSubmit":false		//在选择提示词条是是否提交表单
+	};
+
+ 	BaiduSuggestion.bind("ipt1",params,show);
+	
+</script>
+<div style=" display: none;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1274821526'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1274821526%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+<div >
+
+
+
+</body>
+</html>
