@@ -1,0 +1,10 @@
+====== 手册 ======
+  * [[http://php.net/manual/zh/|PHP官网手册]]
+  * [[http://www.w3school.com.cn/php/php_ref.asp|w3school手册]]
+  * [[http://tool.php100.com/manual.htm|PHP100手册]]
+  * [[http://tool.oschina.net/apidocs|开源中国手册]]
+  * [[http://www.apihome.cn/api/list|API之家]]
+  * [[http://www.runoob.com/|runoob]]
+
+----
+[[php:简介|简介]]

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="H5UI,移动UI组件库,H5前端,前端样式库,CSS样式库,H5UI交互设计,前端框架,UI框架,UI-framework,Mobile-front-end,CSS-framework">
+    <meta name="description" content="H5UI-简洁优雅的移动UI组件库">
+
+    <title>表单 Forms</title>
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <!-- H5UI CSS -->
+    <link rel="stylesheet" href="../css/h5ui.min.css">
+    <!-- Example CSS -->
+    <link rel="stylesheet" href="../css/example.min.css">
+
+
+
+
+</head>
+
+<body ontouchstart>
+
+<div class="h5ui-page top">
+
+
+
+
+
+
+    <!-- end [input] -->
+
+    <!-- start [cell input] -->
+    <div class="h5ui-group">
+
+        <h5 class="h5ui-group_title">
+            提交表单
+        </h5>
+
+
+
+        <div class="h5ui-form">
+            <textarea name="detail" class="h5ui-form-input h5ui-input-cell" placeholder="填写内容" rows="15"></textarea>
+        </div>
+    <p>
+        <button class="h5ui-btn h5ui-btn_primary">提交</button>
+    </p>
+    </div>
+    <!-- end [cell input] -->
+
+
+
+</div>
+
+<!-- start [轻提示] -->
+<div class="h5ui-toast" id="toast-sms">
+    <div class="h5ui-toast_backdrop"></div>
+    <div class="h5ui-toast_dialog">
+        <div class="h5ui-toast_content">
+            <span>验证码发送成功</span>
+        </div>
+    </div>
+</div>
+<!-- end [轻提示] -->
+
+<!-- Copyright -->
+<div class="example-copyright">
+    <a href="../index.html" class="flag"></a>
+</div>
+
+<!-- jQuery -->
+<script src="../js/jquery.min.js"></script>
+<!-- H5UI JS -->
+<script src="../js/h5ui.min.js"></script>
+
+<script>
+    // 发送sms Toast
+    $("#send-sms").click(function() {
+        $("#toast-sms").show().delay(2000).fadeOut();
+    });
+</script>
+
+</body>
+</html>
