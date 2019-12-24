@@ -104,7 +104,10 @@ if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
 
 
 
-<script type="text/javascript" src="/Front_Says/js"></script><div id="says"><script>says()</script></div>
+<noscript type="text/javascript" src="/Front_Says/js"></noscript>
+<div id="says">
+<noscript>says()</noscript>
+</div>
 
 	</h3>
 
@@ -168,7 +171,7 @@ if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
 	"sugSubmit":false		//在选择提示词条是是否提交表单
 	};
 
- 	BaiduSuggestion.bind("ipt1",params,show);
+ 	BaiduSuggestion.bind("web_txt",params,show);
 	
 </script>
 <div style=" display: none;">
