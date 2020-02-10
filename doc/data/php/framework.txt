@@ -1,8 +1,0 @@
-==== 框架 ====
-
-    * [[http://www.thinkphp.cn|thinkphp]]
-    * [[http://www.yiichina.com/|Yii]]
-    * [[http://codeigniter.org.cn/|CI]]
-    * [[http://www.golaravel.com/|laravel]]
-    * [[https://getcomposer.org/|composer]]
-    * [[http://www.slimphp.net/|Slim]]
