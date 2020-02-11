@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>沈阳维基百科</title>
         <style>
-        body {
+         body {
             /* 加载背景图 */
             background-image: url(https://cdn.pixabay.com/photo/2015/01/30/15/16/shenyang-617613_960_720.jpg);
             /* 背景图垂直、水平均居中 */
@@ -20,6 +20,14 @@
             /* 设置背景颜色，背景图加载过程中会显示背景色 */
             /*background-color: #FF0000;*/
         }
+@media only screen and (max-width: 767px) {
+  body {
+    background-image: url(images/background-photo-mobile-devices.jpg) no-repeat top center;
+
+}
+}
+
+
         .button {
             background-color: #AE0000;
             /* Green */
@@ -34,7 +42,7 @@
             width: 100px;
             height: 50px;
             position: absolute;
-            top: 600;
+            top: 0;
             left: 0;
             right: 0;
             bottom: 0;
