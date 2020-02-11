@@ -6,27 +6,15 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>沈阳维基百科</title>
         <style>
-         body {
-            /* 加载背景图 */
-            background-image: url(https://cdn.pixabay.com/photo/2015/01/30/15/16/shenyang-617613_960_720.jpg);
-            /* 背景图垂直、水平均居中 */
-            background-position: center center;
-            /* 背景图不平铺 */
-            background-repeat: no-repeat;
-            /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
-            background-attachment: fixed;
-            /* 让背景图基于容器大小伸缩 */
-            background-size: cover;
-            /* 设置背景颜色，背景图加载过程中会显示背景色 */
-            /*background-color: #FF0000;*/
-        }
-@media only screen and (max-width: 767px) {
-  body {
-    background-image: url(images/background-photo-mobile-devices.jpg) no-repeat top center;
 
+html, body, div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
-}
-
 
         .button {
             background-color: #AE0000;
@@ -49,9 +37,24 @@
             margin: auto;
         }
         </style>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
     </head>
     
     <body>
+        
+<div id="formbackground" style="position:absolute; z-index:-1;"><img id="formbackground-img" src="https://cdn.pixabay.com/photo/2015/01/30/15/16/shenyang-617613_960_720.jpg" height="100%" /></div>
+<script type="text/javascript">
+$(function(){
+    $('#formbackground').height($(window).height());
+    $('#formbackground').width($(window).width());
+    $('#formbackground-img').height($(window).height());
+    $('#formbackground-img').width($(window).width());
+
+
+});
+</script>
+
         <button style="" class="button" onclick="javascript:window.location.href='http://thinkyoung.gitee.io'; ">点击进入</button>
     </body>
 
