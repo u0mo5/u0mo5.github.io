@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>沈阳金店</title>
+		 <link rel="canonical" href="http://xiaomate.cn" />
+        <title>盛京小玛特</title>
+        <meta name="description" content="盛京小玛特 xiaomate.cn "/>
+        <meta name="keywords" content="盛京小玛特 xiaomate.cn "/>
+        <link rel="shortcut icon" href="favicon.ico">
         <style>
 
 html, body, div {
+    
     margin: 0;
     padding: 0;
     border: 0;
@@ -16,7 +21,13 @@ html, body, div {
     vertical-align: baseline;
 }
 
-        .button {
+        .buttons {
+text-align:center;
+vertical-align: middle;
+position:relative;
+top:600px;
+        }
+        button {
             background-color: #AE0000;
             /* Green */
             border: none;
@@ -29,33 +40,66 @@ html, body, div {
             font-size: 16px;
             width: 100px;
             height: 50px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
+
         }
         </style>
+    <div style="margin:0 auto;overflow:hidden; width:0; height: 0; display: block;">
+        <img src="/APP/shop/xiaomate/info/logo.png" />
+    </div>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
     </head>
     
-    <body>
+    <body style="background-color:#AE0000; overflow:auto;">
         
-<div id="formbackground" style="position:absolute; z-index:-1;"><img id="formbackground-img" src="https://thinkyoung.gitee.io/shenyang/static/shop.jpg" height="100%" /></div>
-<script type="text/javascript">
+<!--<div id="formbackground" style="position:absolute; z-index:-1;"><img id="formbackground-img" src="/APP/shop/xiaomate/static/img/background2.jpg" height="100%" /></div>-->
+<noscript type="text/javascript">
+
+// if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+// 				$("#formbackground-img").attr("src", "/APP/shop/xiaomate/static/img/background2.jpg");
+// } else {
+//                 $("#formbackground-img").attr("src", "/APP/shop/xiaomate/static/img/background1.jpg");
+// }  
+
+
+
+
+
+
+
 $(function(){
     $('#formbackground').height($(window).height());
     $('#formbackground').width($(window).width());
     $('#formbackground-img').height($(window).height());
     $('#formbackground-img').width($(window).width());
-
+    $('body').css('overflow','hidden');//禁止滚动
 
 });
-</script>
+</noscript>
+<div class="logo" style="color:white;font-size:10vw;text-align:center;vertical-align:middle;    position: absolute;
+    top: 20%;
+    left: 20%;
+    
+    ">
+    &nbsp;盛京小玛特®
+</div>
+<div class="logo" style="color:white;font-size:6vw;text-align:center;vertical-align:middle;    position: absolute;
+    top: 49%;
+    left: 30%;
+    font-family:Monospace
+    ">
+    xiaomate.cn
+</div>
 
-        <button style="" class="button" onclick="javascript:window.location.href='http://thinkyoung.gitee.io'; ">域名销售</button>
+<div class="buttons">
+        <button style="" class="button" onclick="javascript:; ">门店列表</button>
+
+        <button style="" class="button" onclick="javascript:window.open('tel:18802496381');">联系我们</button>
+        
+        <!--<button style="" class="button" onclick="javascript:window.location.href='/blog'; ">官方博客</button>-->
+        
+        <button style="" class="button" onclick="javascript:window.open('https://gitee.com/thinkyoung'); ">技术支持</button>
+<div>
     </body>
 
 </html>
